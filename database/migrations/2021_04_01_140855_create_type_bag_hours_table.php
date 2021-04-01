@@ -15,8 +15,8 @@ class CreateTypeBagHoursTable extends Migration
     {
         Schema::create('type_bag_hours', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('description');
+            $table->string('name')->unique();
+            $table->string('description')->nullable();
             $table->double('hour_price');
             $table->timestamps();
         });

@@ -17,10 +17,10 @@ class CreateCompanyTable extends Migration
             $table->string('name');
             $table->string('img_logo');
             $table->string('work_sector');
-            $table->string('description');
-            $table->string('email');
-            $table->integer('phone');
-            $table->string('website');
+            $table->string('description')->nullable();
+            $table->string('email')->nullable();
+            $table->integer('phone')->nullable();
+            $table->string('website')->nullable();
         });
     }
 
