@@ -1,6 +1,6 @@
 # Gestor d'hores
 
-## Documentacio
+## Documentació
 
 #### Diagrama de classes
 
