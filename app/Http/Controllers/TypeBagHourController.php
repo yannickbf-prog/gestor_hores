@@ -27,7 +27,7 @@ class TypeBagHourController extends Controller
      */
     public function create()
     {
-        //
+        return view('type_bag_hours.create');
     }
 
     /**
@@ -38,7 +38,17 @@ class TypeBagHourController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'hour_price' => 'required',
+        ]);
+    
+        TypeBagHour::create($request->all());
+     
+        return redirect()->route('type-bag-hours.index')
+                        ->with('success','Bag hour type created successfully.');
+        
+        
     }
 
     /**
@@ -60,7 +70,7 @@ class TypeBagHourController extends Controller
      */
     public function edit(TypeBagHour $typeBagHour)
     {
-        //
+        return view('type_bag_hours.edit',compact('typeBagHour'));
     }
 
     /**
@@ -72,7 +82,15 @@ class TypeBagHourController extends Controller
      */
     public function update(Request $request, TypeBagHour $typeBagHour)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'hour_price' => 'required',
+        ]);
+    
+        $typeBagHour->update($request->all());
+    
+        return redirect()->route('type-bag-hours.index')
+                        ->with('success','Bag hour type updated successfully');
     }
 
     /**

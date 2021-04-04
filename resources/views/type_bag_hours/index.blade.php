@@ -3,12 +3,21 @@
 @section('title', 'Control panel - Type bag hours')
 
 @section('content')
-<h1>Home</h1>
-<p>lorem ipsumm</p>
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Bag hours types</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success" href="{{ route('type-bag-hours.create') }}">Create New Bag hour type</a>
+        </div>
+    </div>
+</div>
 <table class="table table-bordered">
     <tr>
         <th>No</th>
         <th>Name</th>
+        <th>Hour price</th>
         <th>Details</th>
         <th width="280px">Action</th>
     </tr>
@@ -16,9 +25,11 @@
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>
+        <td>{{ $value->hour_price }}€</td>
         <td>{{ \Str::limit($value->description, 100) }}</td>
         <td>
-            <form action="{{ route('type-bag-hours.destroy',$value->id) }}" method="POST">   
+            <form action="{{ route('type-bag-hours.destroy',$value->id) }}" method="POST"> 
+                <a class="btn btn-primary" href="{{ route('type-bag-hours.edit',$value->id) }}">Edit</a>
                 @csrf
                 @method('DELETE')      
                 <button type="submit" class="btn btn-danger">Delete</button>
