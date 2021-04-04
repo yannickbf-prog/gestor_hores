@@ -37,19 +37,19 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Name:</strong>
-                <input type="text" name="name" value="{{ $typeBagHour->name }}" class="form-control" placeholder="Name">
+                <input type="text" name="name" value="{{old('name', $typeBagHour->name)}}" class="form-control" placeholder="Name">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Hour price:</strong>
-                <input type="text" name="hour_price" value="{{ $typeBagHour->hour_price }}" class="form-control" placeholder="Hour price">
+                <input type="text" name="hour_price" value="{{old('hour_price', $typeBagHour->hour_price)}}" class="form-control" placeholder="Hour price">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Detail">{{ $typeBagHour->description }}</textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Detail">{{old('description', $typeBagHour->description)}}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

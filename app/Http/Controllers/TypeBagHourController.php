@@ -38,9 +38,13 @@ class TypeBagHourController extends Controller
      */
     public function store(Request $request)
     {
+        $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
+        
         $request->validate([
             'name' => 'required',
-            'hour_price' => 'required',
+            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+        ],[
+            'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).'),
         ]);
     
         TypeBagHour::create($request->all());
@@ -82,9 +86,13 @@ class TypeBagHourController extends Controller
      */
     public function update(Request $request, TypeBagHour $typeBagHour)
     {
+        $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
+        
         $request->validate([
             'name' => 'required',
-            'hour_price' => 'required',
+            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+        ],[
+            'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).'),
         ]);
     
         $typeBagHour->update($request->all());
