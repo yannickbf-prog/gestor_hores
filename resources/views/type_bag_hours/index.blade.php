@@ -17,7 +17,11 @@
             <td>{{ ++$i }}</td>
             <td>{{ $value->name }}</td>
             <td>{{ \Str::limit($value->description, 100) }}</td>
-            
+            <td>
+                <form action="{{ route('type-bag-hours.destroy',$value->id) }}" method="POST">   
+                  
+                </form>
+            </td>
         </tr>
         @endforeach
     </table>  

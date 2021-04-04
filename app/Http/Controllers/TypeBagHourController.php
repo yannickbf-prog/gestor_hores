@@ -83,6 +83,9 @@ class TypeBagHourController extends Controller
      */
     public function destroy(TypeBagHour $typeBagHour)
     {
-        //
+        $typeBagHour->delete();
+    
+        return redirect()->route('type-bag-hours.index')
+                        ->with('success','Bag hour type deleted successfully');
     }
 }

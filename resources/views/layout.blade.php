@@ -14,10 +14,10 @@
     </head>
     
     <body>
-        <div id="app" class="d-flex flex-column h-screen">
+        <div id="app" class="d-flex flex-column h-screen py-3">
             
             <div class="row">
-                <header class="bg-primary bg-info border border-primary col-12">
+                <header class="bg-primary bg-info border border-primary col-12 mb-2 py-2">
                     <h1>aTotArreu Control panel</h1>
                 </header>
 
@@ -25,13 +25,13 @@
             
             <div class="row">
                 @include('partials.nav')
-                <main class="col-8">
+                <main class="col-10">
                     @yield('content')
                 </main>
             </div>
             
             <div class="row">
-                <footer class="col-12">
+                <footer class="col-12 text-center">
                     aTotArreu | Copyright @ {{ date("Y") }}
                 </footer>
             </div>

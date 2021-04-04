@@ -1,5 +1,5 @@
-
-<nav class="col-2 bg-primary bg-info border border-primary navbar navbar-light">
+<!-- 
+<nav class="col-2">
     <ul class="nav nav-pills">
         <li class="nav-item">
             <a class="nav-link {{ setActive('home') }}" href="{{ route('home') }}">
@@ -18,4 +18,12 @@
         <li>Hours bag types</li>
         <li>Hours entry</li>
     </ul>
+</nav>
+
+comment -->
+
+<nav class="nav flex-column nav-pills col-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+  <a class="nav-link {{ setActive('home') }}" href="{{ route('home') }}">@lang('Home')</a>
+  <a class="nav-link {{ setActive('type-bag-hours.index') }}" href="{{ route('type-bag-hours.index') }}">@lang('Hours bag types')</a>
+  
 </nav>
