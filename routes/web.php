@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TypeBagHourController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view("/", "home")->name('home');
 Route::view("/company-info", "company-info")->name('company-info');
+
+//Route::resource('users', UserController::class);
+
+Route::resource('type-bag-hours', TypeBagHourController::class);
