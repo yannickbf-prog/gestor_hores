@@ -3,14 +3,14 @@
 @section('title', 'Control panel - Type bag hours')
 
 @section('content')
-<form action="{{ route('type-bag-hours.index') }}" method="POST"> 
+<form action="{{ route('type-bag-hours.filter') }}" method="POST"> 
     @csrf
     
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Enter Name">
+                <input type="text" name="hour_price" class="form-control" placeholder="Hour price">
             </div>
         </div>
     </div>

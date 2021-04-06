@@ -13,7 +13,7 @@ class TypeBagHourController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //$hour_price = $request['hour_price'];
         

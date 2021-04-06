@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Type bag hour</h2>
+            <h2>Add New Bag Hour type</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('type-bag-hours.index') }}"> Back</a>
