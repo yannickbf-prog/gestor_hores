@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\TypeBagHour;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class TypeBagHourController extends Controller
 {
@@ -14,16 +16,27 @@ class TypeBagHourController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //$hour_price = $request['hour_price'];
-        
-        $hour_price = "%";
-        
-        
-        $data = TypeBagHour::where('hour_price', 'like', "%".$hour_price."%")->latest()->paginate(1);
+    {        
+        $data = DB::table('type_bag_hours')->latest()->paginate(2);
     
         return view('type_bag_hours.index',compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 2);
+    }
+    
+    public function filter(Request $request)
+    {
+       $data = DB::table('type_bag_hours')
+                ->where('hour_price', 'like', "20")
+                ->latest();
+       
+       
+       //echo var_dump($data);
+        
+       //$data = TypeBagHour::where('hour_price', 'like', "%".$hour_price."%")->latest()->get();
+    
+       /*return view('type_bag_hours.index',compact('data'))
+         ->with('i', (request()->input('page', 1) - 1) * 1);*/
+        
     }
     
     /**
