@@ -19,5 +19,6 @@ Route::view("/company-info", "company-info")->name('company-info');
 
 //Route::resource('users', UserController::class);
 
+
 Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
