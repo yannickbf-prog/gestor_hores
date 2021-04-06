@@ -36,7 +36,7 @@
     </tr>
     @forelse ($data as $key => $value)
     <tr>
-        <td>{{ ++$i }}</td>
+        <td>{{ $key+1 }}</td>
         <td>{{ $value->name }}</td>
         <td>{{ $value->hour_price }}€</td>
         <td>{{ \Str::limit($value->description, 100) }}</td>
@@ -54,7 +54,4 @@
     @endforelse
     
 </table> 
-<div id="paginationContainer">
-    {!! $data->links() !!} 
-</div>
 @endsection
