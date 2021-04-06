@@ -17,7 +17,7 @@ class TypeBagHourController extends Controller
     {
         //$hour_price = $request['hour_price'];
         
-        $hour_price = 20;
+        $hour_price = "%";
         
         
         $data = TypeBagHour::where('hour_price', 'like', "%".$hour_price."%")->latest()->paginate(1);
