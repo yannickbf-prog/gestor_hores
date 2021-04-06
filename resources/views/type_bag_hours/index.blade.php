@@ -3,6 +3,19 @@
 @section('title', 'Control panel - Type bag hours')
 
 @section('content')
+<form action="{{ route('type-bag-hours.index') }}" method="POST"> 
+    @csrf
+    
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Name:</strong>
+                <input type="text" name="name" class="form-control" placeholder="Enter Name">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Filter</button>
+</form>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -37,5 +50,8 @@
         </td>
     </tr>
     @endforeach
-</table>  
+</table> 
+<div id="paginationContainer">
+    {!! $data->links() !!} 
+</div>
 @endsection

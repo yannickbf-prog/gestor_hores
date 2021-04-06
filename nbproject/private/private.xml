@@ -6,6 +6,7 @@
             <file>file:/var/www/gestor_hores/app/Models/TypeBagHour.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/TypeBagHourController.php</file>
             <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/index.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Models/User.php</file>
             <file>file:/var/www/gestor_hores/resources/views/home.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/edit.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/create.blade.php</file>

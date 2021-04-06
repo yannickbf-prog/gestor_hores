@@ -12,14 +12,15 @@ class TypeBagHourController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = TypeBagHour::latest()->paginate(5);
+        
+        $data = TypeBagHour::latest()->paginate(1);
     
         return view('type_bag_hours.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
