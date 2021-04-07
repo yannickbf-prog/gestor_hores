@@ -13,22 +13,24 @@ class TypeBagHourController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data = TypeBagHour::latest()->paginate(2);
+        $data = TypeBagHour::paginate(2);
 
         return view('type_bag_hours.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * 2);
     }
 
     public function filter(Request $request) {
-        //$request['hour_price'] = floatval(str_replace(",", ".", $request['hour_price']));
-        //$request['hour_price'] = "%";
+        
+        $name = "%";
+        if(($request['name'] != "")) $name = $request['name'];
         
         $hour_price = "%";
-
+        if(($request['hour_price'] != "")) $hour_price = floatval(str_replace(",", ".", $request['hour_price']));
         
 
         $data = TypeBagHour::
-                where('hour_price', 'like', $hour_price)
+                where('hour_price', '=', $hour_price)
+                ->where('name', 'ilike', "%".$name."%")
                 ->get();
 
         return view('type_bag_hours.filter.index', compact('data'));
