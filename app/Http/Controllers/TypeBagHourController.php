@@ -5,38 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\TypeBagHour;
 use Illuminate\Http\Request;
 
-class TypeBagHourController extends Controller
-{
+class TypeBagHourController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {        
+    public function index() {
         $data = TypeBagHour::latest()->paginate(2);
-    
-        return view('type_bag_hours.index',compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 2);
+
+        return view('type_bag_hours.index', compact('data'))
+                        ->with('i', (request()->input('page', 1) - 1) * 2);
     }
-    
-    public function filter(Request $request)
-    {
-       $data = TypeBagHour::
-                where('hour_price', 'like', 25)
-                ->get();
-       
-       return view('type_bag_hours.filter.index',compact('data'));
+
+    public function filter(Request $request) {
+        //$request['hour_price'] = floatval(str_replace(",", ".", $request['hour_price']));
+        //$request['hour_price'] = "%";
         
+        $hour_price = "%";
+
+        
+
+        $data = TypeBagHour::
+                where('hour_price', 'like', $hour_price)
+                ->get();
+
+        return view('type_bag_hours.filter.index', compact('data'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('type_bag_hours.create');
     }
 
@@ -46,23 +49,20 @@ class TypeBagHourController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
-        
+
         $request->validate([
             'name' => 'required',
             'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-        ],[
+                ], [
             'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).'),
         ]);
-    
+
         TypeBagHour::create($request->all());
-     
+
         return redirect()->route('type-bag-hours.index')
-                        ->with('success','Bag hour type created successfully.');
-        
-        
+                        ->with('success', 'Bag hour type created successfully.');
     }
 
     /**
@@ -71,8 +71,7 @@ class TypeBagHourController extends Controller
      * @param  \App\Models\TypeBagHour  $typeBagHour
      * @return \Illuminate\Http\Response
      */
-    public function show(TypeBagHour $typeBagHour)
-    {
+    public function show(TypeBagHour $typeBagHour) {
         //
     }
 
@@ -82,9 +81,8 @@ class TypeBagHourController extends Controller
      * @param  \App\Models\TypeBagHour  $typeBagHour
      * @return \Illuminate\Http\Response
      */
-    public function edit(TypeBagHour $typeBagHour)
-    {
-        return view('type_bag_hours.edit',compact('typeBagHour'));
+    public function edit(TypeBagHour $typeBagHour) {
+        return view('type_bag_hours.edit', compact('typeBagHour'));
     }
 
     /**
@@ -94,21 +92,20 @@ class TypeBagHourController extends Controller
      * @param  \App\Models\TypeBagHour  $typeBagHour
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TypeBagHour $typeBagHour)
-    {
+    public function update(Request $request, TypeBagHour $typeBagHour) {
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
-        
+
         $request->validate([
             'name' => 'required',
             'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-        ],[
+                ], [
             'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).'),
         ]);
-    
+
         $typeBagHour->update($request->all());
-    
+
         return redirect()->route('type-bag-hours.index')
-                        ->with('success','Bag hour type updated successfully');
+                        ->with('success', 'Bag hour type updated successfully');
     }
 
     /**
@@ -117,11 +114,11 @@ class TypeBagHourController extends Controller
      * @param  \App\Models\TypeBagHour  $typeBagHour
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TypeBagHour $typeBagHour)
-    {
+    public function destroy(TypeBagHour $typeBagHour) {
         $typeBagHour->delete();
-    
+
         return redirect()->route('type-bag-hours.index')
-                        ->with('success','Bag hour type deleted successfully');
+                        ->with('success', 'Bag hour type deleted successfully');
     }
+
 }

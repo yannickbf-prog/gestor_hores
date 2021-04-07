@@ -27,6 +27,7 @@
     </div>
 </div>
 <table class="table table-bordered">
+    @if (count($data) > 0)
     <tr>
         <th>No</th>
         <th>Name</th>
@@ -34,6 +35,7 @@
         <th>Details</th>
         <th width="280px">Action</th>
     </tr>
+    @endif
     @forelse ($data as $key => $value)
     <tr>
         <td>{{ $key+1 }}</td>
