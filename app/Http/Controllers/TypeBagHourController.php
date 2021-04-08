@@ -34,35 +34,20 @@ class TypeBagHourController extends Controller {
 
         return view('type_bag_hours.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * 2);
-       
-         
     }
     
-
-
-    public function filter(Request $request) {
-
-        if(['name' => '%'] != null){
-            
-            session(['name' => '%']);
-            if(($request['name'] != "")) session(['name' => $request['name']]);
-            
-            session(['hour_price' => '%']);
-            if(($request['hour_price'] != "")) session(['hour_price' => $request['hour_price']]);
-        }
+    public function deleteFilters(Request $request) {
         
-        $name = session('name');
-        $hour_price = session('hour_price');
+        session(['name' => '%']);
+        session(['hour_price' => '%']);
         
 
-        $data = TypeBagHour::
-                where('hour_price', 'like', $hour_price)
-                ->where('name', 'ilike', "%".$name."%")
-                ->paginate(1);
+        $data = TypeBagHour::paginate(1);
 
-        return view('type_bag_hours.filter.index', compact('data'));
-       
-          
+        return view('type_bag_hours.index', compact('data'))
+                        ->with('i', (request()->input('page', 1) - 1) * 2);
+   
+
     }
 
     /**

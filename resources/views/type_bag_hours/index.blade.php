@@ -3,9 +3,26 @@
 @section('title', 'Control panel - Type bag hours')
 
 @section('content')
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Bag hours types</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success" href="{{ route('type-bag-hours.create') }}">Create New Bag hour type</a>
+        </div>
+    </div>
+</div>
 <form action="{{ route('type-bag-hours.index') }}" method="GET"> 
     @csrf
     
+    <div class="row py-2">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h3>Filters</h2>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -24,10 +41,16 @@
     </div>
     <button type="submit" class="btn btn-success">Filter</button>
 </form>
+
+
+<form action="{{ route('type-bag-hours.delete_filters') }}" method="POST"> 
+    @csrf
+    <button type="submit" class="btn btn-success">Delete all filters</button>
+</form>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Bag hours types</h2>
+            <h3>Bag hours types list</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-success" href="{{ route('type-bag-hours.create') }}">Create New Bag hour type</a>
@@ -35,6 +58,7 @@
     </div>
 </div>
 <table class="table table-bordered">
+    @if (count($data) > 0)
     <tr>
         <th>No</th>
         <th>Name</th>
@@ -42,6 +66,7 @@
         <th>Details</th>
         <th width="280px">Action</th>
     </tr>
+    @endif
     @forelse ($data as $key => $value)
     <tr>
         <td>{{ ++$i }}</td>
