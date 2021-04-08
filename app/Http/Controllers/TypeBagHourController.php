@@ -39,8 +39,7 @@ class TypeBagHourController extends Controller {
     public function deleteFilters() {
         
         session(['type_bag_hour_name' => '%']);
-        session(['hour_price' => '%']);
-        
+        session(['type_bag_hour_price' => '%']);
 
         return redirect()->route('type-bag-hours.index');
 

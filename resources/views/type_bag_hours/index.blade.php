@@ -35,7 +35,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Hour price" value="@if(session('hour_price') != '%'){{session('hour_price')}}@endif">
+                <input type="text" name="hour_price" class="form-control" placeholder="Hour price" value="@if(session('type_bag_hour_price') != '%'){{session('type_bag_hour_price')}}@endif">
             </div>
         </div>
     </div>
