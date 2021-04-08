@@ -42,11 +42,11 @@
     <button type="submit" class="btn btn-success">Filter</button>
 </form>
 
-
 <form action="{{ route('type-bag-hours.delete_filters') }}" method="POST"> 
     @csrf
     <button type="submit" class="btn btn-success">Delete all filters</button>
 </form>
+
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
