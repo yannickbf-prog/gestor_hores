@@ -16,11 +16,11 @@ class TypeBagHourController extends Controller {
     public function index(Request $request) {
         
         if($request->has('_token')){
-            session(['type_bag_hour_name' => '%']);
-            if(($request['name'] != "")) session(['type_bag_hour_name' => $request['name']]);
             
-            session(['type_bag_hour_price' => '%']);
-            if(($request['hour_price'] != "")) session(['type_bag_hour_price' => $request['hour_price']]);
+            ($request['name'] == "") ? session(['type_bag_hour_name' => '%']) : session(['type_bag_hour_name' => $request['name']]);
+            
+            ($request['hour_price'] == "") ? session(['type_bag_hour_price' => '%']) : session(['type_bag_hour_price' => str_replace(",", ".", $request['hour_price'])]);
+                                                                    
         }
         
         
@@ -28,8 +28,8 @@ class TypeBagHourController extends Controller {
         $hour_price = session('type_bag_hour_price', "%");
         
         $data = TypeBagHour::
-                where('hour_price', 'like', $hour_price)
-                ->where('name', 'ilike', "%".$name."%")
+                where('name', 'ilike', "%".$name."%")
+                ->where('hour_price', 'like', $hour_price)
                 ->paginate(1);
 
         return view('type_bag_hours.index', compact('data'))
