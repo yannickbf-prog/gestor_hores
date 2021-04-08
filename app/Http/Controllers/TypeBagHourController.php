@@ -19,13 +19,13 @@ class TypeBagHourController extends Controller {
             session(['type_bag_hour_name' => '%']);
             if(($request['name'] != "")) session(['type_bag_hour_name' => $request['name']]);
             
-            session(['hour_price' => '%']);
-            if(($request['hour_price'] != "")) session(['hour_price' => $request['hour_price']]);
+            session(['type_bag_hour_price' => '%']);
+            if(($request['hour_price'] != "")) session(['type_bag_hour_price' => $request['hour_price']]);
         }
         
         
         $name = session('type_bag_hour_name', "%");
-        $hour_price = session('hour_price', "%");
+        $hour_price = session('type_bag_hour_price', "%");
         
         $data = TypeBagHour::
                 where('hour_price', 'like', $hour_price)
