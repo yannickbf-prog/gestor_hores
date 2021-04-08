@@ -16,16 +16,16 @@ class TypeBagHourController extends Controller {
     public function index(Request $request) {
         
         if($request->has('_token')){
-            session(['name' => '%']);
-            if(($request['name'] != "")) session(['name' => $request['name']]);
+            session(['type_bag_hour_name' => '%']);
+            if(($request['name'] != "")) session(['type_bag_hour_name' => $request['name']]);
             
             session(['hour_price' => '%']);
             if(($request['hour_price'] != "")) session(['hour_price' => $request['hour_price']]);
         }
         
         
-        $name = session('name');
-        $hour_price = session('hour_price');
+        $name = session('type_bag_hour_name', "%");
+        $hour_price = session('hour_price', "%");
         
         $data = TypeBagHour::
                 where('hour_price', 'like', $hour_price)
@@ -38,15 +38,11 @@ class TypeBagHourController extends Controller {
     
     public function deleteFilters() {
         
-        session(['name' => '%']);
+        session(['type_bag_hour_name' => '%']);
         session(['hour_price' => '%']);
         
 
-        $data = TypeBagHour::paginate(1);
-
-        return view('type_bag_hours.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * 1);
-   
+        return redirect()->route('type-bag-hours.index');
 
     }
 
