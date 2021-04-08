@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\TypeBagHour;
 use Illuminate\Http\Request;
 
-use Cookie;
 
 class TypeBagHourController extends Controller {
 
@@ -14,37 +13,56 @@ class TypeBagHourController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $data = TypeBagHour::paginate(2);
+    public function index(Request $request) {
+        
+        if($request->has('_token')){
+            session(['name' => '%']);
+            if(($request['name'] != "")) session(['name' => $request['name']]);
+            
+            session(['hour_price' => '%']);
+            if(($request['hour_price'] != "")) session(['hour_price' => $request['hour_price']]);
+        }
+        
+        
+        $name = session('name');
+        $hour_price = session('hour_price');
+        
+        $data = TypeBagHour::
+                where('hour_price', 'like', $hour_price)
+                ->where('name', 'ilike', "%".$name."%")
+                ->paginate(1);
 
         return view('type_bag_hours.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * 2);
+       
+         
     }
     
 
 
     public function filter(Request $request) {
+
+        if(['name' => '%'] != null){
+            
+            session(['name' => '%']);
+            if(($request['name'] != "")) session(['name' => $request['name']]);
+            
+            session(['hour_price' => '%']);
+            if(($request['hour_price'] != "")) session(['hour_price' => $request['hour_price']]);
+        }
         
-        $cookie = Cookie::make('name', 'value');
-        
-        $val = Cookie::get('name');
-        
-        $name = "%";
-        if(($request['name'] != "")) cookie('name', $request['name']);
-        
-        $hour_price = "%";
-        if(($request['hour_price'] != "")) $hour_price = floatval(str_replace(",", ".", $request['hour_price']));
-        
-        
-        
+        $name = session('name');
+        $hour_price = session('hour_price');
         
 
         $data = TypeBagHour::
                 where('hour_price', 'like', $hour_price)
-                ->where('name', 'ilike', "%".Cookie::get('name')."%")
-                ->get();
+                ->where('name', 'ilike', "%".$name."%")
+                ->paginate(1);
 
         return view('type_bag_hours.filter.index', compact('data'));
+       
+          
     }
 
     /**

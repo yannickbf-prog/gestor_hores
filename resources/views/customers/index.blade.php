@@ -46,7 +46,7 @@
     @endif
     @forelse ($data as $key => $value)
     <tr>
-        <td>{{ $key+1 }}</td>
+        <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>
         <td>{{ $value->hour_price }}€</td>
         <td>{{ \Str::limit($value->description, 100) }}</td>

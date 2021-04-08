@@ -14,11 +14,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $data = Customer::latest()->paginate(1);
+        $data = Customer::latest()->paginate(2);
         
-         return view('type_bag_hours.index', [
-            'projects' => $data
-        ]);
+        return view('customers.index', compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 2);
     }
 
     /**

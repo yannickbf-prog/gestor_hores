@@ -3,7 +3,7 @@
 @section('title', 'Control panel - Type bag hours')
 
 @section('content')
-<form action="{{ route('type-bag-hours.filter') }}" method="POST"> 
+<form action="{{ route('type-bag-hours.index') }}" method="GET"> 
     @csrf
     
     <div class="row">
