@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
+                <input type="text" name="name" class="form-control" placeholder="Name" value="<?php if(session('name') != '%') echo session('name') ?>">
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Hour price">
+                <input type="text" name="hour_price" class="form-control" placeholder="Hour price" value="<?php if(session('hour_price') != '%') echo session('hour_price') ?>">
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
         <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>
         <td>{{ $value->hour_price }}€</td>
-        <td>{{ \Str::limit($value->description, 100) }}</td>
+        <td>@if ($value->description == "") {{ 'No description' }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>
             <form action="{{ route('type-bag-hours.destroy',$value->id) }}" method="POST"> 
                 <a class="btn btn-primary" href="{{ route('type-bag-hours.edit',$value->id) }}">Edit</a>

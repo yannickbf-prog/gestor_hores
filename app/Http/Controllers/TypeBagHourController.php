@@ -33,10 +33,10 @@ class TypeBagHourController extends Controller {
                 ->paginate(1);
 
         return view('type_bag_hours.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * 2);
+                        ->with('i', (request()->input('page', 1) - 1) * 1);
     }
     
-    public function deleteFilters(Request $request) {
+    public function deleteFilters() {
         
         session(['name' => '%']);
         session(['hour_price' => '%']);
@@ -45,7 +45,7 @@ class TypeBagHourController extends Controller {
         $data = TypeBagHour::paginate(1);
 
         return view('type_bag_hours.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * 2);
+                        ->with('i', (request()->input('page', 1) - 1) * 1);
    
 
     }
