@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name" value="<?php if(session('name') != '%') echo session('name') ?>">
+                <input type="text" name="name" class="form-control" placeholder="Name" value="@if(session('name') != '%'){{session('name')}}@endif">
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Hour price" value="<?php if(session('hour_price') != '%') echo session('hour_price') ?>">
+                <input type="text" name="hour_price" class="form-control" placeholder="Hour price" value="@if(session('hour_price') != '%'){{session('hour_price')}}@endif">
             </div>
         </div>
     </div>
