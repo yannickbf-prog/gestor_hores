@@ -10,7 +10,7 @@ class TypeBagHour extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'hour_price'
+        'name', 'hour_price', 'description'
     ];
 
 }

@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Bag Hour type</h2>
+            <h2>Add New Customer</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>
@@ -36,25 +36,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                <input type="text" name="name" class="form-control" placeholder="Enter Name" value="{{old('name')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Email:</strong>
-                <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                <input type="email" name="email" class="form-control" placeholder="Enter Email" value="{{old('email')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Phone:</strong>
-                <input type="text" name="phone" class="form-control" placeholder="Enter Phone">
+                <input type="text" name="phone" class="form-control" placeholder="Enter Phone" value="{{old('phone')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description"></textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description">{{old('description')}}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

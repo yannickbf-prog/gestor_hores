@@ -43,7 +43,8 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'unique:customers,name||required',
             'email' => 'unique:customers,email||required||email',
-            'phone' => 'unique:customers,phone||required||numeric||min:9||max:15'
+            'phone' => 'unique:customers,phone||required||numeric||min:100000000||max:100000000000000',
+            'description' => 'max:400'
         ]);
 
         Customer::create($request->all());
