@@ -14,11 +14,12 @@ class CreateUsersProjectsTable extends Migration
     public function up()
     {
         Schema::create('users_projects', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->primary(['user_id', 'project_id']);
+            $table->timestamps();
         });
     }
 
