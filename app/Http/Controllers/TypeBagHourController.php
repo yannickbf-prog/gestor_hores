@@ -30,10 +30,10 @@ class TypeBagHourController extends Controller {
         $data = TypeBagHour::
                 where('name', 'ilike', "%".$name."%")
                 ->where('hour_price', 'like', $hour_price)
-                ->paginate(1);
+                ->paginate(7);
 
         return view('type_bag_hours.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * 1);
+                        ->with('i', (request()->input('page', 1) - 1) * 7);
     }
     
     public function deleteFilters() {
