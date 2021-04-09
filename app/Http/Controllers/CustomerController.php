@@ -13,13 +13,40 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('_token')){
+            
+            ($request['name'] == "") ? session(['customer_name' => '%']) : session(['customer_name' => $request['name']]);
+            
+            ($request['email'] == "") ? session(['customer_email' => '%']) : session(['customer_email' => $request['email']]);
+            
+            ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
+                                                                    
+        }
+        
+        $name = session('customer_name', "%");
+        $email = session('customer_email', "%");
+        $phone = session('customer_phone', "%");
+        
         $data = Customer::
-                paginate(7);
+                where('name', 'ilike', "%".$name."%")
+                ->where('email', 'ilike', "%".$email."%")
+                ->where('phone', 'like', "%".$phone."%")
+                ->paginate(1);
 
         return view('customers.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * 7);
+                        ->with('i', (request()->input('page', 1) - 1) * 1);
+    }
+    
+    public function deleteFilters() {
+        
+        session(['customer_name' => '%']);
+        session(['customer_email' => '%']);
+        session(['customer_phone' => '%']);
+
+        return redirect()->route('customers.index');
+
     }
 
     /**

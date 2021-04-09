@@ -32,27 +32,44 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name" value="@if(session('type_bag_hour_name') != '%'){{session('type_bag_hour_name')}}@endif">
+                <input type="text" name="name" class="form-control" placeholder="Name" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Hour price" value="@if(session('type_bag_hour_price') != '%'){{session('type_bag_hour_price')}}@endif">
+                <strong>Email:</strong>
+                <input type="text" name="email" class="form-control" placeholder="Email" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Phone:</strong>
+                <input type="text" name="phone" class="form-control" placeholder="Phone" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
             </div>
         </div>
     </div>
     <button type="submit" class="btn btn-success">Filter</button>
 </form>
 
-<form action="{{ route('type-bag-hours.delete_filters') }}" method="POST"> 
+<form action="{{ route('customers.delete_filters') }}" method="POST"> 
     @csrf
     <button type="submit" class="btn btn-success">Delete all filters</button>
 </form>
 
-
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>Customers list</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success" href="{{ route('customers.create') }}">Create New Customers</a>
+        </div>
+    </div>
+</div>
 
 <table class="table table-bordered">
     @if (count($data) > 0)
