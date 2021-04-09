@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
@@ -41,9 +42,9 @@ class CustomerController extends Controller
     {
 
         $request->validate([
-            'name' => 'unique:customers,name||required',
-            'email' => 'unique:customers,email||required||email',
-            'phone' => 'unique:customers,phone||required||numeric||min:100000000||max:100000000000000',
+            'name' => 'unique:customers||required',
+            'email' => 'unique:customers||required||email',
+            'phone' => 'unique:customers||required||numeric||min:100000000||max:100000000000000',
             'description' => 'max:400'
         ]);
 
@@ -72,7 +73,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -84,7 +85,17 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'name' => ['required', Rule::unique('customers')->ignore($customer)],
+            'email' => ['required','email',Rule::unique('customers')->ignore($customer)],
+            'phone' => ['required', 'numeric', 'min:100000000', 'max:100000000000000', Rule::unique('customers')->ignore($customer)],
+            'description' => 'max:400'
+        ]);
+        
+        $customer->update($request->all());
+
+        return redirect()->route('customers.index')
+                        ->with('success', 'Customer updated successfully');
     }
 
     /**
@@ -95,6 +106,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return redirect()->route('customers.index')
+                        ->with('success', 'Customer deleted successfully');
     }
 }

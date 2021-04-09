@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeBagHour;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
 
 class TypeBagHourController extends Controller {
 
@@ -64,7 +64,7 @@ class TypeBagHourController extends Controller {
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
         $request->validate([
-            'name' => 'required||unique:type_bag_hours,name',
+            'name' => 'required||unique:type_bag_hours',
             'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'description' => 'max:400'
                 ], [
@@ -108,7 +108,7 @@ class TypeBagHourController extends Controller {
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', Rule::unique('type_bag_hours')->ignore($typeBagHour)],
             'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
                 ], [
             'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).'),

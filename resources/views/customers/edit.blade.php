@@ -1,15 +1,15 @@
 @extends('layout')
 
-@section('title', 'Control panel - Type bag hours - Edit '.$typeBagHour->name)
+@section('title', 'Control panel - Customers - Edit '.$customer->name)
 
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Edit Type bag hour: {{ $typeBagHour->name }}</h2>
+            <h2>Edit Type bag hour: {{ $customer->name }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('type-bag-hours.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
     <strong>Fields with * are required</strong>
 </div>
 
-<form action="{{ route('type-bag-hours.update',$typeBagHour->id) }}" method="POST">
+<form action="{{ route('customers.update',$customer->id) }}" method="POST">
     @csrf
     @method('PUT')
 
@@ -37,19 +37,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Name:</strong>
-                <input type="text" name="name" value="{{old('name', $typeBagHour->name)}}" class="form-control" placeholder="Name">
+                <input type="text" name="name" value="{{old('name', $customer->name)}}" class="form-control" placeholder="Name">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*Hour price:</strong>
-                <input type="text" name="hour_price" value="{{old('hour_price', $typeBagHour->hour_price)}}" class="form-control" placeholder="Hour price">
+                <strong>*Email:</strong>
+                <input type="email" name="email" class="form-control" placeholder="Enter Email" value="{{old('email', $customer->email)}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*Phone:</strong>
+                <input type="text" name="phone" class="form-control" placeholder="Enter Phone" value="{{old('phone', $customer->phone)}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Detail">{{old('description', $typeBagHour->description)}}</textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description">{{old('description', $customer->description)}}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
