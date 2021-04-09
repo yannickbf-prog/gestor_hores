@@ -89,7 +89,7 @@
         </td>
     </tr>
     @empty
-    <li>Not Bag hours types to show</li>
+    <li>No Bag hours types to show</li>
     @endforelse
 
 </table> 

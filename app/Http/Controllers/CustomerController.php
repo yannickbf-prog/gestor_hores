@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\CreateCustomerRequest;
+
 
 class CustomerController extends Controller
 {
@@ -65,17 +66,12 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCustomerRequest $request)
     {
 
-        $request->validate([
-            'name' => 'unique:customers||required',
-            'email' => 'unique:customers||required||email',
-            'phone' => 'unique:customers||required||numeric||min:100000000||max:100000000000000',
-            'description' => 'max:400'
-        ]);
+       
 
-        Customer::create($request->all());
+        Customer::create($request->validated());
 
         return redirect()->route('customers.index')
                         ->with('success', 'Customer created successfully.');

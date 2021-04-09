@@ -99,7 +99,7 @@
         </td>
     </tr>
     @empty
-    <li>Not Bag hours types to show</li>
+    <li>No Customers to show</li>
     @endforelse
     
 </table> 
