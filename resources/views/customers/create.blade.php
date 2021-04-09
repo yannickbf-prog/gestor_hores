@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Control panel - Type bag hours - Create new')
+@section('title', 'Control panel - Customers - Create new')
 
 @section('content')
 <div class="row">
@@ -9,7 +9,7 @@
             <h2>Add New Bag Hour type</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('type-bag-hours.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
     <strong>Fields with * are required</strong>
 </div>
 
-<form action="{{ route('type-bag-hours.store') }}" method="POST">
+<form action="{{ route('customers.store') }}" method="POST">
     @csrf
   
      <div class="row">
@@ -41,8 +41,14 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Enter Hour price">
+                <strong>*Email:</strong>
+                <input type="email" name="email" class="form-control" placeholder="Enter Email">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*Phone:</strong>
+                <input type="text" name="phone" class="form-control" placeholder="Enter Phone">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

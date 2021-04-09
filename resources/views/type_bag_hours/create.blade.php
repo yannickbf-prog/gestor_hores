@@ -36,19 +36,19 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                <input type="text" name="name" class="form-control" placeholder="Enter Name" value="{{old('name')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Enter Hour price">
+                <input type="text" name="hour_price" class="form-control" placeholder="Enter Hour price"  value="{{old('hour_price')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description"></textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description">{{old('description')}}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -3,6 +3,11 @@
 @section('title', 'Control panel - Type bag hours')
 
 @section('content')
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
+@endif
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -15,7 +20,7 @@
 </div>
 <form action="{{ route('type-bag-hours.index') }}" method="GET"> 
     @csrf
-    
+
     <div class="row py-2">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -57,6 +62,7 @@
         </div>
     </div>
 </div>
+
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
@@ -85,7 +91,7 @@
     @empty
     <li>Not Bag hours types to show</li>
     @endforelse
-    
+
 </table> 
 <div id="paginationContainer">
     {!! $data->links() !!} 

@@ -14,10 +14,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $data = Customer::latest()->paginate(2);
-        
+        $data = Customer::
+                paginate(7);
+
         return view('customers.index', compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 2);
+                        ->with('i', (request()->input('page', 1) - 1) * 7);
     }
 
     /**
@@ -27,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
@@ -38,7 +39,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'unique:customers,name||required',
+            'email' => 'unique:customers,email||required||email',
+            'phone' => 'unique:customers,phone||required||numeric||min:9||max:15'
+        ]);
+
+        Customer::create($request->all());
+
+        return redirect()->route('customers.index')
+                        ->with('success', 'Customer created successfully.');
     }
 
     /**

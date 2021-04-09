@@ -1,45 +1,16 @@
 @extends('layout')
 
-@section('title', 'Control panel - Type bag hours')
+@section('title', 'Control panel - Customers')
 
 @section('content')
-<form action="{{ route('type-bag-hours.filter') }}" method="POST"> 
-    @csrf
-    
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Hour price">
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-success">Filter</button>
-</form>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Bag hours types</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('type-bag-hours.create') }}">Create New Bag hour type</a>
-        </div>
-    </div>
-</div>
+
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
         <th>No</th>
         <th>Name</th>
-        <th>Hour price</th>
+        <th>Email</th>
+        <th>Phone</th>
         <th>Details</th>
         <th width="280px">Action</th>
     </tr>
@@ -48,7 +19,8 @@
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>
-        <td>{{ $value->hour_price }}€</td>
+        <td>{{ $value->email }}</td>
+        <td>{{ $value->phone }}</td>
         <td>{{ \Str::limit($value->description, 100) }}</td>
         <td>
             <form action="{{ route('type-bag-hours.destroy',$value->id) }}" method="POST"> 
