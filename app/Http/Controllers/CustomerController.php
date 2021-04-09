@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateCustomerRequest;
+use App\Http\Requests\EditCustomerRequest;
 
 
 class CustomerController extends Controller
@@ -69,8 +70,6 @@ class CustomerController extends Controller
     public function store(CreateCustomerRequest $request)
     {
 
-       
-
         Customer::create($request->validated());
 
         return redirect()->route('customers.index')
@@ -106,16 +105,12 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(EditCustomerRequest $request, Customer $customer)
     {
-        $request->validate([
-            'name' => ['required', Rule::unique('customers')->ignore($customer)],
-            'email' => ['required','email',Rule::unique('customers')->ignore($customer)],
-            'phone' => ['required', 'numeric', 'min:100000000', 'max:100000000000000', Rule::unique('customers')->ignore($customer)],
-            'description' => 'max:400'
-        ]);
         
-        $customer->update($request->all());
+        
+        $customer->update($request->validated());
+       
 
         return redirect()->route('customers.index')
                         ->with('success', 'Customer updated successfully');

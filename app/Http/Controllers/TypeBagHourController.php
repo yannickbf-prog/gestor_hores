@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeBagHour;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\CreateTypeBagHourRequest;
+use App\Http\Requests\EditTypeBagHourRequest;
 
 class TypeBagHourController extends Controller {
 
@@ -60,18 +61,10 @@ class TypeBagHourController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CreateTypeBagHourRequest $request) {
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
-        $request->validate([
-            'name' => 'required||unique:type_bag_hours',
-            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-            'description' => 'max:400'
-                ], [
-            'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).'),
-        ]);
-
-        TypeBagHour::create($request->all());
+        TypeBagHour::create($request->validated());
 
         return redirect()->route('type-bag-hours.index')
                         ->with('success', 'Bag hour type created successfully.');
@@ -104,18 +97,11 @@ class TypeBagHourController extends Controller {
      * @param  \App\Models\TypeBagHour  $typeBagHour
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TypeBagHour $typeBagHour) {
+    public function update(EditTypeBagHourRequest $request, TypeBagHour $typeBagHour) {
+        
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
-        $request->validate([
-            'name' => ['required', Rule::unique('type_bag_hours')->ignore($typeBagHour)],
-            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-                ], [
-            'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).'),
-            'description' => 'max:400'
-        ]);
-
-        $typeBagHour->update($request->all());
+        $typeBagHour->update($request->validated());
 
         return redirect()->route('type-bag-hours.index')
                         ->with('success', 'Bag hour type updated successfully');
