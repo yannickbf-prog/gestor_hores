@@ -29,9 +29,11 @@ class TypeBagHourController extends Controller {
         $hour_price = session('type_bag_hour_price', "%");
         
         $data = TypeBagHour::
-                where('name', 'ilike', "%".$name."%")
-                ->where('hour_price', 'like', $hour_price)
+                where('name', 'like', "%{$name}%")
+                ->where('hour_price', 'LIKE', $hour_price)
                 ->paginate(7);
+        
+      
 
         return view('type_bag_hours.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * 7);

@@ -32,8 +32,8 @@ class CustomerController extends Controller
         $phone = session('customer_phone', "%");
         
         $data = Customer::
-                where('name', 'ilike', "%".$name."%")
-                ->where('email', 'ilike', "%".$email."%")
+                where('name', 'like', "%".$name."%")
+                ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
                 ->paginate(1);
 
