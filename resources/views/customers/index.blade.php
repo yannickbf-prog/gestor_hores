@@ -52,6 +52,18 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+
+                <button type="button" class="btn btn-md btn-primary" id="datePopover" data-toggle="popover">Date interval</button>
+                <div id='inputDates'></div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -63,18 +75,7 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                
-                <button type="button" class="btn btn-md btn-primary" id="datePopover" data-toggle="popover">Date interval</button>
-                <div id='inputDates'></div>
-            </div>
-        </div>
-    </div>
-
-    
+    <button type="submit" class="btn btn-success">Filter</button>
 </form>
 
 <form action="{{ route('customers.delete_filters') }}" method="POST"> 

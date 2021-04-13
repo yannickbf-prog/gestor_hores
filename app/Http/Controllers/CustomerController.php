@@ -6,7 +6,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
-
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -25,6 +25,10 @@ class CustomerController extends Controller
             
             ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
             
+            if (Carbon::createFromFormat('d/m/Y', '20/02/2020') !== false) {
+                validDate();
+            }
+            
             session(['customer_order' => $request['order']]);
                                                                     
         }
@@ -32,6 +36,7 @@ class CustomerController extends Controller
         $name = session('customer_name', "%");
         $email = session('customer_email', "%");
         $phone = session('customer_phone', "%");
+        // = session('customer_date_from');
         $order = session('customer_order', "desc");
         
         $data = Customer::
