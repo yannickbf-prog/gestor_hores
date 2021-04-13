@@ -67,8 +67,8 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <div class="row"><div class="col-xs-12 col-sm-12 col-md-12"><div class="form-group"><strong>Date piker:</strong><input type="text" id="datepicker"></div></div></div>
-                <button type="button" class="btn btn-md btn-primary example-popover" data-toggle="popover">Click to toggle popover</button>
+                
+                <button type="button" class="btn btn-md btn-primary" id="datePopover" data-toggle="popover">Date interval</button>
                 <div id='inputDates'></div>
             </div>
         </div>

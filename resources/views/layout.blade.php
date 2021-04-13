@@ -81,21 +81,15 @@
 
     <script>
         $(function () {
-            $('.example-popover').popover({
+            $('#datePopover').popover({
                 container: '#inputDates',
-                content: '<div class="row"><div class="col-xs-12 col-sm-12 col-md-12"><div class="form-group"><strong>Date piker:</strong><input type="text" id="datepicker2"></div></div></div>',
+                content: '<div class="row"><div class="col-xs-12 col-sm-12 col-md-12"><div class="form-group"><strong>From:</strong><input type="text" class="datepicker"></div><div class="form-group"><strong>To:</strong><input type="text" class="datepicker"></div></div></div>',
                 html: true
             }).on('shown.bs.popover', function () {
-                $("#datepicker2").datepicker();
+                $(".datepicker").datepicker();
             });
         });
     </script>
-
-    <!-- Datapiker ui -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    
-
 
     <!--Used for change languajes-->
     <!--
