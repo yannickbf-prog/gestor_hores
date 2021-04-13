@@ -52,6 +52,18 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Order:</strong>
+                <select name="order" id="order">
+                    <option value="desc">New first</option>
+                    <option value="asc" @if(session('customer_order') == 'asc'){{'selected'}}@endif >Old first</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <input type="text" id="datepicker">    
     <button type="submit" class="btn btn-success">Filter</button>
 </form>
 

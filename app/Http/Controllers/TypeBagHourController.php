@@ -21,16 +21,19 @@ class TypeBagHourController extends Controller {
             ($request['name'] == "") ? session(['type_bag_hour_name' => '%']) : session(['type_bag_hour_name' => $request['name']]);
             
             ($request['hour_price'] == "") ? session(['type_bag_hour_price' => '%']) : session(['type_bag_hour_price' => str_replace(",", ".", $request['hour_price'])]);
-                                                                    
+              
+            session(['type_bag_hour_order' => $request['order']]);
         }
         
         
         $name = session('type_bag_hour_name', "%");
         $hour_price = session('type_bag_hour_price', "%");
+        $order = session('type_bag_hour_order', "asc");
         
         $data = TypeBagHour::
                 where('name', 'like', "%{$name}%")
                 ->where('hour_price', 'LIKE', $hour_price)
+                ->orderBy('created_at', $order)
                 ->paginate(7);
         
       
@@ -43,6 +46,7 @@ class TypeBagHourController extends Controller {
         
         session(['type_bag_hour_name' => '%']);
         session(['type_bag_hour_price' => '%']);
+        session(['type_bag_hour_order' => 'asc']);
 
         return redirect()->route('type-bag-hours.index');
 

@@ -44,6 +44,17 @@
             </div>
         </div>
     </div>
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Order:</strong>
+                <select name="order" id="order">
+                    <option value="asc">Old first</option>
+                    <option value="desc" @if(session('type_bag_hour_order') == 'desc'){{'selected'}}@endif>New first</option>
+                </select>
+            </div>
+        </div>
+    </div> 
     <button type="submit" class="btn btn-success">Filter</button>
 </form>
 

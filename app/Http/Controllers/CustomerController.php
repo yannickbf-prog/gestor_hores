@@ -24,17 +24,21 @@ class CustomerController extends Controller
             ($request['email'] == "") ? session(['customer_email' => '%']) : session(['customer_email' => $request['email']]);
             
             ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
+            
+            session(['customer_order' => $request['order']]);
                                                                     
         }
         
         $name = session('customer_name', "%");
         $email = session('customer_email', "%");
         $phone = session('customer_phone', "%");
+        $order = session('customer_order', "desc");
         
         $data = Customer::
                 where('name', 'like', "%".$name."%")
                 ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
+                ->orderBy('created_at', $order)
                 ->paginate(1);
 
         return view('customers.index', compact('data'))
@@ -46,6 +50,7 @@ class CustomerController extends Controller
         session(['customer_name' => '%']);
         session(['customer_email' => '%']);
         session(['customer_phone' => '%']);
+        session(['customer_order' => 'desc']);
 
         return redirect()->route('customers.index');
 
