@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <input type="text" id="datepicker">    
+    <p>Date: <input type="text" id="datepicker"></p>
     <button type="submit" class="btn btn-success">Filter</button>
 </form>
 
