@@ -63,8 +63,18 @@
             </div>
         </div>
     </div>
-    <input type="text" id="datepicker">    
-    <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <div class="row"><div class="col-xs-12 col-sm-12 col-md-12"><div class="form-group"><strong>Date piker:</strong><input type="text" id="datepicker"></div></div></div>
+                <button type="button" class="btn btn-md btn-primary example-popover" data-toggle="popover">Click to toggle popover</button>
+                <div id='inputDates'></div>
+            </div>
+        </div>
+    </div>
+
+    
 </form>
 
 <form action="{{ route('customers.delete_filters') }}" method="POST"> 
@@ -113,7 +123,7 @@
     @empty
     <li>No Customers to show</li>
     @endforelse
-    
+
 </table> 
 <div id="paginationContainer">
     {!! $data->links() !!} 
