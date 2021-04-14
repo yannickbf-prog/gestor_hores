@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
 use Carbon\Carbon;
+use DateTime;
 
 class CustomerController extends Controller
 {
@@ -25,15 +26,14 @@ class CustomerController extends Controller
             
             ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
             
-         
-                if (Carbon::createFromFormat('d/m/Y', $request['date_from']) !== false) {
-                    session(['customer_date_from' => $request['date_from']]);
-                }
-                else{
-                    session(['customer_date_from' => 'ha entrado']);
-                }
-            
-            
+            if (DateTime::createFromFormat('d/m/Y', $request['date_from']) !== false) {
+                echo "is a date";
+            }
+            else{
+                echo "is not a date";
+              }
+
+                       
             
             session(['customer_order' => $request['order']]);
                                                                     
@@ -42,10 +42,9 @@ class CustomerController extends Controller
         $name = session('customer_name', "%");
         $email = session('customer_email', "%");
         $phone = session('customer_phone', "%");
-        $date_from = session('customer_date_from', Carbon::now());
+        $date_from = session('customer_date_from', Carbon::now()->toDateString());
         $order = session('customer_order', "desc");
         
-        {{ var_dump($date_from); }}
         
         $data = Customer::
                 where('name', 'like', "%".$name."%")
