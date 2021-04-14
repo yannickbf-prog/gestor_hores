@@ -27,10 +27,11 @@ class CustomerController extends Controller
             ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
             
             if (DateTime::createFromFormat('d/m/Y', $request['date_from']) !== false) {
-                echo "is a date";
+                $date = DateTime::createFromFormat('d/m/Y', $request['date_from'])->format('Y-m-d');
+                session(['customer_date_from' => $date]);
             }
             else{
-                echo "is not a date";
+                
               }
 
                        
@@ -42,9 +43,10 @@ class CustomerController extends Controller
         $name = session('customer_name', "%");
         $email = session('customer_email', "%");
         $phone = session('customer_phone', "%");
-        $date_from = session('customer_date_from', Carbon::now()->toDateString());
+        $date_from = session('customer_date_from');
         $order = session('customer_order', "desc");
         
+        echo $date_from;
         
         $data = Customer::
                 where('name', 'like', "%".$name."%")
