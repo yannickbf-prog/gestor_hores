@@ -27,7 +27,7 @@ class CustomerController extends Controller
             ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
             
             if (DateTime::createFromFormat('d/m/Y', $request['date_from']) !== false) {
-                $date = DateTime::createFromFormat('d/m/Y', $request['date_from'])->format('Y-m-d');
+                $date = DateTime::createFromFormat('d/m/Y', $request['date_from'])->format('d/m/Y');
                 session(['customer_date_from' => $date]);
             }
             else{
@@ -44,9 +44,13 @@ class CustomerController extends Controller
         $phone = session('customer_phone', "%");
         
         $date_from = session('customer_date_from', "");
+        
         if($date_from == ""){
             $date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
             $date_from = $date->format('Y-m-d');
+        }
+        else{
+            $date_from = DateTime::createFromFormat('d/m/Y', $date_from)->format('Y-m-d');
         }
         
         $order = session('customer_order', "desc");
@@ -57,6 +61,7 @@ class CustomerController extends Controller
                 where('name', 'like', "%".$name."%")
                 ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
+                ->whereBetween('created_at', ['2021-01-01', $date_from])
                 ->orderBy('created_at', $order)
                 ->paginate(1);
 
