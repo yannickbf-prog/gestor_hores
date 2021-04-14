@@ -58,8 +58,29 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
 
-                <button type="button" class="btn btn-md btn-primary" id="datePopover" data-toggle="popover">Date interval</button>
-                <div id='inputDates'></div>
+                <button type="button" class="btn btn-md btn-primary" id="datePopoverBtn" data-placement="top">Date create interval</button>
+
+                <div class="popover fade bs-popover-top show" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+                    <div class="arrow" style="left: 114px;"></div>
+                    <div class="popover-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="form-group">
+                                    <strong>From:</strong>
+                                    <input name="date_from" type="text" class="datepicker">
+                                </div>
+                                <div class="form-group">
+                                    <strong>To:</strong>
+                                    <input type="text" name="date_to" class="datepicker">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

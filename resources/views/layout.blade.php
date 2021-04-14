@@ -40,11 +40,15 @@
                 order: 2;
                 margin-top: 10px;
             }
+            
+            #datePopover{
+                opacity: 0;
+                transition: opacity .3s;
+            }
+            
         </style>
 
-        <script>
-            let from = "";
-        </script>
+       
     </head>
 
     <body>
@@ -82,26 +86,11 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     
-    <script>
-        
-
-    </script>
-
-    <script>
-        function updateFrom() {
-            let from = document.getElementsByName('date_from')[0].value;
-            alert(from);
-        }
-        $(function () {
-            $('#datePopover').popover({
-                container: '#inputDates',
-                content: '<div class="row"><div class="col-xs-12 col-sm-12 col-md-12"><div class="form-group"><strong>From:</strong><input name="date_from" type="text" class="datepicker" onchange="updateFrom()"></div><div class="form-group"><strong>To:</strong><input type="text" name="date_to" class="datepicker"></div></div></div>',
-                html: true
-            }).on('shown.bs.popover', function () {
-                $(".datepicker").datepicker();
-            });
-        });
-    </script>
+  <script>
+    $(function () {
+      $(".datepicker").datepicker();
+    });
+  </script>
 
     <!--Used for change languajes-->
 
@@ -159,6 +148,25 @@
       };
       $.datepicker.setDefaults($.datepicker.regional["ca"]);
     
+</script>
+
+<script>
+
+var displayPopover = 1;
+function showPopover(){
+    (displayPopover % 2 === 0) ? document.getElementById("datePopover").style.opacity = 0 : document.getElementById("datePopover").style.opacity = 1;
+    displayPopover++;
+}
+function closePopover(){
+    document.getElementById("datePopover").style.opacity = 0;
+    displayPopover = 1;
+}
+    
+window.onload = function () {
+    document.getElementById("datePopoverBtn").addEventListener("click", showPopover);
+    document.getElementsByClassName("close")[0].addEventListener("click", closePopover);
+};
+
 </script>
 
 </html>
