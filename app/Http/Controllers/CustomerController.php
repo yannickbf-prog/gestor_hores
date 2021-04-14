@@ -31,10 +31,8 @@ class CustomerController extends Controller
                 session(['customer_date_from' => $date]);
             }
             else{
-                $date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
-                
-                //echo $date->format('Y-m-d');
-                session(['customer_date_from' => $date->format('Y-m-d')]);
+                $date = "";
+                session(['customer_date_from' => $date]);
             }
 
             session(['customer_order' => $request['order']]);
@@ -45,8 +43,11 @@ class CustomerController extends Controller
         $email = session('customer_email', "%");
         $phone = session('customer_phone', "%");
         
-        $date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
-        $date_from = session('customer_date_from', $date->format('Y-m-d'));
+        $date_from = session('customer_date_from', "");
+        if($date_from == ""){
+            $date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
+            $date_from = $date->format('Y-m-d');
+        }
         
         $order = session('customer_order', "desc");
         

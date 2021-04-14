@@ -70,7 +70,7 @@
                                 </button>
                                 <div class="form-group">
                                     <strong>From:</strong>
-                                    <input name="date_from" type="text" class="datepicker">
+                                    <input name="date_from" type="text" class="datepicker" value="@if(session('customer_date_from') != ''){{session('customer_date_from')}}@endif">
                                 </div>
                                 <div class="form-group">
                                     <strong>To:</strong>
