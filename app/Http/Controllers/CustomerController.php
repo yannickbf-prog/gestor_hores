@@ -6,7 +6,6 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
-use Carbon\Carbon;
 use DateTime;
 
 class CustomerController extends Controller
@@ -31,11 +30,11 @@ class CustomerController extends Controller
                 session(['customer_date_from' => $date]);
             }
             else{
+                $date = date('Y-m-d');
                 
-              }
+                session(['customer_date_from' => $date]);
+            }
 
-                       
-            
             session(['customer_order' => $request['order']]);
                                                                     
         }
