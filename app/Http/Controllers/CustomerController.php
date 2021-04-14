@@ -31,11 +31,16 @@ class CustomerController extends Controller
                 session(['customer_date_from' => $date]);
             }
             else{
-                $date = "";
-                session(['customer_date_from' => $date]);
+                session(['customer_date_from' => ""]);
             }
             
-            
+            if (DateTime::createFromFormat('d/m/Y', $request['date_to']) !== false) {
+                $date = DateTime::createFromFormat('d/m/Y', $request['date_to'])->format('d/m/Y');
+                session(['customer_date_to' => $date]);
+            }
+            else{
+                session(['customer_date_to' => ""]);
+            }
 
             session(['customer_order' => $request['order']]);
                                                                     
@@ -48,24 +53,34 @@ class CustomerController extends Controller
         $date_from = session('customer_date_from', "");
         
         if($date_from == ""){
-            /*$date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
-            $date_from = $date->format('Y-m-d');*/
-            $date = new DateTime('2021-04-15');
+            $date = new DateTime('2021-04-10');
             $date_from = $date->format('Y-m-d');
         }
         else{
             $date_from = DateTime::createFromFormat('d/m/Y', $date_from)->format('Y-m-d');
         }
         
-        $order = session('customer_order', "desc");
+        //echo $date_from;
         
-        echo $date_from;
+        $date_to = session('customer_date_to', "");
+        
+        if($date_to == ""){
+            $date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
+            $date_to = $date->format('Y-m-d');
+        }
+        else{
+            $date_to = DateTime::createFromFormat('d/m/Y', $date_to)->format('Y-m-d');
+        }
+        
+        //echo " ".$date_to;
+        
+        $order = session('customer_order', "desc");
         
         $data = Customer::
                 where('name', 'like', "%".$name."%")
                 ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
-                ->whereBetween('created_at', ['2021-01-01', $date_from])
+                ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate(1);
 
@@ -78,6 +93,8 @@ class CustomerController extends Controller
         session(['customer_name' => '%']);
         session(['customer_email' => '%']);
         session(['customer_phone' => '%']);
+        session(['customer_date_from' => ""]);
+        session(['customer_date_to' => ""]);
         session(['customer_order' => 'desc']);
 
         return redirect()->route('customers.index');

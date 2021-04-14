@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <strong>To:</strong>
-                                    <input type="text" name="date_to" class="datepicker">
+                                    <input type="text" name="date_to" class="datepicker" value="@if(session('customer_date_to') != ''){{session('customer_date_to')}}@endif">
                                 </div>
                             </div>
                         </div>
@@ -123,6 +123,7 @@
         <th>Email</th>
         <th>Phone</th>
         <th>Details</th>
+        <th>Created at</th>
         <th width="280px">Action</th>
     </tr>
     @endif
@@ -133,6 +134,7 @@
         <td>{{ $value->email }}</td>
         <td>{{ $value->phone }}</td>
         <td>{{ \Str::limit($value->description, 100) }}</td>
+        <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('customers.destroy',$value->id) }}" method="POST"> 
                 <a class="btn btn-primary" href="{{ route('customers.edit',$value->id) }}">Edit</a>
