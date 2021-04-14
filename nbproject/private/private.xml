@@ -7,6 +7,7 @@
             <file>file:/var/www/gestor_hores/app/Http/Controllers/TypeBagHourController.php</file>
             <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/index.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/index.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Models/Customer.php</file>
             <file>file:/var/www/gestor_hores/resources/views/layout.blade.php</file>
         </group>
     </open-files>
