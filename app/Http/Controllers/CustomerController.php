@@ -34,6 +34,8 @@ class CustomerController extends Controller
                 $date = "";
                 session(['customer_date_from' => $date]);
             }
+            
+            
 
             session(['customer_order' => $request['order']]);
                                                                     
@@ -46,7 +48,9 @@ class CustomerController extends Controller
         $date_from = session('customer_date_from', "");
         
         if($date_from == ""){
-            $date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
+            /*$date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
+            $date_from = $date->format('Y-m-d');*/
+            $date = new DateTime('2021-04-15');
             $date_from = $date->format('Y-m-d');
         }
         else{
