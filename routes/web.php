@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\CustomerController;
 
@@ -23,6 +24,18 @@ Route::view("/company-info", "company-info")->name('company-info');
 
 Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
+
+
+
+Route::get('/customers/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'ca', 'es'])) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+
+    //
+});
 
 Route::post('type-bag-hours/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type-bag-hours.delete_filters');
 Route::post('customers/delete_filters', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');

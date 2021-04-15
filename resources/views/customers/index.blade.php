@@ -99,7 +99,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Number of records per page</strong>
+                <strong>Number of records per page: </strong>
                 <select name="num_records" id="numRecords">
                     <option value="10">10</option>
                     <option value="50" @if(session('customer_num_records') == 50){{'selected'}}@endif>50</option>
