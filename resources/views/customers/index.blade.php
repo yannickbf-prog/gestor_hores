@@ -102,9 +102,9 @@
                 <strong>Number of records per page</strong>
                 <select name="num_records" id="numRecords">
                     <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="all">All</option>
+                    <option value="50" @if(session('customer_num_records') == 50){{'selected'}}@endif>50</option>
+                    <option value="100" @if(session('customer_num_records') == 100){{'selected'}}@endif>100</option>
+                    <option value="all" @if(session('customer_num_records') == 'all'){{'selected'}}@endif>All</option>
                 </select>
             </div>
         </div>
