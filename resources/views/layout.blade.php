@@ -1,3 +1,6 @@
+@php
+{{ App::setLocale('ca'); }}
+@endphp
 <html>
     <head>
         <title>@yield('title', 'Control panel')</title>

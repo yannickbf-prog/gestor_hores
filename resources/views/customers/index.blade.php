@@ -1,9 +1,11 @@
+
 @extends('layout')
 
-@section('title', 'Control panel - Customers')
+@section('title', 'Control panel - __("Customers")')
 
 @section('content')
 @if ($message = Session::get('success'))
+
 <div class="alert alert-success">
     <p>{{ $message }}</p>
 </div>

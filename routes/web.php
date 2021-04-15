@@ -26,16 +26,12 @@ Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
 
 
+Route::get('clients', [CustomerController::class, 'index']);
+Route::view("/clients/crear", "customers.create");
+Route::post("/portafolio", [CustomerController::class, 'store']);
 
-Route::get('/customers/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'ca', 'es'])) {
-        abort(400);
-    }
 
-    App::setLocale($locale);
-
-    //
-});
+//Route::view("/clients", "customers")->name('customers');
 
 Route::post('type-bag-hours/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type-bag-hours.delete_filters');
 Route::post('customers/delete_filters', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
