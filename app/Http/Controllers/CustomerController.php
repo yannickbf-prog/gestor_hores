@@ -43,6 +43,8 @@ class CustomerController extends Controller
             }
 
             session(['customer_order' => $request['order']]);
+            
+            session(['customer_num_records' => $request['num_records']]);
                                                                     
         }
         
@@ -76,16 +78,22 @@ class CustomerController extends Controller
         
         $order = session('customer_order', "desc");
         
+        $num_records = session('customer_num_records', 10);
+        
+        if($num_records == 'all'){
+            $num_records = Customer::count();
+        }
+        
         $data = Customer::
                 where('name', 'like', "%".$name."%")
                 ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
                 ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
-                ->paginate(1);
+                ->paginate($num_records);
 
         return view('customers.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * 1);
+                        ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
     
     public function deleteFilters() {

@@ -96,6 +96,19 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Number of records per page</strong>
+                <select name="num_records" id="numRecords">
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="all">All</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-success">Filter</button>
 </form>
 
