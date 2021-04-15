@@ -1,12 +1,15 @@
+@php
+{{ App::setLocale('ca'); }}
+@endphp
 @extends('layout')
 
-@section('title', 'Control panel - Customers - Create new')
+@section('title', __('Control Panel'))
 
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Customer</h2>
+            <h2>{{__('Add New Customer')}}</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>

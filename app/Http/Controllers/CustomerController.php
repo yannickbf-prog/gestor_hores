@@ -130,7 +130,7 @@ class CustomerController extends Controller
 
         Customer::create($request->validated());
 
-        return redirect()->route('customers.index')
+        return redirect()->route('clients.index')
                         ->with('success', 'Customer created successfully.');
     }
 

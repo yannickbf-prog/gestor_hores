@@ -1,6 +1,4 @@
-@php
-{{ App::setLocale('ca'); }}
-@endphp
+
 <html>
     <head>
         <title>@yield('title', 'Control panel')</title>
@@ -55,6 +53,7 @@
     </head>
 
     <body>
+
         <div id="app" class="d-flex flex-column h-screen py-3">
 
             <div class="row">
