@@ -12,7 +12,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>@lang('sentence.point_of_sale')</h2>
+            <h2>{{ __('message.page_title') }}</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-success" href="{{ route('customers.create') }}">Create New Customer</a>

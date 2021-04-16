@@ -56,15 +56,7 @@
 
         <div id="app" class="d-flex flex-column h-screen py-3">
             
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> Language 
-                    <span class="caret"></span>
-                    </a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="lang/en">English</a>
-                      <a class="dropdown-item" href="lang/es">Spanish</a>
-                    </div>
-                 </li> 
+
 
             <div class="row">
                 <header class="bg-primary bg-info border border-primary col-12 mb-2 py-2">

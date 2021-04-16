@@ -1,17 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class LocalizationController extends Controller
 {
-    public function lang($locale)
+    public function index()
     {
-        App::setLocale($locale);
-        session()->put('locale', $locale);
-        return redirect()->back();
+        return view('language');
+    }
+    
+
+    
+    public function lang_change(Request $request)
+    {
+        App::setLocale($request->lang);
+        session()->put('locale', $request->lang);
+        return view('language');
     }
 }
