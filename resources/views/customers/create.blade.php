@@ -1,6 +1,3 @@
-@php
-{{ App::setLocale('ca'); }}
-@endphp
 @extends('layout')
 
 @section('title', __('Control Panel'))
