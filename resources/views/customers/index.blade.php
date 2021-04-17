@@ -15,12 +15,13 @@
             <h2>{{ __('message.page_title') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('customers.create') }}">Create New Customer</a>
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">Create New Customer</a>
+           
         </div>
     </div>
 </div>
 
-<form action="{{ route('customers.index') }}" method="GET"> 
+<form action="{{ route($lang.'_customers.index') }}" method="GET"> 
     @csrf
 
     <div class="row py-2">

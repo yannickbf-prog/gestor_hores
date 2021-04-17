@@ -134,9 +134,11 @@ class CustomerController extends Controller
     public function store(CreateCustomerRequest $request)
     {
 
+        $lang = setLang();
+        
         Customer::create($request->validated());
 
-        return redirect()->route('clients.index')
+        return redirect()->route('es_customers.index')
                         ->with('success', 'Customer created successfully.');
     }
 
