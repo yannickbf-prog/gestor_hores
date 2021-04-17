@@ -75,7 +75,7 @@ class CustomerController extends Controller
             $date_to = $date->format('Y-m-d');
         }
         else{
-            $date_to = DateTime::createFromFormat('d/m/Y', $date_to)->format('Y-m-d');
+            $date_to = DateTime::createFromFormat('d/m/Y', $date_to)->modify('+1 day')->format('Y-m-d');
         }
         
         //echo " ".$date_to;
