@@ -136,6 +136,10 @@ class CustomerController extends Controller
 
         $lang = setLang();
         
+        if (\Request::is('es/*')) {
+            $lang = "es";
+        }
+        
         Customer::create($request->validated());
 
         return redirect()->route('es_customers.index')
