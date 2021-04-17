@@ -38,6 +38,7 @@ Route::get("en/customers/create", [CustomerController::class, 'create'])->name('
 Route::get("en/customers/{customer}/edit", [CustomerController::class, 'edit'])->name('en_customers.edit');
 Route::delete("en/customers/{customer}", [CustomerController::class, 'destroy'])->name('en_customers.destroy');
 Route::post("customers/{lang}", [CustomerController::class, 'store'])->name('customers.store');
+Route::post("customers/{customer}/{lang}", [CustomerController::class, 'update'])->name('customers.update');
 
 
 //Route::post("es/clientes/guardar", [CustomerController::class, 'store'])->name('es_customers.store');

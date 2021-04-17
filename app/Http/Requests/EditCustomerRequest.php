@@ -24,6 +24,7 @@ class EditCustomerRequest extends FormRequest
      */
     public function rules()
     {
+    
         return [
             'name' => ['required', Rule::unique('customers')->ignore($this->id)],
             'email' => ['required','email',Rule::unique('customers')->ignore($this->id)],

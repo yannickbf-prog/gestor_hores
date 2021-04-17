@@ -9,7 +9,7 @@
             <h2>Edit Type bag hour: {{ $customer->name }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route($lang.'_customers.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -29,9 +29,9 @@
     <strong>Fields with * are required</strong>
 </div>
 
-<form action="{{ route('customers.update',$customer->id) }}" method="POST">
+<form action="{{ route('customers.update',['customer' => $customer->id, 'lang' => $lang ]) }}" method="POST">
     @csrf
-    @method('PUT')
+    
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">

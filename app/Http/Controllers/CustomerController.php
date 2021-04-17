@@ -133,12 +133,6 @@ class CustomerController extends Controller
      */
     public function store(CreateCustomerRequest $request, $lang)
     {
-
-        /*$lang = setLang();
-        
-        if (\Request::is('es/*')) {
-            $lang = "es";
-        }*/
         
         Customer::create($request->validated());
 
@@ -165,7 +159,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        return view('customers.edit', compact('customer'));
+        $lang = setGetLang();
+        
+        return view('customers.edit', compact('customer'), compact('lang'));
     }
 
     /**
@@ -175,14 +171,14 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(EditCustomerRequest $request, Customer $customer)
+    public function update(EditCustomerRequest $request, Customer $customer, $lang)
     {
         
         
         $customer->update($request->validated());
        
 
-        return redirect()->route('customers.index')
+        return redirect()->route($lang.'_customers.index')
                         ->with('success', 'Customer updated successfully');
     }
 
