@@ -36,9 +36,9 @@ Route::resource('type-bag-hours', TypeBagHourController::class);
 //Route::get("/portafolio/crear", "ProjectController@create")->name('projects.create');
 //Route::post("/portafolio", "ProjectController@store")->name('projects.store');
 
-Route::get("es/clientes", [CustomerController::class, 'index'])->name('es_customers.index');
-Route::get("es/clientes/crear", [CustomerController::class, 'create'])->name('es_customers.create');
-Route::post("es/clientes/guardar", [CustomerController::class, 'store'])->name('es_customers.store');
+//Route::get("es/clientes", [CustomerController::class, 'index'])->name('es_customers.index');
+//Route::get("es/clientes/crear", [CustomerController::class, 'create'])->name('es_customers.create');
+//Route::post("es/clientes/guardar", [CustomerController::class, 'store'])->name('es_customers.store');
 
 
 Route::post('type-bag-hours/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type-bag-hours.delete_filters');

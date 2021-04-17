@@ -8,7 +8,7 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
 use DateTime;
 use DateTimeZone;
-use Illuminate\Support\Facades\App;
+
 
 class CustomerController extends Controller
 {
@@ -20,7 +20,7 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         
-        $lang = setLang();
+        //$lang = setLang();
         
         if($request->has('_token')){
             
@@ -71,7 +71,7 @@ class CustomerController extends Controller
         $date_to = session('customer_date_to', "");
         
         if($date_to == ""){
-            $date = new DateTime('NOW', new DateTimeZone('Europe/Madrid'));
+            $date = new DateTime('NOW +1 day', new DateTimeZone('Europe/Madrid'));
             $date_to = $date->format('Y-m-d');
         }
         else{
@@ -97,7 +97,7 @@ class CustomerController extends Controller
                 ->paginate($num_records);
 
         return view('customers.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
+                        ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
     
     public function deleteFilters() {
@@ -120,7 +120,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $lang = setLang();
+        //$lang = setLang();
         
         return view('customers.create')->with('lang', $lang);
     }
@@ -134,15 +134,15 @@ class CustomerController extends Controller
     public function store(CreateCustomerRequest $request)
     {
 
-        $lang = setLang();
+        /*$lang = setLang();
         
         if (\Request::is('es/*')) {
             $lang = "es";
-        }
+        }*/
         
         Customer::create($request->validated());
 
-        return redirect()->route('es_customers.index')
+        return redirect()->route('customers.index')
                         ->with('success', 'Customer created successfully.');
     }
 
