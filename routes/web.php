@@ -36,7 +36,7 @@ Route::resource('type-bag-hours', TypeBagHourController::class);
 Route::get("en/customers", [CustomerController::class, 'index'])->name('en_customers.index');
 Route::get("en/customers/create", [CustomerController::class, 'create'])->name('en_customers.create');
 Route::get("en/customers/{customer}/edit", [CustomerController::class, 'edit'])->name('en_customers.edit');
-Route::delete("customers/{customer}", [CustomerController::class, 'destroy'])->name('en_customers.destroy');
+Route::delete("en/customers/{customer}", [CustomerController::class, 'destroy'])->name('en_customers.destroy');
 Route::post("customers/{lang}", [CustomerController::class, 'store'])->name('customers.store');
 
 

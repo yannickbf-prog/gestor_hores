@@ -194,9 +194,12 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        
         $customer->delete();
+        
+        $lang = getLang();
 
-        return redirect()->route('customers.index')
+        return redirect()->route($lang.'_customers.index')
                         ->with('success', 'Customer deleted successfully');
     }
 }
