@@ -20,7 +20,7 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         
-        //$lang = setLang();
+        $lang = setGetLang();
         
         if($request->has('_token')){
             
@@ -97,7 +97,7 @@ class CustomerController extends Controller
                 ->paginate($num_records);
 
         return view('customers.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * $num_records);
+                        ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
     public function deleteFilters() {
@@ -120,7 +120,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //$lang = setLang();
+        $lang = setGetLang();
         
         return view('customers.create')->with('lang', $lang);
     }
@@ -131,7 +131,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateCustomerRequest $request)
+    public function store(CreateCustomerRequest $request, $lang)
     {
 
         /*$lang = setLang();
@@ -142,7 +142,7 @@ class CustomerController extends Controller
         
         Customer::create($request->validated());
 
-        return redirect()->route('customers.index')
+        return redirect()->route($lang.'_customers.index')
                         ->with('success', 'Customer created successfully.');
     }
 

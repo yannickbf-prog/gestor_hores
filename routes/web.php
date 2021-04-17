@@ -30,10 +30,21 @@ use App\Http\Controllers\LocalizationController;
 Route::view("/", "home")->name('home');
 Route::view("/company-info", "company-info")->name('company-info');
 
-Route::resource('customers', CustomerController::class);
+//Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
-//Route::get("en/customers", [CustomerController::class, 'index'])->name('en_customers.index');
-//Route::get("/portafolio/crear", "ProjectController@create")->name('projects.create');
+
+Route::get("en/customers", [CustomerController::class, 'index'])->name('en_customers.index');
+Route::get("en/customers/create", [CustomerController::class, 'create'])->name('en_customers.create');
+Route::get("en/customers/{customer}/edit", [CustomerController::class, 'edit'])->name('en_customers.edit');
+Route::delete("customers/{customer}", [CustomerController::class, 'destroy'])->name('en_customers.destroy');
+Route::post("customers/{lang}", [CustomerController::class, 'store'])->name('customers.store');
+
+
+//Route::post("es/clientes/guardar", [CustomerController::class, 'store'])->name('es_customers.store');
+//
+//
+//
+////Route::get("/portafolio/crear", "ProjectController@create")->name('projects.create');
 //Route::post("/portafolio", "ProjectController@store")->name('projects.store');
 
 //Route::get("es/clientes", [CustomerController::class, 'index'])->name('es_customers.index');

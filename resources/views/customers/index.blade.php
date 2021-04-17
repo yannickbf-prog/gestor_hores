@@ -15,13 +15,13 @@
             <h2>{{ __('message.page_title') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('customers.create') }}">Create New Customer</a>
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">Create New Customer</a>
            
         </div>
     </div>
 </div>
 
-<form action="{{ route('customers.index') }}" method="GET"> 
+<form action="{{ route($lang.'_customers.index') }}" method="GET"> 
     @csrf
 
     <div class="row py-2">
@@ -126,7 +126,7 @@
             <h3>Customers list</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('customers.create') }}">Create New Customers</a>
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">Create New Customers</a>
         </div>
     </div>
 </div>
@@ -152,8 +152,8 @@
         <td>{{ \Str::limit($value->description, 100) }}</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
-            <form action="{{ route('customers.destroy',$value->id) }}" method="POST"> 
-                <a class="btn btn-primary" href="{{ route('customers.edit',$value->id) }}">Edit</a>
+            <form action="{{ route($lang.'_customers.destroy',$value->id) }}" method="POST"> 
+                <a class="btn btn-primary" href="{{ route($lang.'_customers.edit',$value->id) }}">Edit</a>
                 @csrf
                 @method('DELETE')      
                 <button type="submit" class="btn btn-danger">Delete</button>
