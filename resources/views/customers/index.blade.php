@@ -19,6 +19,7 @@
         </div>
     </div>
 </div>
+
 <form action="{{ route('customers.index') }}" method="GET"> 
     @csrf
 

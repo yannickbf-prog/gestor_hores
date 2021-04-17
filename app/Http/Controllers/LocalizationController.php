@@ -11,8 +11,6 @@ class LocalizationController extends Controller
         return view('language');
     }
     
-
-    
     public function lang_change(Request $request)
     {
         App::setLocale($request->lang);

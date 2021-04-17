@@ -8,6 +8,7 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\App;
 
 class CustomerController extends Controller
 {
@@ -18,6 +19,9 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
+        
+        $lang = setLang();
+        
         if($request->has('_token')){
             
             ($request['name'] == "") ? session(['customer_name' => '%']) : session(['customer_name' => $request['name']]);
@@ -93,7 +97,7 @@ class CustomerController extends Controller
                 ->paginate($num_records);
 
         return view('customers.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * $num_records);
+                        ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
     public function deleteFilters() {
@@ -116,7 +120,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customers.create');
+        $lang = setLang();
+        
+        return view('customers.create')->with('lang', $lang);
     }
 
     /**

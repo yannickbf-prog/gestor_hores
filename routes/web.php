@@ -20,13 +20,9 @@ use App\Http\Controllers\LocalizationController;
 |
 */
 
-/*Route::view("/", "home")->name('home');
-Route::view("/company-info", "company-info")->name('company-info');
-*/
-//Route::resource('users', UserController::class);
 
-
-
+//Route::get('/', [LocalizationController::class, "index"]);
+//Route::get('change/lang', [LocalizationController::class, "lang_change"])->name('LangChange');
 
 
 
@@ -34,15 +30,15 @@ Route::view("/company-info", "company-info")->name('company-info');
 Route::view("/", "home")->name('home');
 Route::view("/company-info", "company-info")->name('company-info');
 
-Route::get('change/lang', [LocalizationController::class, "lang_change"])->name('LangChange');
-
-//Route::get('customers', [LocalizationController::class, "customers"]);
-//Route::get('/', [LocalizationController::class, "index"]);
-
-
 Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
+//Route::get("en/customers", [CustomerController::class, 'index'])->name('en_customers.index');
+//Route::get("/portafolio/crear", "ProjectController@create")->name('projects.create');
+//Route::post("/portafolio", "ProjectController@store")->name('projects.store');
 
+Route::get("es/clientes", [CustomerController::class, 'index'])->name('es_customers.index');
+Route::get("es/clientes/crear", [CustomerController::class, 'create'])->name('es_customers.create');
+//Route::post("es/clientes", "ProjectController@store")->name('projects.store');
 
 Route::post('type-bag-hours/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type-bag-hours.delete_filters');
 Route::post('customers/delete_filters', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');

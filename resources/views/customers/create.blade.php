@@ -9,7 +9,7 @@
             <h2>{{__('Add New Customer')}}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route($lang.'_customers.index') }}"> Back</a>
         </div>
     </div>
 </div>
