@@ -33,12 +33,14 @@ Route::view("/company-info", "company-info")->name('company-info');
 //Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
 
+Route::post("customers/{customer}/lang/{lang}", [CustomerController::class, 'update'])->name('customers.update');
+Route::post('customers/delete_filters', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
 Route::get("en/customers", [CustomerController::class, 'index'])->name('en_customers.index');
 Route::get("en/customers/create", [CustomerController::class, 'create'])->name('en_customers.create');
 Route::get("en/customers/{customer}/edit", [CustomerController::class, 'edit'])->name('en_customers.edit');
 Route::delete("en/customers/{customer}", [CustomerController::class, 'destroy'])->name('en_customers.destroy');
 Route::post("customers/{lang}", [CustomerController::class, 'store'])->name('customers.store');
-Route::post("customers/{customer}/{lang}", [CustomerController::class, 'update'])->name('customers.update');
+
 
 
 //Route::post("es/clientes/guardar", [CustomerController::class, 'store'])->name('es_customers.store');
@@ -54,6 +56,6 @@ Route::post("customers/{customer}/{lang}", [CustomerController::class, 'update']
 
 
 Route::post('type-bag-hours/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type-bag-hours.delete_filters');
-Route::post('customers/delete_filters', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
+
 
 

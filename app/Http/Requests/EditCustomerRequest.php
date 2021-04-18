@@ -26,9 +26,9 @@ class EditCustomerRequest extends FormRequest
     {
     
         return [
-            'name' => ['required', Rule::unique('customers')->ignore($this->id)],
-            'email' => ['required','email',Rule::unique('customers')->ignore($this->id)],
-            'phone' => ['required', 'numeric', 'min:100000000', 'max:100000000000000', Rule::unique('customers')->ignore($this->id)],
+            'name' => ['required', Rule::unique('customers')->ignore($this->customer->id)],
+            'email' => ['required','email',Rule::unique('customers')->ignore($this->customer->id)],
+            'phone' => ['required', 'numeric', 'min:100000000', 'max:100000000000000', Rule::unique('customers')->ignore($this->customer->id)],
             'description' => 'max:400'
         ];
     }

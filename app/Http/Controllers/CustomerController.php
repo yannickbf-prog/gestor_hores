@@ -8,6 +8,7 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Validation\Rule;
 
 
 class CustomerController extends Controller
@@ -109,7 +110,7 @@ class CustomerController extends Controller
         session(['customer_date_to' => ""]);
         session(['customer_order' => 'desc']);
 
-        return redirect()->route('customers.index');
+        return redirect()->route('en_customers.index');
 
     }
 
@@ -173,7 +174,6 @@ class CustomerController extends Controller
      */
     public function update(EditCustomerRequest $request, Customer $customer, $lang)
     {
-        
         
         $customer->update($request->validated());
        
