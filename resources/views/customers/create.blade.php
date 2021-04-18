@@ -57,6 +57,7 @@
                 <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description">{{old('description')}}</textarea>
             </div>
         </div>
+         <input type="hidden" name="lang" value="{{ $lang }}">
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
         </div>

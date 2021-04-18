@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Support\Facades\App;
+
 class CreateCustomerRequest extends FormRequest
 {
     /**
@@ -23,6 +25,8 @@ class CreateCustomerRequest extends FormRequest
      */
     public function rules()
     {
+        App::setLocale($this->lang);
+        
         return [
             
             'name' => 'unique:customers||required',

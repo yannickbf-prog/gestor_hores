@@ -5,25 +5,26 @@
             <url>app/Http/Controllers/CustomerController.php</url>
             <bookmark id="1">
                 <name/>
-                <line>201</line>
+                <line>200</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/CustomerController.php</file>
-            <file>file:/var/www/gestor_hores/app/helpers.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Requests/CreateCustomerRequest.php</file>
+            <file>file:/var/www/gestor_hores/app/helpers.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/CustomerController.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/edit.blade.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/TypeBagHourController.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/index.blade.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Requests/EditCustomerRequest.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/EditTypeBagHourRequest.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/edit.blade.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/create.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/views/partials/nav.blade.php</file>
             <file>file:/var/www/gestor_hores/routes/console.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Requests/EditTypeBagHourRequest.php</file>
         </group>
     </open-files>
 </project-private>

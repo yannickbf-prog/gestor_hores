@@ -5,8 +5,11 @@
 @section('content')
 @if ($message = Session::get('success'))
 
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{ $message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 @endif
 <div class="row py-2">
@@ -152,7 +155,7 @@
         <td>{{ \Str::limit($value->description, 100) }}</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
-            <form action="{{ route($lang.'_customers.destroy',$value->id) }}" method="POST"> 
+            <form action="{{ route('customers.destroy',[$value->id, $lang]) }}" method="POST"> 
                 <a class="btn btn-primary" href="{{ route($lang.'_customers.edit',$value->id) }}">Edit</a>
                 @csrf
                 @method('DELETE')      

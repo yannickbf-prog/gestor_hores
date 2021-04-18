@@ -8,6 +8,7 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\App;
 
 
 class CustomerController extends Controller
@@ -133,9 +134,9 @@ class CustomerController extends Controller
      */
     public function store(CreateCustomerRequest $request, $lang)
     {
-        
+              
         Customer::create($request->validated());
-
+        
         return redirect()->route($lang.'_customers.index')
                         ->with('success', 'Customer created successfully.');
     }
@@ -187,12 +188,10 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Customer $customer, $lang)
     {
         
         $customer->delete();
-        
-        $lang = getLang();
 
         return redirect()->route($lang.'_customers.index')
                         ->with('success', 'Customer deleted successfully');
