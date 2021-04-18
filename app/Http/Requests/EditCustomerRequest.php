@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
 
 class EditCustomerRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class EditCustomerRequest extends FormRequest
      */
     public function rules()
     {
-    
+        App::setLocale($this->lang);
+        
         return [
             'name' => ['required', Rule::unique('customers')->ignore($this->customer->id)],
             'email' => ['required','email',Rule::unique('customers')->ignore($this->customer->id)],
