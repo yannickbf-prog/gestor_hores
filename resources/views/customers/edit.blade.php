@@ -29,7 +29,7 @@
     <strong>Fields with * are required</strong>
 </div>
 
-<form action="{{ route('customers.update',['customer' => $customer->id, 'lang' => $lang ]) }}" method="POST">
+<form action="{{ route('customers.update',[$customer->id, $lang]) }}" method="POST">
     @csrf
 
 

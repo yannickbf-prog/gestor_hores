@@ -8,7 +8,6 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
 use DateTime;
 use DateTimeZone;
-use Illuminate\Validation\Rule;
 
 
 class CustomerController extends Controller
