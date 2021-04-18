@@ -101,7 +101,7 @@ class CustomerController extends Controller
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
-    public function deleteFilters() {
+    public function deleteFilters(Request $request) {
         
         session(['customer_name' => '%']);
         session(['customer_email' => '%']);
@@ -109,8 +109,10 @@ class CustomerController extends Controller
         session(['customer_date_from' => ""]);
         session(['customer_date_to' => ""]);
         session(['customer_order' => 'desc']);
+        
+        $lang = $request->lang;
 
-        return redirect()->route('en_customers.index');
+        return redirect()->route($lang.'_customers.index');
 
     }
 
@@ -138,7 +140,7 @@ class CustomerController extends Controller
         Customer::create($request->validated());
         
         return redirect()->route($lang.'_customers.index')
-                        ->with('success', 'Customer created successfully.');
+                        ->with('success', __('message.customer')." ".__('message.created') );
     }
 
     /**
@@ -179,7 +181,7 @@ class CustomerController extends Controller
        
 
         return redirect()->route($lang.'_customers.index')
-                        ->with('success', 'Customer updated successfully');
+                        ->with('success', __('message.customer')." ".__('message.updated'));
     }
 
     /**
@@ -190,10 +192,11 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer, $lang)
     {
+        App::setLocale($lang);
         
         $customer->delete();
 
         return redirect()->route($lang.'_customers.index')
-                        ->with('success', 'Customer deleted successfully');
+                        ->with('success', __('message.customer')." ".__('message.deleted'));
     }
 }

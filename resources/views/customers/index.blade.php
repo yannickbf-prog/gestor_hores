@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', __('Control Panel')." - ". __('Customers'))
+@section('title', __('message.control_panel')." - ". __('message.customers'))
 
 @section('content')
 @if ($message = Session::get('success'))
@@ -15,10 +15,10 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>{{ __('message.page_title') }}</h2>
+            <h2>{{ __('message.customers') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">Create New Customer</a>
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
            
         </div>
     </div>
@@ -30,31 +30,31 @@
     <div class="row py-2">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>Filters</h2>
+                <h3>{{ __('message.filters') }}</h2>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
+                <strong>{{ __('message.name') }}:</strong>
+                <input type="text" name="name" class="form-control" placeholder="{{ __('message.name') }}" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Email:</strong>
-                <input type="text" name="email" class="form-control" placeholder="Email" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
+                <strong>{{ __('message.email') }}:</strong>
+                <input type="text" name="{{ __('message.email') }}" class="form-control" placeholder="Email" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Phone:</strong>
-                <input type="text" name="phone" class="form-control" placeholder="Phone" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
+                <strong>{{ __('message.phone') }}:</strong>
+                <input type="text" name="phone" class="form-control" placeholder="{{ __('message.phone') }}" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
 
-                <button type="button" class="btn btn-md btn-primary" id="datePopoverBtn" data-placement="top">Date create interval</button>
+                <button type="button" class="btn btn-md btn-primary" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
 
                 <div class="popover fade bs-popover-top show" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
                     <div class="arrow" style="left: 114px;"></div>
@@ -75,11 +75,11 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <div class="form-group">
-                                    <strong>From:</strong>
+                                    <strong>{{ __('message.from') }}:</strong>
                                     <input name="date_from" type="text" class="datepicker" value="@if(session('customer_date_from') != ''){{session('customer_date_from')}}@endif">
                                 </div>
                                 <div class="form-group">
-                                    <strong>To:</strong>
+                                    <strong>{{ __('message.to') }}:</strong>
                                     <input type="text" name="date_to" class="datepicker" value="@if(session('customer_date_to') != ''){{session('customer_date_to')}}@endif">
                                 </div>
                             </div>
@@ -94,10 +94,10 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Order:</strong>
+                <strong>{{ __('message.order') }}:</strong>
                 <select name="order" id="order">
-                    <option value="desc">New first</option>
-                    <option value="asc" @if(session('customer_order') == 'asc'){{'selected'}}@endif >Old first</option>
+                    <option value="desc">{{ __('message.new_first') }}</option>
+                    <option value="asc" @if(session('customer_order') == 'asc'){{'selected'}}@endif >{{ __('message.old_first') }}</option>
                 </select>
             </div>
         </div>
@@ -105,31 +105,32 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Number of records per page: </strong>
+                <strong>{{ __('message.number_of_records') }}: </strong>
                 <select name="num_records" id="numRecords">
                     <option value="10">10</option>
                     <option value="50" @if(session('customer_num_records') == 50){{'selected'}}@endif>50</option>
                     <option value="100" @if(session('customer_num_records') == 100){{'selected'}}@endif>100</option>
-                    <option value="all" @if(session('customer_num_records') == 'all'){{'selected'}}@endif>All</option>
+                    <option value="all" @if(session('customer_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
                 </select>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-success">Filter</button>
+    <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 
 <form action="{{ route('customers.delete_filters') }}" method="POST"> 
     @csrf
-    <button type="submit" class="btn btn-success">Delete all filters</button>
+    <input type="hidden" name="lang" value="{{ $lang }}">
+    <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
 </form>
 
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>Customers list</h2>
+            <h3>{{ __('message.customers_list') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">Create New Customers</a>
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
         </div>
     </div>
 </div>
@@ -137,13 +138,13 @@
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
-        <th>No</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Details</th>
-        <th>Created at</th>
-        <th width="280px">Action</th>
+        <th>Nº</th>
+        <th>{{ __('message.name') }}</th>
+        <th>{{ __('message.email') }}</th>
+        <th>{{ __('message.phone') }}</th>
+        <th>{{ __('message.description') }}</th>
+        <th>{{ __('message.created_at') }}</th>
+        <th>{{ __('message.action') }}</th>
     </tr>
     @endif
     @forelse ($data as $key => $value)
@@ -152,14 +153,14 @@
         <td>{{ $value->name }}</td>
         <td>{{ $value->email }}</td>
         <td>{{ $value->phone }}</td>
-        <td>{{ \Str::limit($value->description, 100) }}</td>
+        <td>@if ($value->description == ''){{ "No description" }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('customers.destroy',[$value->id, $lang]) }}" method="POST"> 
-                <a class="btn btn-primary" href="{{ route($lang.'_customers.edit',$value->id) }}">Edit</a>
+                <a class="btn btn-primary" href="{{ route($lang.'_customers.edit',$value->id) }}">{{ __('message.edit') }}</a>
                 @csrf
                 @method('DELETE')      
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger">{{ __('message.delete') }}</button>
             </form>
         </td>
     </tr>

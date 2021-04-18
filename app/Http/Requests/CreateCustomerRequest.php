@@ -35,4 +35,12 @@ class CreateCustomerRequest extends FormRequest
         
         ];
     }
+    
+    public function messages() 
+    {
+        return [
+            'phone.min' => __('message.phone_min'),
+            'phone.max' => __('message.phone_max')
+        ];
+    }
 }
