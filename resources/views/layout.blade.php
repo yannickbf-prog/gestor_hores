@@ -63,8 +63,8 @@
                     <h1>aTotArreu Control panel</h1>
                     <div class="col-md-4 form-group">
                         <select class="form-control Langchange">
-                            <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-                            <option value="es" {{ session()->get('locale') == 'es' ? 'selected' : '' }}>Spanish</option>
+                            <option value="en" {{ setActiveLang('en') }}>English</option>
+                            <option value="es" {{ setActiveLang('es') }}>Spanish</option>
                         </select>
                     </div>
                 </header>
@@ -163,9 +163,9 @@
 <script type="text/javascript">
     var url = "{{ route('LangChange') }}";
     $(".Langchange").change(function(){
-        let getUrl = "{{ Route::currentRouteName() }}";
-        let customer = "@if(isset($customer)) {{ $customer }} @else {{'nocustomer'}} @endif";
-        window.location.href = url + "?lang="+ $(this).val() + "&urltoredirect=" + getUrl + "&customer=" + customer;
+        let currentRoute = "{{ Route::currentRouteName() }}";
+        let customer = "@if(isset($customer)){{ $customer->id }} @else{{'nocustomer'}} @endif";
+        window.location.href = url + "?langToDisplay="+ $(this).val() + "&currentRoute=" + currentRoute + "&customer=" + customer;
     });
 </script>
 

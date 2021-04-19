@@ -4,6 +4,15 @@ function setActive($routeName) {
     return request()->routeIs($routeName) ? 'active' : '';
 }
 
+function setActiveLang($lang){
+    if(\Request::is($lang.'/*')){
+        return 'selected';
+    }
+    else{
+        return '';
+    }
+}
+
 function setGetLang() {
     if (\Request::is('en/*')) {
         App::setLocale('en');
