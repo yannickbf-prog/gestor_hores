@@ -22,7 +22,7 @@ use App\Http\Controllers\LocalizationController;
 
 
 //Route::get('/', [LocalizationController::class, "index"]);
-//Route::get('change/lang', [LocalizationController::class, "lang_change"])->name('LangChange');
+Route::get('change/lang', [LocalizationController::class, "lang_change"])->name('LangChange');
 
 
 

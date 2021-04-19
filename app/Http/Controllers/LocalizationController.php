@@ -13,8 +13,7 @@ class LocalizationController extends Controller
     
     public function lang_change(Request $request)
     {
-        App::setLocale($request->lang);
-        session()->put('locale', $request->lang);
-        return view('language');
+       
+        return $request->lang." ".$request->urltoredirect." ".$request->route()->getName();
     }
 }
