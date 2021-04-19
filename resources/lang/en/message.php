@@ -12,6 +12,8 @@ return [
     'updated' => 'updated successfully',
     'deleted' => 'deleted successfully', 
     
+    'enter' => 'Enter',
+    
     'customers' => 'Customers',
     'create_new_customer' => 'Create New Customer',
     'customer' => 'Customer',

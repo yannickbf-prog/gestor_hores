@@ -10,7 +10,10 @@ return [
     
     'created' => 'creat amb èxit',
     'updated' => 'actualitzat amb èxit',
-    'deleted' => 'eliminat amb èxit',  
+    'deleted' => 'eliminat amb èxit', 
+    
+    'enter' => 'Escriu',
+
     
     'customers' => 'Clients',
     'create_new_customer' => 'Crear Nou Client',

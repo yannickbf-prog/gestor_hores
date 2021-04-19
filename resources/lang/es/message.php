@@ -10,7 +10,9 @@ return [
     
     'created' => 'creado con exito',
     'updated' => 'actualizado con exito',
-    'deleted' => 'eliminado con exito',  
+    'deleted' => 'eliminado con exito', 
+    
+    'enter' => 'Escribe',
     
     'customers' => 'Clientes',
     'create_new_customer' => 'Crear Nuevo Cliente',

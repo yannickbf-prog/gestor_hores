@@ -37,25 +37,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.name')}}:</strong>
-                <input type="text" name="name" value="{{old('name', $customer->name)}}" class="form-control" placeholder="Name">
+                <input type="text" name="name" value="{{old('name', $customer->name)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.name')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.email')}}:</strong>
-                <input type="email" name="email" class="form-control" placeholder="Enter Email" value="{{old('email', $customer->email)}}">
+                <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')}} {{__('message.email')}}" value="{{old('email', $customer->email)}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.phone')}}:</strong>
-                <input type="text" name="phone" class="form-control" placeholder="Enter Phone" value="{{old('phone', $customer->phone)}}">
+                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{__('message.phone')}}" value="{{old('phone', $customer->phone)}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{__('message.description')}}:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description">{{old('description', $customer->description)}}</textarea>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')}} {{__('message.description')}}">{{old('description', $customer->description)}}</textarea>
             </div>
         </div>
         

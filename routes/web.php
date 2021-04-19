@@ -33,6 +33,8 @@ Route::view("/company-info", "company-info")->name('company-info');
 //Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
 
+Route::post("control-panel/company-info/lang/{lang}", [CustomerController::class, 'update'])->name('company-info.update');
+
 Route::get("en/control-panel/company-info", [CompanyController::class, 'index'])->name('en_company_info.index');
 Route::get("en/control-panel/company-info/edit", [CompanyController::class, 'edit'])->name('en_company_info.edit');
 

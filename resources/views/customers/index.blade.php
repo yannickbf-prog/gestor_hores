@@ -38,7 +38,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.name') }}:</strong>
-                <input type="text" name="name" class="form-control" placeholder="{{ __('message.name') }}" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
+                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.email') }}:</strong>
-                <input type="text" name="{{ __('message.email') }}" class="form-control" placeholder="Email" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
+                <input type="text" name="{{ __('message.email') }}" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.phone') }}:</strong>
-                <input type="text" name="phone" class="form-control" placeholder="{{ __('message.phone') }}" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
+                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
             </div>
         </div>
     </div>
