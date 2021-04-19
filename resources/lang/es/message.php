@@ -2,8 +2,9 @@
 
 return [
     
-    'english' => 'Ingles',
+    'english' => 'Inglés',
     'spanish' => 'Español',
+    'catalan' => 'Catalan',
     
     'control_panel' => 'Panel de control',
     

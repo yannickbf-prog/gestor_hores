@@ -65,6 +65,7 @@
                         <select class="form-control Langchange">
                             <option value="en" {{ setActiveLang('en') }}>{{ __('message.english') }}</option>
                             <option value="es" {{ setActiveLang('es') }}>{{ __('message.spanish') }}</option>
+                            <option value="ca" {{ setActiveLang('ca') }}>{{ __('message.catalan') }}</option>
                         </select>
                     </div>
                 </header>

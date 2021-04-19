@@ -4,6 +4,7 @@ return [
 
     'english' => 'English',
     'spanish' => 'Spanish',
+    'catalan' => 'Catalan',
     
     'control_panel' => 'Panel de control',
     

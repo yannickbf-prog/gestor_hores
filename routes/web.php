@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\CustomerController;
 
@@ -32,18 +33,31 @@ Route::view("/company-info", "company-info")->name('company-info');
 //Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
 
-Route::post("customers/{customer}/lang/{lang}", [CustomerController::class, 'update'])->name('customers.update');
-Route::post('customers/delete_filters/', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
-Route::post("customers/lang/{lang}", [CustomerController::class, 'store'])->name('customers.store');
-Route::delete("customers/{customer}/lang/{lang}", [CustomerController::class, 'destroy'])->name('customers.destroy');
+Route::get("en/control-panel/company-info", [CompanyController::class, 'index'])->name('en_company_info.index');
+Route::get("en/control-panel/company-info/edit", [CompanyController::class, 'edit'])->name('en_company_info.edit');
 
-Route::get("en/customers", [CustomerController::class, 'index'])->name('en_customers.index');
-Route::get("en/customers/create", [CustomerController::class, 'create'])->name('en_customers.create');
-Route::get("en/customers/{customer}/edit", [CustomerController::class, 'edit'])->name('en_customers.edit');
+Route::get("es/panel-de-control/informacion-empresa", [CompanyController::class, 'index'])->name('es_company_info.index');
+Route::get("es/panel-de-control/informacion-empresa/editar", [CompanyController::class, 'edit'])->name('es_company_info.edit');
 
-Route::get("es/clientes", [CustomerController::class, 'index'])->name('es_customers.index');
-Route::get("es/clientes/crear", [CustomerController::class, 'create'])->name('es_customers.create');
-Route::get("es/clientes/{customer}/editar", [CustomerController::class, 'edit'])->name('es_customers.edit');
+Route::get("ca/panell-de-control/informacio-empresa", [CompanyController::class, 'index'])->name('ca_company_info.index');
+Route::get("ca/panell-de-control/informacio-empresa/editar", [CompanyController::class, 'edit'])->name('ca_company_info.edit');
+
+Route::post("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'update'])->name('customers.update');
+Route::post('control-panel/customers/delete_filters/', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
+Route::post("control-panel/customers/lang/{lang}", [CustomerController::class, 'store'])->name('customers.store');
+Route::delete("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'destroy'])->name('customers.destroy');
+
+Route::get("en/control-panel/customers", [CustomerController::class, 'index'])->name('en_customers.index');
+Route::get("en/control-panel/customers/create", [CustomerController::class, 'create'])->name('en_customers.create');
+Route::get("en/control-panel/customers/{customer}/edit", [CustomerController::class, 'edit'])->name('en_customers.edit');
+
+Route::get("es/panel-de-control/clientes", [CustomerController::class, 'index'])->name('es_customers.index');
+Route::get("es/panel-de-control/clientes/crear", [CustomerController::class, 'create'])->name('es_customers.create');
+Route::get("es/panel-de-control/clientes/{customer}/editar", [CustomerController::class, 'edit'])->name('es_customers.edit');
+
+Route::get("ca/panell-de-control/clients", [CustomerController::class, 'index'])->name('ca_customers.index');
+Route::get("ca/panell-de-control/clients/crear", [CustomerController::class, 'create'])->name('ca_customers.create');
+Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
 
 
 
