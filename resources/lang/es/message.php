@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'page_title' => 'Pagina de bienvenida',
-    'welcome_message' => 'Hola bienvenido a esta pagina',
-    'author_information' => 'Mi nombre es Sanjay. Este blog es mío y creamos esta publicación para que aprendas.',
+    
+    'english' => 'Ingles',
+    'spanish' => 'Español',
     
     'control_panel' => 'Panel de control',
     
@@ -43,5 +43,7 @@ return [
     'submit' => 'Enviar',
     
     'phone_min' => 'El telefono tiene que tener 9 dijitos como minimo',
-    'phone_max' => 'El telefono no puede tener mas de 15 dijitos'
+    'phone_max' => 'El telefono no puede tener mas de 15 dijitos',
+    
+    
 ];
