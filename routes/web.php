@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HomeContoller;
 
 use App\Http\Controllers\LocalizationController;
 
@@ -32,6 +33,10 @@ Route::view("/company-info", "company-info")->name('company-info');
 
 //Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
+
+Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index');
+Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index');
+Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
 
 Route::post("control-panel/company-info/lang/{lang}", [CustomerController::class, 'update'])->name('company-info.update');
 
