@@ -38,10 +38,58 @@
                 <input type="text" name="logo" value="{{old('logo', $company->img_logo)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Logo')}}">
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*{{__('Work sector')}}:</strong>
-                <input type="text" name="work_sector" value="{{old('work_sector', $company->work_sector)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Work sector')}}">
+                <label for="workSector"><strong>*{{ "Work sector" }}:</strong></label>
+                <select class="form-control" id="workSector" name="work_sector">
+                    <option value="automotive_sector" {{ setActiveSelect('automotive_sector', $company->work_sector) }}>Automotive sector</option>
+                    <option value="computer_science" {{ setActiveSelect('computer_science', $company->work_sector) }}>Computer science</option>
+                    <option value="construction" {{ setActiveSelect('construction', $company->work_sector) }}>Construction</option>
+                    <option value="telecomunications" {{ setActiveSelect('telecomunications', $company->work_sector) }}>Telecommunications</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{__('message.description')}}:</strong>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description', $company->description)}}</textarea>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*{{__('message.email')}}:</strong>
+                <input type="text" name="email" value="{{old('email', $company->email)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.email')}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*{{__('message.phone')}}:</strong>
+                <input type="text" name="phone" value="{{old('phone', $company->phone)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.phone')}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*{{__('Website')}}:</strong>
+                <input type="text" name="website" value="{{old('website', $company->website)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Website')}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*{{__('Default language')}}:</strong>
+                <input type="text" name="default_lang" value="{{old('default_lang', $company->default_lang)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Website')}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <label for="defaultLang"><strong>*{{__('Default language')}}</strong></label>
+                <select class="form-control" id="defaultLang" name="default_lang">
+                    <option value="en" {{ setActiveSelect('en', $company->default_lang) }}>{{__('message.english')}}</option>
+                    <option value="es" {{ setActiveSelect('es', $company->default_lang) }}>{{__('message.spanish')}}</option>
+                    <option value="ca" {{ setActiveSelect('ca', $company->default_lang) }}>{{__('message.catalan')}}</option>
+                </select>
             </div>
         </div>
     </div>

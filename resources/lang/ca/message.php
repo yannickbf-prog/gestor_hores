@@ -39,6 +39,9 @@ return [
     'edit' => 'Editar',
     'delete' => 'Eliminar',
     
+    'confirm' => 'Estas segur que vols',
+    'the' => 'el',
+    
     'add_new' => 'Afegir nou',
     'back' => 'Tornar',
     'woops!' => 'Vaja!',

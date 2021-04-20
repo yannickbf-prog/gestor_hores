@@ -23,6 +23,8 @@ class CreateCompanyTable extends Migration
             $table->integer('phone')->nullable();
             $table->string('website')->nullable();
             $table->string('default_lang');
+            $table->string('date_format');
+            $table->string('currency');
         });
     }
 

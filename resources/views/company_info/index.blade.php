@@ -76,4 +76,19 @@
         </div>
     </div>
 </div>
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>{{ __('Statistics') }}</h3>
+        </div>
+    </div>
+</div>
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <strong>{{ __('Customers') }}:</strong><span> {{ $customers_count }}</span>
+        </div>
+    </div>
+</div>
+
 @endsection

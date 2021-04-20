@@ -12,16 +12,16 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/gestor_hores/app/helpers.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/CustomerController.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateCustomerRequest.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/company_info/edit.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/edit.blade.php</file>
-            <file>file:/var/www/gestor_hores/resources/lang/es/message.php</file>
-            <file>file:/var/www/gestor_hores/resources/lang/en/message.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/index.blade.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Requests/EditCustomerRequest.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/company_info/index.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Models/Company.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/create.blade.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/partials/nav.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/CompanyController.php</file>
         </group>
     </open-files>
 </project-private>

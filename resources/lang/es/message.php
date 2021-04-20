@@ -4,7 +4,7 @@ return [
     
     'english' => 'Inglés',
     'spanish' => 'Español',
-    'catalan' => 'Catalan',
+    'catalan' => 'Catalán',
     
     'control_panel' => 'Panel de control',
     
@@ -37,6 +37,9 @@ return [
     'action' => 'Acción',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
+    
+    'confirm' => 'Estas seguro que quieres',
+    'the' => 'el',
     
     'add_new' => 'Añadir nuevo',
     'back' => 'Volver',

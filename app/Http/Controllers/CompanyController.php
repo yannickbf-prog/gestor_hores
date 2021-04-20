@@ -18,8 +18,10 @@ class CompanyController extends Controller {
         $lang = setGetLang();
 
         $company = DB::table('company')->first();
+        
+        $customers_count = DB::table('customers')->count();
 
-        return view('company_info.index', compact('company'))->with('lang', $lang);
+        return view('company_info.index', compact('company'), compact('customers_count'))->with('lang', $lang);
     }
 
     /**

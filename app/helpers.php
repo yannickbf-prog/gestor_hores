@@ -37,3 +37,12 @@ function getLang(){
         return "ca";
     }
 }
+
+function setActiveSelect($option, $work_sector){
+    if($option == $work_sector){
+        return 'selected';
+    }
+    else{
+        return '';
+    }
+}

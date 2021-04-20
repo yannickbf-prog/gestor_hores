@@ -1,6 +1,8 @@
 @extends('layout')
 
-@section('title', __('Control Panel'))
+@section('title')
+{{ __("message.control_panel") }} - {{ __('message.add_new')." ".__('message.customer') }}
+@endsection
 
 @section('content')
 <div class="row">
@@ -59,7 +61,7 @@
         </div>
         
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
+            <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
         </div>
     </div>
    

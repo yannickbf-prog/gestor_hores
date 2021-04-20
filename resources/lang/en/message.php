@@ -38,6 +38,9 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     
+    'confirm' => 'Are you sure you want to',
+    'the' => 'the',
+    
     'add_new' => 'Add New',
     'back' => 'Back',
     'woops!' => 'Woops!',

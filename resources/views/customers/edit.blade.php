@@ -1,6 +1,8 @@
 @extends('layout')
 
-@section('title', 'Control panel - Customers - Edit '.$customer->name)
+@section('title')
+{{ __("message.control_panel") }} - {{ __("message.customers") }} - {{ __("message.edit") }} {{ $customer->name}}
+@endsection
 
 @section('content')
 <div class="row">
