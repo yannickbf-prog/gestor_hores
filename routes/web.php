@@ -1,14 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeContoller;
-
-use App\Http\Controllers\LocalizationController;
-
-
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +15,8 @@ use App\Http\Controllers\LocalizationController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 
 //Route::get('/', [LocalizationController::class, "index"]);
@@ -67,7 +64,21 @@ Route::get("ca/panell-de-control/clients/crear", [CustomerController::class, 'cr
 Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
 
 
+Route::get('/', function () {
+    $default_lang = DB::table('company')->first()->default_lang;
+    if(Auth::check()){
+        return redirect()->route($default_lang.'_home.index', $default_lang);
+    }
+    else{
+        return redirect()->route('login');
+    }
+});
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 //Route::post("es/clientes/guardar", [CustomerController::class, 'store'])->name('es_customers.store');
 //
@@ -82,6 +93,3 @@ Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController
 
 
 Route::post('type-bag-hours/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type-bag-hours.delete_filters');
-
-
-

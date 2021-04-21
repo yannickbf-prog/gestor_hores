@@ -13,15 +13,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/CustomerController.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/company_info/edit.blade.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/customers/edit.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/index.blade.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/company_info/index.blade.php</file>
-            <file>file:/var/www/gestor_hores/app/Models/Company.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/RegisterController.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/ForgotPasswordController.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Middleware/Authenticate.php</file>
+            <file>file:/var/www/gestor_hores/routes/channels.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/HomeContoller.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/LoginController.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/HomeController.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/home.blade.php</file>
+            <file>file:/var/www/gestor_hores/routes/auth.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/customers/create.blade.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/partials/nav.blade.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/CompanyController.php</file>
+            <file>file:/var/www/gestor_hores/config/auth.php</file>
         </group>
     </open-files>
 </project-private>

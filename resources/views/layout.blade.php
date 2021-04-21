@@ -72,12 +72,14 @@
 
             </div>
 
+            @section('nav_and_content')
             <div class="row">
                 @include('partials.nav')
                 <main class="col-10">
                     @yield('content')
                 </main>
             </div>
+            @show
 
             <div class="row">
                 <footer class="col-12 text-center">
