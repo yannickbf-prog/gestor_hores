@@ -68,6 +68,16 @@
                             <option value="ca" {{ setActiveLang('ca') }}>{{ __('message.catalan') }}</option>
                         </select>
                     </div>
+                    <div class="col-md-4 form-group">
+                        @auth
+                        <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        </li>
+                        @endauth
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </header>
 
             </div>

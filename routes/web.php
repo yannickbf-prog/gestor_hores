@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\HomeContoller;
+
+use App\Http\Controllers\LocalizationController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -31,7 +35,7 @@ Route::view("/company-info", "company-info")->name('company-info');
 //Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
 
-Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index');
+Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware('auth');
 Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index');
 Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
 
@@ -70,7 +74,7 @@ Route::get('/', function () {
         return redirect()->route($default_lang.'_home.index', $default_lang);
     }
     else{
-        return redirect()->route('login');
+        return redirect()->route($default_lang.'_login');
     }
 });
 

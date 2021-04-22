@@ -19,7 +19,7 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                <form method="POST" action="{{ route('en_login') }}">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
 
                     <!-- Email Address -->
@@ -38,6 +38,8 @@
                                  name="password"
                                  required autocomplete="current-password" />
                     </div>
+                    
+                    <input type="hidden" name="lang" value="{{ $lang }}">
 
                     <!-- Remember Me -->
                     <div class="block mt-4">
