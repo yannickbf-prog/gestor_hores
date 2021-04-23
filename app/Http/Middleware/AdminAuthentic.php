@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
 
-class AdminAuthentic
-{
+class AdminAuthentic {
+
     /**
      * Handle an incoming request.
      *
@@ -15,16 +15,15 @@ class AdminAuthentic
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$guards)
-    {
-        $guards = empty($guards) ? [null] : $guards;
+    public function handle(Request $request, Closure $next) {
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
+        if (Auth::check()) {
+            if (Auth::user()->isAdmin()) {
                 return $next($request);
             }
         }
 
         abort(404);
     }
+
 }
