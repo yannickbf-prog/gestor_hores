@@ -6,8 +6,8 @@ use Auth;
 use Closure;
 use Illuminate\Http\Request;
 
-class UserAuthenticated
-{
+class UserAuthenticated {
+
     /**
      * Handle an incoming request.
      *
@@ -15,21 +15,15 @@ class UserAuthenticated
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
-    {
-        if( Auth::check() )
-        {
-            // if user admin take him to his dashboard
-            if ( Auth::user()->isAdmin() ) {
-                 return redirect(route('en_home.index'));
-            }
+    public function handle(Request $request, Closure $next) {
 
-            // allow user to proceed with request
-            else if ( Auth::user()->isUser() ) {
-                 return $next($request);
+        if (Auth::check()) {
+            if (Auth::user()->isUser()) {
+                return $next($request);
             }
         }
 
-        abort(404);  // for other user throw 404 error
+        abort(404);
     }
+
 }

@@ -40,7 +40,7 @@ Route::resource('type-bag-hours', TypeBagHourController::class);
 Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware('admin');
 
 //Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware('auth');
-Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index')->middleware('auth');
+Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index')->middleware('user');
 Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
 
 Route::post("control-panel/company-info/lang/{lang}", [CustomerController::class, 'update'])->name('company-info.update');
