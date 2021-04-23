@@ -12,19 +12,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/CustomerController.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/customers/index.blade.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/RegisterController.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/ForgotPasswordController.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Middleware/Authenticate.php</file>
-            <file>file:/var/www/gestor_hores/routes/channels.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/HomeContoller.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/LoginController.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/HomeController.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/home.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Middleware/RedirectIfAuthenticated.php</file>
+            <file>file:/var/www/gestor_hores/app/Providers/RouteServiceProvider.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/edit.blade.php</file>
             <file>file:/var/www/gestor_hores/routes/auth.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
             <file>file:/var/www/gestor_hores/config/auth.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Middleware/Authenticate.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/AuthenticatedSessionController.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/auth/login.blade.php</file>
         </group>
     </open-files>
 </project-private>

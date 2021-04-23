@@ -9,6 +9,10 @@ use App\Http\Controllers\HomeContoller;
 use App\Http\Controllers\LocalizationController;
 use Illuminate\Support\Facades\DB;
 
+use App\Http\Middleware\AdminAuthenticated;
+
+use App\Http\Middleware\AdminAuthentic;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,8 +39,11 @@ Route::view("/company-info", "company-info")->name('company-info');
 //Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
 
-Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware('auth');
-Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index');
+// admin protected routes
+Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware(AdminAuthentic::class);
+
+//Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware('auth');
+Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index')->middleware('auth');
 Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
 
 Route::post("control-panel/company-info/lang/{lang}", [CustomerController::class, 'update'])->name('company-info.update');
