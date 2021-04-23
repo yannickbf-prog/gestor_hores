@@ -23,7 +23,7 @@ class UserAuthenticated {
             }
         }
 
-        abort(404);
+        abort(404); 
     }
 
 }
