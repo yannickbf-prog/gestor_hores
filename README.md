@@ -6,9 +6,9 @@
 
 **1. Exposició del projecte**
 
-**2. Casos d’us
-    1 Diagrama de casos d’us
-	2 Especificació de casos d’us**
+**2. Casos d’us**
+    **1. Diagrama de casos d’us**
+	**2. Especificació de casos d’us**
 
 **3. Diagrama de classes**
 
