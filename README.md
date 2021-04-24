@@ -16,6 +16,10 @@
     1. L’administrador o treballador entren a l’apartat de login de la pagina web
     2. Posen el seu usuari i contrasenya a un formulari i l’envien
     3. Accedeixen a la pagina web d'administració corresponent al tipus d’usuari
+
+- Extensions (o fluxos alternatius)
+    - Si l’usuari no existeix o la contrasenya no es valida no es podrà accedir al panell de control. En aquest cas es mostrara un missatge d’error a baix del formulari indicant que l’usuari no es vàlid o que l’usuari es vàlid però la contrasenya no ho es.
+    
 2.3.2 Panell de control d’administrador
 
     • Actor principal: Administrador
