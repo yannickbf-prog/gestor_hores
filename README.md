@@ -4,11 +4,11 @@
 
 2.3.1 Validar usuari
 - Actor principal: Administrador
-    • Actor secundari: Treballador
-    • Personal involucrat i interessos:-----
-    • Precondicionaments
-    • Entrar a l’apartat de login de la pagina web
-    • Fer login
+- Actor secundari: Treballador
+- Personal involucrat i interessos:-----
+- Precondicionaments
+    - Entrar a l’apartat de login de la pagina web
+    - Fer login
     • Que l’usuari que fas servir per fer login estigui donat d’alta
     • Postcondicionaments
     • En el cas de fer login com administrador hauries de veure el panell de control de l’administrador en el cas de ser treballador hauries de veure el panell de control del treballador.
