@@ -87,7 +87,6 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
 18. Panell de control del treballador
 19. Contractar bosses d’hores
 
-
 ###### 2.3.1 Validar usuari
 - Actor principal: Administrador
 - Actor secundari: Treballador
