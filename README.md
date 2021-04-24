@@ -6,6 +6,7 @@
 (Aquest diagrama d’us no es correspon exactament a l'aplicació, donaria molta feina modificar-lo, i crec que aquest pot servir per fer-se una idea)
 
 #### 2.1 Diagrama de casos d’us
+![Diagrama de casos d’us](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/use_case_diagram/use_case_diagram.jpg)
 
 #### 2.2 Explicació prèvia
 
