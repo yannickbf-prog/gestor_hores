@@ -65,7 +65,7 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
  
 #### 2.3 Especificació de casos d’us
 
-**CASOS D’US:**
+CASOS D’US:
 
 1. Validar usuari
 2. Panell de control d’administrador
@@ -88,6 +88,7 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
 19. Contractar bosses d’hores
 
 ###### 2.3.1 Validar usuari
+
 - Actor principal: Administrador
 - Actor secundari: Treballador
 - Personal involucrat i interessos:-----
