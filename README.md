@@ -119,20 +119,20 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
 - Extensions (o fluxes alternatius)
     - ----- 
 
-2.3.3. Dades empresa
+##### 2.3.3. Dades empresa
 
-    • Actor principal: Administrador
-    • Actor secundari: -----
-    • Personal involucrat i interessos:-----
-    • Precondicionaments
-    • Haver clicat sobre «Dades empresa» al panell de control de l’administrador
-    • Postcondicionaments
-    • Veure la seccio «Dades empresa» en la que figuren totes les dades de l’empresa, i el nombre de «clients», «projectes», «bosses d’hores» i «tipus de bosses d’hores» que tenim, també un boto «editar» per editar les dades de l’empresa
-    • Escenari principal o flux bàsic
-    • 1. Fer login
-    • 2. Veure panell de control corresponent en el que podrà veure els següents enllaços: «Usuaris», «Clients», «Projectes», «Tipus de bosses d’hores», «Bosses d’hores»
-    • Extensions (o fluxes alternatius)
-    • ----- 
+- Actor principal: Administrador
+- Actor secundari: -----
+- Personal involucrat i interessos:-----
+- Precondicionaments
+    - Haver clicat sobre «Dades empresa» al panell de control de l’administrador
+- Postcondicionaments
+    - Veure la seccio «Dades empresa» en la que figuren totes les dades de l’empresa, i el nombre de «clients», «projectes», «bosses d’hores» i «tipus de bosses d’hores» que tenim, també un boto «editar» per editar les dades de l’empresa
+- Escenari principal o flux bàsic
+    - 1. Fer login
+    - 2. Veure panell de control corresponent en el que podrà veure els següents enllaços: «Usuaris», «Clients», «Projectes», «Tipus de bosses d’hores», «Bosses d’hores»
+- Extensions (o fluxes alternatius)
+    - ----- 
 
 2.3.4. Usuaris
 
