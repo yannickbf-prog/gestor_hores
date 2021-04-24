@@ -2,6 +2,52 @@
 
 ## Documentació
 
+### 2. Casos d’us
+(Aquest diagrama d’us no es correspon exactament a l'aplicació, donaria molta feina modificar-lo, i crec que aquest pot servir per fer-se una idea)
+
+#### 2.1 Diagrama de casos d’us
+
+#### 2.2 Explicació prèvia
+
+**Cada cop que mostrem el nom d’algun dels següents ítems a una llista serà un enllaç que ens ens dirigira a les següents pagines:**
+
+**Usuari** anirem a: **«Veure usuari i les seves bosses d’hores»**
+
+**Tipus de bossa d’hores** anirem a: **«Veure tipus de bossa d’hores»**
+
+**Client** anirem a: **«Veure client i els seus projectes»**
+
+**Projecte** anirem a: **«Veure projecte i les seves bosses d’hores»**  
+
+- Cada cop que mostrem un llistat amb el nom d’algun d’aquests ítems s’era un enllaç que ens portara a el que hem especificat
+
+A totes les pagines figurara el logo i nom de l’empresa com a header, tant en el panell d'administració com al de treballador
+ 
+2.3 Especificació de casos d’us
+
+CASOS D’US:
+
+1. Validar usuari
+2. Panell de control d’administrador
+3. Dades empresa
+4. Usuaris
+5. Veure usuaris i les seves bosses d’hores
+6. Clients
+7. Veure client i els seus projectes
+8. Projectes
+9. Veure projecte i les seves bosses d’hores
+10. Tipus de bosses d’hores
+11. Veure tipus de bossa d’hores
+12. Bosses d’hores
+13. Alta
+14. Edició
+15. Eliminació
+16. Validar i invalidar
+17. Rebre avis quan s’esgoti una bossa d’hores
+18. Panell de control del treballador
+19. Contractar bosses d’hores
+
+
 ### 2.3.1 Validar usuari
 - Actor principal: Administrador
 - Actor secundari: Treballador
