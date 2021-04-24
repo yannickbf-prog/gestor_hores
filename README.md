@@ -2,7 +2,7 @@
 
 ## Documentació
 
-2.3.1 Validar usuari
+### 2.3.1 Validar usuari
 - Actor principal: Administrador
 - Actor secundari: Treballador
 - Personal involucrat i interessos:-----
