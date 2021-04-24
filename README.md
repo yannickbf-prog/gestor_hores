@@ -12,10 +12,10 @@
 
 ![Panell de control de l'administrador](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Panell%20de%20control%20de%20l'administrador.png)
 
-![Informacio de l'empresa](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Informacio%de%l'empresa.png)
+![Informacio de l'empresa](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Informacio%20de%20l'empresa.png)
 
 ![Usuaris](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Usuaris.png)
 
-![Veure usuari, els seus projectes i les seves entrades](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure usuari,%els%seus%projectes%i%les seves entrades.png)
+![Veure usuari, els seus projectes i les seves entrades](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20usuari%2C%20els%20seus%20projectes%20i%20les%20seves%20entrades.png)
 
 ![Clients](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Clients.png)
