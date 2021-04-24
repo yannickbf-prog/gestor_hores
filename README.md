@@ -10,3 +10,4 @@
 
 ![Validar usuari](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Validar%20usuari.png)
 
+![Panell de control de l'administrador](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Panell de control de l'administrador.png)
