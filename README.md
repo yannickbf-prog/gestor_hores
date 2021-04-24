@@ -9,7 +9,7 @@
 
 #### 2.2 Explicació prèvia
 
-**Cada cop que mostrem el nom d’algun dels següents ítems a una llista serà un enllaç que ens ens dirigira a les següents pagines:**
+**Cada cop que mostrem el nom d’algun dels següents ítems a una llista serà un enllaç que ens ens dirigirà a les següents pagines:**
 
 **Usuari** anirem a: **«Veure usuari i les seves bosses d’hores»**
 
@@ -21,7 +21,7 @@
 
 - Cada cop que mostrem un llistat amb el nom d’algun d’aquests ítems s’era un enllaç que ens portara a el que hem especificat
 
-A totes les pagines figurara el logo i nom de l’empresa com a header, tant en el panell d'administració com al de treballador
+**A totes les pagines figurara el logo i nom de l’empresa com a header, tant en el panell d'administració com al de treballador**
  
 2.3 Especificació de casos d’us
 
