@@ -1,6 +1,45 @@
 # Gestor d'hores
 
-## Documentació
+## Documentació funcional del projecte de gestió d’hores
+
+### Índex de continguts
+
+**1. Exposició del projecte**
+
+**2. Casos d’us
+	2.1 Diagrama de casos d’us
+	2.2 Especificació de casos d’us**
+
+**3. Diagrama de classes**
+
+**4. Mockup del projecte**
+
+### 1. Exposició del projecte
+
+El projecte tracta de crear una aplicació web de gestió d’hores dedicades per part de treballadors d’una empresa a treballar a un projecte, aquestes hores treballades poden ser de diferents tipus com «creació de pagina web» o «manteniment de xarxa informàtica»
+
+Per poder dur a terme això utilitzarem bosses d’hores, aquestes bosses d’hores poden ser de diferents tipus, com: «creació de pagina web» o «manteniment de xarxa informàtica», i pertanyen a un projecte. Un projecte pot tindre diferents bosses d’hores per diferents serveis. 
+
+Es una especie de sistema de fitxatge en el que un usuari administrador pot crear diferents bosses d’hores per a diferents projectes, oferint diferents serveis, i un usuari treballador o administrador pot «fitxar» les seves hores treballades en aquesta «bossa d’hores» d’aquest projecte.
+
+També tenim clients, que son empreses normalment, però també poden ser particulars. Aquests clients tenen projectes, aquests projectes tenen bosses d’hores, les bosses d’hores poden ser de diferents tipus, podem crear els que vulguem. Les bosses d’hores tindran un nombre d’hores contractades, un nombre d’hores disponibles i un preu final, podrem auto-calcular el preu total de la bossa d’hores segons les hores contractades i el preu del tipus de bossa d’hores, però el preu final serà completament lliure. Totes aquestes coses i mes es podran fer des de el panell de l’administrador. 
+
+Des de aquest panell també podem crear usuaris, als que podrem assignar una bossa d’hores. 
+
+Els usuaris que assignem a la bossa d’hores tindran dret a «entrar hores» treballades a aquesta bossa d’hores. D’aquesta manera «fitxen» les hores treballades a un projecte amb us tipus de servei particular.
+
+Els **usuaris** poden ser: 
+
+- **admin**: que tindran dret a entrar al panell d'administració així com a entrar hores treballades a una bossa d’hores que tinguin assignada des del mateix. Des de el **panell d'administració** podran administrar tots i cada un dels elements necessaris per el funcionament correcte de la app, a mes de poder crear/consultar/modificar la informació registrada de manera fàcil.
+      
+- **treballador**: que tindran dret a entrar al **panell de treballador**, en el que només tindran dret a entrar hores treballades a les bosses d’hores que tinguin assignades, els administradors les tindran que «validar» per tal de «confirmar» que aquestes hores han sigut «utilitzades».
+
+La idea es que aquesta app en principi sigui per la organització aTotArreu.com, en la que estic realitzant les practiques. Però en un futur, un cop l'aplicació estigui funcionant, la idea es crear una pagina web multisite, en el que altres empreses es pugin registrar i obtenir una url per a la seva empresa, tipus empresa.gestorhores.com, en la que pugin entrar en els seus propis panells de control, per gestionar les hores dedicades pels treballadors en els serveis que ofereixi la seva empresa, independentment del sector en el que treballin, i així poder dur un control fàcil i exhaustiu de tota la informació relacionada amb la gestió d’hores treballades dels treballadors.
+
+**Framewoks utilitzats:**
+
+- **Bootstrap** per entorn client
+- **Laravel** per entorn servidor
 
 ### 2. Casos d’us
 (Aquest diagrama d’us no es correspon exactament a l'aplicació, donaria molta feina modificar-lo, i crec que aquest pot servir per fer-se una idea)
