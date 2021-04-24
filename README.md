@@ -65,7 +65,7 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
  
 #### 2.3 Especificació de casos d’us
 
-CASOS D’US:
+**CASOS D’US:**
 
 1. Validar usuari
 2. Panell de control d’administrador
@@ -121,7 +121,6 @@ CASOS D’US:
     - ----- 
 
 ##### 2.3.3. Dades empresa
-
 - Actor principal: Administrador
 - Actor secundari: -----
 - Personal involucrat i interessos:-----
@@ -135,30 +134,30 @@ CASOS D’US:
 - Extensions (o fluxes alternatius)
     - ----- 
 
-2.3.4. Usuaris
+##### 2.3.4. Usuaris
 
-    • Actor principal: Administrador
-    • Actor secundari: -----
-    • Personal involucrat i interessos:-----
-    • Precondicionaments
-    • Haver clicat sobre «Usuaris» al panell de control de l’administrador
-    • Postcondicionaments
-    • Veure un llistat d’usuaris ordenats per data de creació de mes nou a mes antic 
-    • Podrem veure 
-        ◦ Nom d’usuari
-        ◦ Nom
-        ◦ Cognom/cognoms
-        ◦ Correu electrònic
-        ◦ Si son administradors o treballadors 
-        ◦ Data de creació
-        ◦ Botons «editar» i «eliminar» al costat. 
-    • Un boto de «donar d’alta nou usuari». 
-    • També un input per buscar per nom usuari, un altre per buscar per nom, un per cognom/cognoms, un per correu electrònic, un 1 select amb les opcions «Tots», «Administradors» i «Treballadors», «Tots» estarà marcat per defecte, un enllaç per buscar una alta en un interval de dates, quan cliquem s’obrira un div on podrem posar les 2 dates, quan cliquem a un dels 2 inputs ens sortira un calendari per escollir data, un select amb les opcions «Mes nous primer» i «Mes antics primer», «Mes nous» estarà per defecte amb un boto per filtrar amb les dades que haguem posat.
-    • Escenari principal o flux bàsic
-    • 1. Clicar a «Usuaris» al panell de control de l’administrador.
-    • 2. Veure en pantalla la secció «Usuaris» 
-    • Extensions (o fluxes alternatius)
-    • ----- 
+- Actor principal: Administrador
+- Actor secundari: -----
+- Personal involucrat i interessos:-----
+- Precondicionaments
+    - Haver clicat sobre «Usuaris» al panell de control de l’administrador
+- Postcondicionaments
+    - Veure un llistat d’usuaris ordenats per data de creació de mes nou a mes antic 
+    - Podrem veure 
+        - Nom d’usuari
+        - Nom
+        - Cognom/cognoms
+        - Correu electrònic
+        - Si son administradors o treballadors 
+        - Data de creació
+        - Botons «editar» i «eliminar» al costat. 
+    - Un boto de «donar d’alta nou usuari». 
+    - També un input per buscar per nom usuari, un altre per buscar per nom, un per cognom/cognoms, un per correu electrònic, un 1 select amb les opcions «Tots», «Administradors» i «Treballadors», «Tots» estarà marcat per defecte, un enllaç per buscar una alta en un interval de dates, quan cliquem s’obrira un div on podrem posar les 2 dates, quan cliquem a un dels 2 inputs ens sortira un calendari per escollir data, un select amb les opcions «Mes nous primer» i «Mes antics primer», «Mes nous» estarà per defecte amb un boto per filtrar amb les dades que haguem posat.
+- Escenari principal o flux bàsic
+    - 1. Clicar a «Usuaris» al panell de control de l’administrador.
+    - 2. Veure en pantalla la secció «Usuaris» 
+- Extensions (o fluxes alternatius)
+    - ----- 
 
 2.3.5 Veure usuari amb les seves bosses d’hores i les seves entrades d’hores
 
