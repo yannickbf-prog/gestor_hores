@@ -1,6 +1,6 @@
 # Gestor d'hores
 
-## Documentació funcional del projecte de gestió d’hores
+## Documentació funcional
 
 ### Índex de continguts
 
