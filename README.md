@@ -9,13 +9,13 @@
 - Precondicionaments
     - Entrar a l’apartat de login de la pagina web
     - Fer login
-    • Que l’usuari que fas servir per fer login estigui donat d’alta
-    • Postcondicionaments
-    • En el cas de fer login com administrador hauries de veure el panell de control de l’administrador en el cas de ser treballador hauries de veure el panell de control del treballador.
-    • Escenari principal o flux bàsic
-    • 1. L’administrador o treballador entren a l’apartat de login de la pagina web
-    • 2. Posen el seu usuari i contrasenya a un formulari i l’envien
-    • 3. Accedeixen a la pagina web d'administració corresponent al tipus d’usuari
+    - Que l’usuari que fas servir per fer login estigui donat d’alta
+    - Postcondicionaments
+    - En el cas de fer login com administrador hauries de veure el panell de control de l’administrador en el cas de ser treballador hauries de veure el panell de control del treballador.
+- Escenari principal o flux bàsic
+    1. L’administrador o treballador entren a l’apartat de login de la pagina web
+    2. Posen el seu usuari i contrasenya a un formulari i l’envien
+    3. Accedeixen a la pagina web d'administració corresponent al tipus d’usuari
 2.3.2 Panell de control d’administrador
 
     • Actor principal: Administrador
