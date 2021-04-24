@@ -63,9 +63,9 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
 
 **A totes les pagines figurara el logo i nom de l’empresa com a header, tant en el panell d'administració com al de treballador**
  
-2.3 Especificació de casos d’us
+#### 2.3 Especificació de casos d’us
 
-CASOS D’US:
+**CASOS D’US:**
 
 1. Validar usuari
 2. Panell de control d’administrador
@@ -88,7 +88,7 @@ CASOS D’US:
 19. Contractar bosses d’hores
 
 
-### 2.3.1 Validar usuari
+###### 2.3.1 Validar usuari
 - Actor principal: Administrador
 - Actor secundari: Treballador
 - Personal involucrat i interessos:-----
@@ -96,7 +96,7 @@ CASOS D’US:
     - Entrar a l’apartat de login de la pagina web
     - Fer login
     - Que l’usuari que fas servir per fer login estigui donat d’alta
-    - Postcondicionaments
+ - Postcondicionaments
     - En el cas de fer login com administrador hauries de veure el panell de control de l’administrador en el cas de ser treballador hauries de veure el panell de control del treballador.
 - Escenari principal o flux bàsic
     1. L’administrador o treballador entren a l’apartat de login de la pagina web
@@ -106,20 +106,19 @@ CASOS D’US:
 - Extensions (o fluxos alternatius)
     - Si l’usuari no existeix o la contrasenya no es valida no es podrà accedir al panell de control. En aquest cas es mostrara un missatge d’error a baix del formulari indicant que l’usuari no es vàlid o que l’usuari es vàlid però la contrasenya no ho es.
     
-2.3.2 Panell de control d’administrador
-
-    • Actor principal: Administrador
-    • Actor secundari: -----
-    • Personal involucrat i interessos:-----
-    • Precondicionaments
-    • Haver fet login
-    • Postcondicionaments
-    • Veure panell de control corresponent en el que podrà veure els següents enllaços a un sidebar: «Informació de l’empresa» «Usuaris», «Clients», «Projectes», «Tipus de bosses d’hores», «Bosses d’hores». Al centre de la pagina podem veure un boto de «Nou projecte» , un altre amb «Nova bossa d’hores» i una llista amb les ultimes bosses d’hores sol·licitades que no estan validades, per poder així activar-les de manera fàcil i directa
-    • Escenari principal o flux bàsic
-    • 1. Fer login
-    • 2. Veure el panell de control de administrador
-    • Extensions (o fluxes alternatius)
-    • ----- 
+##### 2.3.2 Panell de control d’administrador
+- Actor principal: Administrador
+- Actor secundari: -----
+- Personal involucrat i interessos:-----
+- Precondicionaments
+    - Haver fet login
+- Postcondicionaments
+    - Veure panell de control corresponent en el que podrà veure els següents enllaços a un sidebar: «Informació de l’empresa» «Usuaris», «Clients», «Projectes», «Tipus de bosses d’hores», «Bosses d’hores». Al centre de la pagina podem veure un boto de «Nou projecte» , un altre amb «Nova bossa d’hores» i una llista amb les ultimes bosses d’hores sol·licitades que no estan validades, per poder així activar-les de manera fàcil i directa.
+- Escenari principal o flux bàsic
+    - 1. Fer login
+    - 2. Veure el panell de control de administrador
+- Extensions (o fluxes alternatius)
+    - ----- 
 
 2.3.3. Dades empresa
 
