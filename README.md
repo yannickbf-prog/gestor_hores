@@ -19,3 +19,5 @@
 ![Veure usuari, els seus projectes i les seves entrades](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20usuari%2C%20els%20seus%20projectes%20i%20les%20seves%20entrades.png)
 
 ![Clients](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Clients.png)
+
+![Veure client Industries Lopez, els seus projectes, les seves bosses d'hores i les seves entrades d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20client%20Industries%20Lopez%2C%20els%20seus%20projectes%2C%20les%20seves%20bosses%20d'hores%20i%20les%20seves%20entrades%20d'hores.png)
