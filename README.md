@@ -9,13 +9,13 @@
 
 #### Dades
 
-Títol del projecte: gestor d'hores
+**Títol del projecte**: gestor d'hores
 
-Dades de l'autor: Yannick Baratte Forner
+**Dades de l'autor**: Yannick Baratte Forner
 
-Cicle Formatiu: DAW
+**Cicle Formatiu**: DAW
 
-Data d'entrega: ...
+**Data d'entrega**: ...
 
 #### Descripció
 El projecte tracta de crear una aplicació web de gestió d’hores dedicades per part de treballadors d’una empresa a treballar a un projecte, aquestes hores treballades poden ser de diferents tipus com «creació de pagina web» o «manteniment de xarxa informàtica»
@@ -32,16 +32,16 @@ Els usuaris que assignem a la bossa d’hores tindran dret a «entrar hores» tr
 
 #### Objectius
 
-Objectius de Software:
+**Objectius de Software**:
 
-Objectius Personals:
+**Objectius Personals**:
 
 #### Tecnologies
 
 - S’expliquen els llenguatges de programació, entorns de desenvolupament, llibreries i metodologies concretes emprades en el desenvolupament
 - Cal explicar/justificar l’elecció d’una tecnologia o entorn en favor d’un altre si escau.
 
-Framewoks utilitzats:
+**Framewoks utilitzats:**
 
 - **Bootstrap** per entorn client
 - **Laravel** per entorn servidor
