@@ -1,4 +1,5 @@
-# Gestor d'hores ![Link GitHub Page](https://yannickbf-prog.github.io/gestor_hores/)
+# Gestor d'hores 
+![Link GitHub Page](https://yannickbf-prog.github.io/gestor_hores/)
 
 ## Documentació funcional
 
