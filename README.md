@@ -1,6 +1,56 @@
 # Gestor d'hores 
 ![Link GitHub Page](https://yannickbf-prog.github.io/gestor_hores/)
 
+## Memòria
+
+### Índex
+
+### 1. Introducció
+
+#### Dades
+
+**Títol del projecte**: gestor d'hores
+
+**Dades de l'autor**: Yannick Baratte Forner
+
+**Cicle Formatiu**: DAW
+
+**Data d'entrega**: ...
+
+#### Descripció
+El projecte tracta de crear una aplicació web de gestió d’hores dedicades per part de treballadors d’una empresa a treballar a un projecte, aquestes hores treballades poden ser de diferents tipus com «creació de pagina web» o «manteniment de xarxa informàtica»
+
+Per poder dur a terme això utilitzarem bosses d’hores, aquestes bosses d’hores poden ser de diferents tipus, com: «creació de pagina web» o «manteniment de xarxa informàtica», i pertanyen a un projecte. Un projecte pot tindre diferents bosses d’hores per diferents serveis. 
+
+Es una especie de sistema de fitxatge en el que un usuari administrador pot crear diferents bosses d’hores per a diferents projectes, oferint diferents serveis, i un usuari treballador o administrador pot «fitxar» les seves hores treballades en aquesta «bossa d’hores» d’aquest projecte.
+
+També tenim clients, que son empreses normalment, però també poden ser particulars. Aquests clients tenen projectes, aquests projectes tenen bosses d’hores, les bosses d’hores poden ser de diferents tipus, podem crear els que vulguem. Les bosses d’hores tindran un nombre d’hores contractades, un nombre d’hores disponibles i un preu final, podrem auto-calcular el preu total de la bossa d’hores segons les hores contractades i el preu del tipus de bossa d’hores, però el preu final serà completament lliure. Totes aquestes coses i mes es podran fer des de el panell de l’administrador. 
+
+Des de aquest panell també podem crear usuaris, als que podrem assignar una bossa d’hores. 
+
+Els usuaris que assignem a la bossa d’hores tindran dret a «entrar hores» treballades a aquesta bossa d’hores. D’aquesta manera «fitxen» les hores treballades a un projecte amb us tipus de servei particular.
+
+#### Objectius
+
+**Objectius de Software**:
+
+**Objectius Personals**:
+
+#### Tecnologies
+
+- S’expliquen els llenguatges de programació, entorns de desenvolupament, llibreries i metodologies concretes emprades en el desenvolupament
+- Cal explicar/justificar l’elecció d’una tecnologia o entorn en favor d’un altre si escau.
+
+**Framewoks utilitzats:**
+
+- **Bootstrap** per entorn client
+- **Laravel** per entorn servidor
+
+### 2. Desenvolupament de l’Aplicació
+
+#### Anàlisi Previ
+
+
 ## Documentació funcional
 
 ### Índex de continguts
