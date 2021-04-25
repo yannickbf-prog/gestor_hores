@@ -76,7 +76,8 @@ Anotació: a la documentacio que hi ha mes a baix es pot trobar mes informació.
 - **Diagrama de navegació**
 ![Diagrama de classes](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/class_diagram/diagrama_classes_praqutiques3.jpg)
 
-- **Mockups del projecte**
+- **Mockups del projecte**   
+
 **Anotació:** els forms per CRUD no els he fet per que es simplement demanar les dades necessàries de diferents maneres.
 
 ![Validar usuari](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Validar%20usuari.png)
