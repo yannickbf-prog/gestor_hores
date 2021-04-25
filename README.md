@@ -105,6 +105,24 @@ Anotació: a la documentacio que hi ha mes a baix es pot trobar mes informació.
 
 ![Entrada d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Entrada%20d'hores%20.png)
 
+#### Disseny/Implementacio
+- Explicar de l’estructura externa i organització general del codi:  estructura de carpetes, fitxers, dependències emprades...
+- Explicar l’estructura interna i lògica del codi: POO o MVC (si s’han emprat), composició classes o fitxers de framework
+
+#### Producció
+- Captura final de les principals pantalles de l’aplicació
+
+### 3. Desplegament
+Explicar com s’ha fet el desplegament i les característiques més destacades
+
+### 4. Resultats i conclusions
+- Reflexionar sobre si s’han acomplit els objectius plantejats al principi del projecte
+- Indicar les variacions o adaptacions s’han hagut de fer respecte de la idea inicial que es tenia en escriure l’avantprojecte
+- Funcionalitats pendents d’implementar i Línies de treball a seguir en el futur (si escau)
+
+### 5. Bibliografia i webgrafia
+- Les fonts utilitzades per a l'elaboració del projecte i articles/tutorials consultats
+
 ## Documentació funcional
 
 ### Índex de continguts
