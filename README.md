@@ -1,4 +1,4 @@
-# Gestor d'hores
+# Gestor d'hores ![Link GitHub Page](https://yannickbf-prog.github.io/gestor_hores/)
 
 ## Documentació funcional
 
@@ -12,7 +12,9 @@
 
 3. Diagrama de classes
 
-4. Mockup del projecte
+4. Diagrama de navegació
+
+5. Mockup del projecte
 
 ### 1. Exposició del projecte
 
@@ -214,7 +216,7 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
     - -----
 
 
-## 2.3.8. Projectes
+##### 2.3.8. Projectes
 - Actor principal: Administrador
 - Actor secundari: -----
 - Personal involucrat i interessos:-----
