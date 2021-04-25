@@ -52,7 +52,7 @@ Framewoks utilitzats:
 
 Anotació: a la documentacio que hi ha mes a baix es pot trobar mes informació.
 
-- Diagrama de casos d'u
+- **Diagrama de casos d'us**
 
 **Explicació prèvia**
 
