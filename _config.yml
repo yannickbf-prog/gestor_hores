@@ -1,1 +1,7 @@
+title: Gestor d'hores
+author: Yannick Baratte Forner
+email: ybaratte@cifpfbmoll.eu
+description: > # this means to ignore newlines until "baseurl:"
+  GitHub Page generat a partir de README.md en markdown per documentar projecte final de DAW
+github_username:  yannickbf-prog
 theme: jekyll-theme-hacker
