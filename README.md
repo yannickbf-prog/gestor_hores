@@ -124,6 +124,8 @@ Explicar com s’ha fet el desplegament i les característiques més destacades
 ### 5. Bibliografia i webgrafia
 - Les fonts utilitzades per a l'elaboració del projecte i articles/tutorials consultats
 
+ > **!!! A partir d'aqui mostro la documentació funcional del projecte, aixo es un extra, res del que mostro a partir d'aqui forma part de la part obligatoria de la memoria sino que es un extra. !!!**
+
 ## Documentació funcional
 
 ### Índex de continguts
