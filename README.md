@@ -100,7 +100,7 @@ Anotació: a la documentacio que hi ha mes a baix es pot trobar mes informació.
 
 ![Bosses d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Bosses%20d'hores.png)
 
-![Veure bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20entrades%20d'una%20bossa%20d'hores%20d'un%20projecte.png)
+![Veure bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20bossa%20d'hores%20d'un%20projecte.png)
 
 ![Tipus bosses d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Tipus%20bosses%20d'hores.png)
 
