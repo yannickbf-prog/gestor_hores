@@ -71,10 +71,10 @@ Anotació: a la documentacio que hi ha mes a baix es pot trobar mes informació.
 ![Diagrama de casos d’us](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/use_case_diagram/use_case_diagram.jpg)
 
 - **Diagrama de classes**
-![Diagrama de navegació](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/navigation_diagram/diagrama_navegacio.jpg)
+![Diagrama de classes](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/class_diagram/diagrama_classes_praqutiques3.jpg)
 
 - **Diagrama de navegació**
-![Diagrama de classes](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/class_diagram/diagrama_classes_praqutiques3.jpg)
+![Diagrama de navegació](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/navigation_diagram/diagrama_navegacio.jpg)
 
 - **Mockups del projecte**   
 
@@ -100,11 +100,15 @@ Anotació: a la documentacio que hi ha mes a baix es pot trobar mes informació.
 
 ![Bosses d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Bosses%20d'hores.png)
 
-![Veure bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20entrades%20d'una%20bossa%20d'hores%20d'un%20projecte.png)
+![Veure bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20bossa%20d'hores%20d'un%20projecte.png)
+
+![Veure entrades d'una bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20entrades%20d'una%20bossa%20d'hores%20d'un%20projecte.png)
 
 ![Tipus bosses d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Tipus%20bosses%20d'hores.png)
 
 ![Entrada d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Entrada%20d'hores%20.png)
+
+![Panell de control del treballador](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Panell%20de%20control%20del%20treballador.png)
 
 #### Disseny/Implementacio
 - Explicar de l’estructura externa i organització general del codi:  estructura de carpetes, fitxers, dependències emprades...
@@ -601,8 +605,12 @@ La idea es que aquesta app en principi sigui per la organització aTotArreu.com,
 
 ![Bosses d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Bosses%20d'hores.png)
 
-![Veure bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20entrades%20d'una%20bossa%20d'hores%20d'un%20projecte.png)
+![Veure bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20bossa%20d'hores%20d'un%20projecte.png)
+
+![Veure entrades d'una bossa d'hores d'un projecte](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Veure%20entrades%20d'una%20bossa%20d'hores%20d'un%20projecte.png)
 
 ![Tipus bosses d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Tipus%20bosses%20d'hores.png)
 
 ![Entrada d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Entrada%20d'hores%20.png)
+
+![Panell de control del treballador](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Panell%20de%20control%20del%20treballador.png)
