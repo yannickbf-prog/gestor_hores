@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\EditCompanyRequest;
 
 class CompanyController extends Controller {
 
@@ -75,8 +76,12 @@ class CompanyController extends Controller {
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $lang) {
-        //
+    public function update(EditCompanyRequest $request, $lang) {
+        $company = DB::table('company')->where('id', 1);
+        $company->update($request->validated());
+        
+        return redirect()->route($lang.'_company_info.index')
+                        ->with('success', __('message.customer')." ".__('message.updated'));
     }
 
     /**

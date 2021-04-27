@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\App;
+use Auth;
 
-class EditCustomerRequest extends FormRequest
+class EditCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,10 +33,7 @@ class EditCustomerRequest extends FormRequest
         App::setLocale($this->lang);
         
         return [
-            'name' => ['required', Rule::unique('customers')->ignore($this->customer->id)],
-            'email' => ['required','email',Rule::unique('customers')->ignore($this->customer->id)],
-            'phone' => ['required', 'numeric', 'min:100000000', 'max:100000000000000', Rule::unique('customers')->ignore($this->customer->id)],
-            'description' => 'max:400'
+            'name' => 'unique:customers||required',
         ];
     }
 }
