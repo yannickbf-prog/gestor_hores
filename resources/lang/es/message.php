@@ -14,7 +14,34 @@ return [
     
     'enter' => 'Escribe',
     
+    'home' => 'Inicio',
     'customers' => 'Clientes',
+    'company_info' => 'Información de la empresa',
+
+    
+    'unvalidated_hour_bags' => "Bolsas de horas sin validar",
+    'bag_hour_type' => "Tipo de bolsa de horas",
+    'project_name' => 'Nombre del proyecto',
+    'customer_name' => 'Nombre del cliente',
+    'hours' => 'Horas',
+    'creation_day' => 'Fecha de creación',
+    'validate' => 'Validar',
+    
+    'company_info_providing' => 'Información de la empresa que presta los servicios',
+    'automotive_sector' => "Sector automovilístico",
+    'computer_science' => "Informática",
+    'construction' => "Construcción",
+    'telecommunications' => 'Telecomunicaciones',
+    'other' => 'Otro',
+    'website' => 'Sitio web',
+    'default_lang' => 'Idioma por defecto',
+    'statistics' => 'Estadísticas',
+    'work_sector' => 'Sector de trabajo',
+    'en' => 'Inglés',
+    'es' => 'Español',
+    'ca' => 'Catalán',
+    
+    'user' => 'Usuario',
     'create_new_customer' => 'Crear Nuevo Cliente',
     'customer' => 'Cliente',
     'filters' => 'Filtros',

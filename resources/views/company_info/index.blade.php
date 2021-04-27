@@ -16,7 +16,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>{{ __('Information on the company providing the services') }}</h2>
+            <h2>{{ __('message.company_info_providing') }}</h2>
         </div>
     </div>
 </div>
@@ -37,7 +37,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('Work sector') }}:</strong><span> {{ $company->work_sector }}</span>
+            <strong>{{ __('message.work_sector') }}:</strong><span> {{ $company->work_sector }}</span>
         </div>
     </div>
 </div>
@@ -65,28 +65,28 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('Website') }}:</strong><span> {{ $company->website }}</span>
+            <strong>{{ __('message.website') }}:</strong><span> {{ $company->website }}</span>
         </div>
     </div>
 </div>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('Default language') }}:</strong><span> {{ $company->default_lang }}</span>
+            <strong>{{ __('message.default_lang') }}:</strong><span> {{ __('message.'.$company->default_lang) }}</span>
         </div>
     </div>
 </div>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>{{ __('Statistics') }}</h3>
+            <h3>{{ __('message.statistics') }}</h3>
         </div>
     </div>
 </div>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('Customers') }}:</strong><span> {{ $customers_count }}</span>
+            <strong>{{ __('message.customers') }}:</strong><span> {{ $customers_count }}</span>
         </div>
     </div>
 </div>

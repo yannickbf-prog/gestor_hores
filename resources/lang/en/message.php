@@ -14,7 +14,34 @@ return [
     
     'enter' => 'Enter',
     
+    'home' => 'Home',
     'customers' => 'Customers',
+    'company_info' => 'Company info',
+   
+    
+    'unvalidated_hour_bags' => "Unvalidated hour bags",
+    'bag_hour_type' => "Bag hour type",
+    'project_name' => 'Project name',
+    'customer_name' => 'Customer name',
+    'hours' => 'Hours',
+    'creation_day' => 'Creation day',
+    'validate' => 'Validate',
+    
+    'company_info_providing' => "Information on the company providing the services",
+    'automotive_sector' => "Automotive sector",
+    'computer_science' => "Computer science",
+    'construction' => "Construction sector",
+    'telecommunications' => 'Telecommunications',
+    'other' => 'Other',
+    'website' => 'Website',
+    'default_lang' => 'Default lang',
+    'statistics' => 'Statistics',
+    'work_sector' => 'Work sector',
+    'en' => 'English',
+    'es' => 'Spanish',
+    'ca' => 'Catalan',
+    
+    'user' => 'User',
     'create_new_customer' => 'Create New Customer',
     'customer' => 'Customer',
     'filters' => 'Filters',

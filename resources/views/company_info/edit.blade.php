@@ -41,13 +41,13 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <label for="workSector"><strong>*{{ "Work sector" }}:</strong></label>
+                <label for="workSector"><strong>*{{ __("message.work_sector") }}:</strong></label>
                 <select class="form-control" id="workSector" name="work_sector">
-                    <option value="automotive_sector" {{ setActiveSelect('automotive_sector', $company->work_sector) }}>Automotive sector</option>
-                    <option value="computer_science" {{ setActiveSelect('computer_science', $company->work_sector) }}>Computer science</option>
-                    <option value="construction" {{ setActiveSelect('construction', $company->work_sector) }}>Construction</option>
-                    <option value="telecomunications" {{ setActiveSelect('telecomunications', $company->work_sector) }}>Telecommunications</option>
-                    <option value="other">Other</option>
+                    <option value="automotive_sector" {{ setActiveSelect('automotive_sector', $company->work_sector) }}>{{__('message.automotive_sector')}}</option>
+                    <option value="computer_science" {{ setActiveSelect('computer_science', $company->work_sector) }}>{{__('message.computer_science')}}</option>
+                    <option value="construction" {{ setActiveSelect('construction', $company->work_sector) }}>{{__('message.construction')}}</option>
+                    <option value="telecomunications" {{ setActiveSelect('telecomunications', $company->work_sector) }}>{{__('message.telecommunications')}}</option>
+                    <option value="other">{{__('message.other')}}</option>
                 </select>
             </div>
         </div>
@@ -72,19 +72,14 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*{{__('Website')}}:</strong>
+                <strong>*{{__('message.website')}}:</strong>
                 <input type="text" name="website" value="{{old('website', $company->website)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Website')}}">
             </div>
         </div>
+       
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*{{__('Default language')}}:</strong>
-                <input type="text" name="default_lang" value="{{old('default_lang', $company->default_lang)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Website')}}">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <label for="defaultLang"><strong>*{{__('Default language')}}</strong></label>
+                <label for="defaultLang"><strong>*{{__('message.default_lang')}}</strong></label>
                 <select class="form-control" id="defaultLang" name="default_lang">
                     <option value="en" {{ setActiveSelect('en', $company->default_lang) }}>{{__('message.english')}}</option>
                     <option value="es" {{ setActiveSelect('es', $company->default_lang) }}>{{__('message.spanish')}}</option>

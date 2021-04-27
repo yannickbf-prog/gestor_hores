@@ -14,8 +14,33 @@ return [
     
     'enter' => 'Escriu',
 
-    
+    'home' => 'Inici',
     'customers' => 'Clients',
+    'company_info' => "Informació de l'empresa",
+    
+    'unvalidated_hour_bags' => "Bosses d'hores sense validar",
+    'user' => 'Usuari',
+    'bag_hour_type' => "Tipus de bosssa d'hores",
+    'project_name' => 'Nom del projecte',
+    'customer_name' => 'Nom del client',
+    'hours' => 'Hores',
+    'creation_day' => 'Data de creació',
+    'validate' => 'Validar',
+    
+    'company_info_providing' => "Informació de l'empresa que presta els serveis",
+    'automotive_sector' => "Sector automovilistic",
+    'computer_science' => "Informàtica",
+    'construction' => "Construcció",
+    'telecommunications' => 'Telecomunicacions',
+    'other' => 'Un altre',
+    'website' => 'Pàgina web',
+    'default_lang' => 'Idioma per defecte',
+    'statistics' => 'Estadístiques',
+    'work_sector' => 'Sector de treball',
+    'en' => 'Anglès',
+    'es' => 'Espanyol',
+    'ca' => 'Català',
+    
     'create_new_customer' => 'Crear Nou Client',
     'customer' => 'Client',
     'filters' => 'Filtres',

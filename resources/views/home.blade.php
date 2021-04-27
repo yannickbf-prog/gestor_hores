@@ -3,16 +3,16 @@
 @section('title', 'Control panel - Home')
 
 @section('content')
-    <h1>Home</h1>
-    <h2>Unvalidated hour bags</h2>
+    <h1>{{ __('message.home') }}</h1>
+    <h2>{{ __('message.unvalidated_hour_bags') }}</h2>
     <table class="table table-bordered">
         <tr>
-            <th>User</th>
-            <th>Bag Hour Type</th>
-            <th>Project name</th>
-            <th>Customer name</th>
-            <th>Hours</th>
-            <th>Creation day</th>
+            <th>{{ __('message.user') }}</th>
+            <th>{{ __('message.bag_hour_type') }}</th>
+            <th>{{ __('message.project_name') }}</th>
+            <th>{{ __('message.customer_name') }}</th>
+            <th>{{ __('message.hours') }}</th>
+            <th>{{ __('message.creation_day') }}</th>
             
         </tr>
         <tr>
@@ -22,7 +22,7 @@
             <td>Industries Lopez</td>
             <td>5h</td>
             <td>27/03/2021</td>
-            <td>validar</td>
+            <td>{{ __('message.validate') }}</td>
         </tr>
     </table>
 @endsection

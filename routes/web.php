@@ -30,8 +30,8 @@ Route::get('change/lang', [LocalizationController::class, "lang_change"])->name(
 
 
 
-Route::view("/", "home")->name('home');
-Route::view("/company-info", "company-info")->name('company-info');
+//Route::view("/", "home")->name('home');
+//Route::view("/company-info", "company-info")->name('company-info');
 
 //Route::resource('customers', CustomerController::class);
 Route::resource('type-bag-hours', TypeBagHourController::class);
@@ -40,10 +40,10 @@ Route::resource('type-bag-hours', TypeBagHourController::class);
 Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware('admin');
 
 //Route::get("en/control-panel/", [HomeContoller::class, 'index'])->name('en_home.index')->middleware('auth');
-Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index')->middleware('user');
-Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
+Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index')->middleware('admin');
+Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index')->middleware('admin');
 
-Route::post("control-panel/company-info/lang/{lang}", [CustomerController::class, 'update'])->name('company-info.update');
+Route::post("control-panel/company-info/lang/{lang}", [CompanyController::class, 'update'])->name('company-info.update');
 
 Route::get("en/control-panel/company-info", [CompanyController::class, 'index'])->name('en_company_info.index');
 Route::get("en/control-panel/company-info/edit", [CompanyController::class, 'edit'])->name('en_company_info.edit');
