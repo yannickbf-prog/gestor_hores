@@ -108,6 +108,8 @@ Anotació: a la documentacio que hi ha mes a baix es pot trobar mes informació.
 
 ![Entrada d'hores](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Entrada%20d'hores%20.png)
 
+![Panell de control del treballador](https://raw.githubusercontent.com/yannickbf-prog/gestor_hores/master/imgs_documentation/mockups/Panell%20de%20control%20del%20treballador.png)
+
 #### Disseny/Implementacio
 - Explicar de l’estructura externa i organització general del codi:  estructura de carpetes, fitxers, dependències emprades...
 - Explicar l’estructura interna i lògica del codi: POO o MVC (si s’han emprat), composició classes o fitxers de framework
