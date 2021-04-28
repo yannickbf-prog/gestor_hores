@@ -12,6 +12,10 @@ return [
     'updated' => 'actualitzat amb èxit',
     'deleted' => 'eliminat amb èxit', 
     
+    'created_f' => 'creaada amb èxit',
+    'updated_f' => 'actualitzada amb èxit',
+    'deleted_f' => 'eliminada amb èxit', 
+    
     'enter' => 'Escriu',
 
     'home' => 'Inici',
@@ -27,6 +31,7 @@ return [
     'creation_day' => 'Data de creació',
     'validate' => 'Validar',
     
+    'company' => 'Empresa',
     'company_info_providing' => "Informació de l'empresa que presta els serveis",
     'automotive_sector' => "Sector automovilistic",
     'computer_science' => "Informàtica",

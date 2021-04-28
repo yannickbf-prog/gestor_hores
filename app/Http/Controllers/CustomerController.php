@@ -181,7 +181,7 @@ class CustomerController extends Controller
        
 
         return redirect()->route($lang.'_customers.index')
-                        ->with('success', __('message.customer')." ".__('message.updated'));
+                        ->with('success', __('message.company')." ".__('message.updated'));
     }
 
     /**

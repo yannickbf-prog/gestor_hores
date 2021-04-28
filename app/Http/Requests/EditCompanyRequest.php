@@ -33,7 +33,11 @@ class EditCompanyRequest extends FormRequest
         App::setLocale($this->lang);
         
         return [
-            'name' => 'unique:customers||required',
+            'name' => 'required',
+            'description' => 'max:400',
+            'work_sector' => 'required',
+            'email' => 'email',
+            'default_lang' => 'required'
         ];
     }
 }

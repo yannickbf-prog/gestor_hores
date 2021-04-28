@@ -12,6 +12,10 @@ return [
     'updated' => 'actualizado con exito',
     'deleted' => 'eliminado con exito', 
     
+    'created_f' => 'creaada con exito',
+    'updated_f' => 'actualizada con exito',
+    'deleted_f' => 'eliminada con exito', 
+    
     'enter' => 'Escribe',
     
     'home' => 'Inicio',
@@ -27,6 +31,7 @@ return [
     'creation_day' => 'Fecha de creación',
     'validate' => 'Validar',
     
+    'company' => 'Empresa',
     'company_info_providing' => 'Información de la empresa que presta los servicios',
     'automotive_sector' => "Sector automovilístico",
     'computer_science' => "Informática",

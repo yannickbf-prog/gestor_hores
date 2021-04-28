@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\DB;
 
 
 //Route::get('/', [LocalizationController::class, "index"]);
-Route::get('change/lang', [LocalizationController::class, "lang_change"])->name('LangChange');
+//Route::get('change/lang', [LocalizationController::class, "lang_change"])->name('LangChange');
 
 
 
@@ -31,7 +31,7 @@ Route::get('change/lang', [LocalizationController::class, "lang_change"])->name(
 //Route::view("/", "home")->name('home');
 //Route::view("/company-info", "company-info")->name('company-info');
 //Route::resource('customers', CustomerController::class);
-Route::resource('type-bag-hours', TypeBagHourController::class);
+//Route::resource('type-bag-hours', TypeBagHourController::class);
 
 
 
@@ -71,6 +71,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/clients", [CustomerController::class, 'index'])->name('ca_customers.index');
     Route::get("ca/panell-de-control/clients/crear", [CustomerController::class, 'create'])->name('ca_customers.create');
     Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
+    
+    //Bag hour types
+    Route::get("en/control-panel/bag-hours-types", [TypeBagHourController::class, 'index'])->name('en_bag_hours_types.index');
 });
 
 

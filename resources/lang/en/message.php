@@ -12,6 +12,10 @@ return [
     'updated' => 'updated successfully',
     'deleted' => 'deleted successfully', 
     
+    'created_f' => 'created successfully',
+    'updated_f' => 'updated successfully',
+    'deleted_f' => 'deleted successfully', 
+    
     'enter' => 'Enter',
     
     'home' => 'Home',
@@ -27,6 +31,7 @@ return [
     'creation_day' => 'Creation day',
     'validate' => 'Validate',
     
+    'company' => 'Company',
     'company_info_providing' => "Information on the company providing the services",
     'automotive_sector' => "Automotive sector",
     'computer_science' => "Computer science",

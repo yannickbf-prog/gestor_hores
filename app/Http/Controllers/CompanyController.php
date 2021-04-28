@@ -81,7 +81,7 @@ class CompanyController extends Controller {
         $company->update($request->validated());
         
         return redirect()->route($lang.'_company_info.index')
-                        ->with('success', __('message.customer')." ".__('message.updated'));
+                        ->with('success', __('message.company')." ".__('message.updated_f'));
     }
 
     /**
