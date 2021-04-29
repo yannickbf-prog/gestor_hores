@@ -9,7 +9,7 @@
             <h2>Add New Bag Hour type</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('type-bag-hours.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
     <strong>Fields with * are required</strong>
 </div>
 
-<form action="{{ route('type-bag-hours.store') }}" method="POST">
+<form action="{{ route('bag_hours_types.store', $lang) }}" method="POST">
     @csrf
   
      <div class="row">

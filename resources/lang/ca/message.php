@@ -19,8 +19,9 @@ return [
     'enter' => 'Escriu',
 
     'home' => 'Inici',
-    'customers' => 'Clients',
     'company_info' => "Informació de l'empresa",
+    'customers' => 'Clients',
+    "bag_hours_types" => "Tipus de bosses d'hores",
     
     'unvalidated_hour_bags' => "Bosses d'hores sense validar",
     'user' => 'Usuari',

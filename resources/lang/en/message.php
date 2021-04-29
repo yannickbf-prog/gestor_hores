@@ -19,9 +19,9 @@ return [
     'enter' => 'Enter',
     
     'home' => 'Home',
-    'customers' => 'Customers',
     'company_info' => 'Company info',
-   
+    'customers' => 'Customers',
+    "bag_hours_types" => "Bag hour types",
     
     'unvalidated_hour_bags' => "Unvalidated hour bags",
     'bag_hour_type' => "Bag hour type",

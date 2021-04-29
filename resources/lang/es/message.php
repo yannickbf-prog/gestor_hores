@@ -19,8 +19,9 @@ return [
     'enter' => 'Escribe',
     
     'home' => 'Inicio',
-    'customers' => 'Clientes',
     'company_info' => 'Información de la empresa',
+    'customers' => 'Clientes',
+    'bag_hours_types' => 'Tipos de bolsas de horas',
 
     
     'unvalidated_hour_bags' => "Bolsas de horas sin validar",

@@ -14,11 +14,11 @@
             <h2>Bag hours types</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('type-bag-hours.create') }}">Create New Bag hour type</a>
+            <a class="btn btn-success" href="{{ route($lang.'_bag_hours_types.create') }}">Create New Bag hour type</a>
         </div>
     </div>
 </div>
-<form action="{{ route('type-bag-hours.index') }}" method="GET"> 
+<form action="{{ route($lang.'_bag_hours_types.index') }}" method="GET"> 
     @csrf
 
     <div class="row py-2">
@@ -69,7 +69,7 @@
             <h3>Bag hours types list</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('type-bag-hours.create') }}">Create New Bag hour type</a>
+            <a class="btn btn-success" href="{{ route($lang.'_bag_hours_types.create') }}">Create New Bag hour type</a>
         </div>
     </div>
 </div>
@@ -91,10 +91,11 @@
         <td>{{ $value->hour_price }}€</td>
         <td>@if ($value->description == "") {{ 'No description' }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>
-            <form action="{{ route('type-bag-hours.destroy',$value->id) }}" method="POST"> 
-                <a class="btn btn-primary" href="{{ route('type-bag-hours.edit',$value->id) }}">Edit</a>
+            <form action="{{ route('bag_hours_types.destroy',[$value->id, $lang]) }}" method="POST"> 
+                <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.edit',$value->id) }}">Edit</a>
                 @csrf
-                @method('DELETE')      
+                @method('DELETE')
+                
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
