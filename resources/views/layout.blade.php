@@ -45,7 +45,9 @@
             #datePopover{
                 opacity: 0;
                 transition: opacity .3s;
+                display: none;
             }
+            
 
         </style>
 
@@ -206,17 +208,39 @@
     <script>
 
         var displayPopover = 1;
-        function showPopover() {
-            (displayPopover % 2 === 0) ? document.getElementById("datePopover").style.opacity = 0 : document.getElementById("datePopover").style.opacity = 1;
+        function showClosePopover() {
+             
+            if(displayPopover % 2 === 0){
+                
+                document.getElementById("datePopover").style.opacity = 0;
+                
+                setTimeout(function(){
+                    document.getElementById("datePopover").style.display = "none";
+                },300);
+                
+            }
+            else{
+                document.getElementById("datePopover").style.display = "block";
+                setTimeout(function(){
+                    document.getElementById("datePopover").style.opacity = 1;
+                },0000);
+                
+            } 
             displayPopover++;
         }
+        
         function closePopover() {
             document.getElementById("datePopover").style.opacity = 0;
+
+            setTimeout(function(){
+                document.getElementById("datePopover").style.display = "none";
+            },300);
+                
             displayPopover = 1;
         }
 
         window.onload = function () {
-            document.getElementById("datePopoverBtn").addEventListener("click", showPopover);
+            document.getElementById("datePopoverBtn").addEventListener("click", showClosePopover);
             document.getElementsByClassName("close")[0].addEventListener("click", closePopover);
         };
 
