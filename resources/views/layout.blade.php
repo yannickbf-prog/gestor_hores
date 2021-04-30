@@ -41,21 +41,21 @@
                 order: 2;
                 margin-top: 10px;
             }
-            
+
             #datePopover{
                 opacity: 0;
                 transition: opacity .3s;
             }
-            
+
         </style>
 
-       
+
     </head>
 
     <body>
 
         <div id="app" class="d-flex flex-column h-screen py-3">
-            
+
 
 
             <div class="row">
@@ -108,98 +108,119 @@
     <!-- Datapiker ui -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    
-  <script>
-    $(function () {
-      $(".datepicker").datepicker();
-    });
-  </script>
+
+    <script>
+                                $(function () {
+                                    $(".datepicker").datepicker();
+                                });
+    </script>
 
     <!--Used for change languajes-->
 
     <script>
-      $.datepicker.regional["ca"] = {
-        closeText: "Tancar",
-        prevText: "< Ant",
-        nextText: "Seg >",
-        currentText: "Hoy",
-        monthNames: [
-          "Gener",
-          "Febrer",
-          "Març",
-          "Abril",
-          "Maig",
-          "Juny",
-          "Juliol",
-          "Agost",
-          "Septembre",
-          "Octubre",
-          "Novembre",
-          "Desembre",
-        ],
-        monthNamesShort: [
-          "Gen",
-          "Feb",
-          "Mar",
-          "Abr",
-          "Mai",
-          "Jun",
-          "Jul",
-          "Ago",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-        dayNames: [
-          "Diumenje",
-          "Dilluns",
-          "Dimarts",
-          "Dimecres",
-          "Dijous",
-          "Divendres",
-          "Dissabte",
-        ],
-        dayNamesShort: ["Diu", "Dil", "Dim", "Dme", "Dij", "Div", "Dis"],
-        dayNamesMin: ["Di", "Dl", "Dm", "Dc", "Dj", "Dv", "Ds"],
-        weekHeader: "Sm",
-        dateFormat: "dd/mm/yy",
-        firstDay: 1,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: "",
-      };
-      $.datepicker.setDefaults($.datepicker.regional["ca"]);
-    
-</script>
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+        $(function () {
+            $("#fecha").datepicker();
+        });
+        $.datepicker.regional["ca"] = {
+            closeText: "Tancar",
+            prevText: "< Ant",
+            nextText: "Seg >",
+            currentText: "Hoy",
+            monthNames: [
+                "Gener",
+                "Febrer",
+                "Març",
+                "Abril",
+                "Maig",
+                "Juny",
+                "Juliol",
+                "Agost",
+                "Septembre",
+                "Octubre",
+                "Novembre",
+                "Desembre",
+            ],
+            monthNamesShort: [
+                "Gen",
+                "Feb",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+            ],
+            dayNames: [
+                "Diumenje",
+                "Dilluns",
+                "Dimarts",
+                "Dimecres",
+                "Dijous",
+                "Divendres",
+                "Dissabte",
+            ],
+            dayNamesShort: ["Diu", "Dil", "Dim", "Dme", "Dij", "Div", "Dis"],
+            dayNamesMin: ["Di", "Dl", "Dm", "Dc", "Dj", "Dv", "Ds"],
+            weekHeader: "Sm",
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: "",
+        };
+        $.datepicker.setDefaults($.datepicker.regional["{{ $lang }}"]);
 
-<script type="text/javascript">
-    var url = "{{ route('LangChange') }}";
-    $(".Langchange").change(function(){
-        let currentRoute = "{{ Route::currentRouteName() }}";
-        let id= "@if(isset($customer)){{ $customer->id }} @else{{'noid'}} @endif";
-        window.location.href = url + "?langToDisplay="+ $(this).val() + "&currentRoute=" + currentRoute + "&id=" + id;
-    });
-</script>
+    </script>
 
-<script>
+    <script type="text/javascript">
+        var url = "{{ route('LangChange') }}";
+        $(".Langchange").change(function () {
+            let currentRoute = "{{ Route::currentRouteName() }}";
+            let id = "@if(isset($customer)){{ $customer->id }} @else{{'noid'}} @endif";
+            window.location.href = url + "?langToDisplay=" + $(this).val() + "&currentRoute=" + currentRoute + "&id=" + id;
+        });
+    </script>
 
-var displayPopover = 1;
-function showPopover(){
-    (displayPopover % 2 === 0) ? document.getElementById("datePopover").style.opacity = 0 : document.getElementById("datePopover").style.opacity = 1;
-    displayPopover++;
-}
-function closePopover(){
-    document.getElementById("datePopover").style.opacity = 0;
-    displayPopover = 1;
-}
-    
-window.onload = function () {
-    document.getElementById("datePopoverBtn").addEventListener("click", showPopover);
-    document.getElementsByClassName("close")[0].addEventListener("click", closePopover);
-};
+    <script>
 
-</script>
+        var displayPopover = 1;
+        function showPopover() {
+            (displayPopover % 2 === 0) ? document.getElementById("datePopover").style.opacity = 0 : document.getElementById("datePopover").style.opacity = 1;
+            displayPopover++;
+        }
+        function closePopover() {
+            document.getElementById("datePopover").style.opacity = 0;
+            displayPopover = 1;
+        }
+
+        window.onload = function () {
+            document.getElementById("datePopoverBtn").addEventListener("click", showPopover);
+            document.getElementsByClassName("close")[0].addEventListener("click", closePopover);
+        };
+
+    </script>
 
 </html>
 

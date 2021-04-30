@@ -45,13 +45,15 @@ class TypeBagHourController extends Controller {
                         ->with('i', (request()->input('page', 1) - 1) * 7);
     }
     
-    public function deleteFilters() {
+    public function deleteFilters(Request $request) {
         
         session(['type_bag_hour_name' => '%']);
         session(['type_bag_hour_price' => '%']);
         session(['type_bag_hour_order' => 'asc']);
 
-        return redirect()->route('type-bag-hours.index');
+        $lang = $request->lang;
+        
+        return redirect()->route($lang.'_bag_hours_types.index');
 
     }
 
@@ -99,7 +101,9 @@ class TypeBagHourController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(TypeBagHour $typeBagHour) {
-        return view('type_bag_hours.edit', compact('typeBagHour'));
+        $lang = setGetLang();
+        
+        return view('type_bag_hours.edit', compact('typeBagHour'), compact('lang'));
     }
 
     /**
@@ -109,13 +113,13 @@ class TypeBagHourController extends Controller {
      * @param  \App\Models\TypeBagHour  $typeBagHour
      * @return \Illuminate\Http\Response
      */
-    public function update(EditTypeBagHourRequest $request, TypeBagHour $typeBagHour) {
+    public function update(EditTypeBagHourRequest $request, TypeBagHour $typeBagHour, $lang) {
         
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
         $typeBagHour->update($request->validated());
 
-        return redirect()->route('type-bag-hours.index')
+        return redirect()->route($lang.'_bag_hours_types.index')
                         ->with('success', 'Bag hour type updated successfully');
     }
 
@@ -125,13 +129,13 @@ class TypeBagHourController extends Controller {
      * @param  \App\Models\TypeBagHour  $typeBagHour
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TypeBagHour $typeBagHour) {
+    public function destroy(TypeBagHour $typeBagHour, $lang) {
         
-       
+        App::setLocale($lang);
         
         $typeBagHour->delete();
 
-        return redirect()->route('en_bag_hours_types.index')
+        return redirect()->route($lang.'_bag_hours_types.index')
                         ->with('success', 'Bag hour type deleted successfully');
     }
 

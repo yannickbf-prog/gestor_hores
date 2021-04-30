@@ -21,7 +21,7 @@ return [
     'home' => 'Home',
     'company_info' => 'Company info',
     'customers' => 'Customers',
-    "bag_hours_types" => "Bag hour types",
+    "bag_hours_types" => "Types of hour bags",
     
     'unvalidated_hour_bags' => "Unvalidated hour bags",
     'bag_hour_type' => "Bag hour type",
@@ -69,6 +69,12 @@ return [
     'action' => 'Action',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    
+    'create_new_type_hour_bag' => 'Create New Type of hour bag',
+    'hour_price' => 'Hour price',
+    
+    'create' => 'Crete',
+    'new' => 'New',
     
     'confirm' => 'Are you sure you want to',
     'the' => 'the',

@@ -30,7 +30,7 @@
     <div class="row py-2">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>{{ __('message.filters') }}</h2>
+                <h3>{{ __('message.filters') }}</h3>
             </div>
         </div>
     </div>

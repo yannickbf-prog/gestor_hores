@@ -70,6 +70,12 @@ return [
     'edit' => 'Editar',
     'delete' => 'Eliminar',
     
+    'create_new_type_hour_bag' => "Crear Nou Tipus de bossa d'hores",
+    'hour_price' => 'Preu per hora',
+
+    'create' => 'Crear',
+    'new' => 'Nou',
+    
     'confirm' => 'Estas segur que vols',
     'the' => 'el',
     

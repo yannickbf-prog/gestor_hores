@@ -71,6 +71,12 @@ return [
     'edit' => 'Editar',
     'delete' => 'Eliminar',
     
+    'create_new_type_hour_bag' => "Crear Nuevo Tipo de bolsa de horas",
+    'hour_price' => 'Precio por hora',
+    
+    'create' => 'Crear',
+    'new' => 'Nuevo',
+    
     'confirm' => 'Estas seguro que quieres',
     'the' => 'el',
     
