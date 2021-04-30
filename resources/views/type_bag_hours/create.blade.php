@@ -1,22 +1,24 @@
 @extends('layout')
 
-@section('title', 'Control panel - Type bag hours - Create new')
+@section('title')
+{{ __("message.control_panel") }} - {{ __('message.add_new')." ".__('message.bag_hour_type') }}
+@endsection
 
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Bag Hour type</h2>
+            <h2>{{ __('message.add_new')." ".__('message.bag_hour_type') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.index') }}"> {{__('message.back')}}</a>
         </div>
     </div>
 </div>
    
 @if ($errors->any())
     <div class="alert alert-danger mt-3">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -26,7 +28,7 @@
 @endif
    
 <div class="alert alert-success mt-2">
-    <strong>Fields with * are required</strong>
+    <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
 <form action="{{ route('bag_hours_types.store', $lang) }}" method="POST">
@@ -35,24 +37,24 @@
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Enter Name" value="{{old('name')}}">
+                <strong>*{{__('message.name')}}:</strong>
+                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*Hour price:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Enter Hour price"  value="{{old('hour_price')}}">
+                <strong>*{{__('message.hour_price')}}:</strong>
+                <input type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')." ".__('message.hour_price')}}"  value="{{old('hour_price')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Enter Description">{{old('description')}}</textarea>
+                <strong>{{__('message.description')}}:</strong>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
         </div>
     </div>
    

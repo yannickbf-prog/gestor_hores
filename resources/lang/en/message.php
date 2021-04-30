@@ -24,7 +24,7 @@ return [
     "bag_hours_types" => "Types of hour bags",
     
     'unvalidated_hour_bags' => "Unvalidated hour bags",
-    'bag_hour_type' => "Bag hour type",
+    'bag_hour_type' => "Type of hour bag",
     'project_name' => 'Project name',
     'customer_name' => 'Customer name',
     'hours' => 'Hours',
@@ -69,12 +69,20 @@ return [
     'action' => 'Action',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'close' => 'Close',
     
     'create_new_type_hour_bag' => 'Create New Type of hour bag',
     'hour_price' => 'Hour price',
+    'hour_format' => "The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).",
+
     
     'create' => 'Crete',
     'new' => 'New',
+    
+    'bag_hour_type_list' => 'Types of hour bags list',
+    
+    'no_description' => 'Without description',
+
     
     'confirm' => 'Are you sure you want to',
     'the' => 'the',

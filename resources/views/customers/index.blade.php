@@ -127,7 +127,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>{{ __('message.customers_list') }}</h2>
+            <h3>{{ __('message.customers_list') }}</h3>
         </div>
         <div class="pull-right">
             <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
@@ -153,7 +153,7 @@
         <td>{{ $value->name }}</td>
         <td>{{ $value->email }}</td>
         <td>{{ $value->phone }}</td>
-        <td>@if ($value->description == ''){{ "No description" }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+        <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('customers.destroy',[$value->id, $lang]) }}" method="POST"> 
@@ -174,10 +174,10 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} {{ $value->name }}?
+                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} <b>{{ $value->name }}</b>?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
                                 <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
                             </div>
                         </div>

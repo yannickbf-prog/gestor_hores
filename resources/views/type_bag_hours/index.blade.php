@@ -35,7 +35,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.name') }}:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name" value="@if(session('type_bag_hour_name') != '%'){{session('type_bag_hour_name')}}@endif">
+                <input type="text" name="name" class="form-control" placeholder="{{ __('message.enter')." ".__('message.name') }}" value="@if(session('type_bag_hour_name') != '%'){{session('type_bag_hour_name')}}@endif">
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.hour_price') }}:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="Hour price" value="@if(session('type_bag_hour_price') != '%'){{session('type_bag_hour_price')}}@endif">
+                <input type="text" name="hour_price" class="form-control" placeholder="{{ __('message.enter')." ".__('message.hour_price') }}" value="@if(session('type_bag_hour_price') != '%'){{session('type_bag_hour_price')}}@endif">
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 
-<form action="{{ route('type-bag-hours.delete_filters') }}" method="POST"> 
+<form action="{{ route('type_bag_hours.delete_filters') }}" method="POST"> 
     @csrf
     <input type="hidden" name="lang" value="{{ $lang }}">
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
@@ -70,7 +70,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>Bag hours types list</h2>
+            <h3>{{ __("message.bag_hour_type_list") }}</h3>
         </div>
         <div class="pull-right">
             <a class="btn btn-success" href="{{ route($lang.'_bag_hours_types.create') }}">{{ __("message.create")." ".__("message.new")." ".__("message.bag_hours_types") }}</a>
@@ -81,11 +81,11 @@
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
-        <th>No</th>
-        <th>Name</th>
-        <th>Hour price</th>
-        <th>Details</th>
-        <th width="280px">Action</th>
+        <th>Nº</th>
+        <th>{{ __('message.name') }}</th>
+        <th>{{ __('message.hour_price') }}</th>
+        <th>{{ __('message.description') }}</th>
+        <th width="280px">{{ __('message.action') }}</th>
     </tr>
     @endif
     @forelse ($data as $key => $value)
@@ -93,14 +93,35 @@
         <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>
         <td>{{ $value->hour_price }}€</td>
-        <td>@if ($value->description == "") {{ 'No description' }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+        <td>@if ($value->description == "") {{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>
             <form action="{{ route('bag_hours_types.destroy',[$value->id, $lang]) }}" method="POST"> 
-                <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.edit',$value->id) }}">Edit</a>
+                <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.edit',$value->id) }}">{{ __('message.edit') }}</a>
                 @csrf
                 @method('DELETE')
-                
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    {{ __('message.delete') }}
+                </button>
+                 <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.bag_hour_type") }} <b>{{ $value->name }}</b>?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </td>
     </tr>

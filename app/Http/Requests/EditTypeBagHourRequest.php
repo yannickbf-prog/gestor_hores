@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
 use Auth;
 
 class EditTypeBagHourRequest extends FormRequest
@@ -30,8 +31,10 @@ class EditTypeBagHourRequest extends FormRequest
      */
     public function rules()
     {
+        App::setLocale($this->lang);
+        
         return [
-            'name' => ['required', Rule::unique('type_bag_hours')->ignore($this->id)],
+            'name' => ['required', Rule::unique('type_bag_hours')->ignore($this->typeBagHour->id)],
             'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'description' => 'max:400'
         ];
@@ -39,7 +42,7 @@ class EditTypeBagHourRequest extends FormRequest
     
     public function messages(){
         return [
-            'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).')
+            'hour_price.regex' => __('message.hour_format')
         ];
     }
 }

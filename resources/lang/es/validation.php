@@ -151,6 +151,7 @@ return [
         'minute'                => 'minuto',
         'mobile'                => 'móvil',
         'month'                 => 'mes',
+        'hour_price'            => 'precio por hora',
         'name'                  => 'nombre',
         'password'              => 'contraseña',
         'password_confirmation' => 'confirmación de la contraseña',

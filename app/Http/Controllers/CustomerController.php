@@ -136,11 +136,12 @@ class CustomerController extends Controller
      */
     public function store(CreateCustomerRequest $request, $lang)
     {
+        App::setLocale($lang);
               
         Customer::create($request->validated());
         
         return redirect()->route($lang.'_customers.index')
-                        ->with('success', __('message.customer')." ".__('message.created') );
+                        ->with('success', __('message.customer')." ".$request->name." ".__('message.created') );
     }
 
     /**
@@ -181,7 +182,7 @@ class CustomerController extends Controller
        
 
         return redirect()->route($lang.'_customers.index')
-                        ->with('success', __('message.company')." ".__('message.updated'));
+                        ->with('success', __('message.customer')." ".$request->name." ".__('message.updated'));
     }
 
     /**

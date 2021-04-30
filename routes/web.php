@@ -76,7 +76,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post("control-panel/types-hour-bags/lang/{lang}", [TypeBagHourController::class, 'store'])->name('bag_hours_types.store');
     Route::put("control-panel/types-hour-bags/{typeBagHour}/lang/{lang}", [TypeBagHourController::class, 'update'])->name('bag_hours_types.update');
     Route::delete("control-panel/types-hour-bags/{typeBagHour}/lang/{lang}", [TypeBagHourController::class, 'destroy'])->name('bag_hours_types.destroy');
-    Route::post('control-panel/types-hour-bags/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type-bag-hours.delete_filters');
+    Route::post('control-panel/types-hour-bags/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type_bag_hours.delete_filters');
 
     // Control panel - Customers en
     Route::get("en/control-panel/types-hour-bags", [TypeBagHourController::class, 'index'])->name('en_bag_hours_types.index');

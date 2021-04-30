@@ -70,12 +70,19 @@ return [
     'action' => 'Acción',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
+    'close' => 'Cerrar',
     
     'create_new_type_hour_bag' => "Crear Nuevo Tipo de bolsa de horas",
     'hour_price' => 'Precio por hora',
+    'hour_format' => "El precio debe tener el siguiente formato: 20, 2000, 20.25 o 20,25 (valores de ejemplo).",
     
     'create' => 'Crear',
     'new' => 'Nuevo',
+
+    
+    'bag_hour_type_list' => "Lista de tipos de bolsas de horas",
+
+    'no_description' => 'Sin descripción',
     
     'confirm' => 'Estas seguro que quieres',
     'the' => 'el',

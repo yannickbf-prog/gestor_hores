@@ -76,12 +76,15 @@ class TypeBagHourController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(CreateTypeBagHourRequest $request, $lang) {
+        
+        App::setLocale($lang);
+        
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
         TypeBagHour::create($request->validated());
 
         return redirect()->route($lang.'_bag_hours_types.index')
-                        ->with('success', 'Bag hour type created successfully.');
+                        ->with('success', __('message.bag_hour_type')." ".$request->name." ".__('message.created_f'));
     }
 
     /**
@@ -115,12 +118,14 @@ class TypeBagHourController extends Controller {
      */
     public function update(EditTypeBagHourRequest $request, TypeBagHour $typeBagHour, $lang) {
         
+        App::setLocale($lang);
+        
         $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
         $typeBagHour->update($request->validated());
 
         return redirect()->route($lang.'_bag_hours_types.index')
-                        ->with('success', 'Bag hour type updated successfully');
+                        ->with('success', __('message.bag_hour_type')." ".$request->name." ".__('message.updated_f'));
     }
 
     /**
@@ -136,7 +141,7 @@ class TypeBagHourController extends Controller {
         $typeBagHour->delete();
 
         return redirect()->route($lang.'_bag_hours_types.index')
-                        ->with('success', 'Bag hour type deleted successfully');
+                        ->with('success', __('message.bag_hour_type')." ".__('message.deleted_f'));
     }
 
 }

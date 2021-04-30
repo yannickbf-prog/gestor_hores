@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\App;
 use Auth;
 
 class CreateTypeBagHourRequest extends FormRequest
@@ -30,6 +30,8 @@ class CreateTypeBagHourRequest extends FormRequest
      */
     public function rules()
     {
+        App::setLocale($this->lang);
+        
         return [
             
             'name' => 'required||unique:type_bag_hours',
@@ -41,7 +43,7 @@ class CreateTypeBagHourRequest extends FormRequest
     
     public function messages(){
         return [
-            'hour_price.regex' => __('The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).')
+            'hour_price.regex' => __('message.hour_format')
         ];
     }
 }

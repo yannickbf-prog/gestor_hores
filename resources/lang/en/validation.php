@@ -150,6 +150,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'hour_price' => 'hour price',
+    ],
 
 ];

@@ -12,7 +12,7 @@ return [
     'updated' => 'actualitzat amb èxit',
     'deleted' => 'eliminat amb èxit', 
     
-    'created_f' => 'creaada amb èxit',
+    'created_f' => 'creada amb èxit',
     'updated_f' => 'actualitzada amb èxit',
     'deleted_f' => 'eliminada amb èxit', 
     
@@ -69,12 +69,19 @@ return [
     'action' => 'Acció',
     'edit' => 'Editar',
     'delete' => 'Eliminar',
+    'close' => 'Tancar',
     
     'create_new_type_hour_bag' => "Crear Nou Tipus de bossa d'hores",
     'hour_price' => 'Preu per hora',
+    'hour_format' => "El preu ha de tenir el següent format: 20, 2000, 20.25 o 20,25 (valors d'exemple).",
+
 
     'create' => 'Crear',
     'new' => 'Nou',
+    
+    'bag_hour_type_list' => "Llista de tipus de bosses d'hores",
+    
+    'no_description' => 'Sense descripció',
     
     'confirm' => 'Estas segur que vols',
     'the' => 'el',

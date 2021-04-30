@@ -150,6 +150,7 @@ return [
         'minute'                => 'minut',
         'mobile'                => 'mòbil',
         'month'                 => 'mes',
+        'hour_price'            => 'preu per hora',
         'name'                  => 'nom',
         'password'              => 'contrasenya',
         'password_confirmation' => 'confirmació de la contrasenya',
