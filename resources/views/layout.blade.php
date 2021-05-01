@@ -1,4 +1,6 @@
-
+@php
+use Illuminate\Support\Facades\DB;
+@endphp
 <html>
     <head>
         <title>@yield('title', 'Control panel')</title>
@@ -63,7 +65,7 @@
 
             <div class="row">
                 <header class="bg-primary bg-info border border-primary col-12 mb-2 py-2">
-                    <h1>aTotArreu Control panel</h1>
+                    <h1>{{DB::table('company')->first()->name}} | {{__('message.control_panel')}}</h1>
                     <div class="col-md-4 form-group">
                         <select class="form-control Langchange">
                             <option value="en" {{ setActiveLang('en') }}>{{ __('message.english') }}</option>

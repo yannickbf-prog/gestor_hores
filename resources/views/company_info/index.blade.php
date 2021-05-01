@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', __('message.control_panel')." - ". __('Company Info'))
+@section('title', __('message.control_panel')." - ". __('message.company_info_providing'))
 
 @section('content')
 @if ($message = Session::get('success'))
@@ -87,6 +87,13 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <strong>{{ __('message.customers') }}:</strong><span> {{ $customers_count }}</span>
+        </div>
+    </div>
+</div>
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <strong>{{ __('message.bag_hours_types') }}:</strong><span> {{ $types_hour_bags_count }}</span>
         </div>
     </div>
 </div>

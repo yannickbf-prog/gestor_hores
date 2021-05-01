@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Control panel - Home')
+@section('title', __('message.control_panel')." - ". __('message.home'))
 
 @section('content')
     <h1>{{ __('message.home') }}</h1>
