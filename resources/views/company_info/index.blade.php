@@ -37,7 +37,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('message.work_sector') }}:</strong><span> {{ $company->work_sector }}</span>
+            <strong>{{ __('message.work_sector') }}:</strong><span> {{ __("message.".$company->work_sector) }}</span>
         </div>
     </div>
 </div>

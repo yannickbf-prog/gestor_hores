@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateTypeBagHourRequest;
 use App\Http\Requests\EditTypeBagHourRequest;
 use Illuminate\Support\Facades\App;
+use DateTime;
+use DateTimeZone;
 
 class TypeBagHourController extends Controller {
 
@@ -25,6 +27,22 @@ class TypeBagHourController extends Controller {
             
             ($request['hour_price'] == "") ? session(['type_bag_hour_price' => '%']) : session(['type_bag_hour_price' => str_replace(",", ".", $request['hour_price'])]);
               
+            if (DateTime::createFromFormat('d/m/Y', $request['date_from']) !== false) {
+                $date = DateTime::createFromFormat('d/m/Y', $request['date_from'])->format('d/m/Y');
+                session(['type_bag_hour_date_from' => $date]);
+            }
+            else{
+                session(['type_bag_hour_date_from' => ""]);
+            }
+            
+            if (DateTime::createFromFormat('d/m/Y', $request['date_to']) !== false) {
+                $date = DateTime::createFromFormat('d/m/Y', $request['date_to'])->format('d/m/Y');
+                session(['type_bag_hour_date_to' => $date]);
+            }
+            else{
+                session(['type_bag_hour_date_to' => ""]);
+            }
+            
             session(['type_bag_hour_order' => $request['order']]);
         }
         
@@ -33,9 +51,32 @@ class TypeBagHourController extends Controller {
         $hour_price = session('type_bag_hour_price', "%");
         $order = session('type_bag_hour_order', "asc");
         
+        $date_from = session('type_bag_hour_date_from', "");
+        
+        if($date_from == ""){
+            $date = new DateTime('2021-04-10');
+            $date_from = $date->format('Y-m-d');
+        }
+        else{
+            $date_from = DateTime::createFromFormat('d/m/Y', $date_from)->format('Y-m-d');
+        }
+        
+        //echo $date_from;
+        
+        $date_to = session('type_bag_hour_date_to', "");
+        
+        if($date_to == ""){
+            $date = new DateTime('NOW +1 day', new DateTimeZone('Europe/Madrid'));
+            $date_to = $date->format('Y-m-d');
+        }
+        else{
+            $date_to = DateTime::createFromFormat('d/m/Y', $date_to)->modify('+1 day')->format('Y-m-d');
+        }
+        
         $data = TypeBagHour::
                 where('name', 'like', "%{$name}%")
                 ->where('hour_price', 'LIKE', $hour_price)
+                ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate(7);
         

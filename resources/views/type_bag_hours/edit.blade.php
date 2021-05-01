@@ -27,7 +27,7 @@
 </div>
 @endif
 
-<div class="alert alert-success mt-2">
+<div class="alert alert-info mt-2">
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
