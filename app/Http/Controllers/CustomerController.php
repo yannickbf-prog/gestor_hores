@@ -6,8 +6,6 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Requests\EditCustomerRequest;
-use DateTime;
-use DateTimeZone;
 use Illuminate\Support\Facades\App;
 
 
@@ -30,56 +28,20 @@ class CustomerController extends Controller
             ($request['email'] == "") ? session(['customer_email' => '%']) : session(['customer_email' => $request['email']]);
             
             ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
-            
-            if (DateTime::createFromFormat('d/m/Y', $request['date_from']) !== false) {
-                $date = DateTime::createFromFormat('d/m/Y', $request['date_from'])->format('d/m/Y');
-                session(['customer_date_from' => $date]);
-            }
-            else{
-                session(['customer_date_from' => ""]);
-            }
-            
-            if (DateTime::createFromFormat('d/m/Y', $request['date_to']) !== false) {
-                $date = DateTime::createFromFormat('d/m/Y', $request['date_to'])->format('d/m/Y');
-                session(['customer_date_to' => $date]);
-            }
-            else{
-                session(['customer_date_to' => ""]);
-            }
 
             session(['customer_order' => $request['order']]);
             
             session(['customer_num_records' => $request['num_records']]);
                                                                     
         }
+                
+        $dates = getIntervalDates($request, 'customer');
+        $date_from = $dates[0];
+        $date_to = $dates[1];
         
         $name = session('customer_name', "%");
         $email = session('customer_email', "%");
         $phone = session('customer_phone', "%");
-        
-        $date_from = session('customer_date_from', "");
-        
-        if($date_from == ""){
-            $date = new DateTime('2021-04-10');
-            $date_from = $date->format('Y-m-d');
-        }
-        else{
-            $date_from = DateTime::createFromFormat('d/m/Y', $date_from)->format('Y-m-d');
-        }
-        
-        //echo $date_from;
-        
-        $date_to = session('customer_date_to', "");
-        
-        if($date_to == ""){
-            $date = new DateTime('NOW +1 day', new DateTimeZone('Europe/Madrid'));
-            $date_to = $date->format('Y-m-d');
-        }
-        else{
-            $date_to = DateTime::createFromFormat('d/m/Y', $date_to)->modify('+1 day')->format('Y-m-d');
-        }
-        
-        //echo " ".$date_to;
         
         $order = session('customer_order', "desc");
         
@@ -109,6 +71,7 @@ class CustomerController extends Controller
         session(['customer_date_from' => ""]);
         session(['customer_date_to' => ""]);
         session(['customer_order' => 'desc']);
+        session(['customer_num_records' => 10]);
         
         $lang = $request->lang;
 

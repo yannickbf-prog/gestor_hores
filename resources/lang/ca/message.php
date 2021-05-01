@@ -70,6 +70,8 @@ return [
     'edit' => 'Editar',
     'delete' => 'Eliminar',
     'close' => 'Tancar',
+    'no' => 'No hi han registres de',
+    'to_show' => 'per mostrar',
     
     'create_new_type_hour_bag' => "Crear Nou Tipus de bossa d'hores",
     'hour_price' => 'Preu per hora',

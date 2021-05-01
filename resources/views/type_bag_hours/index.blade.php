@@ -88,6 +88,19 @@
             </div>
         </div>
     </div> 
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.number_of_records') }}: </strong>
+                <select name="num_records" id="numRecords">
+                    <option value="10">10</option>
+                    <option value="50" @if(session('type_bag_hour_num_records') == 50){{'selected'}}@endif>50</option>
+                    <option value="100" @if(session('type_bag_hour_num_records') == 100){{'selected'}}@endif>100</option>
+                    <option value="all" @if(session('type_bag_hour_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 
@@ -113,8 +126,9 @@
     <tr>
         <th>Nº</th>
         <th>{{ __('message.name') }}</th>
-        <th>{{ __('message.hour_price') }}</th>
         <th>{{ __('message.description') }}</th>
+        <th>{{ __('message.hour_price') }}</th>
+        <th>{{ __('message.created_at') }}</th>
         <th width="280px">{{ __('message.action') }}</th>
     </tr>
     @endif
@@ -122,8 +136,9 @@
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>
-        <td>{{ $value->hour_price }}€</td>
         <td>@if ($value->description == "") {{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+        <td>{{ $value->hour_price }}€</td>
+        <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('bag_hours_types.destroy',[$value->id, $lang]) }}" method="POST"> 
                 <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.edit',$value->id) }}">{{ __('message.edit') }}</a>
@@ -156,7 +171,7 @@
         </td>
     </tr>
     @empty
-    <li>No Bag hours types to show</li>
+    <li>{{__('message.no')}} {{__('message.bag_hours_types')}} {{__('message.to_show')}}</li>
     @endforelse
 
 </table> 

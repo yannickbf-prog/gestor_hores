@@ -188,7 +188,7 @@
         </td>
     </tr>
     @empty
-    <li>No Customers to show</li>
+    <li>{{__('message.no')}} {{__('message.customers')}} {{__('message.to_show')}}</li>
     @endforelse
 
 </table> 

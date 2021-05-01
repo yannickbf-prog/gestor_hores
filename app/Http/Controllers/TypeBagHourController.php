@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateTypeBagHourRequest;
 use App\Http\Requests\EditTypeBagHourRequest;
 use Illuminate\Support\Facades\App;
-use DateTime;
-use DateTimeZone;
+
 
 class TypeBagHourController extends Controller {
 
@@ -28,28 +27,33 @@ class TypeBagHourController extends Controller {
             ($request['hour_price'] == "") ? session(['type_bag_hour_price' => '%']) : session(['type_bag_hour_price' => str_replace(",", ".", $request['hour_price'])]);
             
             session(['type_bag_hour_order' => $request['order']]);
+            
+            session(['type_bag_hour_num_records' => $request['num_records']]);
         }
-        
-        
-        $name = session('type_bag_hour_name', "%");
-        $hour_price = session('type_bag_hour_price', "%");
-        $order = session('type_bag_hour_order', "asc");
         
         $dates = getIntervalDates($request, 'type_bag_hour');
         $date_from = $dates[0];
         $date_to = $dates[1];
+                
+        $name = session('type_bag_hour_name', "%");
+        $hour_price = session('type_bag_hour_price', "%");
+        $order = session('type_bag_hour_order', "asc");
+        
+        $num_records = session('type_bag_hour_num_records', 10);
+        
+        if($num_records == 'all'){
+            $num_records = TypeBagHour::count();
+        }
         
         $data = TypeBagHour::
                 where('name', 'like', "%{$name}%")
                 ->where('hour_price', 'LIKE', $hour_price)
                 ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
-                ->paginate(7);
-        
-      
+                ->paginate($num_records);
 
         return view('type_bag_hours.index', compact('data'), compact('lang'))
-                        ->with('i', (request()->input('page', 1) - 1) * 7);
+                        ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
     
     public function deleteFilters(Request $request) {
@@ -59,6 +63,7 @@ class TypeBagHourController extends Controller {
         session(['type_bag_hour_date_from' => ""]);
         session(['type_bag_hour_date_to' => ""]);
         session(['type_bag_hour_order' => 'asc']);
+        session(['type_bag_hour_num_records' => 10]);
 
         $lang = $request->lang;
         

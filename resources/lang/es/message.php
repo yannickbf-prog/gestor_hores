@@ -71,6 +71,9 @@ return [
     'edit' => 'Editar',
     'delete' => 'Eliminar',
     'close' => 'Cerrar',
+    'no' => 'No hay registros de',
+    'to_show' => 'para mostrar',
+
     
     'create_new_type_hour_bag' => "Crear Nuevo Tipo de bolsa de horas",
     'hour_price' => 'Precio por hora',

@@ -70,6 +70,9 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'close' => 'Close',
+    'no' => 'No',
+    'to_show' => 'records to display',
+
     
     'create_new_type_hour_bag' => 'Create New Type of hour bag',
     'hour_price' => 'Hour price',
