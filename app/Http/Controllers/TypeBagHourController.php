@@ -26,22 +26,6 @@ class TypeBagHourController extends Controller {
             ($request['name'] == "") ? session(['type_bag_hour_name' => '%']) : session(['type_bag_hour_name' => $request['name']]);
             
             ($request['hour_price'] == "") ? session(['type_bag_hour_price' => '%']) : session(['type_bag_hour_price' => str_replace(",", ".", $request['hour_price'])]);
-              
-            if (DateTime::createFromFormat('d/m/Y', $request['date_from']) !== false) {
-                $date = DateTime::createFromFormat('d/m/Y', $request['date_from'])->format('d/m/Y');
-                session(['type_bag_hour_date_from' => $date]);
-            }
-            else{
-                session(['type_bag_hour_date_from' => ""]);
-            }
-            
-            if (DateTime::createFromFormat('d/m/Y', $request['date_to']) !== false) {
-                $date = DateTime::createFromFormat('d/m/Y', $request['date_to'])->format('d/m/Y');
-                session(['type_bag_hour_date_to' => $date]);
-            }
-            else{
-                session(['type_bag_hour_date_to' => ""]);
-            }
             
             session(['type_bag_hour_order' => $request['order']]);
         }
@@ -51,27 +35,9 @@ class TypeBagHourController extends Controller {
         $hour_price = session('type_bag_hour_price', "%");
         $order = session('type_bag_hour_order', "asc");
         
-        $date_from = session('type_bag_hour_date_from', "");
-        
-        if($date_from == ""){
-            $date = new DateTime('2021-04-10');
-            $date_from = $date->format('Y-m-d');
-        }
-        else{
-            $date_from = DateTime::createFromFormat('d/m/Y', $date_from)->format('Y-m-d');
-        }
-        
-        //echo $date_from;
-        
-        $date_to = session('type_bag_hour_date_to', "");
-        
-        if($date_to == ""){
-            $date = new DateTime('NOW +1 day', new DateTimeZone('Europe/Madrid'));
-            $date_to = $date->format('Y-m-d');
-        }
-        else{
-            $date_to = DateTime::createFromFormat('d/m/Y', $date_to)->modify('+1 day')->format('Y-m-d');
-        }
+        $dates = getIntervalDates($request, 'type_bag_hour');
+        $date_from = $dates[0];
+        $date_to = $dates[1];
         
         $data = TypeBagHour::
                 where('name', 'like', "%{$name}%")
@@ -90,6 +56,8 @@ class TypeBagHourController extends Controller {
         
         session(['type_bag_hour_name' => '%']);
         session(['type_bag_hour_price' => '%']);
+        session(['type_bag_hour_date_from' => ""]);
+        session(['type_bag_hour_date_to' => ""]);
         session(['type_bag_hour_order' => 'asc']);
 
         $lang = $request->lang;
