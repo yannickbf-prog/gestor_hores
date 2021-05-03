@@ -36,7 +36,7 @@
 
         </div>
 
-        <img src="storage/app/images/{{ Session::get('image') }}">
+        <img src="storage/{{ Session::get('image') }}">
 
         @endif
 

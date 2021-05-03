@@ -52,6 +52,11 @@ use Illuminate\Support\Facades\DB;
             .alert-success{
                 display: none;
             }
+            
+            .logo {
+                max-width: 350px;
+                max-height: 150px;
+            }
         </style>
 
 
@@ -65,6 +70,9 @@ use Illuminate\Support\Facades\DB;
 
             <div class="row">
                 <header class="bg-primary bg-info border border-primary col-12 mb-2 py-2">
+                    @if(DB::table('company')->first()->img_logo != null)
+                    <img src="/storage/{{ DB::table('company')->first()->img_logo }}" class="logo" alt="Logo {{ DB::table('company')->first()->name }}">
+                    @endif
                     <h1>{{DB::table('company')->first()->name}} | {{__('message.control_panel')}}</h1>
                     <div class="col-md-4 form-group">
                         <select class="form-control Langchange">

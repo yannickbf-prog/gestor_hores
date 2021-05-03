@@ -34,6 +34,7 @@ class EditCompanyRequest extends FormRequest
         
         return [
             'name' => 'required',
+            'img_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'description' => 'max:400',
             'work_sector' => 'required',
             'email' => 'email',

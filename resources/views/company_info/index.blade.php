@@ -30,7 +30,12 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('Logo') }}:</strong><span> {{ $company->img_logo }}</span>
+            <strong>{{ __('Logo') }}:</strong><br>
+            @if($company->img_logo != null)
+            <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
+            @else
+            <span>No logo</span>
+            @endif
         </div>
     </div>
 </div>

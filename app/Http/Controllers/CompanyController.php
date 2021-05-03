@@ -80,11 +80,24 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(EditCompanyRequest $request, $lang) {
-        $company = DB::table('company')->where('id', 1);
-        $company->update($request->validated());
+        /*$company = DB::table('company')->where('id', 1);
+        if($request->img_logo )
+        $imageName = 'logo.'.$request->img_logo->extension();  
+        $request->img_logo->storeAs('public', $imageName);
         
+        DB::transaction(function() use ($request, $company, $imageName)
+        {
+            $company->update($request->validated());
+        
+            $company->update(['img_logo' => $imageName]); 
+        });
+                
         return redirect()->route($lang.'_company_info.index')
-                        ->with('success', __('message.company')." ".__('message.updated_f'));
+                        ->with('success', __('message.company')." ".$request->name." ".__('message.updated_f'));*/
+        
+        if($request->img_logo == ""){
+            return true; 
+        }
     }
 
     /**

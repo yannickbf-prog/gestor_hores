@@ -60,7 +60,7 @@ class ImageUploadController extends Controller
 
      
 
-        $request->image->storeAs('images', $imageName);
+        $request->image->storeAs('public', $imageName);
 
   
 

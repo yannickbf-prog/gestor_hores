@@ -22,7 +22,7 @@
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
-<form action="{{ route('company-info.update', $lang) }}" method="POST">
+<form action="{{ route('company-info.update', $lang) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     
@@ -33,10 +33,23 @@
                 <input type="text" name="name" value="{{old('name', $company->name)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.name')}}">
             </div>
         </div>
+        
+       
+        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*{{__('Logo')}}:</strong>
-                <input type="text" name="logo" value="{{old('logo', $company->img_logo)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Logo')}}">
+                <strong>{{__('Logo')}}:</strong><br>
+                @if($company->img_logo != null)
+                <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
+               
+                    <a class="btn btn-danger" href="#">Delete logo</a>
+
+                @else
+                <span>No logo</span>
+                @endif
+                <br>
+                <span><b>Add/change logo</b></span>
+                <input type="file" name="img_logo" class="form-control">
             </div>
         </div>
 
