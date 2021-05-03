@@ -34,8 +34,8 @@ class CreateTypeBagHourRequest extends FormRequest
         
         return [
             
-            'name' => 'required||unique:type_bag_hours',
-            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'name' => 'required|unique:type_bag_hours|max:50',
+            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/|max:10',
             'description' => 'max:400'
                 
         ];

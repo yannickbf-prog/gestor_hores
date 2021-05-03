@@ -30,7 +30,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('Logo') }}:</strong><br>
+            <strong>{{ __('message.logo') }}:</strong><br>
             @if($company->img_logo != null)
             <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
             @else
@@ -70,7 +70,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('message.website') }}:</strong><span> @if($company->website != null) {{ $company->website }} @else {{__('message.no_website_available')}} @endif</span>
+            <strong>{{ __('message.website') }}:</strong><span> @if($company->website != null) <a href="{{ "//".$company->website }}" target="_blank">{{ $company->website }}</a> @else {{__('message.no_website_available')}} @endif</span>
         </div>
     </div>
 </div>

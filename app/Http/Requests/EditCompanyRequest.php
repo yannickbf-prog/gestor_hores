@@ -37,11 +37,18 @@ class EditCompanyRequest extends FormRequest
             'img_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'work_sector' => 'required|max:70',
             'description' => 'max:400',
-            'email' => 'email|max:50',
-            'phone' => 'numeric||min:100000000||max:100000000000000',
-            'website' => 'nullable|url|max:50',
+            'email' => 'nullable|email|max:50',
+            'phone' => 'nullable|numeric|min:100000000|max:100000000000000',
+            'website' => 'nullable|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/|max:50',
             'default_lang' => 'required|min:2|max:2'
         ];
     }
-    
+    public function messages() 
+    {
+        return [
+            'phone.numeric' => __('message.phone_numeric'),
+            'phone.min' => __('message.phone_min'),
+            'phone.max' => __('message.phone_max')
+        ];
+    }
 }

@@ -34,8 +34,8 @@ class CreateCustomerRequest extends FormRequest
         
         return [
             
-            'name' => 'unique:customers||required',
-            'email' => 'unique:customers||required||email',
+            'name' => 'unique:customers||required||max:50',
+            'email' => 'unique:customers||required||email||max:50',
             'phone' => 'unique:customers||required||numeric||min:100000000||max:100000000000000',
             'description' => 'max:400'
         
@@ -45,6 +45,7 @@ class CreateCustomerRequest extends FormRequest
     public function messages() 
     {
         return [
+            'phone.numeric' => __('message.phone_numeric'),
             'phone.min' => __('message.phone_min'),
             'phone.max' => __('message.phone_max')
         ];

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EditCompanyRequest;
 use File;
+use App;
 
 class CompanyController extends Controller {
 
@@ -118,15 +119,19 @@ class CompanyController extends Controller {
         //
     }
     
-    public function destroyLogo() {
+    public function destroyLogo($lang) {
+        App::setLocale($lang);
+        
         $company = DB::table('company')->where('id', 1);
+        
         if(File::exists(public_path("/storage/".$company->value('img_logo')))){
             File::delete(public_path("/storage/".$company->value('img_logo')));
         }
+        
         $company->update(['img_logo' => null]);
         
-        return redirect()->route('es_company_info.index')
-                        ->with('success', __('message.company') . " " . __('message.updated_f'));
+        return redirect()->route($lang.'_company_info.index')
+                        ->with('success', __('message.logo') . " " . __('message.deleted'));
     }
 
 }

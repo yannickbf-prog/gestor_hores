@@ -34,8 +34,8 @@ class EditTypeBagHourRequest extends FormRequest
         App::setLocale($this->lang);
         
         return [
-            'name' => ['required', Rule::unique('type_bag_hours')->ignore($this->typeBagHour->id)],
-            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'name' => ['required', Rule::unique('type_bag_hours')->ignore($this->typeBagHour->id), 'max:50'],
+            'hour_price' => 'required|regex:/^\d+(\.\d{1,2})?$/|max:10',
             'description' => 'max:400'
         ];
     }

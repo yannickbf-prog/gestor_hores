@@ -46,7 +46,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Control panel - Company info - Operations
 
-    Route::get("control-panel/company-info/destroyLogo", [CompanyController::class, 'destroyLogo'])->name('company-info.destroy_logo');
+    Route::get("control-panel/company-info/destroyLogo/lang/{lang}", [CompanyController::class, 'destroyLogo'])->name('company-info.destroy_logo');
     Route::put("control-panel/company-info/lang/{lang}", [CompanyController::class, 'update'])->name('company-info.update');
     // Control panel - Company info en
     Route::get("en/control-panel/company-info", [CompanyController::class, 'index'])->name('en_company_info.index');

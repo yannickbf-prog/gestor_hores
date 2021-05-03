@@ -39,7 +39,7 @@ return [
     'digits_between'       => ':attribute ha de tenir entre :min i :max dígits.',
     'dimensions'           => 'Les dimensions de la imatge :attribute no són vàlides.',
     'distinct'             => 'El camp :attribute té un valor duplicat.',
-    'email'                => ':attribute no és un e-mail vàlid',
+    'email'                => "L':attribute no és un e-mail vàlid",
     'ends_with'            => 'The :attribute must end with one of the following: :values.',
     'exists'               => ':attribute és invàlid.',
     'file'                 => 'El camp :attribute ha de ser un arxiu.',
@@ -140,7 +140,7 @@ return [
         'date'                  => 'data',
         'day'                   => 'dia',
         'description'           => 'descripció',
-        'email'                 => 'adreça electrònica',
+        'email'                 => "email",
         'excerpt'               => 'extracte',
         'first_name'            => 'nom',
         'gender'                => 'gènere',
@@ -164,6 +164,7 @@ return [
         'title'                 => 'títol',
         'username'              => 'usuari',
         'year'                  => 'any',
-        'img_logo'              => 'El logo'
+        'img_logo'              => 'El logotip',
+        'website'               => 'pàgina web',
     ],
 ];

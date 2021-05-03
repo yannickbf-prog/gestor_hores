@@ -73,12 +73,16 @@ return [
     'no' => 'No hi han registres de',
     'to_show' => 'per mostrar',
     
-    'no_logo_available' => 'Logo no disponible',
+    'logo' => 'Logotip',
+    'add' => 'Afegir',
+    'change' => 'Canviar',
+    'no_logo_available' => 'Logotip no disponible',
     'no_description_available' => 'Descripció no disponible',
     'no_email_available' => 'Email no disponible',
     'no_phone_available' => 'Teléfono no disponible',
     'no_website_available' => 'Pàgina web no disponible',
 
+    
     
     'create_new_type_hour_bag' => "Crear Nou Tipus de bossa d'hores",
     'hour_price' => 'Preu per hora',
@@ -102,7 +106,8 @@ return [
     'fields_are_required' => 'Els camps amb "*" són obligatoris.',
     'submit' => 'Enviar',
     
-    'phone_min' => 'El telèfon ha de tenir 9 dijitos com a mínim',
+    'phone_numeric' => 'El telèfon només pot contenir dígits sense espais ni altres caràcters',
+    'phone_min' => 'El telèfon ha de tenir 9 dijits com a mínim',
     'phone_max' => 'El telèfon no pot tindre mes de 15 dígits',
     
     

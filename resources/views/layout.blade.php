@@ -52,7 +52,7 @@ use Illuminate\Support\Facades\DB;
             .alert-success{
                 display: none;
             }
-            
+
             .logo {
                 max-width: 350px;
                 max-height: 150px;
@@ -106,7 +106,7 @@ use Illuminate\Support\Facades\DB;
 
             <div class="row">
                 <footer class="col-12 text-center">
-                    aTotArreu | Copyright @ {{ date("Y") }}
+                    {{ DB::table('company')->first()->name }} | Copyright @ {{ date("Y") }}
                 </footer>
             </div>
 
@@ -123,14 +123,17 @@ use Illuminate\Support\Facades\DB;
 
 
     <script>
-                                $(function () {
-                                    $(".datepicker").datepicker();
-                                });
+
+
+        $(function () {
+            $(".datepicker").datepicker({dateFormat: "dd/mm/yy"}).val();
+        });
     </script>
 
     <!--Used for change languajes-->
 
     <script>
+
         $.datepicker.regional['es'] = {
             closeText: 'Cerrar',
             prevText: '< Ant',
@@ -148,10 +151,8 @@ use Illuminate\Support\Facades\DB;
             showMonthAfterYear: false,
             yearSuffix: ''
         };
-        $.datepicker.setDefaults($.datepicker.regional['es']);
-        $(function () {
-            $("#fecha").datepicker();
-        });
+
+
         $.datepicker.regional["ca"] = {
             closeText: "Tancar",
             prevText: "< Ant",
@@ -204,6 +205,7 @@ use Illuminate\Support\Facades\DB;
             yearSuffix: "",
         };
         $.datepicker.setDefaults($.datepicker.regional["{{ $lang }}"]);
+
 
     </script>
 
@@ -258,7 +260,7 @@ use Illuminate\Support\Facades\DB;
             document.getElementsByClassName("close")[0].addEventListener("click", closePopover);
 
             $(".alert-success").slideDown(400);
-        
+
             $(".alert-success").delay(6000).slideUp(400, function () {
                 $(this).alert('close');
             });

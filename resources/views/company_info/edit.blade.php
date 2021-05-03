@@ -38,7 +38,7 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>{{__('Logo')}}:</strong>
+                <strong>{{__('message.logo')}}:</strong>
                 @if($company->img_logo != null)
                 <br>
                 <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
@@ -50,28 +50,28 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }}</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ __("message.logo") }}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} ?
+                                {{ __('message.confirm') }} <b>{{ __('message.delete') }}</b> {{ __('message.the') }} {{ __("message.logo") }} ?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                <a href="{{ route('company-info.destroy_logo') }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ route('company-info.destroy_logo', $lang) }}" class="btn btn-success">{{__('message.delete')}}</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <br>
-                <span><b>Change logo</b></span>
+                <span><b>{{__('message.change')}} {{__('message.logo')}}</b></span>
                 @else
-                <span>No logo</span>
+                <span>{{__('message.no_logo_available')}}</span>
                 <br>
-                <span><b>Add logo</b></span>
+                <span><b>{{__('message.add')}} {{__('message.logo')}}</b></span>
                 @endif
                 
                 <input type="file" name="img_logo" class="form-control">
@@ -112,7 +112,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{__('message.website')}}:</strong>
-                <input type="text" name="website" value="{{old('website', $company->website)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Website')}}">
+                <input type="text" name="website" value="{{old('website', $company->website)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.website')}}">
             </div>
         </div>
 

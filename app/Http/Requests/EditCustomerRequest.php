@@ -34,10 +34,18 @@ class EditCustomerRequest extends FormRequest
         App::setLocale($this->lang);
         
         return [
-            'name' => ['required', Rule::unique('customers')->ignore($this->customer->id)],
-            'email' => ['required','email',Rule::unique('customers')->ignore($this->customer->id)],
+            'name' => ['required', Rule::unique('customers')->ignore($this->customer->id), 'max:50'],
+            'email' => ['required','email',Rule::unique('customers')->ignore($this->customer->id), 'max:50'],
             'phone' => ['required', 'numeric', 'min:100000000', 'max:100000000000000', Rule::unique('customers')->ignore($this->customer->id)],
             'description' => 'max:400'
+        ];
+    }
+    public function messages() 
+    {
+        return [
+            'phone.numeric' => __('message.phone_numeric'),
+            'phone.min' => __('message.phone_min'),
+            'phone.max' => __('message.phone_max')
         ];
     }
 }

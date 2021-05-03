@@ -74,7 +74,10 @@ return [
     'no' => 'No hay registros de',
     'to_show' => 'para mostrar',
     
-    'no_logo_available' => 'Logo no disponible',
+    'logo' => 'Logotipo',
+    'add' => 'Añadir',
+    'change' => 'Cambiar',
+    'no_logo_available' => 'Logotipo no disponible',
     'no_description_available' => 'Descripción no disponible',
     'no_email_available' => 'Email no disponible',
     'no_phone_available' => 'Telèfon no disponible',
@@ -100,6 +103,7 @@ return [
     'fields_are_required' => 'Los campos con "*" son obligatorios.',
     'submit' => 'Enviar',
     
+    'phone_numeric' => 'El teléfono solo puede contener dígitos sin espacios ni otros caracteres',
     'phone_min' => 'El telefono tiene que tener 9 dijitos como minimo',
     'phone_max' => 'El telefono no puede tener mas de 15 dijitos',
     

@@ -73,6 +73,9 @@ return [
     'no' => 'No',
     'to_show' => 'records to display',
 
+    'logo' => 'Logo',
+    'add' => 'Add',
+    'change' => 'Change',
     'no_logo_available' => 'Logo not available',
     'no_description_available' => 'Description not available',
     'no_email_available' => 'Email not available',
@@ -103,6 +106,7 @@ return [
     'fields_are_required' => 'Fields with "*" are required.',
     'submit' => 'Submit',
     
+    'phone_numeric' => 'The phone can only contain digits without spaces or other characters',
     'phone_min' => 'Phone must have 9 digits minimum',
     'phone_max' => 'The phone cannot have more than 15 digits'
 ];
