@@ -34,7 +34,7 @@
             @if($company->img_logo != null)
             <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
             @else
-            <span>No logo</span>
+            <span>{{ __('message.no_logo_available') }}</span>
             @endif
         </div>
     </div>
@@ -49,28 +49,28 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('message.description') }}:</strong><p> {{ $company->description }}</p>
+            <strong>{{ __('message.description') }}:</strong><p> @if($company->description != null) {{ $company->description }} @else {{ __('message.no_description_available')}} @endif</p>
         </div>
     </div>
 </div>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('message.email') }}:</strong><span> {{ $company->email }}</span>
+            <strong>{{ __('message.email') }}:</strong><span> @if($company->email != null) {{ $company->email }} @else {{ __('message.no_email_available')}} @endif</span>
         </div>
     </div>
 </div>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('message.phone') }}:</strong><span> {{ $company->phone }}</span>
+            <strong>{{ __('message.phone') }}:</strong><span> @if($company->phone != null) {{ $company->phone }} @else {{__('message.no_phone_available')}} @endif</span>
         </div>
     </div>
 </div>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <strong>{{ __('message.website') }}:</strong><span> {{ $company->website }}</span>
+            <strong>{{ __('message.website') }}:</strong><span> @if($company->website != null) {{ $company->website }} @else {{__('message.no_website_available')}} @endif</span>
         </div>
     </div>
 </div>

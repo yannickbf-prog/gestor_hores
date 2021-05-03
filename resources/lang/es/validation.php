@@ -166,5 +166,6 @@ return [
         'title'                 => 'título',
         'username'              => 'usuario',
         'year'                  => 'año',
+        'img_logo'              => 'El logo'
     ],
 ];

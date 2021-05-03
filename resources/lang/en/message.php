@@ -73,6 +73,12 @@ return [
     'no' => 'No',
     'to_show' => 'records to display',
 
+    'no_logo_available' => 'Logo not available',
+    'no_description_available' => 'Description not available',
+    'no_email_available' => 'Email not available',
+    'no_phone_available' => 'Phone not available',
+    'no_website_available' => 'Website not available',
+
     
     'create_new_type_hour_bag' => 'Create New Type of hour bag',
     'hour_price' => 'Hour price',

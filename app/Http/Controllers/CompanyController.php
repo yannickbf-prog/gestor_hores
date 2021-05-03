@@ -6,6 +6,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EditCompanyRequest;
+use File;
 
 class CompanyController extends Controller {
 
@@ -15,13 +16,13 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        
+
         $lang = setGetLang();
 
         $company = DB::table('company')->first();
-            
+
         $data_counts = [
-            'customers_count' => DB::table('customers')->count(), 
+            'customers_count' => DB::table('customers')->count(),
             'types_hour_bags_count' => DB::table('type_bag_hours')->count()
         ];
 
@@ -64,11 +65,11 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit() {
-        
+
         $lang = setGetLang();
-        
+
         $company = DB::table('company')->first();
-        
+
         return view('company_info.edit', compact('company'), compact('lang'));
     }
 
@@ -80,24 +81,31 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(EditCompanyRequest $request, $lang) {
-        /*$company = DB::table('company')->where('id', 1);
-        if($request->img_logo )
-        $imageName = 'logo.'.$request->img_logo->extension();  
-        $request->img_logo->storeAs('public', $imageName);
+        $company = DB::table('company')->where('id', 1);
         
-        DB::transaction(function() use ($request, $company, $imageName)
-        {
-            $company->update($request->validated());
-        
-            $company->update(['img_logo' => $imageName]); 
-        });
-                
-        return redirect()->route($lang.'_company_info.index')
-                        ->with('success', __('message.company')." ".$request->name." ".__('message.updated_f'));*/
-        
-        if($request->img_logo == ""){
-            return true; 
+        if ($request->img_logo == "") {
+            $company->update($request->validated(), ['except' => ['img_logo'] ]);
         }
+        else{
+            
+            if(File::exists(public_path("/storage/".$company->value('img_logo')))){
+                File::delete(public_path("/storage/".$company->value('img_logo')));
+            }
+            
+            $imageName = 'logo.' . $request->img_logo->extension();
+            $request->img_logo->storeAs('public', $imageName);
+            
+          
+            DB::transaction(function() use ($request, $company, $imageName) {
+                $company->update($request->validated());
+
+                $company->update(['img_logo' => $imageName]);
+            });
+        }
+        
+
+        return redirect()->route($lang . '_company_info.index')
+                        ->with('success', __('message.company') . " " . $request->name . " " . __('message.updated_f'));
     }
 
     /**
@@ -108,6 +116,17 @@ class CompanyController extends Controller {
      */
     public function destroy(Company $company) {
         //
+    }
+    
+    public function destroyLogo() {
+        $company = DB::table('company')->where('id', 1);
+        if(File::exists(public_path("/storage/".$company->value('img_logo')))){
+            File::delete(public_path("/storage/".$company->value('img_logo')));
+        }
+        $company->update(['img_logo' => null]);
+        
+        return redirect()->route('es_company_info.index')
+                        ->with('success', __('message.company') . " " . __('message.updated_f'));
     }
 
 }

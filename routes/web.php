@@ -34,8 +34,8 @@ Route::get('change/lang', [LocalizationController::class, "lang_change"])->name(
 //Route::resource('customers', CustomerController::class);
 //Route::resource('type-bag-hours', TypeBagHourController::class);
 
-    Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
-    Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
+    //Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
+    //Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
 
 //Routes protected for admin user
 Route::group(['middleware' => 'admin'], function () {
@@ -46,7 +46,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Control panel - Company info - Operations
 
-    
+    Route::get("control-panel/company-info/destroyLogo", [CompanyController::class, 'destroyLogo'])->name('company-info.destroy_logo');
     Route::put("control-panel/company-info/lang/{lang}", [CompanyController::class, 'update'])->name('company-info.update');
     // Control panel - Company info en
     Route::get("en/control-panel/company-info", [CompanyController::class, 'index'])->name('en_company_info.index');

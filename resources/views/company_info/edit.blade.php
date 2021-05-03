@@ -18,14 +18,14 @@
 </div>
 @endif
 
-<div class="alert alert-success mt-2">
+<div class="alert alert-info mt-2">
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
 <form action="{{ route('company-info.update', $lang) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    
+
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -33,22 +33,47 @@
                 <input type="text" name="name" value="{{old('name', $company->name)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.name')}}">
             </div>
         </div>
-        
-       
-        
+
+
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>{{__('Logo')}}:</strong><br>
+                <strong>{{__('Logo')}}:</strong>
                 @if($company->img_logo != null)
+                <br>
                 <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
-               
-                    <a class="btn btn-danger" href="#">Delete logo</a>
-
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    {{ __('message.delete') }}
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                <a href="{{ route('company-info.destroy_logo') }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+                <span><b>Change logo</b></span>
                 @else
                 <span>No logo</span>
-                @endif
                 <br>
-                <span><b>Add/change logo</b></span>
+                <span><b>Add logo</b></span>
+                @endif
+                
                 <input type="file" name="img_logo" class="form-control">
             </div>
         </div>
@@ -74,23 +99,23 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*{{__('message.email')}}:</strong>
+                <strong>{{__('message.email')}}:</strong>
                 <input type="text" name="email" value="{{old('email', $company->email)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.email')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*{{__('message.phone')}}:</strong>
+                <strong>{{__('message.phone')}}:</strong>
                 <input type="text" name="phone" value="{{old('phone', $company->phone)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.phone')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>*{{__('message.website')}}:</strong>
+                <strong>{{__('message.website')}}:</strong>
                 <input type="text" name="website" value="{{old('website', $company->website)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('Website')}}">
             </div>
         </div>
-       
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <label for="defaultLang"><strong>*{{__('message.default_lang')}}</strong></label>
@@ -101,7 +126,7 @@
                 </select>
             </div>
         </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
         </div>
     </div>

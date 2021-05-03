@@ -73,6 +73,13 @@ return [
     'no' => 'No hi han registres de',
     'to_show' => 'per mostrar',
     
+    'no_logo_available' => 'Logo no disponible',
+    'no_description_available' => 'Descripció no disponible',
+    'no_email_available' => 'Email no disponible',
+    'no_phone_available' => 'Teléfono no disponible',
+    'no_website_available' => 'Pàgina web no disponible',
+
+    
     'create_new_type_hour_bag' => "Crear Nou Tipus de bossa d'hores",
     'hour_price' => 'Preu per hora',
     'hour_format' => "El preu ha de tenir el següent format: 20, 2000, 20.25 o 20,25 (valors d'exemple).",

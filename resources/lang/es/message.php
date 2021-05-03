@@ -73,7 +73,12 @@ return [
     'close' => 'Cerrar',
     'no' => 'No hay registros de',
     'to_show' => 'para mostrar',
-
+    
+    'no_logo_available' => 'Logo no disponible',
+    'no_description_available' => 'Descripción no disponible',
+    'no_email_available' => 'Email no disponible',
+    'no_phone_available' => 'Telèfon no disponible',
+    'no_website_available' => 'Sitio web no disponible',
     
     'create_new_type_hour_bag' => "Crear Nuevo Tipo de bolsa de horas",
     'hour_price' => 'Precio por hora',
@@ -84,8 +89,6 @@ return [
 
     
     'bag_hour_type_list' => "Lista de tipos de bolsas de horas",
-
-    'no_description' => 'Sin descripción',
     
     'confirm' => 'Estas seguro que quieres',
     'the' => 'el',
