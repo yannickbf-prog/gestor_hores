@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\HomeContoller;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -33,6 +34,8 @@ Route::get('change/lang', [LocalizationController::class, "lang_change"])->name(
 //Route::resource('customers', CustomerController::class);
 //Route::resource('type-bag-hours', TypeBagHourController::class);
 
+    Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
+    Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
 
 //Routes protected for admin user
 Route::group(['middleware' => 'admin'], function () {
@@ -42,6 +45,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
 
     // Control panel - Company info - Operations
+
+    
     Route::put("control-panel/company-info/lang/{lang}", [CompanyController::class, 'update'])->name('company-info.update');
     // Control panel - Company info en
     Route::get("en/control-panel/company-info", [CompanyController::class, 'index'])->name('en_company_info.index');
