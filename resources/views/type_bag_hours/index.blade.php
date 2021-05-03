@@ -179,3 +179,6 @@
     {!! $data->links() !!} 
 </div>
 @endsection
+@section('js')
+    <script type="text/javascript" src="{{ URL::asset('js/hour_bag_types_index.js') }}"></script>
+@endsection

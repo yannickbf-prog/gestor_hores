@@ -11,55 +11,10 @@ use Illuminate\Support\Facades\DB;
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
 
-        <style>
-
-            #app{
-                width: 95%;
-                margin: auto;
-            }
-
-            svg{
-                width: 20px;
-                height: 20px;
-            }
-
-            #paginationContainer > nav{
-                display: flex;
-                justify-content: space-between;
-            }
-
-            #paginationContainer > nav > div{
-                width: 50%;
-            }
-
-            #paginationContainer > nav > div:nth-child(2){
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-            }
-
-            #paginationContainer > nav > div:nth-child(2) > div:first-child{
-                order: 2;
-                margin-top: 10px;
-            }
-
-            #datePopover{
-                opacity: 0;
-                transition: opacity .3s;
-            }
-
-            .alert-success{
-                display: none;
-            }
-
-            .logo {
-                max-width: 350px;
-                max-height: 150px;
-            }
-        </style>
-
-
+        
     </head>
 
     <body>
@@ -121,20 +76,14 @@ use Illuminate\Support\Facades\DB;
     <!-- Datapiker ui -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-    <script>
-
-
+    
+    <script type="text/javascript">
         $(function () {
             $(".datepicker").datepicker({dateFormat: "dd/mm/yy"}).val();
         });
-    </script>
-
-    <!--Used for change languajes-->
-
-    <script>
-
-        $.datepicker.regional['es'] = {
+        
+        
+         $.datepicker.regional['es'] = {
             closeText: 'Cerrar',
             prevText: '< Ant',
             nextText: 'Sig >',
@@ -204,12 +153,9 @@ use Illuminate\Support\Facades\DB;
             showMonthAfterYear: false,
             yearSuffix: "",
         };
+        
         $.datepicker.setDefaults($.datepicker.regional["{{ $lang }}"]);
-
-
-    </script>
-
-    <script type="text/javascript">
+        
         var url = "{{ route('LangChange') }}";
         $(".Langchange").change(function () {
             let currentRoute = "{{ Route::currentRouteName() }}";
@@ -218,58 +164,7 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
 
-    <script>
-
-
-        //Show hide dates popover
-        var displayPopover = 1;
-        function togglePopover() {
-
-            if (displayPopover % 2 === 0) {
-                document.getElementById("datePopover").style.opacity = 0;
-
-                setTimeout(function () {
-                    document.getElementById("datePopover").classList.remove("visible");
-                    document.getElementById("datePopover").classList.add("invisible");
-                }, 300);
-
-            } else {
-                document.getElementById("datePopover").classList.remove("invisible");
-                document.getElementById("datePopover").classList.add("visible");
-                document.getElementById("datePopover").style.opacity = 1;
-
-            }
-            displayPopover++;
-        }
-
-        function closePopover() {
-            document.getElementById("datePopover").style.opacity = 0;
-
-            setTimeout(function () {
-                document.getElementById("datePopover").classList.remove("visible");
-                document.getElementById("datePopover").classList.add("invisible");
-            }, 300);
-
-            displayPopover = 1;
-        }
-
-
-
-        window.onload = function () {
-            document.getElementById("datePopoverBtn").addEventListener("click", togglePopover);
-            document.getElementsByClassName("close")[0].addEventListener("click", closePopover);
-
-            $(".alert-success").slideDown(400);
-
-            $(".alert-success").delay(6000).slideUp(400, function () {
-                $(this).alert('close');
-            });
-
-        };
-
-
-    </script>
-
+     @yield('js')
 
 
 </html>

@@ -196,3 +196,6 @@
     {!! $data->links() !!} 
 </div>
 @endsection
+@section('js')
+    <script type="text/javascript" src="{{ URL::asset('js/customer_index.js') }}"></script>
+@endsection

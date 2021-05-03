@@ -104,3 +104,7 @@
 </div>
 
 @endsection
+
+@section('js')
+    <script type="text/javascript" src="{{ URL::asset('js/company_info_index.js') }}"></script>
+@endsection
