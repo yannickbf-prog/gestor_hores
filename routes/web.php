@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\HomeContoller;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TypeBagHourController;
+
 use App\Http\Controllers\LocalizationController;
 //use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\DB;
@@ -60,8 +62,9 @@ Route::group(['middleware' => 'admin'], function () {
     // Control panel - Users - Operations
     
     // Control panel - Users - en
-    
-    // Control panel - Users - es
+    Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');
+    Route::get("en/control-panel/users/create", [UserController::class, 'index'])->name('en_users.create');
+    // Control panel - Users - en/control-panel/userses
     
     // Control panel - Users - ca
     
