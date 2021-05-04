@@ -76,95 +76,25 @@ use Illuminate\Support\Facades\DB;
     <!-- Datapiker ui -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <!--Here we add js code of the page if any -->
+    @yield('js')
     
+    <!-- We put here the code was need php variables -->
     <script type="text/javascript">
-        $(function () {
-            $(".datepicker").datepicker({dateFormat: "dd/mm/yy"}).val();
-        });
-        
-        
-         $.datepicker.regional['es'] = {
-            closeText: 'Cerrar',
-            prevText: '< Ant',
-            nextText: 'Sig >',
-            currentText: 'Hoy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-            weekHeader: 'Sm',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-        };
-
-
-        $.datepicker.regional["ca"] = {
-            closeText: "Tancar",
-            prevText: "< Ant",
-            nextText: "Seg >",
-            currentText: "Hoy",
-            monthNames: [
-                "Gener",
-                "Febrer",
-                "Març",
-                "Abril",
-                "Maig",
-                "Juny",
-                "Juliol",
-                "Agost",
-                "Septembre",
-                "Octubre",
-                "Novembre",
-                "Desembre",
-            ],
-            monthNamesShort: [
-                "Gen",
-                "Feb",
-                "Mar",
-                "Abr",
-                "Mai",
-                "Jun",
-                "Jul",
-                "Ago",
-                "Sep",
-                "Oct",
-                "Nov",
-                "Dec",
-            ],
-            dayNames: [
-                "Diumenje",
-                "Dilluns",
-                "Dimarts",
-                "Dimecres",
-                "Dijous",
-                "Divendres",
-                "Dissabte",
-            ],
-            dayNamesShort: ["Diu", "Dil", "Dim", "Dme", "Dij", "Div", "Dis"],
-            dayNamesMin: ["Di", "Dl", "Dm", "Dc", "Dj", "Dv", "Ds"],
-            weekHeader: "Sm",
-            dateFormat: "dd/mm/yy",
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: "",
-        };
-        
+        <!-- We pass the lang value into datepiker -->
         $.datepicker.setDefaults($.datepicker.regional["{{ $lang }}"]);
         
+        <!-- This code is used to change lang and go to the same page we are but now in other lang-->
         var url = "{{ route('LangChange') }}";
         $(".Langchange").change(function () {
             let currentRoute = "{{ Route::currentRouteName() }}";
-            let id = "@if(isset($customer)){{ $customer->id }} @else{{'noid'}} @endif";
+            <!-- We need the id if we are editing an item or viewing an item to go to the same page -->
+            let id = "@if(isset($customer)){{ $customer->id }} @elseif(isset($typeBagHour)){{ $typeBagHour->id }} @else{{'noid'}} @endif";
             window.location.href = url + "?langToDisplay=" + $(this).val() + "&currentRoute=" + currentRoute + "&id=" + id;
         });
     </script>
 
-     @yield('js')
+     
 
 
 </html>

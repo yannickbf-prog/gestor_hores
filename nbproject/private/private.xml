@@ -12,10 +12,14 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/index.blade.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/company_info/index.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateCustomerRequest.php</file>
+            <file>file:/var/www/gestor_hores/database/migrations/2021_04_01_125130_create_customers_table.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/EditCompanyRequest.php</file>
+            <file>file:/var/www/gestor_hores/database/migrations/2021_04_01_140855_create_type_bag_hours_table.php</file>
+            <file>file:/var/www/gestor_hores/routes/auth.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
-            <file>file:/var/www/gestor_hores/app/Http/Controllers/CompanyController.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateTypeBagHourRequest.php</file>
+            <file>file:/var/www/gestor_hores/database/migrations/2021_04_01_162628_create_company_table.php</file>
         </group>
     </open-files>
 </project-private>

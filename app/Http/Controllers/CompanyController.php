@@ -130,7 +130,8 @@ class CompanyController extends Controller {
         
         $company->update(['img_logo' => null]);
         
-        return redirect()->route($lang.'_company_info.index')
+        
+        return redirect()->back()
                         ->with('success', __('message.logo') . " " . __('message.deleted'));
     }
 

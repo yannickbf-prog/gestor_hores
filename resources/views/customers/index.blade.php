@@ -76,11 +76,11 @@
                                 </button>
                                 <div class="form-group">
                                     <strong>{{ __('message.from') }}:</strong>
-                                    <input name="date_from" type="text" class="datepicker" value="@if(session('customer_date_from') != ''){{session('customer_date_from')}}@endif">
+                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('customer_date_from') != ''){{session('customer_date_from')}}@endif">
                                 </div>
                                 <div class="form-group">
                                     <strong>{{ __('message.to') }}:</strong>
-                                    <input type="text" name="date_to" class="datepicker" value="@if(session('customer_date_to') != ''){{session('customer_date_to')}}@endif">
+                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('customer_date_to') != ''){{session('customer_date_to')}}@endif">
                                 </div>
                             </div>
                         </div>

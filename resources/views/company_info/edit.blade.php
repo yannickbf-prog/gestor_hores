@@ -3,6 +3,15 @@
 @section('title', 'Control panel - Company Info - Edit '.$company->name)
 
 @section('content')
+@if ($message = Session::get('success'))
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ $message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <div class="pull-right">
     <a class="btn btn-primary" href="{{ route($lang.'_company_info.index') }}">{{__('message.back')}}</a>
 </div>
@@ -132,4 +141,7 @@
     </div>
 
 </form>
+@endsection
+@section('js')
+    <script type="text/javascript" src="{{ URL::asset('js/company_info_edit.js') }}"></script>
 @endsection

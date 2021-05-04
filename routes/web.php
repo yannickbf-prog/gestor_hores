@@ -6,7 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\HomeContoller;
 use App\Http\Controllers\LocalizationController;
-use App\Http\Controllers\ImageUploadController;
+//use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -45,7 +45,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
 
     // Control panel - Company info - Operations
-
     Route::get("control-panel/company-info/destroyLogo/lang/{lang}", [CompanyController::class, 'destroyLogo'])->name('company-info.destroy_logo');
     Route::put("control-panel/company-info/lang/{lang}", [CompanyController::class, 'update'])->name('company-info.update');
     // Control panel - Company info en
@@ -58,6 +57,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/informacio-empresa", [CompanyController::class, 'index'])->name('ca_company_info.index');
     Route::get("ca/panell-de-control/informacio-empresa/editar", [CompanyController::class, 'edit'])->name('ca_company_info.edit');
 
+    // Control panel - Users - Operations
+    
+    // Control panel - Users - en
+    
+    // Control panel - Users - es
+    
+    // Control panel - Users - ca
+    
+    
     // Control panel - Customers - Operations
     Route::post("control-panel/customers/lang/{lang}", [CustomerController::class, 'store'])->name('customers.store');
     Route::put("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'update'])->name('customers.update');
