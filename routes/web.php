@@ -60,10 +60,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/informacio-empresa/editar", [CompanyController::class, 'edit'])->name('ca_company_info.edit');
 
     // Control panel - Users - Operations
-    
+    Route::post('control-panel/users/delete_filters/', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
     // Control panel - Users - en
     Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');
-    Route::get("en/control-panel/users/create", [UserController::class, 'index'])->name('en_users.create');
+    //Route::get("en/control-panel/users/create", [UserController::class, 'create'])->name('en_users.create');
     // Control panel - Users - en/control-panel/userses
     
     // Control panel - Users - ca

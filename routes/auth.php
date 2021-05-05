@@ -10,12 +10,19 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('en/control-panel/users/create', [RegisteredUserController::class, 'create'])
+        ->middleware('admin')
+        ->name('en_users.create');
+/*Route::get('/register', [RegisteredUserController::class, 'create'])
+        ->middleware('admin')
+        ->name('register');
 Route::get('/register', [RegisteredUserController::class, 'create'])
-                ->middleware('admin')
-                ->name('register');
+        ->middleware('admin')
+        ->name('register');*/
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
-                ->middleware('admin');
+                ->middleware('admin')
+                ->name('users.store');
 
 Route::get('en/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')

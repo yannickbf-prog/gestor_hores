@@ -19,7 +19,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $lang = setGetLang();
+        
+        return view('auth.register', compact('lang'));
     }
 
     /**
