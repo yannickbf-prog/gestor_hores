@@ -74,6 +74,9 @@ use Illuminate\Support\Facades\DB;
 
     <!-- Datapiker ui -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+            
+    <script src="https://unpkg.com/sticky-table-headers"></script>
 
     <!--Here we add js code of the page if any -->
     @yield('js')
@@ -93,7 +96,10 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
 
-     
+    <script>
+
+        $('table').stickyTableHeaders({cacheHeaderHeight: true});
+    </script>
 
 
 </html>
