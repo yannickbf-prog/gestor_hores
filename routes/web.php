@@ -60,14 +60,19 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/informacio-empresa/editar", [CompanyController::class, 'edit'])->name('ca_company_info.edit');
 
     // Control panel - Users - Operations
+    Route::put("control-panel/users/{user}/lang/{lang}", [UserController::class, 'update'])->name('users.update');
     Route::post('control-panel/users/delete_filters/', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
     // Control panel - Users - en
     Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');
-    //Route::get("en/control-panel/users/create", [UserController::class, 'create'])->name('en_users.create');
+    
+    Route::get("en/control-panel/users/{user}/edit", [UserController::class, 'edit'])->name('en_users.edit');
+    Route::get("es/panel-de-control/usuarios/{user}/editar", [UserController::class, 'edit'])->name('es_users.edit');
+    Route::get("ca/panell-de-control/usuaris/{user}/editar", [UserController::class, 'edit'])->name('ca_users.edit');
+    
     // Control panel - Users - en/control-panel/userses
-    
+    Route::get("es/panel-de-control/usuarios", [UserController::class, 'index'])->name('es_users.index');
     // Control panel - Users - ca
-    
+    Route::get("ca/panell-de-control/usuaris", [UserController::class, 'index'])->name('ca_users.index');
     
     // Control panel - Customers - Operations
     Route::post("control-panel/customers/lang/{lang}", [CustomerController::class, 'store'])->name('customers.store');

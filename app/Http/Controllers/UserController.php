@@ -117,7 +117,9 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user) {
-        //
+        $lang = setGetLang();
+        
+        return view('users.edit', compact('user'), compact('lang'));
     }
 
     /**
@@ -127,8 +129,18 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user) {
-        //
+    public function update(Request $request, User $user, $lang) {
+        
+        $user->update($request->validated([
+            'nickname' => 'unique:users',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'unique:users',
+            'password' => 'required|string|confirmed|min:8',
+        ]));
+        
+        return redirect()->route($lang.'_users.index')
+                        ->with('success', __('message.user')." ".$request->name." ".__('message.updated'));
     }
 
     /**

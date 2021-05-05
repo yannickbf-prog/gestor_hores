@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('en/control-panel/users/create', [RegisteredUserController::class, 'create'])
         ->middleware('admin')
         ->name('en_users.create');
-/*Route::get('/register', [RegisteredUserController::class, 'create'])
-        ->middleware('admin')
-        ->name('register');
-Route::get('/register', [RegisteredUserController::class, 'create'])
-        ->middleware('admin')
-        ->name('register');*/
 
-Route::post('/register', [RegisteredUserController::class, 'store'])
+Route::get('es/panel-de-control/usuarios/crear', [RegisteredUserController::class, 'create'])
+        ->middleware('admin')
+        ->name('es_users.create');
+
+Route::get('ca/panell-de-control/usuaris/crear', [RegisteredUserController::class, 'create'])
+        ->middleware('admin')
+        ->name('ca_users.create');
+
+Route::post('control-panel/usuarios/lang/{lang}', [RegisteredUserController::class, 'store'])
                 ->middleware('admin')
                 ->name('users.store');
 
