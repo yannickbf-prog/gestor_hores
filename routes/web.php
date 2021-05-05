@@ -64,6 +64,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('control-panel/users/delete_filters/', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
     // Control panel - Users - en
     Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');
+        // Control panel - Users - en/control-panel/userses
+    Route::get("es/panel-de-control/usuarios", [UserController::class, 'index'])->name('es_users.index');
+    // Control panel - Users - ca
+    Route::get("ca/panell-de-control/usuaris", [UserController::class, 'index'])->name('ca_users.index');
+    
     
     Route::get("en/control-panel/users/{user}/edit", [UserController::class, 'edit'])->name('en_users.edit');
     Route::get("es/panel-de-control/usuarios/{user}/editar", [UserController::class, 'edit'])->name('es_users.edit');

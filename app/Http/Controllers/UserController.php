@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\EditUserRequest;
 
 class UserController extends Controller {
 
@@ -129,15 +130,9 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user, $lang) {
+    public function update(EditUserRequest $request, User $user, $lang) {
         
-        $user->update($request->validated([
-            'nickname' => 'unique:users',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'unique:users',
-            'password' => 'required|string|confirmed|min:8',
-        ]));
+        $user->update($request->validated());
         
         return redirect()->route($lang.'_users.index')
                         ->with('success', __('message.user')." ".$request->name." ".__('message.updated'));
