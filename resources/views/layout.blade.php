@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\DB;
         
         <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
         
+        
+        <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+       <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/sticky-header/bootstrap-table-sticky-header.css" rel="stylesheet">
+        
     </head>
 
     <body>
@@ -77,6 +81,12 @@ use Illuminate\Support\Facades\DB;
     
             
     <script src="https://unpkg.com/sticky-table-headers"></script>
+    
+    
+    
+    
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
 
     <!--Here we add js code of the page if any -->
     @yield('js')
@@ -98,7 +108,7 @@ use Illuminate\Support\Facades\DB;
 
     <script>
 
-        $('table').stickyTableHeaders({cacheHeaderHeight: true});
+        $('table').stickyTableHeaders();
     </script>
 
 

@@ -146,10 +146,13 @@
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
 </form>
 
-<table class="table table-bordered">
+<table class="table table-bordered" style="margin-top: 10px">
     @if (count($data) > 0)
+    
     <thead class="" style="top: 20px">
+        
         <tr class="thead-light" style="border-bottom: 1px solid blue;">
+    
             <th>Nº</th>
             <th>{{ __('message.username') }}</th>
             <th>{{ __('message.name') }}</th>
@@ -162,7 +165,7 @@
             <th>{{ __('message.action') }}</th>
         </tr>
     </thead>
-    
+
     @endif
     @forelse ($data as $key => $value)
     <tr>
@@ -203,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </td>
     </tr>
@@ -212,7 +215,9 @@
     @endforelse
 
 </table> 
+
+
 @endsection
 @section('js')
-    <script type="text/javascript" src="{{ URL::asset('js/users_index.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/users_index.js') }}"></script>
 @endsection
