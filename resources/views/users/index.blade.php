@@ -145,20 +145,27 @@
     <input type="hidden" name="lang" value="{{ $lang }}">
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
 </form>
+
 <table class="table table-bordered">
     @if (count($data) > 0)
-    <tr>
-        <th>Nº</th>
-        <th>{{ __('message.username') }}</th>
-        <th>{{ __('message.name') }}</th>
-        <th>{{ __('message.surname') }}</th>
-        <th>{{ __('message.email') }}</th>
-        <th>{{ __('message.phone') }}</th>
-        <th>{{ __('message.description') }}</th>
-        <th>{{ __('message.role') }}</th>
-        <th>{{ __('message.created_at') }}</th>
-        <th>{{ __('message.action') }}</th>
-    </tr>
+    <thead class="sticky-top">
+        <tr style="background-color: green">
+            <td></td>
+        </tr>
+        <tr style="background-color: blue">
+            <th>Nº</th>
+            <th>{{ __('message.username') }}</th>
+            <th>{{ __('message.name') }}</th>
+            <th>{{ __('message.surname') }}</th>
+            <th>{{ __('message.email') }}</th>
+            <th>{{ __('message.phone') }}</th>
+            <th>{{ __('message.description') }}</th>
+            <th>{{ __('message.role') }}</th>
+            <th>{{ __('message.created_at') }}</th>
+            <th>{{ __('message.action') }}</th>
+        </tr>
+    </thead>
+    
     @endif
     @forelse ($data as $key => $value)
     <tr>
@@ -172,8 +179,8 @@
         <td>{{ $value->role }}</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
-            <form action="{{ route('customers.destroy',[$value->id, $lang]) }}" method="POST"> 
-                <a class="btn btn-primary" href="{{ route($lang.'_customers.edit',$value->id) }}">{{ __('message.edit') }}</a>
+            <form action="{{ route('users.destroy',[$value->id, $lang]) }}" method="POST"> 
+                <a class="btn btn-primary" href="{{ route($lang.'_users.edit',$value->id) }}">{{ __('message.edit') }}</a>
                 @csrf
                 @method('DELETE')      
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\EditUserRequest;
+use Illuminate\Support\Facades\App;
 
 class UserController extends Controller {
 
@@ -144,8 +145,13 @@ class UserController extends Controller {
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user) {
-        //
+    public function destroy(User $user, $lang) {
+        App::setLocale($lang);
+        
+        $user->delete();
+
+        return redirect()->route($lang.'_users.index')
+                        ->with('success', __('message.user')." ".__('message.deleted'));
     }
 
 }
