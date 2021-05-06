@@ -13,7 +13,22 @@ use Illuminate\Support\Facades\DB;
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         
         <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
-        
+        <style>
+        .stickyElement th{
+            	position: sticky;
+            	top: 0;
+        }
+            
+         .stickyElement th::after{
+                content: '';
+                width: 100%;
+                height: 2px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background: black;
+	}
+        </style>
     </head>
 
     <body>
