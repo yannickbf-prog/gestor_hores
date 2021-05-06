@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TypeBagHourController;
+use App\Http\Controllers\EntryHoursController;
 
 use App\Http\Controllers\LocalizationController;
 //use App\Http\Controllers\ImageUploadController;
@@ -122,6 +123,8 @@ Route::group(['middleware' => 'admin'], function () {
     
     
 });
+
+Route::get("en/entry-hours", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
 
 
 Route::get('/', function () {
