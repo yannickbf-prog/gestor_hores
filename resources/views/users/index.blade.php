@@ -146,7 +146,7 @@
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
 </form>
 
-<table class="table">
+<table class="table table-striped">
     @if (count($data) > 0)
     <thead class="sticky-top table">
         <tr style="background-color: white;">
