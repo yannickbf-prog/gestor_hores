@@ -72,6 +72,14 @@ return [
     'close' => 'Close',
     'no' => 'No',
     'to_show' => 'records to display',
+    
+    'users' => 'Users',
+    "username" => "Username",
+    'surname' => 'Surnames',
+    'role' => 'Role',
+    'admin' => "Admin",
+    'worker' => "Worker",
+
 
     'logo' => 'Logo',
     'add' => 'Add',

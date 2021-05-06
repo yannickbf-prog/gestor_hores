@@ -73,6 +73,13 @@ return [
     'no' => 'No hi han registres de',
     'to_show' => 'per mostrar',
     
+    'users' => 'Usuaris',
+    "username" => "Nom d'usuari",
+    'surname' => 'Cognoms',
+    'role' => "Tipus d'usuari",
+    'admin' => "Admin",
+    'worker' => "Treballador",
+    
     'logo' => 'Logotip',
     'add' => 'Afegir',
     'change' => 'Canviar',

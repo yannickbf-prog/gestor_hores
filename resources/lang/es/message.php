@@ -74,6 +74,13 @@ return [
     'no' => 'No hay registros de',
     'to_show' => 'para mostrar',
     
+    'users' => 'Usuarios',
+    "username" => "Nombre de usuario",
+    'surname' => 'Apellido',
+    'role' => "Tipos de usuarios",
+    'admin' => "Admin",
+    'worker' => "Trabajador",
+    
     'logo' => 'Logotipo',
     'add' => 'Añadir',
     'change' => 'Cambiar',
@@ -89,6 +96,7 @@ return [
     
     'create' => 'Crear',
     'new' => 'Nuevo',
+    
 
     
     'bag_hour_type_list' => "Lista de tipos de bolsas de horas",
