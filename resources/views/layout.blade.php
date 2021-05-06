@@ -108,7 +108,7 @@ use Illuminate\Support\Facades\DB;
 
     <script>
 
-        $('table').stickyTableHeaders();
+        $('table').stickyTableHeaders({fixedOffset: 20});
     </script>
 
 

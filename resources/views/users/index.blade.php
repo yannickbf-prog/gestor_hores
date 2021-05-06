@@ -146,11 +146,13 @@
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
 </form>
 
-<table class="table table-bordered" style="margin-top: 10px">
+<table class="table">
     @if (count($data) > 0)
     
     <thead class="" style="top: 20px">
-        
+        <tr class="bg-white">
+            <td colspan="10" class="border-top-0"></td>
+        </tr>
         <tr class="thead-light" style="border-bottom: 1px solid blue;">
     
             <th>Nº</th>
