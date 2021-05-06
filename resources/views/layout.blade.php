@@ -14,20 +14,8 @@ use Illuminate\Support\Facades\DB;
         
         <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
         <style>
-        .stickyElement th{
-            	position: sticky;
-            	top: 0;
-        }
-            
-         .stickyElement th::after{
-                content: '';
-                width: 100%;
-                height: 2px;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                background: black;
-	}
+   
+         
         </style>
     </head>
 
