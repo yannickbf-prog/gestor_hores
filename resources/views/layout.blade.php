@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\DB;
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         
         <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
-        
-        
-        <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
-       <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/sticky-header/bootstrap-table-sticky-header.css" rel="stylesheet">
-        
+    
     </head>
 
     <body>
@@ -83,10 +79,7 @@ use Illuminate\Support\Facades\DB;
     <script src="https://unpkg.com/sticky-table-headers"></script>
     
     
-    
-    
-    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
+
 
     <!--Here we add js code of the page if any -->
     @yield('js')
@@ -108,7 +101,8 @@ use Illuminate\Support\Facades\DB;
 
     <script>
 
-        $('table').stickyTableHeaders({fixedOffset: 20});
+        $('table').stickyTableHeaders();
+        
     </script>
 
 
