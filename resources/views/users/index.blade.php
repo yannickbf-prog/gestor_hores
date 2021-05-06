@@ -146,13 +146,13 @@
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
 </form>
 
-<table>
+<table class="table">
     @if (count($data) > 0)
-    <thead class="sticky-top">
-        <tr style="background-color: white; border: 1px solid white">
-            <td colspan="10" style="height: 7px"></td>
+    <thead class="sticky-top table">
+        <tr style="background-color: white;">
+            <td colspan="10" style="height: 7px" class="border-top-0"></td>
         </tr>
-        <tr style="background-color: blue">
+        <tr class="thead-light border-bottom-1">
             <th>Nº</th>
             <th>{{ __('message.username') }}</th>
             <th>{{ __('message.name') }}</th>
@@ -168,7 +168,7 @@
     
     @endif
     @forelse ($data as $key => $value)
-    <tr>
+    <tr class="table-striped">
         <td>{{ ++$i }}</td>
         <td>{{ $value->nickname }}</td>
         <td>{{ $value->name }}</td>
