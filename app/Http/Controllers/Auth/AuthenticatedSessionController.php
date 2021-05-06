@@ -36,7 +36,14 @@ class AuthenticatedSessionController extends Controller
         
         $lang = $request->lang;
 
-        return redirect()->route($lang.'_home.index');
+        if(Auth::user()->isAdmin()){
+            return redirect()->route($lang.'_home.index');
+        }
+        if(Auth::user()->isUser()){
+            return redirect()->route($lang.'_entry_hours.index');;
+        }
+        
+        
     }
 
     /**

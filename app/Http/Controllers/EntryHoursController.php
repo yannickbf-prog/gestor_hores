@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\App;
 
 class EntryHoursController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('user');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -124,13 +124,20 @@ Route::group(['middleware' => 'admin'], function () {
     
 });
 
-Route::get("en/entry-hours", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
+Route::get("en/entry-hours-worked", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
+Route::get("es/entrar-horas-trabajadas", [EntryHoursController::class, 'index'])->name('es_entry_hours.index');
+Route::get("ca/entrar-hores-treballades", [EntryHoursController::class, 'index'])->name('ca_entry_hours.index');
 
 
 Route::get('/', function () {
     $default_lang = DB::table('company')->first()->default_lang;
     if (Auth::check()) {
-        return redirect()->route($default_lang . '_home.index', $default_lang);
+        if(Auth::user()->isAdmin()){
+            return redirect()->route($default_lang . '_home.index', $default_lang);
+        }
+        if(Auth::user()->isUser()){
+            return redirect()->route($default_lang . '_entry_hours.index', $default_lang);
+        }
     } else {
         return redirect()->route($default_lang . '_login');
     }
