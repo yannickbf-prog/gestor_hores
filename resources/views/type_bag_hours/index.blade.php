@@ -121,7 +121,7 @@
     </div>
 </div>
 
-<table class="table table-bordered mt-4">
+<table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
         <th>Nº</th>

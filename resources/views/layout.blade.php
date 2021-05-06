@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         
         <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" />
-    
+        
     </head>
 
     <body>
@@ -74,12 +74,6 @@ use Illuminate\Support\Facades\DB;
 
     <!-- Datapiker ui -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
-            
-    <script src="https://unpkg.com/sticky-table-headers"></script>
-    
-    
-
 
     <!--Here we add js code of the page if any -->
     @yield('js')
@@ -99,11 +93,7 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
 
-    <script>
-
-        $('table').stickyTableHeaders();
-        
-    </script>
+     
 
 
 </html>
