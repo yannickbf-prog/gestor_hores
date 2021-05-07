@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App;
-use App\Http\Requests\CreateCustomerRequest;
+use App\Http\Requests\CreateUserRequest;
 
 class RegisteredUserController extends Controller
 {
@@ -34,34 +34,12 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request,$lang)
+    public function store(CreateUserRequest $request,$lang)
     {
-        
-        
-        
         
         App::setLocale($lang);
         
-        $request->validate([
-            'nickname' => 'required|unique:users|max:20',
-            'name' => 'required|string|max:50',
-            'surname' => 'required|string|max:100',
-            'email' => 'required|string|email|max:50|unique:users',
-            'phone' => 'unique:users|numeric||min:100000000||max:100000000000000|nullable',
-            'description' => 'max:400',
-            'password' => 'required|string|min:8',
-            'role' => 'required'
-        ]);
-
-        $user = User::create([
-            'nickname' => $request->nickname,
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-            'role' => $request->role
-        ]);
+        $user = User::create($request->validated());
 
         event(new Registered($user));
 

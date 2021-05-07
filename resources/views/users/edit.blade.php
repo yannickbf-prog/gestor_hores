@@ -62,22 +62,28 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.phone')}}:</strong>
-                <input type="text" name="phone" value="{{old('phone', $user->email)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.phone')}}">
+                <input type="text" name="phone" value="{{old('phone', $user->phone)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.phone')}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{__('message.description')}}:</strong>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description', $user->description)}}</textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.password')}}:</strong>
-                <input type="text" name="password" value="{{old('password', $user->email)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.password')}}">
+                <input type="text" name="password" value="{{old('password', $user->password)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.password')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.role')}}:</strong><br><br>
                 <input type="radio" id="user" name="role" value="user" checked>
-                <label for="user">Worker</label><br>
+                <label for="user">{{ __('message.worker') }}</label><br>
                 <input type="radio" id="admin" name="role" value="admin">
-                <label for="admin">Administrator</label><br>  
+                <label for="admin">{{ __('message.admin') }}</label><br>  
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

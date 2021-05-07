@@ -37,7 +37,7 @@ class CreateUserRequest extends FormRequest
             'name' => 'required|string|max:50',
             'surname' => 'required|string|max:100',
             'email' => 'required|string|email|max:50|unique:users',
-            'phone' => 'unique:users|numeric||min:100000000||max:100000000000000',
+            'phone' => 'unique:users|numeric||min:100000000||max:100000000000000|nullable',
             'description' => 'max:400',
             'password' => 'required|string|min:8',
             'role' => 'required'
