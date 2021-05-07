@@ -79,7 +79,9 @@ return [
     'role' => 'Role',
     'admin' => "Admin",
     'worker' => "Worker",
-
+    'password' => 'Password',
+    'password_confirm' => 'Password confirm',
+    
 
     'logo' => 'Logo',
     'add' => 'Add',

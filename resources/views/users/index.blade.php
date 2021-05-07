@@ -217,7 +217,9 @@
     @endforelse
     </tbody>
 </table> 
-
+<div id="paginationContainer">
+    {!! $data->links() !!} 
+</div>
 @endsection
 @section('js')
     <script type="text/javascript" src="{{ URL::asset('js/users_index.js') }}"></script>

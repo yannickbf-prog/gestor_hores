@@ -33,11 +33,23 @@ class EditUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'nickname' => 'unique:users',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'unique:users',
+            'nickname' => 'unique:users|20',
+            'name' => 'required|string|max:50',
+            'surname' => 'required|string|max:100',
+            'email' => 'required|string|email|max:50|unique:users',
+            'phone' => 'unique:users|numeric||min:100000000||max:100000000000000',
+            'description' => 'max:400',
             'password' => 'required|string|min:8',
+            'role' => 'required'
+        ];
+    }
+    
+    public function messages() 
+    {
+        return [
+            'phone.numeric' => __('message.phone_numeric'),
+            'phone.min' => __('message.phone_min'),
+            'phone.max' => __('message.phone_max')
         ];
     }
 }

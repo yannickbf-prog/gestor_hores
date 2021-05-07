@@ -79,6 +79,8 @@ return [
     'role' => "Tipus d'usuari",
     'admin' => "Admin",
     'worker' => "Treballador",
+    'password' => 'Contrasenya',
+    'password_confirm' => 'Confirmar contrasenya',
     
     'logo' => 'Logotip',
     'add' => 'Afegir',

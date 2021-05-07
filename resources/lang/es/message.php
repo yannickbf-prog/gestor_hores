@@ -76,10 +76,12 @@ return [
     
     'users' => 'Usuarios',
     "username" => "Nombre de usuario",
-    'surname' => 'Apellido',
+    'surname' => 'Apellidos',
     'role' => "Tipos de usuarios",
     'admin' => "Admin",
     'worker' => "Trabajador",
+    'password' => 'Contraseña',
+    'password_confirm' => 'Confirmar contraseña',
     
     'logo' => 'Logotipo',
     'add' => 'Añadir',
@@ -100,6 +102,9 @@ return [
 
     
     'bag_hour_type_list' => "Lista de tipos de bolsas de horas",
+    
+    'no_description' => 'Sin descripción',
+
     
     'confirm' => 'Estas seguro que quieres',
     'the' => 'el',
