@@ -166,5 +166,7 @@ return [
         'year'                  => 'any',
         'img_logo'              => 'El logotip',
         'website'               => 'pàgina web',
+        'nickname'              => "nom d'usuari",
+        'surname'               => 'cognoms'
     ],
 ];

@@ -168,5 +168,7 @@ return [
         'year'                  => 'año',
         'img_logo'              => 'El logo',
         'website'               => 'sitio web',
+        'nickname'              => 'nombre de usuario',
+        'surname'               => 'apellidos'
     ],
 ];

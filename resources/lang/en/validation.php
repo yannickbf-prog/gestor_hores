@@ -152,7 +152,9 @@ return [
 
     'attributes' => [
         'hour_price' => 'hour price',
-        'img_logo' => 'Logo'
+        'img_logo' => 'Logo',
+        'nickname' => 'username',
+        'surname' => 'surnames'
     ],
 
 ];

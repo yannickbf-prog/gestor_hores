@@ -21,7 +21,7 @@
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
+        <li>{{ ucfirst($error) }}</li>
         @endforeach
     </ul>
 </div>

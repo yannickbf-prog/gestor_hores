@@ -77,7 +77,7 @@ return [
     'users' => 'Usuarios',
     "username" => "Nombre de usuario",
     'surname' => 'Apellidos',
-    'role' => "Tipos de usuarios",
+    'role' => "Tipo de usuario",
     'admin' => "Admin",
     'worker' => "Trabajador",
     'password' => 'Contraseña',
