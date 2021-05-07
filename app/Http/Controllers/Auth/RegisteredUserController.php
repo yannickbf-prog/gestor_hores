@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App;
-use App\Http\Requests\CreateUserRequest;
 
 class RegisteredUserController extends Controller
 {
@@ -34,10 +33,36 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(CreateUserRequest $request,$lang)
+    public function store(Request $request,$lang)
     {
-        
         App::setLocale($lang);
+        
+        $request->validate([
+            'nickname' => 'unique:users',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'unique:users',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
+
+        $user = User::create([
+            'nickname' => $request->nickname,
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            'role' => $request->role
+        ]);
+
+        event(new Registered($user));
+
+        //Auth::login($user);
+
+        return redirect(route($lang.'_users.index'))
+                ->with('success', __('message.user')." ".$request->nickname." ".__('message.created') ); 
+        
+        /*App::setLocale($lang);
         
         $user = User::create($request->validated());
 
@@ -46,6 +71,6 @@ class RegisteredUserController extends Controller
         //Auth::login($user);
 
         return redirect(route($lang.'_users.index'))
-                ->with('success', __('message.user')." ".$request->nickname." ".__('message.created') ); 
+                ->with('success', __('message.user')." ".$request->nickname." ".__('message.created') );*/ 
     }
 }
