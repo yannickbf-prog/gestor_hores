@@ -81,6 +81,7 @@ return [
     'worker' => "Treballador",
     'password' => 'Contrasenya',
     'password_confirm' => 'Confirmar contrasenya',
+    'password_edit_info' => 'Si vols canviar la contrasenya, escriu-la, si la vols deixar com estava, deixa el camp en blanc',
     
     'logo' => 'Logotip',
     'add' => 'Afegir',

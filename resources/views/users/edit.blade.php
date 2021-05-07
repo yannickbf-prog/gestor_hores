@@ -72,9 +72,20 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="alert alert-info mt-2">
+                <strong>{{__('message.password_edit_info')}}</strong>
+            </div>
+        </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.password')}}:</strong>
-                <input type="text" name="password" value="{{old('password', $user->password)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.password')}}">
+                <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password')}}">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*{{__('message.password_confirm')}}:</strong>
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password_confirmation')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

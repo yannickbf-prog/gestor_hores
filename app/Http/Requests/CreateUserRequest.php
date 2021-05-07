@@ -39,7 +39,7 @@ class CreateUserRequest extends FormRequest
             'email' => 'required|string|email|max:50|unique:users',
             'phone' => 'unique:users|numeric||min:100000000||max:100000000000000|nullable',
             'description' => 'max:400',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|max:25|confirmed',
             'role' => 'required'
         ];
     }

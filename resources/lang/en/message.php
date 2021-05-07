@@ -81,7 +81,8 @@ return [
     'worker' => "Worker",
     'password' => 'Password',
     'password_confirm' => 'Password confirm',
-    
+    'password_edit_info' => 'If you want to change the password, write it, if you want to leve the password it as it was, leave the field blank',
+
 
     'logo' => 'Logo',
     'add' => 'Add',

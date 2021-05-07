@@ -82,6 +82,8 @@ return [
     'worker' => "Trabajador",
     'password' => 'Contraseña',
     'password_confirm' => 'Confirmar contraseña',
+    'password_edit_info' => 'Si quieres cambiar la contraseña, escríbela, si la quieres dejar como estaba, deja el campo en blanco',
+
     
     'logo' => 'Logotipo',
     'add' => 'Añadir',

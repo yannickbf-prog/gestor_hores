@@ -12,19 +12,23 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/var/www/gestor_hores/resources/lang/ca/validation.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateCustomerRequest.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/CustomerController.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/customers/edit.blade.php</file>
+            <file>file:/var/www/gestor_hores/resources/lang/es/message.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateUserRequest.php</file>
             <file>file:/var/www/gestor_hores/resources/views/users/edit.blade.php</file>
+            <file>file:/var/www/gestor_hores/resources/lang/ca/message.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/UserController.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Requests/EditCustomerRequest.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Requests/EditUserRequest.php</file>
-            <file>file:/var/www/gestor_hores/public/css/styles.css</file>
-            <file>file:/var/www/gestor_hores/resources/views/users/index.blade.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/index.blade.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/auth/register.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/Auth/LoginRequest.php</file>
+            <file>file:/var/www/gestor_hores/resources/lang/en/validation.php</file>
+            <file>file:/var/www/gestor_hores/resources/lang/en/message.php</file>
             <file>file:/var/www/gestor_hores/routes/auth.php</file>
-            <file>file:/var/www/gestor_hores/routes/web.php</file>
-            <file>file:/var/www/gestor_hores/resources/views/layout.blade.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/auth/register.blade.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/customers/create.blade.php</file>
+            <file>file:/var/www/gestor_hores/resources/lang/es/validation.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/RegisteredUserController.php</file>
         </group>
     </open-files>
