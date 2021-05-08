@@ -205,3 +205,17 @@ CREATE TABLE `users_projects` (
 
 
 -- 2021-05-07 22:06:20
+
+
+
+Hola,
+
+He pujat a remot lo que tinc fer, la BD no es exactament la mateixa que a local, pero la he deixat per que funcioni per no perdre temps
+
+Us explico una mica:
+
+Quan entres a l'arrel que en aquest cas seria https://hores.atotarreu.com/app/gestor_hores/public/ et surt un formulari de login en catala, en aquest cas es per que esta configurat com idioma per defecte, pots canviar l'idioma amb el select que tens al header, a totes les pagines pots canviar el idioma i apareixes a la mateixa pagina amb l'idioma seleccionat, tambe pots seguir navegant en el mateix idioma. 
+
+Si entres amb yannickbf3@gmail.com i contrasenya "ordenador" entres com usuari administrador, així que entres a el panell de control de l'administrador, totes les seves rutes estan protegides, nomes pots entrar si estas logeat com admin i també les operacions de CRUD estan protegides.
+
+Tenim la secció 

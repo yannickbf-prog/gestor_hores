@@ -178,7 +178,7 @@
         <td>{{ $value->email }}</td>
         <td>{{ $value->phone }}</td>
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
-        <td>{{ $value->role }}</td>
+        <td>{{ ($value->role=="user")? __('message.worker') : __('message.admin') }} </td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('users.destroy',[$value->id, $lang]) }}" method="POST"> 

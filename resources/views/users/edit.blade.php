@@ -91,9 +91,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.role')}}:</strong><br><br>
-                <input type="radio" id="user" name="role" value="user" checked>
+                <input type="radio" id="user" name="role" value="user" {{ ($user->role=="user")? "checked" : "" }}>
                 <label for="user">{{ __('message.worker') }}</label><br>
-                <input type="radio" id="admin" name="role" value="admin">
+                <input type="radio" id="admin" name="role" value="admin" {{ ($user->role=="admin")? "checked" : "" }}>
                 <label for="admin">{{ __('message.admin') }}</label><br>  
             </div>
         </div>
