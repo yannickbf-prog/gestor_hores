@@ -21,15 +21,19 @@ class ProjectController extends Controller {
             ($request['name'] == "") ? session(['project_name' => '%']) : session(['project_name' => $request['name']]);
             
             ($request['customer_name'] == "") ? session(['project_customer_name' => '%']) : session(['project_customer_name' => $request['customer_name']]);
+        
+            session(['project_state' => $request['state']]);
         }
         
         $name = session('project_name', "%");
         $customer_name = session('project_customer_name', "%");
+        $state = session('project_state', '%');
 
         $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
                 ->select("customers.name AS customer_name", "projects.*")
                 ->where('projects.name', 'like', "%".$name."%")
                 ->where('customers.name', 'like', "%".$customer_name."%")
+                ->where('projects.active', 'like', $state)
                 ->paginate(2);
 
         return view('projects.index', compact('data'))

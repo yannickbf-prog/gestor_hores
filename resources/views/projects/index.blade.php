@@ -43,9 +43,9 @@
             <div class="form-group">
                 <strong>{{ __('message.state') }}: </strong>
                 <select name="state" id="state">
-                    <option value="all">{{ __('message.all') }}</option>
-                    <option value="active" @if(session('project_state') == 'active'){{'selected'}}@endif>{{ __('message.active') }}</option>
-                    <option value="inactive" @if(session('project_state') == 'inactive'){{'selected'}}@endif>{{ __('message.inactive') }}</option>
+                    <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all') }}</option>
+                    <option value="1" @if(session('project_state') == "1"){{'selected'}}@endif>{{ __('message.active') }}</option>
+                    <option value="0" @if(session('project_state') == "0"){{'selected'}}@endif>{{ __('message.inactive') }}</option>
                     
                 </select>
             </div>
