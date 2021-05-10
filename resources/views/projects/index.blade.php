@@ -38,6 +38,19 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.state') }}: </strong>
+                <select name="state" id="state">
+                    <option value="all">{{ __('message.all') }}</option>
+                    <option value="active" @if(session('project_state') == 'active'){{'selected'}}@endif>{{ __('message.active') }}</option>
+                    <option value="inactive" @if(session('project_state') == 'inactive'){{'selected'}}@endif>{{ __('message.inactive') }}</option>
+                    
+                </select>
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 <table class="table table-bordered">
