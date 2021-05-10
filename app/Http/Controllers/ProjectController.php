@@ -6,21 +6,28 @@ use App\Models\Project;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request) {
         $lang = setGetLang();
+
+        if ($request->has('_token')) {
+
+            ($request['name'] == "") ? session(['project_name' => '%']) : session(['project_name' => $request['name']]);
+        }
         
+        $name = session('project_name', "%");
+
         $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
-        ->select("customers.name AS customer_name", "projects.*")
-        ->paginate(2);
-        
+                ->select("customers.name AS customer_name", "projects.name AS project_name")
+                ->where('projects.name', 'like', "%".$name."%")
+                ->paginate(2);
+
         return $data;
     }
 
@@ -29,8 +36,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -40,8 +46,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -51,8 +56,7 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
-    {
+    public function show(Project $project) {
         //
     }
 
@@ -62,8 +66,7 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
-    {
+    public function edit(Project $project) {
         //
     }
 
@@ -74,8 +77,7 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
-    {
+    public function update(Request $request, Project $project) {
         //
     }
 
@@ -85,8 +87,8 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
-    {
+    public function destroy(Project $project) {
         //
     }
+
 }
