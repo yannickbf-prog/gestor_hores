@@ -17,10 +17,18 @@ class UserAuthenticated {
      */
     public function handle(Request $request, Closure $next) {
 
+        $lang = getLang();
+        
         if (Auth::check()) {
             if (Auth::user()->isUser()) {
                 return $next($request);
             }
+            elseif (Auth::user()->isAdmin()) {
+                return redirect()->route($lang.'_home.index');
+            }
+        }
+        else{
+            return redirect()->route($lang.'_login');
         }
 
         abort(404);
