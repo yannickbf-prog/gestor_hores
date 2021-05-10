@@ -51,6 +51,37 @@
             </div>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+
+                <button type="button" class="btn btn-md btn-primary" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+                    <div class="arrow" style="left: 114px;"></div>
+                    <div class="popover-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="form-group">
+                                    <strong>{{ __('message.from') }}:</strong>
+                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('project_date_from') != ''){{session('customer_date_from')}}@endif">
+                                </div>
+                                <div class="form-group">
+                                    <strong>{{ __('message.to') }}:</strong>
+                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('project_date_to') != ''){{session('customer_date_to')}}@endif">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 <table class="table table-bordered">
@@ -113,4 +144,7 @@
 <div id="paginationContainer">
     {!! $data->links() !!} 
 </div>
+@endsection
+@section('js')
+    <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
 @endsection

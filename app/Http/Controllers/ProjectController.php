@@ -25,6 +25,10 @@ class ProjectController extends Controller {
             session(['project_state' => $request['state']]);
         }
         
+        /*$dates = getIntervalDates($request, 'project');
+        $date_from = $dates[0];
+        $date_to = $dates[1];*/
+        
         $name = session('project_name', "%");
         $customer_name = session('project_customer_name', "%");
         $state = session('project_state', '%');
@@ -34,6 +38,7 @@ class ProjectController extends Controller {
                 ->where('projects.name', 'like', "%".$name."%")
                 ->where('customers.name', 'like', "%".$customer_name."%")
                 ->where('projects.active', 'like', $state)
+                //->whereBetween('created_at', [$date_from, $date_to])
                 ->paginate(2);
 
         return view('projects.index', compact('data'))
