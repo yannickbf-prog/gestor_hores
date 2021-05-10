@@ -19,13 +19,17 @@ class ProjectController extends Controller {
         if ($request->has('_token')) {
 
             ($request['name'] == "") ? session(['project_name' => '%']) : session(['project_name' => $request['name']]);
+            
+            ($request['customer_name'] == "") ? session(['project_customer_name' => '%']) : session(['project_customer_name' => $request['customer_name']]);
         }
         
         $name = session('project_name', "%");
+        $customer_name = session('project_customer_name', "%");
 
         $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
                 ->select("customers.name AS customer_name", "projects.*")
                 ->where('projects.name', 'like', "%".$name."%")
+                ->where('customers.name', 'like', "%".$customer_name."%")
                 ->paginate(2);
 
         return view('projects.index', compact('data'))

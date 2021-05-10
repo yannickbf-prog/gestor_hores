@@ -30,6 +30,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.customer_name') }}:</strong>
+                <input type="text" name="customer_name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.customer_name') }}" value="@if(session('project_customer_name') != '%'){{session('project_customer_name')}}@endif">
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 <table class="table table-bordered">
