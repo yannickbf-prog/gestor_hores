@@ -20,6 +20,9 @@
             <file>file:/var/www/gestor_hores/app/Http/Requests/EditCustomerRequest.php</file>
             <file>file:/var/www/gestor_hores/resources/lang/en/validation.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Requests/EditTypeBagHourRequest.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/users/index.blade.php</file>
+            <file>file:/var/www/gestor_hores/public/storage/logo.png</file>
+            <file>file:/var/www/gestor_hores/routes/web.php</file>
             <file>file:/var/www/gestor_hores/resources/views/customers/create.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/lang/es/validation.php</file>
             <file>file:/var/www/gestor_hores/database/migrations/2014_10_12_000000_create_users_table.php</file>
@@ -38,6 +41,7 @@
             <file>file:/var/www/gestor_hores/resources/views/auth/register.blade.php</file>
             <file>file:/var/www/gestor_hores/database/migrations/2021_04_01_140855_create_type_bag_hours_table.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Requests/CreateTypeBagHourRequest.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/layout.blade.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/Auth/RegisteredUserController.php</file>
         </group>
     </open-files>

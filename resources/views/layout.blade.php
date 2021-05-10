@@ -1,5 +1,18 @@
 @php
 use Illuminate\Support\Facades\DB;
+$header_h1 = "message.login";
+$header_route = $lang."_login";
+if (Auth::check()) {
+    if(Auth::user()->isAdmin()){
+        $header_h1 = "message.control_panel";
+        $header_route = $lang."_home.index";
+    }
+    else if(Auth::user()->isUser()){
+        $header_h1 = "message.entry_hours";
+        $header_route = $lang."_entry_hours.index";
+    }
+}
+
 @endphp
 <html>
     <head>
@@ -25,9 +38,15 @@ use Illuminate\Support\Facades\DB;
             <div class="row">
                 <header class="bg-primary bg-info border border-primary col-12 mb-2 py-2">
                     @if(DB::table('company')->first()->img_logo != null)
-                    <img src="/storage/{{ DB::table('company')->first()->img_logo }}" class="logo" alt="Logo {{ DB::table('company')->first()->name }}">
+                  
+                    <a href="{{ route($header_route) }}">
+                        <img src="/storage/{{ DB::table('company')->first()->img_logo }}" class="logo" alt="Logo {{ DB::table('company')->first()->name }}">
+                    </a>
+                    
                     @endif
-                    <h1>{{DB::table('company')->first()->name}} | {{__('message.control_panel')}}</h1>
+                    <a href="{{ route($header_route) }}">
+                        <h1>{{DB::table('company')->first()->name}} | {{__($header_h1)}}</h1>
+                    </a>
                     <div class="col-md-4 form-group">
                         <select class="form-control Langchange">
                             <option value="en" {{ setActiveLang('en') }}>{{ __('message.english') }}</option>

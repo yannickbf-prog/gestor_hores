@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'login' => 'Login',
+    'entry_hours' => 'Entry worked hours',
 
     'english' => 'English',
     'spanish' => 'Spanish',

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'login' => 'Login',
+    'entry_hours' => 'Entrar horas trabajadas',
     
     'english' => 'Inglés',
     'spanish' => 'Español',

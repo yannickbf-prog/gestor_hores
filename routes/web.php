@@ -153,7 +153,7 @@ Route::get('/', function () {
         if(Auth::user()->isAdmin()){
             return redirect()->route($default_lang . '_home.index', $default_lang);
         }
-        if(Auth::user()->isUser()){
+        else if(Auth::user()->isUser()){
             return redirect()->route($default_lang . '_entry_hours.index', $default_lang);
         }
     } else {
