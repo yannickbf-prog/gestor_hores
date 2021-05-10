@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -14,8 +15,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-         //return view('customers.index', compact('data'))
-                        //->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
+        $lang = setGetLang();
+        
+        $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
+        ->select("customers.name AS customer_name", "projects.*")
+        ->paginate(2);
+        
+        return $data;
     }
 
     /**

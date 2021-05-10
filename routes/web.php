@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeContoller;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\EntryHoursController;
 
@@ -113,9 +114,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
     
     //Control panel - Projects - Operations 
-    
+
     //Control panel - Projects - en 
-    
+    Route::get("en/control-panel/projects", [ProjectController::class, 'index'])->name('en_projects.index');
     
     //Control panel - Bag hour types - Operations 
     Route::post("control-panel/types-hour-bags/lang/{lang}", [TypeBagHourController::class, 'store'])->name('bag_hours_types.store');
