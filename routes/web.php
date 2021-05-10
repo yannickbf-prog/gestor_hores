@@ -78,27 +78,21 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/informacio-empresa", [CompanyController::class, 'index'])->name('ca_company_info.index');
     Route::get("ca/panell-de-control/informacio-empresa/editar", [CompanyController::class, 'edit'])->name('ca_company_info.edit');
 
-    // Control panel - Users - Operations
+    // Control panel - Users - Operations - Other routes in routes/auth.php
     Route::put("control-panel/users/{user}/lang/{lang}", [UserController::class, 'update'])->name('users.update');
     Route::delete("control-panel/users/{user}/lang/{lang}", [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('control-panel/users/delete_filters/', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
+    
     // Control panel - Users - en
     Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');
-        // Control panel - Users - en/control-panel/userses
-    Route::get("es/panel-de-control/usuarios", [UserController::class, 'index'])->name('es_users.index');
-    // Control panel - Users - ca
-    Route::get("ca/panell-de-control/usuaris", [UserController::class, 'index'])->name('ca_users.index');
-    
-    
     Route::get("en/control-panel/users/{user}/edit", [UserController::class, 'edit'])->name('en_users.edit');
-    Route::get("es/panel-de-control/usuarios/{user}/editar", [UserController::class, 'edit'])->name('es_users.edit');
-    Route::get("ca/panell-de-control/usuaris/{user}/editar", [UserController::class, 'edit'])->name('ca_users.edit');
-    
-    // Control panel - Users - en/control-panel/userses
+    // Control panel - Users - es
     Route::get("es/panel-de-control/usuarios", [UserController::class, 'index'])->name('es_users.index');
+    Route::get("es/panel-de-control/usuarios/{user}/editar", [UserController::class, 'edit'])->name('es_users.edit');
     // Control panel - Users - ca
     Route::get("ca/panell-de-control/usuaris", [UserController::class, 'index'])->name('ca_users.index');
-    
+    Route::get("ca/panell-de-control/usuaris/{user}/editar", [UserController::class, 'edit'])->name('ca_users.edit');
+
     // Control panel - Customers - Operations
     Route::post("control-panel/customers/lang/{lang}", [CustomerController::class, 'store'])->name('customers.store');
     Route::put("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'update'])->name('customers.update');
@@ -118,23 +112,28 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/clients/crear", [CustomerController::class, 'create'])->name('ca_customers.create');
     Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
     
+    //Control panel - Projects - Operations 
+    
+    //Control panel - Projects - en 
+    
+    
     //Control panel - Bag hour types - Operations 
     Route::post("control-panel/types-hour-bags/lang/{lang}", [TypeBagHourController::class, 'store'])->name('bag_hours_types.store');
     Route::put("control-panel/types-hour-bags/{typeBagHour}/lang/{lang}", [TypeBagHourController::class, 'update'])->name('bag_hours_types.update');
     Route::delete("control-panel/types-hour-bags/{typeBagHour}/lang/{lang}", [TypeBagHourController::class, 'destroy'])->name('bag_hours_types.destroy');
-    Route::post('control-panel/types-hour-bags/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type_bag_hours.delete_filters');
-
-    // Control panel - Customers en
+    Route::post('control-panel/types-hour-bags/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type_bag_hours.delete_filters');  
+    
+    // Control panel - Bag hour types - en
     Route::get("en/control-panel/types-hour-bags", [TypeBagHourController::class, 'index'])->name('en_bag_hours_types.index');
     Route::get("en/control-panel/types-hour-bags/create", [TypeBagHourController::class, 'create'])->name('en_bag_hours_types.create');
     Route::get("en/control-panel/types-hour-bags/{typeBagHour}/edit", [TypeBagHourController::class, 'edit'])->name('en_bag_hours_types.edit');
 
-    // Control panel - Customers es
+    // Control panel - Bag hour types - es
     Route::get("es/panel-de-control/tipos-bolsas-de-horas", [TypeBagHourController::class, 'index'])->name('es_bag_hours_types.index');
     Route::get("es/panel-de-control/tipos-bolsas-horas/crear", [TypeBagHourController::class, 'create'])->name('es_bag_hours_types.create');
     Route::get("es/panel-de-control/tipos-bolsas-de-horas/{typeBagHour}/editar", [TypeBagHourController::class, 'edit'])->name('es_bag_hours_types.edit');
 
-    // Control panel - Customers ca
+    // Control panel - Bag hour types - ca
     Route::get("ca/panell-de-control/tipus-bosses-hores", [TypeBagHourController::class, 'index'])->name('ca_bag_hours_types.index');
     Route::get("ca/panell-de-control/tipus-bosses-hores/crear", [TypeBagHourController::class, 'create'])->name('ca_bag_hours_types.create');
     Route::get("ca/panell-de-control/tipus-bosses-hores/{typeBagHour}/editar", [TypeBagHourController::class, 'edit'])->name('ca_bag_hours_types.edit');
@@ -142,6 +141,7 @@ Route::group(['middleware' => 'admin'], function () {
     
 });
 
+//Entry hours - Workers section - Middleware in controller
 Route::get("en/entry-hours-worked", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
 Route::get("es/entrar-horas-trabajadas", [EntryHoursController::class, 'index'])->name('es_entry_hours.index');
 Route::get("ca/entrar-hores-treballades", [EntryHoursController::class, 'index'])->name('ca_entry_hours.index');

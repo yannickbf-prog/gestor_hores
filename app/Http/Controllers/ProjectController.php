@@ -14,7 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+         //return view('customers.index', compact('data'))
+                        //->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 
     /**
