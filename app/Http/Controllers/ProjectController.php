@@ -24,11 +24,12 @@ class ProjectController extends Controller {
         $name = session('project_name', "%");
 
         $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
-                ->select("customers.name AS customer_name", "projects.name AS project_name")
+                ->select("customers.name AS customer_name", "projects.*")
                 ->where('projects.name', 'like', "%".$name."%")
                 ->paginate(2);
 
-        return $data;
+        return view('projects.index', compact('data'))
+                        ->with('i', (request()->input('page', 1) - 1) * 2)->with('lang', $lang);
     }
 
     /**
