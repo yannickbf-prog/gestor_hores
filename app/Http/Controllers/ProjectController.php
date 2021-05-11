@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateProjectRequest;
+use Illuminate\Support\Facades\App;
 
 class ProjectController extends Controller {
 
@@ -93,8 +95,14 @@ class ProjectController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-
+    public function store(CreateProjectRequest $request, $lang) {
+        
+        App::setLocale($lang);
+              
+        Project::create($request->validated());
+        
+        return redirect()->route($lang.'_projects.index')
+                        ->with('success', __('message.project')." ".$request->name." ".__('message.created') );
     }
 
     /**
