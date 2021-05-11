@@ -18,12 +18,12 @@
             <h2>{{ __('message.bags_of_hours') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bags_of_hours.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.bags_of_hours') }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.bags_of_hours') }}</a>
 
         </div>
     </div>
 </div>
-<form action="{{ route($lang.'_bags_of_hours.index') }}" method="GET"> 
+<form action="{{ route($lang.'_bag_hours.index') }}" method="GET">
     @csrf
     
     <div class="row py-2">
@@ -53,7 +53,7 @@
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 
-<form action="{{ route('bags_of_hours.delete_filters') }}" method="POST"> 
+<form action="{{ route('bag_hours.delete_filters') }}" method="POST"> 
     @csrf
     <input type="hidden" name="lang" value="{{ $lang }}">
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
@@ -65,7 +65,7 @@
             <h3>{{ __('message.bags_of_hours_list') }}</h3>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bags_of_hours.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.bags_of_hours') }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.bags_of_hours') }}</a>
         </div>
     </div>
 </div>
