@@ -48,7 +48,7 @@
                 @if (count($customers) > 0)
                 <select name="customer_id" id="numRecords">
                     @foreach($customers as $key => $customer)
-                        <option value="{{ $customer->id }}">{{$customer->name}}</option>
+                    <option value="{{ $customer->id }}">{{$customer->name}}</option>
                     @endforeach
                 </select>
                 @else
@@ -56,7 +56,25 @@
                 @endif
                 <a href="{{ route($lang."_customers.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.customer') }}</a>
             </div>
-            
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*{{ __('message.state') }}:</strong><br>
+                <input type="radio" id="active" name="role" value="1" checked="">
+                <label for="active">{{__('message.active')}}</label><br>
+                <input type="radio" id="inactive" name="role" value="0">
+                <label for="role">{{__('message.inactive')}}</label><br>  
+            </div>
+
+        </div> 
+        
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{__('message.description')}}:</strong>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
+            </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
