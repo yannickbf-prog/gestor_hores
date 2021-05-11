@@ -82,7 +82,9 @@ class ProjectController extends Controller {
     public function create() {
         $lang = setGetLang();
         
-        return view('projects.create')->with('lang', $lang);
+        $customers = Customer::select("id", "name")->get();
+        
+        return view('projects.create', compact('customers'))->with('lang', $lang);
     }
 
     /**
