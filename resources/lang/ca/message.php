@@ -63,6 +63,7 @@ return [
     'old_first' => 'Antics primer',
     'number_of_records' => 'Número de sortides per pagina',
     'all' => 'Totes',
+    'all_m' => 'Tots',
     'filter' => 'Filtrar',
     'delete_all_filters' => 'Borrar tots els filtres',
     'customers_list' => 'Llista de clients',
@@ -104,6 +105,14 @@ return [
     'create' => 'Crear',
     'new' => 'Nou',
     
+    'project' => 'Projecte',
+    'projects' => 'Projectes',
+    'state' => 'Estat',
+    'active' => 'Actiu',
+    'inactive' => 'Inactiu',
+
+    
+    'projects_list' => 'Llista de projectes',
     'bag_hour_type_list' => "Llista de tipus de bosses d'hores",
     
     'no_description' => 'Sense descripció',

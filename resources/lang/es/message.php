@@ -64,6 +64,7 @@ return [
     'old_first' => 'Antiguos primero',
     'number_of_records' => 'Número de salidas por página',
     'all' => 'Todas',
+    'all_m' => 'Todos',
     'filter' => 'Filtrar',
     'delete_all_filters' => 'Borrar todos los filtros',
     'customers_list' => 'Lista de clientes',
@@ -103,8 +104,13 @@ return [
     'create' => 'Crear',
     'new' => 'Nuevo',
     
+    'project' => 'Proyecto',
+    'projects' => 'Proyectos',
+    'state' => 'Estado',  
+    'active' => 'Activo',
+    'inactive' => 'Inactivo',
 
-    
+    'projects_list' => 'Lista de proyectos',
     'bag_hour_type_list' => "Lista de tipos de bolsas de horas",
     
     'no_description' => 'Sin descripción',

@@ -18,7 +18,7 @@
             <h2>{{ __('message.projects') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_projects.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.project') }}</a>
 
         </div>
     </div>
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <strong>{{ __('message.state') }}: </strong>
                 <select name="state" id="state">
-                    <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all') }}</option>
+                    <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all_m') }}</option>
                     <option value="1" @if(session('project_state') == "1"){{'selected'}}@endif>{{ __('message.active') }}</option>
                     <option value="0" @if(session('project_state') == "0"){{'selected'}}@endif>{{ __('message.inactive') }}</option>
                     
@@ -129,10 +129,10 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>{{ __('message.customers_list') }}</h3>
+            <h3>{{ __('message.projects_list') }}</h3>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_projects.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.project') }}</a>
         </div>
     </div>
 </div>

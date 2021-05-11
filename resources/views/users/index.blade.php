@@ -148,10 +148,10 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>{{ __('message.customers_list') }}</h3>
+            <h3>{{ __('message.projects_list') }}</h3>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_users.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.user') }}</a>
         </div>
     </div>
 </div>

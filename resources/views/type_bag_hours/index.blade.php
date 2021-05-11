@@ -116,7 +116,7 @@
             <h3>{{ __("message.bag_hour_type_list") }}</h3>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bag_hours_types.create') }}">{{ __("message.create")." ".__("message.new")." ".__("message.bag_hours_types") }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_bag_hours_types.create') }}">{{ __('message.create_new_type_hour_bag') }}</a>
         </div>
     </div>
 </div>

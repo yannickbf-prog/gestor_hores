@@ -80,7 +80,9 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        $lang = setGetLang();
+        
+        return view('projects.create')->with('lang', $lang);
     }
 
     /**
@@ -90,7 +92,7 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+
     }
 
     /**

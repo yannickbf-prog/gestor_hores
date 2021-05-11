@@ -63,6 +63,7 @@ return [
     'old_first' => 'Old first',
     'number_of_records' => 'Number of records per page',
     'all' => 'All',
+    'all_m' => 'All',
     'filter' => 'Filter',
     'delete_all_filters' => 'Delete all filters',
     'customers_list' => 'Customers list',
@@ -104,6 +105,13 @@ return [
     'create' => 'Crete',
     'new' => 'New',
     
+    'project' => 'Project',
+    'projects' => 'Projects',
+    'state' => 'State',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    
+    'projects_list' => 'Projects list',
     'bag_hour_type_list' => 'Types of hour bags list',
     
     'no_description' => 'Without description',
