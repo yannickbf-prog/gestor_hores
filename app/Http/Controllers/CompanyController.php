@@ -23,7 +23,9 @@ class CompanyController extends Controller {
         $company = DB::table('company')->first();
 
         $data_counts = [
+            'users_count' => DB::table('users')->count(),
             'customers_count' => DB::table('customers')->count(),
+            'projects_count' => DB::table('projects')->count(),
             'types_hour_bags_count' => DB::table('type_bag_hours')->count()
         ];
 

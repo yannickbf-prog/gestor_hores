@@ -12,6 +12,17 @@
     </button>
 </div>
 @endif
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>{{ __('message.projects') }}</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
+
+        </div>
+    </div>
+</div>
 <form action="{{ route($lang.'_projects.index') }}" method="GET"> 
     @csrf
     
@@ -68,11 +79,11 @@
                                 </button>
                                 <div class="form-group">
                                     <strong>{{ __('message.from') }}:</strong>
-                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('project_date_from') != ''){{session('customer_date_from')}}@endif">
+                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('project_date_from') != ''){{session('project_date_from')}}@endif">
                                 </div>
                                 <div class="form-group">
                                     <strong>{{ __('message.to') }}:</strong>
-                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('project_date_to') != ''){{session('customer_date_to')}}@endif">
+                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('project_date_to') != ''){{session('project_date_to')}}@endif">
                                 </div>
                             </div>
                         </div>
@@ -82,8 +93,50 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.order') }}:</strong>
+                <select name="order" id="order">
+                    <option value="desc">{{ __('message.new_first') }}</option>
+                    <option value="asc" @if(session('project_order') == 'asc'){{'selected'}}@endif >{{ __('message.old_first') }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.number_of_records') }}: </strong>
+                <select name="num_records" id="numRecords">
+                    <option value="10">10</option>
+                    <option value="50" @if(session('project_num_records') == 50){{'selected'}}@endif>50</option>
+                    <option value="100" @if(session('project_num_records') == 100){{'selected'}}@endif>100</option>
+                    <option value="all" @if(session('project_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
+
+<form action="{{ route('projects.delete_filters') }}" method="POST"> 
+    @csrf
+    <input type="hidden" name="lang" value="{{ $lang }}">
+    <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
+</form>
+
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>{{ __('message.customers_list') }}</h3>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
+        </div>
+    </div>
+</div>
+
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
@@ -137,7 +190,7 @@
         </td>
     </tr>
     @empty
-    <li>{{__('message.no')}} {{__('message.customers')}} {{__('message.to_show')}}</li>
+    <li>{{__('message.no')}} {{__('message.projects')}} {{__('message.to_show')}}</li>
     @endforelse
 
 </table> 

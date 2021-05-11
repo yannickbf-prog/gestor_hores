@@ -91,7 +91,21 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
+            <strong>{{ __('message.users') }}:</strong><span> {{ $users_count }}</span>
+        </div>
+    </div>
+</div>
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
             <strong>{{ __('message.customers') }}:</strong><span> {{ $customers_count }}</span>
+        </div>
+    </div>
+</div>
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <strong>{{ __('message.projects') }}:</strong><span> {{ $projects_count }}</span>
         </div>
     </div>
 </div>

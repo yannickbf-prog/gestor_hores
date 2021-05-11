@@ -23,26 +23,55 @@ class ProjectController extends Controller {
             ($request['customer_name'] == "") ? session(['project_customer_name' => '%']) : session(['project_customer_name' => $request['customer_name']]);
         
             session(['project_state' => $request['state']]);
+            
+            session(['project_order' => $request['order']]);
+            
+            session(['project_num_records' => $request['num_records']]);
         }
         
-        /*$dates = getIntervalDates($request, 'project');
+        $dates = getIntervalDates($request, 'project');
         $date_from = $dates[0];
-        $date_to = $dates[1];*/
+        $date_to = $dates[1];
         
         $name = session('project_name', "%");
         $customer_name = session('project_customer_name', "%");
         $state = session('project_state', '%');
+        
+        $order = session('project_order', "desc");
+        
+        $num_records = session('project_num_records', 10);
+        
+        if($num_records == 'all'){
+            $num_records = Customer::count();
+        }
 
         $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
                 ->select("customers.name AS customer_name", "projects.*")
                 ->where('projects.name', 'like', "%".$name."%")
                 ->where('customers.name', 'like', "%".$customer_name."%")
                 ->where('projects.active', 'like', $state)
-                //->whereBetween('created_at', [$date_from, $date_to])
-                ->paginate(2);
+                ->whereBetween('projects.created_at', [$date_from, $date_to])
+                ->orderBy('created_at', $order)
+                ->paginate($num_records);
 
         return view('projects.index', compact('data'))
-                        ->with('i', (request()->input('page', 1) - 1) * 2)->with('lang', $lang);
+                        ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
+    }
+    
+    public function deleteFilters(Request $request) {
+        
+        session(['project_name' => '%']);
+        session(['project_customer_name' => '%']);
+        session(['project_state' => '%']);
+        session(['project_date_from' => ""]);
+        session(['project_date_to' => ""]);
+        session(['project_order' => 'desc']);
+        session(['project_num_records' => 10]);
+        
+        $lang = $request->lang;
+
+        return redirect()->route($lang.'_projects.index');
+
     }
 
     /**

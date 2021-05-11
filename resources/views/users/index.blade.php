@@ -145,7 +145,16 @@
     <input type="hidden" name="lang" value="{{ $lang }}">
     <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
 </form>
-
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>{{ __('message.customers_list') }}</h3>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
+        </div>
+    </div>
+</div>
 
 <table class="table table-striped">
     @if (count($data) > 0)

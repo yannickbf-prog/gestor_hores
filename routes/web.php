@@ -114,9 +114,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
     
     //Control panel - Projects - Operations 
-
+    Route::post('control-panel/projects/delete_filters/', [ProjectController::class, 'deleteFilters'])->name('projects.delete_filters');
     //Control panel - Projects - en 
     Route::get("en/control-panel/projects", [ProjectController::class, 'index'])->name('en_projects.index');
+    //Control panel - Projects - es
+    Route::get("es/panel-de-control/proyectos", [ProjectController::class, 'index'])->name('es_projects.index');
+    //Control panel - Projects - ca
+    Route::get("ca/panell-de-control/projectes", [ProjectController::class, 'index'])->name('ca_projects.index');
     
     //Control panel - Bag hour types - Operations 
     Route::post("control-panel/types-hour-bags/lang/{lang}", [TypeBagHourController::class, 'store'])->name('bag_hours_types.store');
