@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\EditProjectRequest;
 use Illuminate\Support\Facades\App;
 
 class ProjectController extends Controller {
@@ -136,11 +137,11 @@ class ProjectController extends Controller {
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project) {
+    public function update(EditProjectRequest $request, Project $project, $lang) {
         
         $project->update($request->validated());
 
-        return redirect()->route($lang.'_customers.index')
+        return redirect()->route($lang.'_projects.index')
                         ->with('success', __('message.project')." ".$request->name." ".__('message.updated'));
     }
 
