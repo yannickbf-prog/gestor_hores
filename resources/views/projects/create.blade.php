@@ -44,13 +44,19 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>{{ __('message.customer') }}: </strong>
-                <select name="customer" id="numRecords">
+                <strong>*{{ __('message.customer') }}: </strong>
+                @if (count($customers) > 0)
+                <select name="customer_id" id="numRecords">
                     @foreach($customers as $key => $customer)
                         <option value="{{ $customer->id }}">{{$customer->name}}</option>
                     @endforeach
                 </select>
+                @else
+                <li>{{ __('message.no') }} {{ __('message.customers') }} {{ __('message.avalible') }} {{ __('message.create customer') }}</li>
+                @endif
+                <a href="{{ route($lang."_customers.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.customer') }}</a>
             </div>
+            
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
