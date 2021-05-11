@@ -122,7 +122,11 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project) {
-        //
+        $lang = setGetLang();
+        
+        $customers = Customer::select("id", "name")->get();
+        
+        return view('projects.edit', compact('project','lang','customers'));
     }
 
     /**
@@ -133,7 +137,11 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project) {
-        //
+        
+        $project->update($request->validated());
+
+        return redirect()->route($lang.'_customers.index')
+                        ->with('success', __('message.project')." ".$request->name." ".__('message.updated'));
     }
 
     /**
@@ -142,8 +150,14 @@ class ProjectController extends Controller {
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project) {
-        //
+    public function destroy(Project $project,$lang) {
+        
+        App::setLocale($lang);
+        
+        $project->delete();
+
+        return redirect()->route($lang.'_projects.index')
+                        ->with('success', __('message.project')." ".__('message.deleted'));
     }
 
 }

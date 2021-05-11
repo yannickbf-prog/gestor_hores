@@ -158,8 +158,8 @@
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
-            <form action="{{ route('customers.destroy',[$value->id, $lang]) }}" method="POST"> 
-                <a class="btn btn-primary" href="{{ route($lang.'_customers.edit',$value->id) }}">{{ __('message.edit') }}</a>
+            <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
+                <a class="btn btn-primary" href="{{ route($lang.'_projects.edit',$value->id) }}">{{ __('message.edit') }}</a>
                 @csrf
                 @method('DELETE')      
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
@@ -176,7 +176,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} <b>{{ $value->name }}</b>?
+                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.project") }} <b>{{ $value->name }}</b>?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>

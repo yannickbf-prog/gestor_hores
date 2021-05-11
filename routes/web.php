@@ -115,16 +115,24 @@ Route::group(['middleware' => 'admin'], function () {
     
     //Control panel - Projects - Operations 
     Route::post("control-panel/projects/lang/{lang}", [ProjectController::class, 'store'])->name('projects.store');
+    Route::put("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::post('control-panel/projects/delete_filters/', [ProjectController::class, 'deleteFilters'])->name('projects.delete_filters');
+    
     //Control panel - Projects - en 
     Route::get("en/control-panel/projects", [ProjectController::class, 'index'])->name('en_projects.index');
     Route::get("en/control-panel/projects/create", [ProjectController::class, 'create'])->name('en_projects.create');
+    Route::get("en/control-panel/projects/{project}/edit", [ProjectController::class, 'edit'])->name('en_projects.edit');
+    
     //Control panel - Projects - es
     Route::get("es/panel-de-control/proyectos", [ProjectController::class, 'index'])->name('es_projects.index');
     Route::get("es/panel-de-control/proyectos/crear", [ProjectController::class, 'create'])->name('es_projects.create');
+    Route::get("es/panel-de-control/proyectos/{project}/editar", [ProjectController::class, 'edit'])->name('es_projects.edit');
+    
     //Control panel - Projects - ca
     Route::get("ca/panell-de-control/projectes", [ProjectController::class, 'index'])->name('ca_projects.index');
     Route::get("ca/panell-de-control/projectes/crear", [ProjectController::class, 'create'])->name('ca_projects.create');
+    Route::get("ca/panell-de-control/projectes/{project}/editar", [ProjectController::class, 'edit'])->name('ca_projects.edit');
     
     //Control panel - Bag hour types - Operations 
     Route::post("control-panel/types-hour-bags/lang/{lang}", [TypeBagHourController::class, 'store'])->name('bag_hours_types.store');
