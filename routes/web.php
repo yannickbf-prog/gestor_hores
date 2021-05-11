@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\BagHoursController;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\EntryHoursController;
 
@@ -133,6 +134,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/projectes", [ProjectController::class, 'index'])->name('ca_projects.index');
     Route::get("ca/panell-de-control/projectes/crear", [ProjectController::class, 'create'])->name('ca_projects.create');
     Route::get("ca/panell-de-control/projectes/{project}/editar", [ProjectController::class, 'edit'])->name('ca_projects.edit');
+    
+    //Control panel - Bag hours - Operations 
+    
+    //Control panel - Bag hours - en
+    Route::get("en/control-panel/hour-bags", [BagHoursController::class, 'index'])->name('en_bag_hours.index');
+    //Control panel - Bag hours - es
+    Route::get("es/panel-de-control/bolsas-de-horas", [BagHoursController::class, 'index'])->name('es_bag_hours.index');
+    //Control panel - Bag hours - ca
+    Route::get("ca/panell-de-control/bosses-d'hores", [BagHoursController::class, 'index'])->name('ca_bag_hours.index');
     
     //Control panel - Bag hour types - Operations 
     Route::post("control-panel/types-hour-bags/lang/{lang}", [TypeBagHourController::class, 'store'])->name('bag_hours_types.store');

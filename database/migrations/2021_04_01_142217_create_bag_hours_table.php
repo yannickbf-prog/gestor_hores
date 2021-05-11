@@ -19,9 +19,9 @@ class CreateBagHoursTable extends Migration
             $table->foreign('project_id')->references('id')->on('projects');
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('type_bag_hours');
-            $table->integer('hores_contractades');
-            $table->integer('hores_disponibles');
-            $table->double('preu_total');
+            $table->integer('contracted_hours');
+            $table->integer('hours_available');
+            $table->double('total_price');
             $table->timestamps();
         });
     }
