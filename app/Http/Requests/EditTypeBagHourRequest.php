@@ -23,6 +23,12 @@ class EditTypeBagHourRequest extends FormRequest
             return false;
         }
     }
+    
+    protected function prepareForValidation()
+    {
+        $format_num = str_replace(",", ".", $this->hour_price);
+        $this->merge(['hour_price' => $format_num]);
+    }
 
     /**
      * Get the validation rules that apply to the request.

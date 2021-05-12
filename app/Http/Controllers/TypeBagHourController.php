@@ -47,7 +47,7 @@ class TypeBagHourController extends Controller {
         
         $data = TypeBagHour::
                 where('name', 'like', "%{$name}%")
-                ->where('hour_price', 'LIKE', $hour_price)
+                ->where('hour_price', 'like', $hour_price)
                 ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
@@ -92,8 +92,6 @@ class TypeBagHourController extends Controller {
     public function store(CreateTypeBagHourRequest $request, $lang) {
         
         App::setLocale($lang);
-        
-        $request['hour_price'] = str_replace(",", ".", $request['hour_price']);
 
         TypeBagHour::create($request->validated());
 
