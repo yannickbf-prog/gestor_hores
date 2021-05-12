@@ -69,7 +69,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.hour_price') }}:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.hour_price') }}" value="@if(session('bag_hour_hour_price') != '%'){{ number_format(session('bag_hour_hour_price'), 2, ',', '.') }}@endif">
+                <input type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.hour_price') }}" value="@if(session('bag_hour_hour_price') != '%'){{ session('bag_hour_hour_price') }}@endif">
             </div>
         </div>
     </div>
@@ -77,11 +77,64 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.total_price') }}:</strong>
-                <input type="text" name="total_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.total_price') }}" value="@if(session('bag_hour_total_price') != '%'){{ number_format(session('bag_hour_total_price'), 2, ',', '.') }}@endif">
+                <input type="text" name="total_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.total_price') }}" value="@if(session('bag_hour_total_price') != '%'){{ session('bag_hour_total_price') }}@endif">
             </div>
         </div>
     </div>
-    
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+
+                <button type="button" class="btn btn-md btn-primary" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+                    <div class="arrow" style="left: 114px;"></div>
+                    <div class="popover-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="form-group">
+                                    <strong>{{ __('message.from') }}:</strong>
+                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('bag_hour_date_from') != ''){{session('bag_hour_date_from')}}@endif">
+                                </div>
+                                <div class="form-group">
+                                    <strong>{{ __('message.to') }}:</strong>
+                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('bag_hour_date_to') != ''){{session('bag_hour_date_to')}}@endif">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.order') }}:</strong>
+                <select name="order" id="order">
+                    <option value="desc">{{ __('message.new_first') }}</option>
+                    <option value="asc" @if(session('bag_hour_order') == 'asc'){{'selected'}}@endif >{{ __('message.old_first') }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.number_of_records') }}: </strong>
+                <select name="num_records" id="numRecords">
+                    <option value="10">10</option>
+                    <option value="50" @if(session('bag_hour_num_records') == 50){{'selected'}}@endif>50</option>
+                    <option value="100" @if(session('bag_hour_num_records') == 100){{'selected'}}@endif>100</option>
+                    <option value="all" @if(session('bag_hour_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 
@@ -170,5 +223,5 @@
 </div>
 @endsection
 @section('js')
-    <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/hour_bags_index.js') }}"></script>
 @endsection
