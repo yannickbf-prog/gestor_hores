@@ -36,16 +36,24 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>{{ __('message.name') }}:</strong>
-                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('project_name') != '%'){{session('project_name')}}@endif">
+                <strong>{{ __('message.bag_of_hours_type') }}:</strong>
+                <input type="text" name="type" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.bag_of_hours_type') }}" value="@if(session('bag_hour_type') != '%'){{session('bag_hour_type')}}@endif">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>{{ __('message.customer_name') }}:</strong>
-                <input type="text" name="customer_name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.customer_name') }}" value="@if(session('project_customer_name') != '%'){{session('project_customer_name')}}@endif">
+                <strong>{{ __('message.project') }}:</strong>
+                <input type="text" name="project" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.project') }}" value="@if(session('bag_hour_project') != '%'){{session('bag_hour_project')}}@endif">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.contracted_hours') }}:</strong>
+                <input type="text" name="contracted_hours" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contracted_hours') }}" value="@if(session('bag_hour_contracted_hours') != '%'){{session('bag_hour_contracted_hours')}}@endif">
             </div>
         </div>
     </div>
@@ -79,6 +87,7 @@
         <th>{{ __('message.bag_of_hours_type_description') }}</th>
         <th>{{ __('message.contracted_hours') }}</th>
         <th>{{ __('message.hours_available') }}</th>
+        <th>{{ __('message.hour_price') }}</th>
         <th>{{ __('message.total_price') }}</th>
         <th>{{ __('message.created_at') }}</th>
         <th>{{ __('message.action') }}</th>
@@ -92,6 +101,7 @@
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ $value->contracted_hours }}h</td>
         <td>{{ $value->hours_available }}h</td>
+        <td>{{ $value->type_hour_price }}€</td>
         <td>{{ $value->total_price }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
