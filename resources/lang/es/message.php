@@ -103,6 +103,7 @@ return [
     
     'create' => 'Crear',
     'new' => 'Nuevo',
+    'new_f' => 'Nueva',
     
     'project' => 'Proyecto',
     'projects' => 'Proyectos',
@@ -130,5 +131,12 @@ return [
     'phone_min' => 'El telefono tiene que tener 9 dijitos como minimo',
     'phone_max' => 'El telefono no puede tener mas de 15 dijitos',
     
-    
+    'bags_of_hours' => "Bolsas de horas",
+    'bag_of_hours' => "Bolsa de horas",
+    "bags_of_hours_list" => "Lista de bolsas de horas",
+    "bag_of_hours_type" => "Tipo de bolsa de hores",
+    "bag_of_hours_type_description" => "Descripción de tipo de bolsa de horas",
+    "contracted_hours" => "Horas contractadas",
+    "hours_available" => "Horas disponibles",
+    "total_price" => "Precio total",
 ];

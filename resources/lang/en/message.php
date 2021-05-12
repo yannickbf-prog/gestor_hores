@@ -104,6 +104,7 @@ return [
     
     'create' => 'Crete',
     'new' => 'New',
+    'new_f' => 'New',
     
     'project' => 'Project',
     'projects' => 'Projects',
@@ -129,5 +130,14 @@ return [
     
     'phone_numeric' => 'The phone can only contain digits without spaces or other characters',
     'phone_min' => 'Phone must have 9 digits minimum',
-    'phone_max' => 'The phone cannot have more than 15 digits'
+    'phone_max' => 'The phone cannot have more than 15 digits',
+    
+    'bags_of_hours' => 'Bags of hours',
+    'bag_of_hours' => "Bag of hours",
+    "bags_of_hours_list" => "Bags of hours list",
+    "bag_of_hours_type" => "Bag of hours type",
+    "bag_of_hours_type_description" => "Bag of hours type description",
+    "contracted_hours" => "Contracted hours",
+    "hours_available" => "Hours available",
+    "total_price" => "Total price",
 ];

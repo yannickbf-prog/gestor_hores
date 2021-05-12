@@ -104,6 +104,7 @@ return [
 
     'create' => 'Crear',
     'new' => 'Nou',
+    'new_f' => 'Nova',
     
     'project' => 'Projecte',
     'projects' => 'Projectes',
@@ -131,5 +132,12 @@ return [
     'phone_min' => 'El telèfon ha de tenir 9 dijits com a mínim',
     'phone_max' => 'El telèfon no pot tindre mes de 15 dígits',
     
-    
+    'bags_of_hours' => "Bosses d'hores",
+    'bag_of_hours' => "Bossa d'hores",
+    "bags_of_hours_list" => "Llista de bosses d'hores",
+    "bag_of_hours_type" => "Tipus de bossa d'hores",
+    "bag_of_hours_type_description" => "Descripció de tipus de bossa d'hores",
+    "contracted_hours" => "Hores contractades",
+    "hours_available" => "Hores disponibles",
+    "total_price" => "Preu total",
 ];

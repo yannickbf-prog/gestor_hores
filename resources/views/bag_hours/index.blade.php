@@ -18,7 +18,7 @@
             <h2>{{ __('message.bags_of_hours') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.bags_of_hours') }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.new_f') }} {{ __('message.bag_of_hours') }}</a>
 
         </div>
     </div>
@@ -65,7 +65,7 @@
             <h3>{{ __('message.bags_of_hours_list') }}</h3>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.bags_of_hours') }}</a>
+            <a class="btn btn-success" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.new_f') }} {{ __('message.bag_of_hours') }}</a>
         </div>
     </div>
 </div>
@@ -90,8 +90,8 @@
         <td>{{ $value->type_name }}</td>
         <td>{{ $value->project_name }}</td>
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
-        <td>{{ $value->contracted_hours }}</td>
-        <td>{{ $value->hours_available }}</td>
+        <td>{{ $value->contracted_hours }}h</td>
+        <td>{{ $value->hours_available }}h</td>
         <td>{{ $value->total_price }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
