@@ -43,7 +43,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.hour_price') }}:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="{{ __('message.enter')." ".__('message.hour_price') }}" value="@if(session('type_bag_hour_price') != '%'){{ number_format(session('type_bag_hour_price'), 2, ',', ' ')}}@endif">
+                <input type="text" name="hour_price" class="form-control" placeholder="{{ __('message.enter')." ".__('message.hour_price') }}" value="@if(session('type_bag_hour_price') != '%'){{ number_format(session('type_bag_hour_price'), 2, ',', '.')}}@endif">
             </div>
         </div>
     </div>
@@ -137,7 +137,7 @@
         <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>
         <td>@if ($value->description == "") {{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
-        <td>{{ number_format($value->hour_price, 2, ',', ' ') }}€</td>
+        <td>{{ number_format($value->hour_price, 2, ',', '.') }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('bag_hours_types.destroy',[$value->id, $lang]) }}" method="POST"> 

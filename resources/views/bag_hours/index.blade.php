@@ -69,7 +69,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.hour_price') }}:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.hour_price') }}" value="@if(session('bag_hour_hour_price') != '%'){{ number_format(session('bag_hour_hour_price'), 2, ',', ' ') }}@endif">
+                <input type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.hour_price') }}" value="@if(session('bag_hour_hour_price') != '%'){{ number_format(session('bag_hour_hour_price'), 2, ',', '.') }}@endif">
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.total_price') }}:</strong>
-                <input type="text" name="total_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.total_price') }}" value="@if(session('bag_hour_total_price') != '%'){{ number_format(session('bag_hour_total_price'), 2, ',', ' ') }}@endif">
+                <input type="text" name="total_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.total_price') }}" value="@if(session('bag_hour_total_price') != '%'){{ number_format(session('bag_hour_total_price'), 2, ',', '.') }}@endif">
             </div>
         </div>
     </div>
