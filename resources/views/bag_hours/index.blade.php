@@ -57,6 +57,22 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.hours_available') }}:</strong>
+                <input type="text" name="hours_available" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.hours_available') }}" value="@if(session('bag_hour_hours_available') != '%'){{session('bag_hour_hours_available')}}@endif">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{ __('message.hour_price') }}:</strong>
+                <input type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.hour_price') }}" value="@if(session('bag_hour_hour_price') != '%'){{ number_format(session('bag_hour_hour_price'), 2, ',', ' ')}}@endif">
+            </div>
+        </div>
+    </div>
     
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
@@ -101,7 +117,7 @@
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ $value->contracted_hours }}h</td>
         <td>{{ $value->hours_available }}h</td>
-        <td>{{ str_replace(".", ",", $value->type_hour_price) }}€</td>
+        <td>{{ number_format($value->type_hour_price, 2, ',', ' ') }}€</td>
         <td>{{ str_replace(".", ",", $value->total_price) }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
@@ -137,7 +153,7 @@
         </td>
     </tr>
     @empty
-    <li>{{__('message.no')}} {{__('message.projects')}} {{__('message.to_show')}}</li>
+    <li>{{__('message.no')}} {{__('message.bags_of_hours')}} {{__('message.to_show')}}</li>
     @endforelse
 
 </table> 

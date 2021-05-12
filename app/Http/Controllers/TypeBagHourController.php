@@ -37,6 +37,9 @@ class TypeBagHourController extends Controller {
                 
         $name = session('type_bag_hour_name', "%");
         $hour_price = session('type_bag_hour_price', "%");
+        
+        
+        
         $order = session('type_bag_hour_order', "asc");
         
         $num_records = session('type_bag_hour_num_records', 10);

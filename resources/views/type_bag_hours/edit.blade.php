@@ -45,7 +45,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>*{{__('message.hour_price')}}:</strong>
-                <input type="text" name="hour_price" value="{{old('hour_price', $typeBagHour->hour_price)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.hour_price')}}">
+                <input type="text" name="hour_price" value="{{old('hour_price',  number_format($typeBagHour->hour_price, 2, ',', ' '))}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.hour_price')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
