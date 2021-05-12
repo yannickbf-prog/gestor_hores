@@ -19,7 +19,7 @@ class BagHourController extends Controller
         
         $data = BagHour::join('projects', 'bag_hours.project_id', '=', 'projects.id')
             ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
-            ->select('projects.*', 'projects.id AS project_id', 'projects.name AS project_name', 'type_bag_hours.id AS type_id', 'type_bag_hours.name AS type_name', 'type_bag_hours.hour_price AS type_hour_price')
+            ->select('bag_hours.*', 'projects.id AS project_id', 'projects.name AS project_name', 'type_bag_hours.id AS type_id', 'type_bag_hours.name AS type_name', 'type_bag_hours.hour_price AS type_hour_price')
             ->paginate(2);
                 
         

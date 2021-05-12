@@ -87,10 +87,12 @@
     @forelse ($data as $key => $value)
     <tr>
         <td>{{ ++$i }}</td>
-        <td>{{ $value->name }}</td>
-        <td>{{ $value->customer_name }}</td>
-        <td>@if($value->active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
+        <td>{{ $value->type_name }}</td>
+        <td>{{ $value->project_name }}</td>
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+        <td>{{ $value->contracted_hours }}</td>
+        <td>{{ $value->hours_available }}</td>
+        <td>{{ $value->total_price }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
