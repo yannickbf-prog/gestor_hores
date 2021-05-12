@@ -38,7 +38,9 @@ class TypeBagHourController extends Controller {
         $name = session('type_bag_hour_name', "%");
         $hour_price = session('type_bag_hour_price', "%");
         
-        
+        if(strlen(substr(strrchr($hour_price, "."), 1)) == 1){
+            $hour_price = number_format($hour_price, 2, '.', '');
+        }
         
         $order = session('type_bag_hour_order', "asc");
         
