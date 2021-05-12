@@ -23,6 +23,7 @@ class BagHourController extends Controller
             ($request['contracted_hours'] == "") ? session(['bag_hour_contracted_hours' => '%']) : session(['bag_hour_contracted_hours' => $request['contracted_hours']]);
             ($request['hours_available'] == "") ? session(['bag_hour_hours_available' => '%']) : session(['bag_hour_hours_available' => $request['hours_available']]);
             ($request['hour_price'] == "") ? session(['bag_hour_hour_price' => '%']) : session(['bag_hour_hour_price' => str_replace(",", ".", $request['hour_price'])]);        
+            ($request['total_price'] == "") ? session(['bag_hour_total_price' => '%']) : session(['bag_hour_total_price' => str_replace(",", ".", $request['total_price'])]);        
         }
         
         $type = session('bag_hour_type', "%");
@@ -36,6 +37,12 @@ class BagHourController extends Controller
             $hour_price = number_format($hour_price, 2, '.', '');
         }
         
+        $total_price = session('bag_hour_total_price', "%");
+        
+        if($total_price != "%"){
+            $total_price = number_format($total_price, 2, '.', '');
+        }
+        
         $data = BagHour::join('projects', 'bag_hours.project_id', '=', 'projects.id')
             ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
             ->select('bag_hours.*', 'projects.id AS project_id', 'projects.name AS project_name', 'type_bag_hours.id AS type_id', 'type_bag_hours.name AS type_name', 'type_bag_hours.hour_price AS type_hour_price')
@@ -44,6 +51,7 @@ class BagHourController extends Controller
             ->where('contracted_hours', 'like', $contracted_hours)
             ->where('hours_available', 'like', $hours_available)
             ->where('hour_price', 'like', $hour_price)
+            ->where('hour_price', 'like', $total_price)
             ->paginate(2);
                 
         
