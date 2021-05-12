@@ -31,7 +31,8 @@ class BagHourController extends Controller
         $hours_available = session('bag_hour_hours_available', "%");
         
         $hour_price = session('bag_hour_hour_price', "%");
-        if(strlen(substr(strrchr($hour_price, "."), 1)) == 1){
+        
+        if($hour_price != "%"){
             $hour_price = number_format($hour_price, 2, '.', '');
         }
         

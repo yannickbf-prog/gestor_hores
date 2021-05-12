@@ -125,8 +125,8 @@
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ $value->contracted_hours }}h</td>
         <td>{{ $value->hours_available }}h</td>
-        <td>{{ number_format($value->type_hour_price, 2, ',', ' ') }}€</td>
-        <td>{{ str_replace(".", ",", $value->total_price) }}€</td>
+        <td>{{ number_format($value->type_hour_price, 2, ',', '.') }}€</td>
+        <td style="width:100px">{{ number_format($value->total_price, 2, ',', '.') }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
         <td>
             <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
