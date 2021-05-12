@@ -29,7 +29,11 @@ class BagHourController extends Controller
         $project = session('bag_hour_project', "%");
         $contracted_hours = session('bag_hour_contracted_hours', "%");
         $hours_available = session('bag_hour_hours_available', "%");
+        
         $hour_price = session('bag_hour_hour_price', "%");
+        if(strlen(substr(strrchr($hour_price, "."), 1)) == 1){
+            $hour_price = number_format($hour_price, 2, '.', '');
+        }
         
         $data = BagHour::join('projects', 'bag_hours.project_id', '=', 'projects.id')
             ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
