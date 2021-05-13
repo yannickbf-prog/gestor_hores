@@ -10,9 +10,10 @@ function calculateTotalPriceBtn() {
 
     if(Number.isInteger(parseInt(contractedHours))){
         let totalPrice = hourPrice * contractedHours;
-        let totalPriceInput = document.getElementsByName("total_price")[0].value;
-        //alert(totalPrice);
-        totalPriceInput = totalPrice;
+        document.getElementsByName("total_price")[0].value = Number.parseFloat(totalPrice).toFixed(2);
+        
+        //Show info of price calculate
+        let strInfo = hourPrice+"€ x "+contractedHours+"h = "
     }
     
 

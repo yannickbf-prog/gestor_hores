@@ -83,7 +83,13 @@
         </div>
          
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <button class="btn btn-primary" id="calculatePrice">{{__('message.calculate_price')}}</button>
+            <div class="alert alert-info mt-2" id="alertCalculatedPrice">
+                <strong></strong>
+            </div>
+        </div>
+         
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <a class="btn btn-primary" id="calculatePrice">{{__('message.calculate_price')}}</a>
         </div>
          
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
