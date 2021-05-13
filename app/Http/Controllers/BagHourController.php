@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BagHour;
 use Illuminate\Http\Request;
-
+use DB;
 
 class BagHourController extends Controller
 {
@@ -99,7 +99,12 @@ class BagHourController extends Controller
      */
     public function create()
     {
-        //
+        $lang = setGetLang();
+        
+        $bags_hours_types = DB::table('type_bag_hours')->select("id", "name", "hour_price")->get();
+        $projects = DB::table('projects')->select("id", "name")->get();
+        
+        return view('bag_hours.create', compact(['lang','bags_hours_types','projects']));
     }
 
     /**

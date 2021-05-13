@@ -136,6 +136,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/projectes/{project}/editar", [ProjectController::class, 'edit'])->name('ca_projects.edit');
     
     //Control panel - Bag hours - Operations 
+    Route::post("control-panel/hour-bags/lang/{lang}", [BagHourController::class, 'store'])->name('bag_hours.store');
     Route::post('control-panel/hour-bags/delete_filters', [BagHourController::class, 'deleteFilters'])->name('bag_hours.delete_filters');  
     
     //Control panel - Bag hours - en
