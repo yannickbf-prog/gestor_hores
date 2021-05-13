@@ -9,9 +9,13 @@ class BagHour extends Model
 {
     use HasFactory;
     
+    public $timestamps = true;
+    
     protected $fillable = [
         'project_id',
         'contracted_hours',
        
     ];
+    
+    
 }

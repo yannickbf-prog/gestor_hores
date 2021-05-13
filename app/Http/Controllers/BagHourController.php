@@ -119,9 +119,9 @@ class BagHourController extends Controller
     {
         App::setLocale($lang);
         
-        $request->validated();/*
+        $request->validated();
 
-        BagHour::create($request->validated());*/
+        //BagHour::create($request->validated());
         
         DB::table('bag_hours')->insert([
             'project_id' => $request->get("type_id"),
@@ -129,6 +129,9 @@ class BagHourController extends Controller
             'contracted_hours' => $request->get("contracted_hours"),
             'hours_available' => $request->get("contracted_hours"),
             'total_price' => $request->get("total_price"),
+            'created_at' => now(),
+            'updated_at' => now(),
+            
         ]);
 
         return $request->get("type_id");

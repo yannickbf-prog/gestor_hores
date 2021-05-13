@@ -21,6 +21,8 @@
             <file>file:/var/www/gestor_hores/resources/views/type_bag_hours/create.blade.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
             <file>file:/var/www/gestor_hores/resources/views/layout.blade.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateBagHourRequest.php</file>
+            <file>file:/var/www/gestor_hores/app/Models/BagHour.php</file>
         </group>
     </open-files>
 </project-private>
