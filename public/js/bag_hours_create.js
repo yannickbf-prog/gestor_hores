@@ -9,17 +9,21 @@ function calculateTotalPriceBtn() {
     let contractedHours = document.getElementsByName("contracted_hours")[0].value;
 
     if(Number.isInteger(parseInt(contractedHours))){
-        let totalPrice = hourPrice * contractedHours;
-        document.getElementsByName("total_price")[0].value = Number.parseFloat(totalPrice).toFixed(2);
+        let totalPrice = Number.parseFloat(hourPrice * contractedHours).toFixed(2);
+        document.getElementsByName("total_price")[0].value = totalPrice.toString().replace(/\./g,',');
         
         //Show info of price calculate
-        let strInfo = hourPrice+"€ x "+contractedHours+"h = "
+        let strInfo = hourPrice.toString().replace(/\./g,',')+"€ x "+contractedHours+"h = "+totalPrice.toString().replace(/\./g,',')+"€";
+
+        document.getElementById("alertCalculatedPrice").classList.remove("d-none");
+        document.getElementById("alertCalculatedPrice").getElementsByTagName("strong")[0].innerText = strInfo;
     }
     
 
 } 
 
 window.onload = function () {
+    document.getElementById("hourPrice")
     //Load popover btn listeners
     document.getElementById("calculatePrice").addEventListener("click", calculateTotalPriceBtn);
 };

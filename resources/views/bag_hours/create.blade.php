@@ -45,6 +45,7 @@
                     <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
                     @endforeach
                 </select>
+                <strong>*{{ __('message.hour_price') }}: </strong><span id="hourPrice"></span>
                 @else
                 <li>{{ __('message.no') }} {{ __('message.bag_hour_type') }} {{ __('message.avalible') }} </li>
                 @endif
@@ -83,7 +84,7 @@
         </div>
          
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="alert alert-info mt-2" id="alertCalculatedPrice">
+            <div class="alert alert-info mt-2 d-none" id="alertCalculatedPrice">
                 <strong></strong>
             </div>
         </div>
