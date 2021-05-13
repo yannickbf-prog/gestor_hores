@@ -42,7 +42,7 @@
                 @if (count($bags_hours_types) > 0)
                 <select name="type_id">
                     @foreach($bags_hours_types as $key => $bag_hours_type)
-                    <option value="{{ $bag_hours_type->id }}">{{$bag_hours_type->name}}</option>
+                    <option value="{{ '{"bht_id":'.$bag_hours_type->id.',"bht_hp":'.$bag_hours_type->hour_price.'}' }}">{{$bag_hours_type->name}}</option>
                     @endforeach
                 </select>
                 @else
@@ -80,6 +80,10 @@
                 <strong>*{{__('message.total_price')}}:</strong>
                 <input type="text" name="total_price" class="form-control" placeholder="{{__('message.enter')." ".__('message.total_price')}}" value="{{old('total_price')}}">
             </div>
+        </div>
+         
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <button class="btn btn-primary" id="calculatePrice">{{__('message.calculate_price')}}</button>
         </div>
          
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
