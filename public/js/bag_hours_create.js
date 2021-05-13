@@ -2,7 +2,9 @@ function calculateTotalPriceBtn() {
 
     var result = document.getElementsByName("type_id")[0].value;
 
-    alert(result);
+    result = JSON.parse(result); 
+    
+    alert(result.num_sequence);
 
 } 
 
