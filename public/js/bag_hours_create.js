@@ -1,10 +1,20 @@
 function calculateTotalPriceBtn() { 
 
-    var result = document.getElementsByName("type_id")[0].value;
+    let strBht = document.getElementsByName("type_id")[0].value;
 
-    result = JSON.parse(result); 
+    let objBht = JSON.parse(strBht);
+
+    let hourPrice = objBht.bht_hp;
     
-    alert(result.num_sequence);
+    let contractedHours = document.getElementsByName("contracted_hours")[0].value;
+
+    if(Number.isInteger(parseInt(contractedHours))){
+        let totalPrice = hourPrice * contractedHours;
+        let totalPriceInput = document.getElementsByName("total_price")[0].value;
+        //alert(totalPrice);
+        totalPriceInput = totalPrice;
+    }
+    
 
 } 
 

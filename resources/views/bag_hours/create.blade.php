@@ -42,7 +42,7 @@
                 @if (count($bags_hours_types) > 0)
                 <select name="type_id">
                     @foreach($bags_hours_types as $key => $bag_hours_type)
-                    <option value='{"num_sequence":{{$bag_hours_type->id}}}'>{{$bag_hours_type->name}}</option>
+                    <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
                     @endforeach
                 </select>
                 @else
