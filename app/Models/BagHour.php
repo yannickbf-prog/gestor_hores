@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BagHour extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'project_id',
+        'contracted_hours',
+       
+    ];
 }

@@ -31,7 +31,7 @@
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
-<form action="{{ route('bag_hours.store', $lang) }}" method="POST">
+<form action="{{ route('bag_hours.store',$lang) }}" method="POST">
     @csrf
   
      <div class="row">
@@ -45,7 +45,7 @@
                     <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
                     @endforeach
                 </select>
-                <strong>*{{ __('message.hour_price') }}: </strong><span id="hourPrice"></span>
+                <strong>*{{ __('message.hour_price') }}: </strong><span id="hourPrice"></span><strong> €</strong>
                 @else
                 <li>{{ __('message.no') }} {{ __('message.bag_hour_type') }} {{ __('message.avalible') }} </li>
                 @endif

@@ -21,7 +21,7 @@ class CreateBagHoursTable extends Migration
             $table->foreign('type_id')->references('id')->on('type_bag_hours');
             $table->integer('contracted_hours');
             $table->integer('hours_available');
-            $table->double('total_price');
+            $table->double('total_price',7,2);
             $table->timestamps();
         });
     }

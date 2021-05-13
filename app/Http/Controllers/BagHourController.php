@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\BagHour;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Requests\CreateBagHourRequest;
+use Illuminate\Support\Facades\App;
 
 class BagHourController extends Controller
 {
@@ -113,9 +115,23 @@ class BagHourController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateBagHourRequest $request, $lang)
     {
-        //
+        App::setLocale($lang);
+        
+        $request->validated();/*
+
+        BagHour::create($request->validated());*/
+        
+        DB::table('bag_hours')->insert([
+            'project_id' => $request->get("type_id"),
+            'type_id' => $request->get("type_id"),
+            'contracted_hours' => $request->get("contracted_hours"),
+            'hours_available' => $request->get("contracted_hours"),
+            'total_price' => $request->get("total_price"),
+        ]);
+
+        return $request->get("type_id");
     }
 
     /**

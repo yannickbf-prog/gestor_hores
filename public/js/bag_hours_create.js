@@ -22,8 +22,29 @@ function calculateTotalPriceBtn() {
 
 } 
 
+function selectChange(){
+    let strBht = document.getElementsByName("type_id")[0].value;
+
+    let objBht = JSON.parse(strBht);
+
+    let hourPrice = objBht.bht_hp;
+
+    document.getElementById("hourPrice").innerText = hourPrice;
+}
+
 window.onload = function () {
-    document.getElementById("hourPrice")
+    //Show hour price of bag hour type selected onload page
+    let strBht = document.getElementsByName("type_id")[0].value;
+
+    let objBht = JSON.parse(strBht);
+
+    let hourPrice = objBht.bht_hp;
+
+    document.getElementById("hourPrice").innerText = hourPrice;
+
     //Load popover btn listeners
     document.getElementById("calculatePrice").addEventListener("click", calculateTotalPriceBtn);
+
+    //On change select we change hour price
+    document.getElementsByName("type_id")[0].addEventListener("change",selectChange);
 };
