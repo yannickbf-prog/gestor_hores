@@ -15,6 +15,8 @@ class HourEntryController extends Controller
      */
     public function index()
     {
+        $lang = setGetLang();
+        
         $data = DB::table('users_projects')
                 ->join('users', 'users_projects.user_id', '=', 'users.id')
                 ->join('projects', 'users_projects.project_id', '=', 'projects.id')
@@ -23,7 +25,10 @@ class HourEntryController extends Controller
                 ->join('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
                 ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                 ->select('users_projects.*', 'users.name', 'projects.name', 'customers.name', 'type_bag_hours.name', 'hours_entry.*')
-                ->get();
+                ->paginate(5);
+        
+        return view('entry_hours.index', compact(['lang', 'data']))
+                        ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
