@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class HourEntry extends Model
 {
     use HasFactory;
+    
+    protected $dates = ['updated_at'];
 }

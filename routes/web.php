@@ -177,6 +177,7 @@ Route::group(['middleware' => 'admin'], function () {
     
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
+    Route::get("en/control-panel/time-entries/create", [HourEntryController::class, 'create'])->name('en_time_entries.create');
 });
 
 //Entry hours - Workers section - Middleware in controller

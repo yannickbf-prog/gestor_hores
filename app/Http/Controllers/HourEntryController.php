@@ -24,7 +24,9 @@ class HourEntryController extends Controller
                 ->join('hours_entry', 'users_projects.id', '=', 'hours_entry.user_project_id')
                 ->join('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
                 ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
-                ->select('users_projects.*', 'users.name', 'projects.name', 'customers.name', 'type_bag_hours.name', 'hours_entry.*')
+                ->select('users.nickname AS user_name', 'projects.name AS project_name', 'customers.name AS customer_name', 
+                    'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.validate AS hour_entry_validate', 
+                    'hours_entry.created_at AS hour_entry_created_at')
                 ->paginate(5);
         
         return view('entry_hours.index', compact(['lang', 'data']))
@@ -38,7 +40,11 @@ class HourEntryController extends Controller
      */
     public function create()
     {
-        //
+        $lang = setGetLang();
+        
+        $customers = Customer::select("id", "name")->get();
+        
+        return view('projects.create', compact('customers'))->with('lang', $lang);
     }
 
     /**

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\EntryHours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Auth;
+use DB;
 
 class EntryHoursController extends Controller
 {
@@ -18,11 +20,26 @@ class EntryHoursController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $lang = setGetLang();
         
-        return view('entry_hours_worker.index', compact('lang'));
+        $user_id = Auth::user()->getUserId();
+        
+        $data = DB::table('users_projects')
+                ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+                ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                ->where('users_projects.user_id', $user_id)
+                ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
+                ->get();
+        
+        if ($request->has('_token')) {
+            echo "<script>";
+            echo "alert('hello');";
+            echo "</script>";
+        }
+        
+        return view('entry_hours_worker.index', compact(['lang', 'data']));
     }
 
     /**

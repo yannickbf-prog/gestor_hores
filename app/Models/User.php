@@ -54,6 +54,10 @@ class User extends Authenticatable
        return $this->role === 'user';
     }
     
+    public function getUserId() {
+       return $this->id;
+    }
+    
     public function setPasswordAttribute($password)
     {   
         if ( $password !== null ) {
