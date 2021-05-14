@@ -45,10 +45,13 @@ class EntryHoursController extends Controller
                     ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
                     ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                     ->where('projects.id', $request['projects'])
+                    ->select('type_bag_hours.name AS type_bag_hour_name', 'bag_hours.id AS bag_hour_id')
                     ->get();
+            
+            return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours']));
         }
-        
-        return view('entry_hours_worker.index', compact(['lang', 'data']));
+        $bag_hours = [];
+        return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours']));
     }
 
     /**
