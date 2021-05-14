@@ -22,6 +22,7 @@ class HourEntryController extends Controller
                 ->join('hours_entry', 'users_projects.id', '=', 'hours_entry.user_project_id')
                 ->join('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
                 ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
+                ->select('users_projects.*', 'users.name', 'projects.name', 'customers.name', 'type_bag_hours.name', 'hours_entry.*')
                 ->get();
     }
 
