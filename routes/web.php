@@ -181,6 +181,8 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 //Entry hours - Workers section - Middleware in controller
+Route::post("entry-hours-worked/lang/{lang}", [EntryHoursController::class, 'store'])->name('en_entry_hours.store');
+
 Route::get("en/entry-hours-worked", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
 Route::get("es/entrar-horas-trabajadas", [EntryHoursController::class, 'index'])->name('es_entry_hours.index');
 Route::get("ca/entrar-hores-treballades", [EntryHoursController::class, 'index'])->name('ca_entry_hours.index');

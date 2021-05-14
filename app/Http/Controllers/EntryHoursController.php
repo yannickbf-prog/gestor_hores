@@ -35,7 +35,7 @@ class EntryHoursController extends Controller
         
         if ($request->has('_token')) {
             echo "<script>";
-            echo "alert('hello');";
+            echo "document.getElementById('secondForm').classList.remove('invisible')";
             echo "</script>";
         }
         
