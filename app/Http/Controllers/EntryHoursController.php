@@ -34,9 +34,18 @@ class EntryHoursController extends Controller
                 ->get();
         
         if ($request->has('_token')) {
+            
             echo "<script>";
+            echo "window.onload = function () {";
             echo "document.getElementById('secondForm').classList.remove('invisible')";
+            echo "};";
             echo "</script>";
+            
+            $bag_hours = DB::table('projects')
+                    ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
+                    ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
+                    ->where('projects.id', $request['projects'])
+                    ->get();
         }
         
         return view('entry_hours_worker.index', compact(['lang', 'data']));
