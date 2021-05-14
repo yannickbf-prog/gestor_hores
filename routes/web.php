@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\BagHourController;
 use App\Http\Controllers\TypeBagHourController;
+use App\Http\Controllers\HourEntryController;
 use App\Http\Controllers\EntryHoursController;
 
 use App\Http\Controllers\LocalizationController;
@@ -172,7 +173,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/tipus-bosses-hores/crear", [TypeBagHourController::class, 'create'])->name('ca_bag_hours_types.create');
     Route::get("ca/panell-de-control/tipus-bosses-hores/{typeBagHour}/editar", [TypeBagHourController::class, 'edit'])->name('ca_bag_hours_types.edit');
     
+    // Control panel - Time entries - Operations
     
+    // Control panel - Time entries - en
+    Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
 });
 
 //Entry hours - Workers section - Middleware in controller

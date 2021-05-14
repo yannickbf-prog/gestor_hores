@@ -134,7 +134,8 @@ class BagHourController extends Controller
             
         ]);
 
-        return $request->get("type_id");
+        return redirect()->route($lang.'_bag_hours.index')
+                        ->with('success', __('message.bag_of_hours')." ".__('message.created_f'));
     }
 
     /**
