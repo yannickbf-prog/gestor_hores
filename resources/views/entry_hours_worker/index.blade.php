@@ -28,14 +28,14 @@
         </form>
     </div>
     <div class="col-xs-8 col-sm-8 col-md-8 invisible" id="secondForm">
-        <form action="{{ route('bag_hours.store',$lang) }}" method="POST">
+        <form action="{{ route('entry_hours.store',$lang) }}" method="POST">
             @csrf
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <h3>Service</h3>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 @if (count($bag_hours) > 0)
-                <select name="bag_hours_in_project">
+                <select name="bag_hour_in_project">
                     @foreach($bag_hours as $key => $value)
                     <option value='{{$value->bag_hour_id}}'>{{$value->type_bag_hour_name}}</option>
                     @endforeach
@@ -52,6 +52,9 @@
                     <input type="text" name="hours_worked" class="form-control" placeholder="{{__('message.enter')." ".__('message.hours_worked')}}" value="{{old('hours_worked')}}">
                 </div>
             </div>
+            
+            <input type="hidden" name="user_id" value="{{$user_id}}">
+            <input type="hidden" name="project_id" value="{{$project}}">
             
             <button type="submit" class="btn btn-success">{{ __('message.go') }}</button>
             

@@ -41,6 +41,8 @@ class EntryHoursController extends Controller
             echo "};";
             echo "</script>";
             
+            $project = $request['projects'];
+            
             $bag_hours = DB::table('projects')
                     ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
                     ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
@@ -48,10 +50,11 @@ class EntryHoursController extends Controller
                     ->select('type_bag_hours.name AS type_bag_hour_name', 'bag_hours.id AS bag_hour_id')
                     ->get();
             
-            return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours']));
+            return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project']));
         }
         $bag_hours = [];
-        return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours']));
+        $project = "";
+        return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project']));
     }
 
     /**
@@ -61,7 +64,7 @@ class EntryHoursController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -70,10 +73,30 @@ class EntryHoursController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $lang)
     {
-        //
+        $user_project_id = DB::table('users_projects')
+                ->where('user_id', $request['user_id'])
+                ->where('project_id', $request['project_id'])
+                ->select('id')
+                ->get();
+        
+        $bag_hour_id = $request['bag_hour_in_project'];
+        
+        $hours = $request['hours_worked'];
+        
+        DB::table('hours_entry')->insert([
+            'user_project_id' => $user_project_id[0]->id,
+            'bag_hours_id' => $bag_hour_id,
+            'hours' => $hours,
+            'validate' => 0,
+            'created_at' => now(),
+            'updated_at' => now(), 
+        ]);
+        
+        return view('entry_hours_worker.success', compact('lang'));
     }
+    
 
     /**
      * Display the specified resource.

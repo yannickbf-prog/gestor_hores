@@ -174,14 +174,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/tipus-bosses-hores/{typeBagHour}/editar", [TypeBagHourController::class, 'edit'])->name('ca_bag_hours_types.edit');
     
     // Control panel - Time entries - Operations
-    
+    Route::post("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
     Route::get("en/control-panel/time-entries/create", [HourEntryController::class, 'create'])->name('en_time_entries.create');
 });
 
 //Entry hours - Workers section - Middleware in controller
-Route::post("entry-hours-worked/lang/{lang}", [EntryHoursController::class, 'store'])->name('en_entry_hours.store');
+Route::post("entry-hours-worked/lang/{lang}", [EntryHoursController::class, 'store'])->name('entry_hours.store');
 
 Route::get("en/entry-hours-worked", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
 Route::get("es/entrar-horas-trabajadas", [EntryHoursController::class, 'index'])->name('es_entry_hours.index');

@@ -50,7 +50,40 @@
         <td>{{ ($value->hour_entry_validate == '1') ? __('message.validated') : __('message.invalidated') }}</td>
         <td>{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
         <td>
-            
+            @if($value->hour_entry_validate == '0')
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#validateModal">
+                {{ __('message.validate') }}
+            </button>
+            @else
+            @endif
+            <!-- Modal -->
+            <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="validateModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ __('message.validate') }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to validate this entry of hours?	
+                            info...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                            <form action="{{ route('entry_hours.validate', $lang) }}" method="POST">
+                                @csrf
+                                @method('POST')      
+                                <input name="bag_hour_id" type="hidden" value="{{$value->bag_hour_id}}">
+                                <input name="hours_entry_id" type="hidden" value="{{$value->hours_entry_id}}">
+                                <input name="hours" type="hidden" value="{{$value->hour_entry_hours}}">
+                                <button type="submit" class="btn btn-success">{{ __('message.validate') }}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </td>
     </tr>
     @empty
@@ -63,5 +96,5 @@
 </div>
 @endsection
 @section('js')
-    <script type="text/javascript" src="{{ URL::asset('js/hour_bags_index.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/hour_bags_index.js') }}"></script>
 @endsection
