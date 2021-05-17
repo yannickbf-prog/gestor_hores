@@ -33,12 +33,11 @@ class HourEntryController extends Controller {
     }
 
     public function validateEntryHour($id) {
-        $id_int = intval($id) - 1;
 
-        $affected = DB::table('hours_entry')
-                ->where('hours_entry.id', $id_int)
+        DB::table('hours_entry')
+                ->where('hours_entry.id', $id)
                 ->update(['validate' => 1]);
-        
+
         return redirect()->route('en_time_entries.index');
     }
 

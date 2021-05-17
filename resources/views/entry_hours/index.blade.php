@@ -54,11 +54,6 @@
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#validateModal">
                 {{ __('message.validate') }}
             </button>
-            @else
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#inValidateModal">
-                {{ __('message.invalidate') }}
-            </button>
-            @endif
             <!-- Modal Validate-->
             <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="validateModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -74,18 +69,18 @@
                             info...
                         </div>
                         <div class="modal-footer">
-                            <form action="{{ route('entry_hours.validate', $value->hours_entry_id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                
-                               
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                <button type="submit" class="btn btn-success">{{ __('message.validate') }}</button>
-                            </form>
+                           <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                           <a class="btn btn-success" href="{{ route('entry_hours.validate',$value->hours_entry_id) }}">{{ __('message.validate') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
+            @else
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#inValidateModal">
+                {{ __('message.invalidate') }}
+            </button>
+            @endif
+            
         </td>
         <td>{{ $value->hours_entry_id }}</td>
     </tr>
