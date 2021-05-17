@@ -32,6 +32,7 @@ return [
     'hours' => 'Hours',
     'creation_day' => 'Creation day',
     'validate' => 'Validate',
+    'invalidate' => 'Invalidate',
     
     'company' => 'Company',
     'company_info_providing' => "Information on the company providing the services",
@@ -140,4 +141,19 @@ return [
     "contracted_hours" => "Contracted hours",
     "hours_available" => "Hours available",
     "total_price" => "Total price",
+    
+    'entry_hours_worked' => 'Entry hours worked',
+    'select_project' => 'Select project',
+    'service_on_project' => 'Service on Project',
+    'select' => 'Select',
+    'service' => 'Service',
+    'hours_worked' => 'Worked hours',
+    'hours_worked_successfully_recorded' => 'Hours worked successfully recorded',
+    'entry_more' => 'Entry more',
+    
+    'time_entries' => "Time entries",
+    'time_entries_list' => "Time enrtries list",
+    "time_entry" => "Time entry",
+    'validated' => "Validated",
+    'invalidated' => 'Invalidted'
 ];

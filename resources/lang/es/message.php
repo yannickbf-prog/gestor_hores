@@ -33,6 +33,7 @@ return [
     'hours' => 'Horas',
     'creation_day' => 'Fecha de creación',
     'validate' => 'Validar',
+    'invalidate' => 'Invalidar',
     
     'company' => 'Empresa',
     'company_info_providing' => 'Información de la empresa que presta los servicios',
@@ -139,4 +140,19 @@ return [
     "contracted_hours" => "Horas contractadas",
     "hours_available" => "Horas disponibles",
     "total_price" => "Precio total",
+    
+    'entry_hours_worked' => 'Entrar horas trabajadas',
+    'select_project' => 'Seleccionar proyecto',
+    'service_on_project' => 'Servicio en Proyecto',
+    'select' => 'Selecciona',
+    'service' => 'Servicio',
+    'hours_worked' => 'Horas trabajadas',
+    'hours_worked_successfully_recorded' => 'Horas trabajadas registradas con éxito',
+    'entry_more' => 'Entrar mas',
+    
+    'time_entries' => "Entradas de horas",
+    'time_entries_list' => "Lista de entradas de horas",
+    "time_entry" => "Entrada de horas",
+    'validated' => "Validada",
+    'invalidated' => 'Invalidada'
 ];

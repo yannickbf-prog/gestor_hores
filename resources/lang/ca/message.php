@@ -33,6 +33,7 @@ return [
     'hours' => 'Hores',
     'creation_day' => 'Data de creació',
     'validate' => 'Validar',
+    'invalidate' => 'Invalidar',
     
     'company' => 'Empresa',
     'company_info_providing' => "Informació de l'empresa que presta els serveis",
@@ -140,4 +141,19 @@ return [
     "contracted_hours" => "Hores contractades",
     "hours_available" => "Hores disponibles",
     "total_price" => "Preu total",
+    
+    'entry_hours_worked' => 'Entrar hores treballades',
+    'select_project' => 'Seleccionar projecte',
+    'service_on_project' => 'Servei en Projecte',
+    'select' => 'Selecciona',
+    'service' => 'Servei',
+    'hours_worked' => 'Hores treballades',
+    'hours_worked_successfully_recorded' => 'Hores treballades registrades amb èxit',
+    'entry_more' => 'Entrar més',
+    
+    'time_entries' => "Entrades d'hores",
+    'time_entries_list' => "Llista d'entrades d'hores",
+    "time_entry" => "Entrada d'hores",
+    'validated' => "Validada",
+    'invalidated' => 'Invalidada'
 ];

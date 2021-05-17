@@ -41,20 +41,27 @@ class EntryHoursController extends Controller
             echo "};";
             echo "</script>";
             
-            $project = $request['projects'];
+            $project_id = $request['projects'];
+            
+            $customer_name = DB::table('customers')
+                    ->join('projects', 'customers.id', '=', 'projects.customer_id')
+                    ->where('projects.id', $project_id)
+                    ->select('customers.name AS customer_name')
+                    ->first();
             
             $bag_hours = DB::table('projects')
                     ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
                     ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
-                    ->where('projects.id', $request['projects'])
-                    ->select('type_bag_hours.name AS type_bag_hour_name', 'bag_hours.id AS bag_hour_id')
+                    ->where('projects.id', $project_id)
+                    ->select('type_bag_hours.name AS type_bag_hour_name', 'bag_hours.id AS bag_hour_id', 'projects.name AS project_name')
                     ->get();
             
-            return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project']));
+            return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project_id', 'customer_name']));
         }
         $bag_hours = [];
-        $project = "";
-        return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project']));
+        $project_id = "";
+        $customer_name = "";
+        return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project_id', 'customer_name']));
     }
 
     /**
@@ -73,7 +80,7 @@ class EntryHoursController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $lang)
+    public function store(Request $request)
     {
         $user_project_id = DB::table('users_projects')
                 ->where('user_id', $request['user_id'])
@@ -93,6 +100,8 @@ class EntryHoursController extends Controller
             'created_at' => now(),
             'updated_at' => now(), 
         ]);
+        
+        $lang = setGetLang();
         
         return view('entry_hours_worker.success', compact('lang'));
     }

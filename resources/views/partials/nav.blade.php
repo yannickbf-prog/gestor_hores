@@ -6,4 +6,5 @@
   <a class="nav-link {{ setActive('*projects.*') }}" href="{{ route($lang.'_projects.index') }}">{{ __('message.projects') }}</a>
   <a class="nav-link {{ setActive('*bag_hours.*') }}" href="{{ route($lang.'_bag_hours.index') }}">{{ __('message.bags_of_hours') }}</a>
   <a class="nav-link {{ setActive('*bag_hours_types.*') }}" href="{{ route($lang.'_bag_hours_types.index') }}">{{ __('message.bag_hours_types') }}</a>
+  <a class="nav-link {{ setActive('*time_entries.*') }}" href="{{ route($lang.'_time_entries.index') }}">{{ __('message.time_entries') }}</a>
 </nav>

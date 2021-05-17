@@ -10,7 +10,6 @@ use App\Http\Controllers\BagHourController;
 use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\HourEntryController;
 use App\Http\Controllers\EntryHoursController;
-
 use App\Http\Controllers\LocalizationController;
 //use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\DB;
@@ -27,23 +26,23 @@ use Illuminate\Support\Facades\DB;
  */
 
 /*
-Route::get('/storage/{filename}', function ($filename)
-{
-    $path = storage_path('/storage/app/public/' . $filename);
+  Route::get('/storage/{filename}', function ($filename)
+  {
+  $path = storage_path('/storage/app/public/' . $filename);
 
-    if (!File::exists($path)) {
-        abort(404);
-    }
+  if (!File::exists($path)) {
+  abort(404);
+  }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
+  $file = File::get($path);
+  $type = File::mimeType($path);
 
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
+  $response = Response::make($file, 200);
+  $response->header("Content-Type", $type);
 
-    return $response;
-});
-*/
+  return $response;
+  });
+ */
 
 
 
@@ -57,10 +56,8 @@ Route::get('change/lang', [LocalizationController::class, "lang_change"])->name(
 //Route::view("/company-info", "company-info")->name('company-info');
 //Route::resource('customers', CustomerController::class);
 //Route::resource('type-bag-hours', TypeBagHourController::class);
-
-    //Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
-    //Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
-
+//Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
+//Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
 //Routes protected for admin user
 Route::group(['middleware' => 'admin'], function () {
     // Control panel home
@@ -85,7 +82,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put("control-panel/users/{user}/lang/{lang}", [UserController::class, 'update'])->name('users.update');
     Route::delete("control-panel/users/{user}/lang/{lang}", [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('control-panel/users/delete_filters/', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
-    
+
     // Control panel - Users - en
     Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');
     Route::get("en/control-panel/users/{user}/edit", [UserController::class, 'edit'])->name('en_users.edit');
@@ -114,50 +111,50 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/clients", [CustomerController::class, 'index'])->name('ca_customers.index');
     Route::get("ca/panell-de-control/clients/crear", [CustomerController::class, 'create'])->name('ca_customers.create');
     Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
-    
+
     //Control panel - Projects - Operations 
     Route::post("control-panel/projects/lang/{lang}", [ProjectController::class, 'store'])->name('projects.store');
     Route::put("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'update'])->name('projects.update');
     Route::delete("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::post('control-panel/projects/delete_filters/', [ProjectController::class, 'deleteFilters'])->name('projects.delete_filters');
-    
+
     //Control panel - Projects - en 
     Route::get("en/control-panel/projects", [ProjectController::class, 'index'])->name('en_projects.index');
     Route::get("en/control-panel/projects/create", [ProjectController::class, 'create'])->name('en_projects.create');
     Route::get("en/control-panel/projects/{project}/edit", [ProjectController::class, 'edit'])->name('en_projects.edit');
-    
+
     //Control panel - Projects - es
     Route::get("es/panel-de-control/proyectos", [ProjectController::class, 'index'])->name('es_projects.index');
     Route::get("es/panel-de-control/proyectos/crear", [ProjectController::class, 'create'])->name('es_projects.create');
     Route::get("es/panel-de-control/proyectos/{project}/editar", [ProjectController::class, 'edit'])->name('es_projects.edit');
-    
+
     //Control panel - Projects - ca
     Route::get("ca/panell-de-control/projectes", [ProjectController::class, 'index'])->name('ca_projects.index');
     Route::get("ca/panell-de-control/projectes/crear", [ProjectController::class, 'create'])->name('ca_projects.create');
     Route::get("ca/panell-de-control/projectes/{project}/editar", [ProjectController::class, 'edit'])->name('ca_projects.edit');
-    
+
     //Control panel - Bag hours - Operations 
     Route::post("control-panel/hour-bags/lang/{lang}", [BagHourController::class, 'store'])->name('bag_hours.store');
-    Route::post('control-panel/hour-bags/delete_filters', [BagHourController::class, 'deleteFilters'])->name('bag_hours.delete_filters');  
-    
+    Route::post('control-panel/hour-bags/delete_filters', [BagHourController::class, 'deleteFilters'])->name('bag_hours.delete_filters');
+
     //Control panel - Bag hours - en
     Route::get("en/control-panel/hour-bags", [BagHourController::class, 'index'])->name('en_bag_hours.index');
     Route::get("en/control-panel/hour-bags/create", [BagHourController::class, 'create'])->name('en_bag_hours.create');
-    
+
     //Control panel - Bag hours - es
     Route::get("es/panel-de-control/bolsas-de-horas", [BagHourController::class, 'index'])->name('es_bag_hours.index');
     Route::get("es/panel-de-control/bolsas-de-horas/crear", [BagHourController::class, 'create'])->name('es_bag_hours.create');
-    
+
     //Control panel - Bag hours - ca
     Route::get("ca/panell-de-control/bosses-d'hores", [BagHourController::class, 'index'])->name('ca_bag_hours.index');
     Route::get("ca/panell-de-control/bosses-d'hores/create", [BagHourController::class, 'create'])->name('ca_bag_hours.create');
-    
+
     //Control panel - Bag hour types - Operations 
     Route::post("control-panel/types-hour-bags/lang/{lang}", [TypeBagHourController::class, 'store'])->name('bag_hours_types.store');
     Route::put("control-panel/types-hour-bags/{typeBagHour}/lang/{lang}", [TypeBagHourController::class, 'update'])->name('bag_hours_types.update');
     Route::delete("control-panel/types-hour-bags/{typeBagHour}/lang/{lang}", [TypeBagHourController::class, 'destroy'])->name('bag_hours_types.destroy');
-    Route::post('control-panel/types-hour-bags/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type_bag_hours.delete_filters');  
-    
+    Route::post('control-panel/types-hour-bags/delete_filters', [TypeBagHourController::class, 'deleteFilters'])->name('type_bag_hours.delete_filters');
+
     // Control panel - Bag hour types - en
     Route::get("en/control-panel/types-hour-bags", [TypeBagHourController::class, 'index'])->name('en_bag_hours_types.index');
     Route::get("en/control-panel/types-hour-bags/create", [TypeBagHourController::class, 'create'])->name('en_bag_hours_types.create');
@@ -172,16 +169,27 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/tipus-bosses-hores", [TypeBagHourController::class, 'index'])->name('ca_bag_hours_types.index');
     Route::get("ca/panell-de-control/tipus-bosses-hores/crear", [TypeBagHourController::class, 'create'])->name('ca_bag_hours_types.create');
     Route::get("ca/panell-de-control/tipus-bosses-hores/{typeBagHour}/editar", [TypeBagHourController::class, 'edit'])->name('ca_bag_hours_types.edit');
-    
+
     // Control panel - Time entries - Operations
-    Route::post("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
+    Route::put("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
+
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
     Route::get("en/control-panel/time-entries/create", [HourEntryController::class, 'create'])->name('en_time_entries.create');
+
+    // Control panel - Time entries - es
+    Route::get("es/panel-de-control/entradas-de-horas", [HourEntryController::class, 'index'])->name('es_time_entries.index');
+    Route::get("es/panel-de-control/entradas-de-horas/create", [HourEntryController::class, 'create'])->name('es_time_entries.create');
+
+    //Control panel - Time entries - ca
+    Route::get("ca/panell-de-control/time-entries", [HourEntryController::class, 'index'])->name('ca_time_entries.index');
+    Route::get("ca/panell-de-control/time-entries/create", [HourEntryController::class, 'create'])->name('ca_time_entries.create');
 });
 
 //Entry hours - Workers section - Middleware in controller
-Route::post("entry-hours-worked/lang/{lang}", [EntryHoursController::class, 'store'])->name('entry_hours.store');
+Route::post("en/entry-hours-worked/success", [EntryHoursController::class, 'store'])->name('en_entry_hours.store');
+Route::post("es/entrar-horas-trabajadas/exito-horas-entradas", [EntryHoursController::class, 'store'])->name('es_entry_hours.store');
+Route::post("ca/entrar-hores-treballades/exit-hores-entrades", [EntryHoursController::class, 'store'])->name('ca_entry_hours.store');
 
 Route::get("en/entry-hours-worked", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
 Route::get("es/entrar-horas-trabajadas", [EntryHoursController::class, 'index'])->name('es_entry_hours.index');
@@ -191,10 +199,9 @@ Route::get("ca/entrar-hores-treballades", [EntryHoursController::class, 'index']
 Route::get('/', function () {
     $default_lang = DB::table('company')->first()->default_lang;
     if (Auth::check()) {
-        if(Auth::user()->isAdmin()){
+        if (Auth::user()->isAdmin()) {
             return redirect()->route($default_lang . '_home.index', $default_lang);
-        }
-        else if(Auth::user()->isUser()){
+        } else if (Auth::user()->isUser()) {
             return redirect()->route($default_lang . '_entry_hours.index', $default_lang);
         }
     } else {

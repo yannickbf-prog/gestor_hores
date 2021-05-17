@@ -55,8 +55,11 @@
                 {{ __('message.validate') }}
             </button>
             @else
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#inValidateModal">
+                {{ __('message.invalidate') }}
+            </button>
             @endif
-            <!-- Modal -->
+            <!-- Modal Validate-->
             <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="validateModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -71,13 +74,12 @@
                             info...
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                            <form action="{{ route('entry_hours.validate', $lang) }}" method="POST">
+                            <form action="{{ route('entry_hours.validate', $value->hours_entry_id) }}" method="POST">
                                 @csrf
-                                @method('POST')      
-                                <input name="bag_hour_id" type="hidden" value="{{$value->bag_hour_id}}">
-                                <input name="hours_entry_id" type="hidden" value="{{$value->hours_entry_id}}">
-                                <input name="hours" type="hidden" value="{{$value->hour_entry_hours}}">
+                                @method('PUT')
+                                
+                               
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
                                 <button type="submit" class="btn btn-success">{{ __('message.validate') }}</button>
                             </form>
                         </div>
@@ -85,6 +87,7 @@
                 </div>
             </div>
         </td>
+        <td>{{ $value->hours_entry_id }}</td>
     </tr>
     @empty
     <li>{{__('message.no')}} {{__('message.time_entries')}} {{__('message.to_show')}}</li>

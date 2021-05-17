@@ -107,7 +107,7 @@ if (Auth::check()) {
         $(".Langchange").change(function () {
             let currentRoute = "{{ Route::currentRouteName() }}";
             <!-- We need the id if we are editing an item or viewing an item to go to the same page -->
-            let id = "@if(isset($user)){{$user->id}} @elseif(isset($customer)){{ $customer->id }} @elseif(isset($typeBagHour)){{ $typeBagHour->id }} @else{{'noid'}} @endif";
+            let id = "@if(isset($user)){{$user->id}} @elseif(isset($customer)){{ $customer->id }} @elseif(isset($project)){{ $project->id }} @elseif(isset($typeBagHour)){{ $typeBagHour->id }} @else{{'noid'}} @endif";
             window.location.href = url + "?langToDisplay=" + $(this).val() + "&currentRoute=" + currentRoute + "&id=" + id;
         });
     </script>
