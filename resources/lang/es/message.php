@@ -34,6 +34,8 @@ return [
     'creation_day' => 'Fecha de creación',
     'validate' => 'Validar',
     'invalidate' => 'Invalidar',
+    'confirm_validate' => "Estas seguro que quieres validar esta bolsa de horas?",
+    'confirm_validate' => "Estas seguro que quieres invalidar esta bolsa de horas?",
     
     'company' => 'Empresa',
     'company_info_providing' => 'Información de la empresa que presta los servicios',

@@ -34,6 +34,8 @@ return [
     'creation_day' => 'Data de creació',
     'validate' => 'Validar',
     'invalidate' => 'Invalidar',
+    'confirm_validate' => "Estas seguir que vols validar aquesta entrada d'hores?",
+    'confirm_invalidate' => "Estas seguir que vols invalidar aquesta entrada d'hores?",
     
     'company' => 'Empresa',
     'company_info_providing' => "Informació de l'empresa que presta els serveis",

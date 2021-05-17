@@ -32,23 +32,22 @@ class HourEntryController extends Controller {
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
-    public function validateEntryHour($id) {
+    public function validateEntryHour($id, $lang) {
 
         DB::table('hours_entry')
                 ->where('hours_entry.id', $id)
                 ->update(['validate' => 1]);
 
-        return redirect()->route('en_time_entries.index');
+        return redirect()->route($lang.'_time_entries.index');
     }
 
-    public function inValidateEntryHour(Request $request, $lang) {
+    public function inValidateEntryHour($id, $lang) {
 
-        if ($request->has('_token')) {
-            //Validate entry hour
-            $affected = DB::table('hours_entry')
-                    ->where('id', $request['hours_entry_id'])
-                    ->update(['validate' => 0]);
-        }
+        DB::table('hours_entry')
+                ->where('hours_entry.id', $id)
+                ->update(['validate' => 0]);
+        
+        return redirect()->route($lang.'_time_entries.index');
     }
 
     /**

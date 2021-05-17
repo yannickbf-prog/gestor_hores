@@ -65,22 +65,40 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Are you sure you want to validate this entry of hours?	
-                            info...
+                            {{ __('message.confirm_validate') }}
                         </div>
                         <div class="modal-footer">
                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                           <a class="btn btn-success" href="{{ route('entry_hours.validate',$value->hours_entry_id) }}">{{ __('message.validate') }}</a>
+                           <a class="btn btn-success" href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}">{{ __('message.validate') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
             @else
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#inValidateModal">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#invalidateModal">
                 {{ __('message.invalidate') }}
             </button>
+            <!-- Modal Invalidate-->
+            <div class="modal fade" id="invalidateModal" tabindex="-1" role="dialog" aria-labelledby="invalidateModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">{{ __('message.invalidate') }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ __('message.confirm_invalidate') }}
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                           <a class="btn btn-success" href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}">{{ __('message.invalidate') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endif
-            
         </td>
         <td>{{ $value->hours_entry_id }}</td>
     </tr>

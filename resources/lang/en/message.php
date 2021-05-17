@@ -33,6 +33,8 @@ return [
     'creation_day' => 'Creation day',
     'validate' => 'Validate',
     'invalidate' => 'Invalidate',
+    'confirm_validate' => 'Are you sure you want to validate this entry of hours?',
+    'confirm_invalidate' => 'Are you sure you want to invalidate this entry of hours?',
     
     'company' => 'Company',
     'company_info_providing' => "Information on the company providing the services",

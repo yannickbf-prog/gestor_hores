@@ -172,7 +172,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Control panel - Time entries - Operations
     //Route::put("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
-    Route::get("control-panel/time-entries/id/{id}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
+    Route::get("control-panel/time-entries/validate/id/{id}/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
+    Route::get("control-panel/time-entries/invalidate/id/{id}/lang/{lang}", [HourEntryController::class, 'invalidateEntryHour'])->name('entry_hours.invalidate');
 
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
@@ -180,11 +181,11 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Control panel - Time entries - es
     Route::get("es/panel-de-control/entradas-de-horas", [HourEntryController::class, 'index'])->name('es_time_entries.index');
-    Route::get("es/panel-de-control/entradas-de-horas/create", [HourEntryController::class, 'create'])->name('es_time_entries.create');
+    Route::get("es/panel-de-control/entradas-de-horas/crear", [HourEntryController::class, 'create'])->name('es_time_entries.create');
 
     //Control panel - Time entries - ca
     Route::get("ca/panell-de-control/time-entries", [HourEntryController::class, 'index'])->name('ca_time_entries.index');
-    Route::get("ca/panell-de-control/time-entries/create", [HourEntryController::class, 'create'])->name('ca_time_entries.create');
+    Route::get("ca/panell-de-control/time-entries/crear", [HourEntryController::class, 'create'])->name('ca_time_entries.create');
 });
 
 //Entry hours - Workers section - Middleware in controller
