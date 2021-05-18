@@ -67,35 +67,30 @@ class HourEntryController extends Controller {
         $users_info = [];
         $users_data =  DB::table('users')->get();
 
+        $projects_users_data = [];
         foreach ($users_data as $user) {
-            $projects_users_data =  DB::table('users_projects')
+            $user_id = $user->id;
+            $projects_users_data = DB::table('users_projects')
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')
-                    ->where('users_projects.user_id', $user->id)
-                    ->where('projects.active', 1)
-                    ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
+                    ->where('users_projects.user_id', $user_id+1)
                     ->get();
-            $users_projects = [];
-            foreach ($projects_users_data as $project_in_user) {
-                
-                $users_projects[] = [
-                    'id' => $project_in_user->project_id,
-                    'name' => $project_in_user->project_name,
-                    'customer' => $project_in_user->customer_name,
-                ];
-            }
             
-            $users_info[] = [
-                'id' => $user->id,
-                'nickname' => $user->nickname,
-                'name' => $user->name,
-                'surname' => $user->surname,
-                'email' => $user->email,
-                'phone' =>  $user->phone,
-                'role' => $user->role,
-                'projects' => $users_projects
-            ];
+           return $projects_users_data;
         }
+        
+         
+        
+        /*
+        $projects_users_data_prueva = DB::table('users_projects')
+                    ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+                    ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                    ->where('users_projects.user_id', 3)
+                    ->get();
+         * 
+         */
+        
+        return $projects_users_data;
 
         //return view('projects.create', compact('customers'))->with('lang', $lang);
     }
