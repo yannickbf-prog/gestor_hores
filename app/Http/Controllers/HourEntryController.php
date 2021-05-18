@@ -75,7 +75,7 @@ class HourEntryController extends Controller {
                     ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                     ->where('users_projects.user_id', $user->id)
                     ->where('projects.active', 1)
-                    ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
+                    ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name', 'bag_hours.id AS bag_hour_id', 'type_bag_hours.name AS type_bag_hour_name')
                     ->get();
             $users_projects = [];
             foreach ($projects_users_data as $project_in_user) {
