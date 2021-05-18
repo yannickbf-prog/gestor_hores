@@ -67,16 +67,36 @@ class HourEntryController extends Controller {
         $users_info = [];
         $users_data =  DB::table('users')->get();
 
-        $projects_users_data = [];
         foreach ($users_data as $user) {
+
             $user_id = $user->id;
             $projects_users_data = DB::table('users_projects')
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')
                     ->where('users_projects.user_id', $user_id+1)
+                    ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
                     ->get();
             
-           return $projects_users_data;
+            $users_projects = [];
+            foreach ($projects_users_data as $project_in_user) {
+                
+                $users_projects[] = [
+                    'id' => $project_in_user->project_id,
+                    'name' => $project_in_user->project_name,
+                    'customer' => $project_in_user->customer_name,
+                ];
+            }
+            
+            $users_info[] = [
+                'id' => $user->id,
+                'nickname' => $user->nickname,
+                'name' => $user->name,
+                'surname' => $user->surname,
+                'email' => $user->email,
+                'phone' =>  $user->phone,
+                'role' => $user->role,
+                'projects' => $users_projects
+            ];
         }
         
          
@@ -90,7 +110,7 @@ class HourEntryController extends Controller {
          * 
          */
         
-        return $projects_users_data;
+        return $users_info;
 
         //return view('projects.create', compact('customers'))->with('lang', $lang);
     }
