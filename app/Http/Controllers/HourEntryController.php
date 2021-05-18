@@ -71,6 +71,8 @@ class HourEntryController extends Controller {
             $projects_users_data =  DB::table('users_projects')
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                    ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
+                    ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                     ->where('users_projects.user_id', $user->id)
                     ->where('projects.active', 1)
                     ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
@@ -83,6 +85,7 @@ class HourEntryController extends Controller {
                     'customer' => $project_in_user->customer_name,
                 ];
             }
+            $project_bag_hours = [];
             $users_info[] = [
                 'id' => $user->id,
                 'nickname' => $user->nickname,
