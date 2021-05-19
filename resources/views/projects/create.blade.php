@@ -47,7 +47,7 @@
                 <strong>*{{ __('message.customer') }}: </strong>
                 @if (count($customers) > 0)
                 <select name="customer_id" id="numRecords">
-                    @foreach($customers as $key => $customer)
+                    @foreach($customers as $customer)
                     <option value="{{ $customer->id }}">{{$customer->name}}</option>
                     @endforeach
                 </select>

@@ -31,16 +31,51 @@
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
+        <strong>*{{ __('message.user') }}: </strong>
+        @if (count($users_data) > 0)
+        <select name="users" id="numRecords">
+            @foreach($users_data as $user)
+            <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
+            @endforeach
+        </select>
+        @else
+        <li>{{ __('message.no') }} {{ __('message.users') }} {{ __('message.avalible') }} {{ __('message.create_user') }}</li>
+        @endif
+        <a href="{{ route($lang."_users.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.user') }}</a>
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group" id="projectSelectContainer">
+        
+    </div>
+</div>
 @endsection
 
 
 @section('js')
-    <script type="text/javascript">
-    
-    window.onload = function () {
-        var users_info = @json($users_info);
-        
-        console.log(users_info);
+<script type="text/javascript">
+
+    function onChangeUser() {
+
     }
-    </script>
+
+    window.onload = function () {
+
+        //Listener for onchange user
+        document.getElementsByName('users')[0].addEventListener("change", onChangeUser);
+
+        //Create the select of projects
+        let projectSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "projects";
+        let userId = document.getElementsByName('users')[0].value; 
+        alert(userId);
+
+        var users_info = @json($users_info);
+                console.log(users_info[0]);
+    }
+</script>
 @endsection

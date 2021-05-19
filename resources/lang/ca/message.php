@@ -57,7 +57,7 @@ return [
     'filters' => 'Filtres',
     'name' => 'Nom',
     'email' => 'Email',
-    'phone' => 'Telèfon ',
+    'phone' => 'Telèfon',
     'date_creation_interval' => 'Interval de dates de creació ',
     'from' => 'Desde',
     'to' => 'Fins',
