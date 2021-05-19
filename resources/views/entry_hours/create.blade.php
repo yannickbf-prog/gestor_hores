@@ -59,23 +59,45 @@
 @section('js')
 <script type="text/javascript">
 
-    function onChangeUser() {
-
-    }
-
-    window.onload = function () {
-
-        //Listener for onchange user
-        document.getElementsByName('users')[0].addEventListener("change", onChangeUser);
-
+    function onChangeUser(users_info) {
+        
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
+        
+        //Get the projects of the users from the json
         let userId = document.getElementsByName('users')[0].value; 
-        alert(userId);
+        let res = users_info.filter((item) => {
+            return item.id == userId;
+        });
 
+        let projectsInUser = res[0]['projects'];
+        
+        /*if(projectsInUser.length > 0){
+            for (projectsInUser of project){
+                let option = document.createElement("option");
+                option.value = project.id;
+                console.log(option);
+            }
+        }*/
+        
+        console.log(projectsInUser);
+    }
+
+    window.onload = function () {
+        
+        //Get the object from json
         var users_info = @json($users_info);
                 console.log(users_info[0]);
+
+        //Listener for onchange user
+        document.getElementsByName('users')[0].addEventListener("change", function(){
+            onChangeUser(users_info);
+        });
+        
+        //Charge the projects on load page
+        onChangeUser(users_info);
+
     }
 </script>
 @endsection
