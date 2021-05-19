@@ -51,6 +51,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="form-group" id="projectSelectContainer">
         <strong>*{{ __('message.projects') }}: </strong>
+        <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
     </div>
 </div>
 @endsection
@@ -92,7 +93,9 @@
             document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
         }
         
-        document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
+        document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
+        
+        //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
         
         console.log(projectsInUser);
     }
