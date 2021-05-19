@@ -123,10 +123,8 @@ class HourEntryController extends Controller {
                 'projects' => $users_projects
             ];
         }
-        
-        return $users_info;
 
-        //return view('projects.create', compact('customers'))->with('lang', $lang);
+        return view('entry_hours.create', compact(['lang','users_info']));
     }
 
     /**
