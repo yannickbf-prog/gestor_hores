@@ -38,7 +38,8 @@
     <script type="text/javascript">
     
     window.onload = function () {
-        let users_info = "{{ $users_info_json }}";  
+        var users_info = @json($users_info_json);
+        
         console.log(users_info);
     }
     </script>

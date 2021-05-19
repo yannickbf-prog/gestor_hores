@@ -124,7 +124,7 @@ class HourEntryController extends Controller {
             ];
         }
         
-        $users_info_json = json_encode($users_info);
+        $users_info_json = $users_info;
 
         return view('entry_hours.create', compact(['lang','users_info_json']));
     }
