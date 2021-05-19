@@ -34,4 +34,12 @@
 @endsection
 
 
-
+@section('js')
+    <script type="text/javascript">
+    
+    window.onload = function () {
+        let users_info = "{{ $users_info_json }}";  
+        console.log(users_info);
+    }
+    </script>
+@endsection

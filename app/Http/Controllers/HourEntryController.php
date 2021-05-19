@@ -123,8 +123,10 @@ class HourEntryController extends Controller {
                 'projects' => $users_projects
             ];
         }
+        
+        $users_info_json = json_encode($users_info);
 
-        return view('entry_hours.create', compact(['lang','users_info']));
+        return view('entry_hours.create', compact(['lang','users_info_json']));
     }
 
     /**
