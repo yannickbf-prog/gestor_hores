@@ -38,7 +38,7 @@
     <script type="text/javascript">
     
     window.onload = function () {
-        var users_info = @json($users_info_json);
+        var users_info = @json($users_info);
         
         console.log(users_info);
     }
