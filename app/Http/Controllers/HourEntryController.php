@@ -85,15 +85,16 @@ class HourEntryController extends Controller {
                         ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
                         ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                         ->where('projects.id', $project_in_user->project_id)
-                        ->where('bag_hours.contracted_hours', '<', function ($query) {
-                            $query->select('hours')
+                        ->where('bag_hours.contracted_hours', '>', function ($query) {
+                            $query->selectRaw('count(hours)')
                             ->from('hours_entry')
-                            ->whereColumn('hours_entry.bag_hours_id', 'bag_hours.id')
-                            ->limit(1);
+                            ->whereColumn('hours_entry.bag_hours_id', 'bag_hours.id');
+                            
                         })
                         ->select('bag_hours.id AS bag_hour_id', 'type_bag_hours.name AS type_bag_hour_name')
                         ->get();
                 
+                //return $projects_bag_hours;            
                 
                 /*DB::table('hours_entry')
                 ->where('bag_hours_id', 2)
