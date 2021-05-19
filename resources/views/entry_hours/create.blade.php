@@ -50,7 +50,7 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="form-group" id="projectSelectContainer">
-        
+        <strong>*{{ __('message.projects') }}: </strong>
     </div>
 </div>
 @endsection
@@ -81,6 +81,12 @@
                 projectSelectHtml.appendChild(option)
             }
         }
+        else{
+            let option = document.createElement("option");
+            option.innerText = "No projects asigned to this user";
+            projectSelectHtml.disabled = true;
+            projectSelectHtml.appendChild(option);
+        }
         
         if(document.getElementsByName('projects')[0] != null){
             document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
@@ -101,6 +107,11 @@
         document.getElementsByName('users')[0].addEventListener("change", function(){
             onChangeUser(users_info);
         });
+        
+        /*//Listener for onchange projects
+        document.getElementsByName('projects')[0].addEventListener("change", function(){
+            onChangeProjects(users_info);
+        });*/
         
         //Charge the projects on load page
         onChangeUser(users_info);
