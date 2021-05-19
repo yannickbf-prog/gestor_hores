@@ -73,13 +73,20 @@
 
         let projectsInUser = res[0]['projects'];
         
-        /*if(projectsInUser.length > 0){
-            for (projectsInUser of project){
+        if(projectsInUser.length > 0){
+            for (project of projectsInUser){
                 let option = document.createElement("option");
                 option.value = project.id;
-                console.log(option);
+                option.innerText = project.name;
+                projectSelectHtml.appendChild(option)
             }
-        }*/
+        }
+        
+        if(document.getElementsByName('projects')[0] != null){
+            document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
+        }
+        
+        document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
         
         console.log(projectsInUser);
     }
