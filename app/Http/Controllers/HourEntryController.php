@@ -74,17 +74,32 @@ class HourEntryController extends Controller {
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')
                     ->where('users_projects.user_id', $user_id+1)
+                    ->where('projects.active', 1)
                     ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
                     ->get();
             
             $users_projects = [];
             foreach ($projects_users_data as $project_in_user) {
                 
+                $projects_bag_hours = DB::table('projects')
+                        ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
+                        ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
+                        ->where('projects.id', $project_in_user->project_id)
+                        ->select('bag_hours.id AS bag_hour_id', 'type_bag_hours.name AS type_bag_hour_name')
+                        ->get();
+                
+                /*$projects_bag_hours = [];
+                foreach ($projects_bag_hours as $bag_hours_in_project) {
+                    projects
+                }*/
+                
                 $users_projects[] = [
                     'id' => $project_in_user->project_id,
                     'name' => $project_in_user->project_name,
                     'customer' => $project_in_user->customer_name,
                 ];
+                
+                
             }
             
             $users_info[] = [
