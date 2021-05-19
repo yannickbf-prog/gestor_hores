@@ -77,7 +77,7 @@
             for (project of projectsInUser){
                 let option = document.createElement("option");
                 option.value = project.id;
-                option.innerText = project.name;
+                option.innerText = project.name+" ("+project.customer+")";
                 projectSelectHtml.appendChild(option)
             }
         }
