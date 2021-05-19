@@ -81,7 +81,7 @@ class HourEntryController extends Controller {
             $users_projects = [];
             foreach ($projects_users_data as $project_in_user) {
                 
-                $projects_bag_hours = DB::table('projects')
+                $projects_bag_hours_data = DB::table('projects')
                         ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
                         ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                         ->where('projects.id', $project_in_user->project_id)
@@ -94,20 +94,19 @@ class HourEntryController extends Controller {
                         ->select('bag_hours.id AS bag_hour_id', 'type_bag_hours.name AS type_bag_hour_name')
                         ->get();
                 
-                //return $projects_bag_hours;            
-                
-                /*DB::table('hours_entry')
-                ->where('bag_hours_id', 2)
-                ->sum('hours_entry.hours');
-                /*$projects_bag_hours = [];
-                foreach ($projects_bag_hours as $bag_hours_in_project) {
-                    projects
-                }*/
+                $projects_bag_hours = [];
+                foreach ($projects_bag_hours_data as $bag_hour_in_project) {
+                    $projects_bag_hours[] = [
+                        'bag_hour_id' => $bag_hour_in_project->bag_hour_id,
+                        'bag_hour_type_name' => $bag_hour_in_project->type_bag_hour_name
+                    ];
+                }
                 
                 $users_projects[] = [
                     'id' => $project_in_user->project_id,
                     'name' => $project_in_user->project_name,
                     'customer' => $project_in_user->customer_name,
+                    'bag_hours' => $projects_bag_hours
                 ];
                 
                 
@@ -124,17 +123,6 @@ class HourEntryController extends Controller {
                 'projects' => $users_projects
             ];
         }
-        
-         
-        
-        /*
-        $projects_users_data_prueva = DB::table('users_projects')
-                    ->join('projects', 'users_projects.project_id', '=', 'projects.id')
-                    ->join('customers', 'projects.customer_id', '=', 'customers.id')
-                    ->where('users_projects.user_id', 3)
-                    ->get();
-         * 
-         */
         
         return $users_info;
 
