@@ -65,81 +65,66 @@ class HourEntryController extends Controller {
         $lang = setGetLang();
 
         $users_info = [];
-        $users_data = DB::table('users')->get();
-
-        $ids = "";
-        $projects = "";
+        $users_data =  DB::table('users')->get();
 
         foreach ($users_data as $user) {
 
-            $ids .= $user->id . " ";
-
+            $user_id = $user->id;
             $projects_users_data = DB::table('users_projects')
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')
-                    ->where('users_projects.user_id', 3)
+                    ->where('users_projects.user_id', $user_id)
                     ->where('projects.active', 1)
                     ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
                     ->get();
             
-            $projects .= $projects_users_data;
-            /* $user_id = $user->id;
-              $projects_users_data = DB::table('users_projects')
-              ->join('projects', 'users_projects.project_id', '=', 'projects.id')
-              ->join('customers', 'projects.customer_id', '=', 'customers.id')
-              ->where('users_projects.user_id', $user_id)
-              ->where('projects.active', 1)
-              ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
-              ->get();
-
-              $users_projects = [];
-              foreach ($projects_users_data as $project_in_user) {
-
-              $projects_bag_hours_data = DB::table('projects')
-              ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
-              ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
-              ->where('projects.id', $project_in_user->project_id)
-              ->where('bag_hours.contracted_hours', '>', function ($query) {
-              $query->selectRaw('count(hours)')
-              ->from('hours_entry')
-              ->whereColumn('hours_entry.bag_hours_id', 'bag_hours.id');
-
-              })
-              ->select('bag_hours.id AS bag_hour_id', 'type_bag_hours.name AS type_bag_hour_name')
-              ->get();
-
-              $projects_bag_hours = [];
-              foreach ($projects_bag_hours_data as $bag_hour_in_project) {
-              $projects_bag_hours[] = [
-              'bag_hour_id' => $bag_hour_in_project->bag_hour_id,
-              'bag_hour_type_name' => $bag_hour_in_project->type_bag_hour_name
-              ];
-              }
-
-              $users_projects[] = [
-              'id' => $project_in_user->project_id,
-              'name' => $project_in_user->project_name,
-              'customer' => $project_in_user->customer_name,
-              'bag_hours' => $projects_bag_hours
-              ];
-
-
-              }
-
-              $users_info[] = [
-              'id' => $user->id,
-              'nickname' => $user->nickname,
-              'name' => $user->name,
-              'surname' => $user->surname,
-              'email' => $user->email,
-              'phone' =>  $user->phone,
-              'role' => $user->role,
-              'projects' => $users_projects
-              ]; */
+            $users_projects = [];
+            foreach ($projects_users_data as $project_in_user) {
+                
+                $projects_bag_hours_data = DB::table('projects')
+                        ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
+                        ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
+                        ->where('projects.id', $project_in_user->project_id)
+                        ->where('bag_hours.contracted_hours', '>', function ($query) {
+                            $query->selectRaw('count(hours)')
+                            ->from('hours_entry')
+                            ->whereColumn('hours_entry.bag_hours_id', 'bag_hours.id');
+                            
+                        })
+                        ->select('bag_hours.id AS bag_hour_id', 'type_bag_hours.name AS type_bag_hour_name')
+                        ->get();
+                
+                $projects_bag_hours = [];
+                foreach ($projects_bag_hours_data as $bag_hour_in_project) {
+                    $projects_bag_hours[] = [
+                        'bag_hour_id' => $bag_hour_in_project->bag_hour_id,
+                        'bag_hour_type_name' => $bag_hour_in_project->type_bag_hour_name
+                    ];
+                }
+                
+                $users_projects[] = [
+                    'id' => $project_in_user->project_id,
+                    'name' => $project_in_user->project_name,
+                    'customer' => $project_in_user->customer_name,
+                    'bag_hours' => $projects_bag_hours
+                ];
+                
+                
+            }
+            
+            $users_info[] = [
+                'id' => $user->id,
+                'nickname' => $user->nickname,
+                'name' => $user->name,
+                'surname' => $user->surname,
+                'email' => $user->email,
+                'phone' =>  $user->phone,
+                'role' => $user->role,
+                'projects' => $users_projects
+            ];
         }
-        //return $ids;
-        return $projects;
-        //return view('entry_hours.create', compact(['lang', 'users_data', 'users_info']));
+
+        return view('entry_hours.create', compact(['lang', 'users_data', 'users_info']));
     }
 
     /**
