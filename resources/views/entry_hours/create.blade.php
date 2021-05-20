@@ -147,19 +147,23 @@
 
     //Get the object from json
     var users_info = @json($users_info);
-            //Charge the projects depending on users on load page
-            onChangeUser(users_info);
+            
+    //Charge the projects depending on users on load page
+    onChangeUser(users_info);
+
 
     window.onload = function (users_info) {
+        var users_info = @json($users_info);
+        //Listener for onchange user
+        document.getElementsByName('users')[0].addEventListener("change", function () {
+            onChangeUser(users_info);
+        });
 
 
         //Charge the bag hours depending on project on load page
         //onChangeProject(users_info);
 
-        //Listener for onchange user
-        document.getElementsByName('users')[0].addEventListener("change", function () {
-            onChangeUser(users_info);
-        });
+
 
         //Listener for onchange projects
         /*document.getElementsByName('projects')[0].addEventListener("change", function(){
