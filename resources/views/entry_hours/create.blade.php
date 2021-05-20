@@ -52,9 +52,7 @@
     <div class="form-group" id="projectSelectContainer">
         <strong>*{{ __('message.projects') }}: </strong>
         <select name="projects" onchange="onChangeProject()">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+
         </select>
         <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
     </div>
@@ -71,106 +69,103 @@
 
 @section('js')
 <script>
-    /*function onChangeUser(users_info) {
-        
-        //Create the select of projects
-        let projectSelectHtml = document.createElement("select");
-        projectSelectHtml.name = "projects";
-        projectSelectHtml.setAttribute(onchange, "hello")
+    function onChangeUser(users_info) {
 
-        
         //Get the projects of the users from the json
-        let userId = document.getElementsByName('users')[0].value; 
+        let userId = document.getElementsByName('users')[0].value;
         let res = users_info.filter((item) => {
             return item.id == userId;
         });
 
         projectsInUser = res[0]['projects'];
-        
-        if(projectsInUser.length > 0){
-            for (project of projectsInUser){
+
+        console.log(projectsInUser);
+
+        if (projectsInUser.length > 0) {
+            for (project of projectsInUser) {
                 let option = document.createElement("option");
                 option.value = project.id;
-                option.innerText = project.name+" ("+project.customer+")";
-                projectSelectHtml.appendChild(option)
+                option.innerText = project.name + " (" + project.customer + ")";
+                document.getElementsByName('projects')[0].appendChild(option)
             }
-        }
-        else{
-            let option = document.createElement("option");
-            option.innerText = "No projects asigned to this user";
-            projectSelectHtml.disabled = true;
-            projectSelectHtml.appendChild(option);
-        }
-        
-        if(document.getElementsByName('projects')[0] != null){
-            document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
-        }
-        
-        document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
-        
-        //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
-        
-         console.log(projectsInUser);
+        }/*
+         else{
+         let option = document.createElement("option");
+         option.innerText = "No projects asigned to this user";
+         projectSelectHtml.disabled = true;
+         document.getElementsByName('projects')[0].appendChild(option);
+         }
+         
+         if(document.getElementsByName('projects')[0] != null){
+         document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
+         }
+         
+         document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
+         
+         //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
+         
+         console.log(projectsInUser);*/
 
-    }*/
-    
-    function onChangeProject (users_info){
-        
-        
-        alert("hello");
-       
-
-        
-        
-        /*let res = projectsInUser.filter((item) => {
-            return item.id == projectId;
-        });
-        
-        bagHoursInProject = res[0]['bag_hours'];
-        
-        if(bagHoursInProject.length > 0){
-            for (bag_hour of bagHoursInProject){
-                let option = document.createElement("option");
-                option.value = bag_hour.bag_hour_id;
-                option.innerText = bag_hour.bag_hour_type_name;
-                bagHourSelectHtml.appendChild(option);
-            }
-        }
-        else{
-            let option = document.createElement("option");
-            option.innerText = "No bag hours asigned to this project";
-            bagHourSelectHtml.disabled = true;
-            bagHourSelectHtml.appendChild(option);
-        }
-        
-        if(document.getElementsByName('bag_hours')[0] != null){
-            document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
-        }
-        
-        document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);*/
-       
     }
 
+    /*function onChangeProject (users_info){
+     
+     
+     alert("hello");
+     
+     
+     
+     
+     let res = projectsInUser.filter((item) => {
+     return item.id == projectId;
+     });
+     
+     bagHoursInProject = res[0]['bag_hours'];
+     
+     if(bagHoursInProject.length > 0){
+     for (bag_hour of bagHoursInProject){
+     let option = document.createElement("option");
+     option.value = bag_hour.bag_hour_id;
+     option.innerText = bag_hour.bag_hour_type_name;
+     bagHourSelectHtml.appendChild(option);
+     }
+     }
+     else{
+     let option = document.createElement("option");
+     option.innerText = "No bag hours asigned to this project";
+     bagHourSelectHtml.disabled = true;
+     bagHourSelectHtml.appendChild(option);
+     }
+     
+     if(document.getElementsByName('bag_hours')[0] != null){
+     document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
+     }
+     
+     document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+     
+     }*/
+
+    //Get the object from json
+    var users_info = @json($users_info);
+            //Charge the projects depending on users on load page
+            onChangeUser(users_info);
+
     window.onload = function (users_info) {
-        
-        //Get the object from json
-        var users_info = @json($users_info);
-                
-        //Charge the projects depending on users on load page
-        //onChangeUser(users_info);
+
+
         //Charge the bag hours depending on project on load page
         //onChangeProject(users_info);
-        
+
         //Listener for onchange user
-        /*document.getElementsByName('users')[0].addEventListener("change", function(){
+        document.getElementsByName('users')[0].addEventListener("change", function () {
             onChangeUser(users_info);
-        });*/
-        
+        });
+
         //Listener for onchange projects
         /*document.getElementsByName('projects')[0].addEventListener("change", function(){
-            onChangeProject(users_info);
-        });*/
-        
+         onChangeProject(users_info);
+         });*/
+
 
     }
 </script>
