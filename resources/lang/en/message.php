@@ -105,7 +105,7 @@ return [
     'hour_format' => "The price must have the next format: 20, 2000, 20.25 or 20,25 (example values).",
 
     
-    'create' => 'Crete',
+    'create' => 'Create',
     'new' => 'New',
     'new_f' => 'New',
     

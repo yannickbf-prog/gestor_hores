@@ -54,6 +54,13 @@
         <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
     </div>
 </div>
+
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group" id="bagHourSelectContainer">
+        <strong>*{{ __('message.bags_of_hours') }}: </strong>
+        <a href="{{ route($lang."_bag_hours.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.bag_of_hours') }}</a>
+    </div>
+</div>
 @endsection
 
 
@@ -97,7 +104,8 @@
         
         //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
         
-        
+         console.log(projectsInUser);
+
     }
     
     function onChangeProject (users_info){
@@ -113,7 +121,28 @@
         });
         
         bagHoursInProject = res[0]['bag_hours'];
-        console.log(bagHoursInProject);
+        
+        if(bagHoursInProject.length > 0){
+            for (bag_hour of bagHoursInProject){
+                let option = document.createElement("option");
+                option.value = bag_hour.bag_hour_id;
+                option.innerText = bag_hour.bag_hour_type_name;
+                bagHourSelectHtml.appendChild(option);
+            }
+        }
+        else{
+            let option = document.createElement("option");
+            option.innerText = "No bag hours asigned to this project";
+            bagHourSelectHtml.disabled = true;
+            bagHourSelectHtml.appendChild(option);
+        }
+        
+        if(document.getElementsByName('bag_hours')[0] != null){
+            document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
+        }
+        
+        document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+       
     }
 
     window.onload = function (users_info) {
@@ -121,9 +150,10 @@
         //Get the object from json
         var users_info = @json($users_info);
                 
-
-        //Charge the users on load page
+        //Charge the projects depending on users on load page
         onChangeUser(users_info);
+        //Charge the bag hours depending on project on load page
+        onChangeProject(users_info);
         
         //Listener for onchange user
         document.getElementsByName('users')[0].addEventListener("change", function(){

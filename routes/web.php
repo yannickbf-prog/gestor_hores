@@ -181,7 +181,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Control panel - Time entries - es
     Route::get("es/panel-de-control/entradas-de-horas", [HourEntryController::class, 'index'])->name('es_time_entries.index');
-    Route::get("es/panel-de-control/entradas-de-horas/crear/", [HourEntryController::class, 'create'])->name('es_time_entries.create');
+    Route::get("es/panel-de-control/entradas-de-horas/crear", [HourEntryController::class, 'create'])->name('es_time_entries.create');
 
     //Control panel - Time entries - ca
     Route::get("ca/panell-de-control/time-entries", [HourEntryController::class, 'index'])->name('ca_time_entries.index');
