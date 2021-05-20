@@ -35,7 +35,7 @@
     <div class="form-group">
         <strong>*{{ __('message.user') }}: </strong>
         @if (count($users_data) > 0)
-        <select name="users" id="numRecords">
+        <select name="users">
             @foreach($users_data as $user)
             <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
             @endforeach
@@ -58,13 +58,14 @@
 
 
 @section('js')
-<script type="text/javascript">
+<script>
 
     function onChangeUser(users_info) {
         
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
+        projectSelectHtml.id = "projects";
         
         //Get the projects of the users from the json
         let userId = document.getElementsByName('users')[0].value; 
@@ -99,6 +100,10 @@
         
         console.log(projectsInUser);
     }
+    
+    function onChangeProject (){
+        alert("hola");
+    }
 
     window.onload = function () {
         
@@ -106,18 +111,17 @@
         var users_info = @json($users_info);
                 console.log(users_info[0]);
 
+        //Charge the users on load page
+        onChangeUser(users_info);
+        
         //Listener for onchange user
         document.getElementsByName('users')[0].addEventListener("change", function(){
             onChangeUser(users_info);
         });
         
-        /*//Listener for onchange projects
-        document.getElementsByName('projects')[0].addEventListener("change", function(){
-            onChangeProjects(users_info);
-        });*/
+        //Listener for onchange projects
+        document.getElementById('projects').addEventListener("change", onChangeProject);
         
-        //Charge the projects on load page
-        onChangeUser(users_info);
 
     }
 </script>

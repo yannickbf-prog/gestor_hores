@@ -16,6 +16,7 @@
             <file>file:/var/www/gestor_hores/resources/views/entry_hours/index.blade.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/HourEntryController.php</file>
             <file>file:/var/www/gestor_hores/resources/views/projects/create.blade.php</file>
+            <file>file:/var/www/gestor_hores/resources/lang/ca/message.php</file>
             <file>file:/var/www/gestor_hores/resources/views/entry_hours/create.blade.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/EntryHoursController.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
