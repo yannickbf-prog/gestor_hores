@@ -59,13 +59,12 @@
 
 @section('js')
 <script>
-
+    var projectsInUser = "";
     function onChangeUser(users_info) {
         
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
-        projectSelectHtml.id = "projects";
         
         //Get the projects of the users from the json
         let userId = document.getElementsByName('users')[0].value; 
@@ -73,7 +72,7 @@
             return item.id == userId;
         });
 
-        let projectsInUser = res[0]['projects'];
+        projectsInUser = res[0]['projects'];
         
         if(projectsInUser.length > 0){
             for (project of projectsInUser){
@@ -98,18 +97,31 @@
         
         //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
         
-        console.log(projectsInUser);
+        
     }
     
-    function onChangeProject (){
-        alert("hola");
+    function onChangeProject (users_info){
+       
+        //Create the select of bag hours
+        let bagHourSelectHtml = document.createElement("select");
+        bagHourSelectHtml.name = "bag_hours";
+        
+        //Get the projects of the users from the json
+        let projectId = document.getElementsByName('projects')[0].value; 
+        let res = users_info.filter((item) => {
+            return item.id == projectId;
+        });
+
+        let bagHourInUser = res;
+        
+        alert(res);
     }
 
-    window.onload = function () {
+    window.onload = function (users_info) {
         
         //Get the object from json
         var users_info = @json($users_info);
-                console.log(users_info[0]);
+                
 
         //Charge the users on load page
         onChangeUser(users_info);
@@ -120,7 +132,9 @@
         });
         
         //Listener for onchange projects
-        document.getElementById('projects').addEventListener("change", onChangeProject);
+        document.getElementsByName('projects')[0].addEventListener("change", function(){
+            onChangeProject(users_info);
+        });
         
 
     }
