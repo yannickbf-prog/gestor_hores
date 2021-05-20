@@ -51,7 +51,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="form-group" id="projectSelectContainer">
         <strong>*{{ __('message.projects') }}: </strong>
-        <select name="projects" onchange="onChangeProject()">
+        <select name="projects">
 
         </select>
         <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
@@ -88,21 +88,21 @@
                 option.innerText = project.name + " (" + project.customer + ")";
                 document.getElementsByName('projects')[0].appendChild(option)
             }
-        }/*
+        }
          else{
-         let option = document.createElement("option");
-         option.innerText = "No projects asigned to this user";
-         projectSelectHtml.disabled = true;
-         document.getElementsByName('projects')[0].appendChild(option);
+            let option = document.createElement("option");
+            option.innerText = "No projects asigned to this user";
+            document.getElementsByName('projects')[0].disabled = true;
+            document.getElementsByName('projects')[0].appendChild(option);
          }
          
          if(document.getElementsByName('projects')[0] != null){
-         document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
+            document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
          }
          
-         document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
+         //document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
          
-         //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
+        //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
          
          console.log(projectsInUser);*/
 
@@ -152,8 +152,8 @@
     onChangeUser(users_info);
 
 
-    window.onload = function (users_info) {
-        var users_info = @json($users_info);
+    window.onload = function () {
+        
         //Listener for onchange user
         document.getElementsByName('users')[0].addEventListener("change", function () {
             onChangeUser(users_info);
