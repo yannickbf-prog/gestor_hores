@@ -106,15 +106,14 @@
         let bagHourSelectHtml = document.createElement("select");
         bagHourSelectHtml.name = "bag_hours";
         
-        //Get the projects of the users from the json
+        //Get the bag_hours of the projects
         let projectId = document.getElementsByName('projects')[0].value; 
-        let res = users_info.filter((item) => {
+        let res = projectsInUser.filter((item) => {
             return item.id == projectId;
         });
-
-        let bagHourInUser = res;
         
-        alert(res);
+        bagHoursInProject = res[0]['bag_hours'];
+        console.log(bagHoursInProject);
     }
 
     window.onload = function (users_info) {
