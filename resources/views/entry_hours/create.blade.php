@@ -51,6 +51,11 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="form-group" id="projectSelectContainer">
         <strong>*{{ __('message.projects') }}: </strong>
+        <select name="projects" onchange="onChangeProject()">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
         <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
     </div>
 </div>
@@ -66,12 +71,13 @@
 
 @section('js')
 <script>
-    var projectsInUser = "";
-    function onChangeUser(users_info) {
+    /*function onChangeUser(users_info) {
         
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
+        projectSelectHtml.setAttribute(onchange, "hello")
+
         
         //Get the projects of the users from the json
         let userId = document.getElementsByName('users')[0].value; 
@@ -106,17 +112,17 @@
         
          console.log(projectsInUser);
 
-    }
+    }*/
     
     function onChangeProject (users_info){
-       
-        //Create the select of bag hours
-        let bagHourSelectHtml = document.createElement("select");
-        bagHourSelectHtml.name = "bag_hours";
         
-        //Get the bag_hours of the projects
-        let projectId = document.getElementsByName('projects')[0].value; 
-        let res = projectsInUser.filter((item) => {
+        
+        alert("hello");
+       
+
+        
+        
+        /*let res = projectsInUser.filter((item) => {
             return item.id == projectId;
         });
         
@@ -141,7 +147,7 @@
             document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
         }
         
-        document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+        document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);*/
        
     }
 
@@ -151,19 +157,19 @@
         var users_info = @json($users_info);
                 
         //Charge the projects depending on users on load page
-        onChangeUser(users_info);
+        //onChangeUser(users_info);
         //Charge the bag hours depending on project on load page
-        onChangeProject(users_info);
+        //onChangeProject(users_info);
         
         //Listener for onchange user
-        document.getElementsByName('users')[0].addEventListener("change", function(){
+        /*document.getElementsByName('users')[0].addEventListener("change", function(){
             onChangeUser(users_info);
-        });
+        });*/
         
         //Listener for onchange projects
-        document.getElementsByName('projects')[0].addEventListener("change", function(){
+        /*document.getElementsByName('projects')[0].addEventListener("change", function(){
             onChangeProject(users_info);
-        });
+        });*/
         
 
     }
