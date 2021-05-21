@@ -68,121 +68,127 @@
 <script>
     var projectsInUser;
     function onChangeUser(users_info) {
-        
+
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
         projectSelectHtml.setAttribute("onchange", "onChangeProject()");
-        
+
         //Get the projects of the users from the json
-        let userId = document.getElementsByName('users')[0].value; 
+        let userId = document.getElementsByName('users')[0].value;
         let res = users_info.filter((item) => {
             return item.id == userId;
         });
         projectsInUser = res[0]['projects'];
-        
-        if(projectsInUser.length > 0){
-            for (project of projectsInUser){
+
+        if (projectsInUser.length > 0) {
+            for (project of projectsInUser) {
                 let option = document.createElement("option");
                 option.value = project.id;
-                option.innerText = project.name+" ("+project.customer+")";
+                option.innerText = project.name + " (" + project.customer + ")";
                 projectSelectHtml.appendChild(option);
             }
-        }
-        else{
+        } else {
             let option = document.createElement("option");
             option.innerText = "No projects asigned to this user";
             projectSelectHtml.disabled = true;
             projectSelectHtml.appendChild(option);
         }
-        
-        if(document.getElementsByName('projects')[0] != null){
+
+        if (document.getElementsByName('projects')[0] != null) {
             document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
         }
-        
+
         document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
-        
+
         //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
-        
-        onChangeProject();        
+
+        onChangeProject();
 
     }
 
-    function onChangeProject (){
-        
+    function onChangeProject() {
+
         //Create the select of bag_hours
         let bagHoursSelectHtml = document.createElement("select");
         bagHoursSelectHtml.name = "bag_hours";
-    
+
         //Get user id and project id
         let projectId = document.getElementsByName('projects')[0].value;
-        
-        if(projectsInUser.length > 0){
-            
+
+        if (projectsInUser.length > 0) {
+
             let res = projectsInUser.filter((item) => {
                 return item.id == projectId;
             });
 
             bagHoursInProject = res[0]['bag_hours'];
-            
-            if(bagHoursInProject.length > 0){
-                for (bag_hour of bagHoursInProject){
+
+            if (bagHoursInProject.length > 0) {
+                for (bag_hour of bagHoursInProject) {
                     let option = document.createElement("option");
                     option.value = bag_hour.bag_hour_id;
                     option.innerText = bag_hour.bag_hour_type_name;
                     bagHoursSelectHtml.appendChild(option);
                 }
-                if(document.getElementsByName('bag_hours')[0] != null){
+                if (document.getElementsByName('bag_hours')[0] != null) {
+                    document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
+                }
+                document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+            } else {
+                let option = document.createElement("option");
+                option.value = "no_bag_hour";
+                option.innerText = "No bag hour assigned to this project";
+                bagHoursSelectHtml.disabled = true;
+                bagHoursSelectHtml.appendChild(option);
+                if (document.getElementsByName('bag_hours')[0] != null) {
                     document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
                 }
                 document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
             }
-            
-            
-           
+
         }
         //else need a project for show her bag hours
-        
-        
-        
-     /*
-      * 
-      * 
-      * 
-      * 
-      * 
-      * 
-     if(bagHoursInProject.length > 0){
-     for (bag_hour of bagHoursInProject){
-     let option = document.createElement("option");
-     option.value = bag_hour.bag_hour_id;
-     option.innerText = bag_hour.bag_hour_type_name;
-     bagHourSelectHtml.appendChild(option);
-     }
-     }
-     else{
-     let option = document.createElement("option");
-     option.innerText = "No bag hours asigned to this project";
-     bagHourSelectHtml.disabled = true;
-     bagHourSelectHtml.appendChild(option);
-     }
-     
-     if(document.getElementsByName('bag_hours')[0] != null){
-     document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
-     }
-     
-     document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
-     */
+
+
+
+        /*
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         if(bagHoursInProject.length > 0){
+         for (bag_hour of bagHoursInProject){
+         let option = document.createElement("option");
+         option.value = bag_hour.bag_hour_id;
+         option.innerText = bag_hour.bag_hour_type_name;
+         bagHourSelectHtml.appendChild(option);
+         }
+         }
+         else{
+         let option = document.createElement("option");
+         option.innerText = "No bag hours asigned to this project";
+         bagHourSelectHtml.disabled = true;
+         bagHourSelectHtml.appendChild(option);
+         }
+         
+         if(document.getElementsByName('bag_hours')[0] != null){
+         document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
+         }
+         
+         document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+         */
     }
 
     //Get the object from json
     var users_info = @json($users_info);
-            
-    //Charge the projects depending on users on load page
-    onChangeUser(users_info);
-    
+            //Charge the projects depending on users on load page
+            onChangeUser(users_info);
+
     window.onload = function () {
-        
+
         //Listener for onchange user
         document.getElementsByName('users')[0].addEventListener("change", function () {
             onChangeUser(users_info);
