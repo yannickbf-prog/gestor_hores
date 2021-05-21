@@ -64,6 +64,7 @@ class HourEntryController extends Controller {
     public function create() {
         $lang = setGetLang();
 
+        //Create json with the info of DB, need for selects user, project and bag of hours. This work with JavaScript
         $users_info = [];
         $users_data =  DB::table('users')->get();
 

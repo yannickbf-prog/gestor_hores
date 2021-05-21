@@ -31,36 +31,40 @@
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-12">
-    <div class="form-group">
-        <strong>*{{ __('message.user') }}: </strong>
-        @if (count($users_data) > 0)
-        <select name="users">
-            @foreach($users_data as $user)
-            <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
-            @endforeach
-        </select>
-        @else
-        <li>{{ __('message.no') }} {{ __('message.users') }} {{ __('message.avalible') }} {{ __('message.create_user') }}</li>
-        @endif
-        <a href="{{ route($lang."_users.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.user') }}</a>
+<form action="{{ route('projects.store',$lang) }}" method="POST">
+    @csrf
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>*{{ __('message.user') }}: </strong>
+            @if (count($users_data) > 0)
+            <select name="users">
+                @foreach($users_data as $user)
+                <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
+                @endforeach
+            </select>
+            @else
+            <li>{{ __('message.no') }} {{ __('message.users') }} {{ __('message.avalible') }} {{ __('message.create_user') }}</li>
+            @endif
+            <a href="{{ route($lang."_users.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.user') }}</a>
+        </div>
+
     </div>
 
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-12">
-    <div class="form-group" id="projectSelectContainer">
-        <strong>*{{ __('message.projects') }}: </strong>
-        <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group" id="projectSelectContainer">
+            <strong>*{{ __('message.projects') }}: </strong>
+            <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
+        </div>
     </div>
-</div>
 
-<div class="col-xs-12 col-sm-12 col-md-12">
-    <div class="form-group" id="bagHourSelectContainer">
-        <strong>*{{ __('message.bags_of_hours') }}: </strong>
-        <a href="{{ route($lang."_bag_hours.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.bag_of_hours') }}</a>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group" id="bagHourSelectContainer">
+            <strong>*{{ __('message.bags_of_hours') }}: </strong>
+            <a href="{{ route($lang."_bag_hours.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.bag_of_hours') }}</a>
+        </div>
     </div>
-</div>
+
+</form>
 @endsection
 
 
@@ -146,17 +150,16 @@
                 document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
             }
 
-        }
-        else{
+        } else {
             let option = document.createElement("option");
-                option.value = "no_bag_hour";
-                option.innerText = "Select a project to see her bags of hours";
-                bagHoursSelectHtml.disabled = true;
-                bagHoursSelectHtml.appendChild(option);
-                if (document.getElementsByName('bag_hours')[0] != null) {
-                    document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
-                }
-                document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+            option.value = "no_bag_hour";
+            option.innerText = "Select a project to see her bags of hours";
+            bagHoursSelectHtml.disabled = true;
+            bagHoursSelectHtml.appendChild(option);
+            if (document.getElementsByName('bag_hours')[0] != null) {
+                document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
+            }
+            document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
         }
 
     }
