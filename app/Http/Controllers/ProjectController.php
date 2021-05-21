@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\EditProjectRequest;
 use Illuminate\Support\Facades\App;
+use DB;
 
 class ProjectController extends Controller {
 
@@ -159,6 +160,21 @@ class ProjectController extends Controller {
 
         return redirect()->route($lang.'_projects.index')
                         ->with('success', __('message.project')." ".__('message.deleted'));
+    }
+    
+    public function addRemoveUsers(Project $project) {
+        
+        $lang = setGetLang();
+        
+        $customer = Customer::select("name")->where('id', $project['customer_id'])->first();
+        
+        $users_in_project = DB::table('users_projects')
+                ->join('users', 'users_projects.user_id', '=', 'users.id')
+                ->where('users_projects.project_id', $project['id'])
+                ->select('users.id AS id', 'users.nickname AS nickname', 'users.role AS role', 'users.name AS name', 'users.surname AS surname', 'users.email AS email', 'users.phone AS phone')
+                ->get();
+        
+        return view('projects.add_remove', compact('project','lang','customer','users_in_project'));
     }
 
 }

@@ -86,14 +86,14 @@ class EntryHoursController extends Controller
                 ->where('user_id', $request['user_id'])
                 ->where('project_id', $request['project_id'])
                 ->select('id')
-                ->get();
+                ->first();
         
         $bag_hour_id = $request['bag_hour_in_project'];
         
         $hours = $request['hours_worked'];
         
         DB::table('hours_entry')->insert([
-            'user_project_id' => $user_project_id[0]->id,
+            'user_project_id' => $user_project_id->id,
             'bag_hours_id' => $bag_hour_id,
             'hours' => $hours,
             'validate' => 0,

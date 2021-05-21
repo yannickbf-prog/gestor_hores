@@ -165,6 +165,7 @@
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                     {{ __('message.delete') }}
                 </button>
+                <a class="btn btn-primary" href="{{ route($lang.'_projects.add_remove_users',$value->id) }}">{{ __('message.add_remove_users') }}</a>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
