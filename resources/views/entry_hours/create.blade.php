@@ -112,7 +112,7 @@
         
         //Create the select of bag_hours
         let bagHoursSelectHtml = document.createElement("select");
-        projectSelectHtml.name = "bag_hours";
+        bagHoursSelectHtml.name = "bag_hours";
     
         //Get user id and project id
         let projectId = document.getElementsByName('projects')[0].value;
@@ -130,15 +130,24 @@
                     let option = document.createElement("option");
                     option.value = bag_hour.bag_hour_id;
                     option.innerText = bag_hour.bag_hour_type_name;
-                    bagHourSelectHtml.appendChild(option);
+                    bagHoursSelectHtml.appendChild(option);
                 }
             }
+            
+            document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+           
         }
         //else need a project for show her bag hours
         
         
         
      /*
+      * 
+      * 
+      * 
+      * 
+      * 
+      * 
      if(bagHoursInProject.length > 0){
      for (bag_hour of bagHoursInProject){
      let option = document.createElement("option");
