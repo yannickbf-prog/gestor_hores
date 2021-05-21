@@ -105,15 +105,12 @@
 
     }
 
-    /*function onChangeProject (users_info){
+    function onChangeProject (users_info){
      
      
-     alert("hello");
+        alert("hello");
      
-     
-     
-     
-     let res = projectsInUser.filter((item) => {
+     /*let res = projectsInUser.filter((item) => {
      return item.id == projectId;
      });
      
@@ -139,14 +136,17 @@
      }
      
      document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
-     
-     }*/
+     */
+    }
 
     //Get the object from json
     var users_info = @json($users_info);
             
     //Charge the projects depending on users on load page
     onChangeUser(users_info);
+    
+    //Charge the projects depending on users on load page
+    onChangeProject(users_info);
 
 
     window.onload = function () {
@@ -154,6 +154,11 @@
         //Listener for onchange user
         document.getElementsByName('users')[0].addEventListener("change", function () {
             onChangeUser(users_info);
+        });
+        
+        //Listener for onchange projects
+        document.getElementsByName('projects')[0].addEventListener("change", function(){
+            onChangeProject(users_info);
         });
 
 
