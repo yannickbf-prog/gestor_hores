@@ -90,6 +90,7 @@
             }
         } else {
             let option = document.createElement("option");
+            option.value = "no_project";
             option.innerText = "No projects asigned to this user";
             projectSelectHtml.disabled = true;
             projectSelectHtml.appendChild(option);
@@ -138,7 +139,7 @@
             } else {
                 let option = document.createElement("option");
                 option.value = "no_bag_hour";
-                option.innerText = "No bag hour assigned to this project";
+                option.innerText = "No bags of hours assigned to this project";
                 bagHoursSelectHtml.disabled = true;
                 bagHoursSelectHtml.appendChild(option);
                 if (document.getElementsByName('bag_hours')[0] != null) {
@@ -147,6 +148,9 @@
                 document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
             }
 
+        }
+        else{
+            
         }
         //else need a project for show her bag hours
 
