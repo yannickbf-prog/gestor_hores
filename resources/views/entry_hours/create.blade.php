@@ -103,13 +103,13 @@
         
         //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
         
+        onChangeProject();        
 
     }
 
     function onChangeProject (){
-     alert("hola");
     
-        /*//Get user id and project id
+        //Get user id and project id
         let userId = document.getElementsByName('users')[0].value;
         let projectId = document.getElementsByName('projects')[0].value;
         
@@ -150,10 +150,6 @@
     //Charge the projects depending on users on load page
     onChangeUser(users_info);
     
-    //Charge the projects depending on users on load page
-    onChangeProject();
-
-
     window.onload = function () {
         
         //Listener for onchange user
