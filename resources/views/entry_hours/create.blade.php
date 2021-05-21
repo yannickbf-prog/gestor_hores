@@ -71,6 +71,7 @@
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
+        projectSelectHtml.setAttribute("onchange", "onChangeProject()");
         
         //Get the projects of the users from the json
         let userId = document.getElementsByName('users')[0].value; 
@@ -105,10 +106,14 @@
 
     }
 
-    function onChangeProject (users_info){
-     
-     
-        alert("hello");
+    function onChangeProject (){
+     alert("hola");
+    
+        /*//Get user id and project id
+        let userId = document.getElementsByName('users')[0].value;
+        let projectId = document.getElementsByName('projects')[0].value;
+        
+        console.log(userId+" "+projectId);
      
      /*let res = projectsInUser.filter((item) => {
      return item.id == projectId;
@@ -146,7 +151,7 @@
     onChangeUser(users_info);
     
     //Charge the projects depending on users on load page
-    onChangeProject(users_info);
+    onChangeProject();
 
 
     window.onload = function () {
@@ -155,11 +160,11 @@
         document.getElementsByName('users')[0].addEventListener("change", function () {
             onChangeUser(users_info);
         });
-        
+
         //Listener for onchange projects
-        document.getElementsByName('projects')[0].addEventListener("change", function(){
-            onChangeProject(users_info);
-        });
+//        document.getElementsByName('projects')[0].addEventListener("change", function(){
+//            onChangeProject(users_info);
+//        });
 
 
         //Charge the bag hours depending on project on load page
