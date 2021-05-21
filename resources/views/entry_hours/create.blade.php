@@ -51,9 +51,6 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="form-group" id="projectSelectContainer">
         <strong>*{{ __('message.projects') }}: </strong>
-        <select name="projects">
-
-        </select>
         <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
     </div>
 </div>
@@ -70,41 +67,41 @@
 @section('js')
 <script>
     function onChangeUser(users_info) {
-
+        
+        //Create the select of projects
+        let projectSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "projects";
+        
         //Get the projects of the users from the json
-        let userId = document.getElementsByName('users')[0].value;
+        let userId = document.getElementsByName('users')[0].value; 
         let res = users_info.filter((item) => {
             return item.id == userId;
         });
-
         projectsInUser = res[0]['projects'];
-
-        console.log(projectsInUser);
-
-        if (projectsInUser.length > 0) {
-            for (project of projectsInUser) {
+        
+        if(projectsInUser.length > 0){
+            for (project of projectsInUser){
                 let option = document.createElement("option");
                 option.value = project.id;
-                option.innerText = project.name + " (" + project.customer + ")";
-                document.getElementsByName('projects')[0].appendChild(option)
+                option.innerText = project.name+" ("+project.customer+")";
+                projectSelectHtml.appendChild(option)
             }
         }
-         else{
+        else{
             let option = document.createElement("option");
             option.innerText = "No projects asigned to this user";
-            document.getElementsByName('projects')[0].disabled = true;
-            document.getElementsByName('projects')[0].appendChild(option);
-         }
-         
-         if(document.getElementsByName('projects')[0] != null){
+            projectSelectHtml.disabled = true;
+            projectSelectHtml.appendChild(option);
+        }
+        
+        if(document.getElementsByName('projects')[0] != null){
             document.getElementById("projectSelectContainer").removeChild(document.getElementsByName('projects')[0]);
-         }
-         
-         //document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
-         
+        }
+        
+        document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
+        
         //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
-         
-         console.log(projectsInUser);*/
+        
 
     }
 
