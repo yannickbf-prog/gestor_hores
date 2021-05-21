@@ -150,7 +150,15 @@
 
         }
         else{
-            
+            let option = document.createElement("option");
+                option.value = "no_bag_hour";
+                option.innerText = "Select a project to see her bags of hours";
+                bagHoursSelectHtml.disabled = true;
+                bagHoursSelectHtml.appendChild(option);
+                if (document.getElementsByName('bag_hours')[0] != null) {
+                    document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
+                }
+                document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
         }
         //else need a project for show her bag hours
 
