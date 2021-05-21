@@ -66,6 +66,7 @@
 
 @section('js')
 <script>
+    var projectsInUser;
     function onChangeUser(users_info) {
         
         //Create the select of projects
@@ -108,19 +109,36 @@
     }
 
     function onChangeProject (){
+        
+        //Create the select of bag_hours
+        let projectSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "projects";
     
         //Get user id and project id
-        let userId = document.getElementsByName('users')[0].value;
         let projectId = document.getElementsByName('projects')[0].value;
         
-        console.log(userId+" "+projectId);
-     
-     /*let res = projectsInUser.filter((item) => {
-     return item.id == projectId;
-     });
-     
-     bagHoursInProject = res[0]['bag_hours'];
-     
+        if(projectsInUser.length > 0){
+            
+            let res = projectsInUser.filter((item) => {
+                return item.id == projectId;
+            });
+
+            bagHoursInProject = res[0]['bag_hours'];
+            
+            if(bagHoursInProject.length > 0){
+                for (bag_hour of bagHoursInProject){
+                    let option = document.createElement("option");
+                    option.value = bag_hour.bag_hour_id;
+                    option.innerText = bag_hour.bag_hour_type_name;
+                    bagHourSelectHtml.appendChild(option);
+                }
+            }
+        }
+        //else need a project for show her bag hours
+        
+        
+        
+     /*
      if(bagHoursInProject.length > 0){
      for (bag_hour of bagHoursInProject){
      let option = document.createElement("option");
