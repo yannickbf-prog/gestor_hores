@@ -111,8 +111,8 @@
     function onChangeProject (){
         
         //Create the select of bag_hours
-        let projectSelectHtml = document.createElement("select");
-        projectSelectHtml.name = "projects";
+        let bagHoursSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "bag_hours";
     
         //Get user id and project id
         let projectId = document.getElementsByName('projects')[0].value;
