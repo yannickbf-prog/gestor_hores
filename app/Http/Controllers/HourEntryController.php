@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\HourEntry;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Requests\CreateHourEntryRequest;
+use Illuminate\Support\Facades\App;
 
 class HourEntryController extends Controller {
 
@@ -134,8 +136,29 @@ class HourEntryController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(CreateHourEntryRequest $request, $lang) {
+        
+        App::setLocale($lang);
+        
+        $request->validated();
+        
+        $user_project_id = DB::table('users_projects')
+                ->where('user_id', $request['users'])
+                ->where('project_id', $request['projects'])
+                ->select('id')
+                ->get();
+        
+        DB::table('hours_entry')->insert([
+            'user_project_id' => $user_project_id[0]->id,
+            'bag_hours_id' => $request['bag_hours'],
+            'hours' => $request['hours'],
+            'validate' => $request['validate'],
+            'created_at' => now(),
+            'updated_at' => now(), 
+        ]);
+        
+        return redirect()->route($lang.'_time_entries.index')
+                        ->with('success', __('message.time_entry')." ".__('message.created') );
     }
 
     /**
