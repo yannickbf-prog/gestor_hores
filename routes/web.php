@@ -171,6 +171,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/tipus-bosses-hores/{typeBagHour}/editar", [TypeBagHourController::class, 'edit'])->name('ca_bag_hours_types.edit');
 
     // Control panel - Time entries - Operations
+    Route::post("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'store'])->name('time_entries.store');
     //Route::put("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
     Route::get("control-panel/time-entries/validate/id/{id}/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
     Route::get("control-panel/time-entries/invalidate/id/{id}/lang/{lang}", [HourEntryController::class, 'invalidateEntryHour'])->name('entry_hours.invalidate');

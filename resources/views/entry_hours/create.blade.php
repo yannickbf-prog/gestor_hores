@@ -31,7 +31,7 @@
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
-<form action="{{ route('projects.store',$lang) }}" method="POST">
+<form action="{{ route('time_entries.store',$lang) }}" method="POST">
     @csrf
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
@@ -64,6 +64,26 @@
         </div>
     </div>
 
+    <div class="col-xs-8 col-sm-8 col-md-8">
+        <div class="form-group">
+            <strong>*{{__('message.hours')}}:</strong>
+            <input type="number" name="hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.hours_worked')}}" value="{{old('hours')}}">
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>*{{ __('message.state') }}:</strong><br>
+            <input type="radio" id="validated" name="validate" value="1" checked>
+            <label for="validated">{{__('message.validated')}}</label><br>
+            <input type="radio" id="invalidated" name="validate" value="0">
+            <label for="invalidated">{{__('message.invalidated')}}</label><br>  
+        </div>
+    </div> 
+
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+        <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
+    </div>
 </form>
 @endsection
 
