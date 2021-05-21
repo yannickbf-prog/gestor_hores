@@ -102,8 +102,6 @@
 
         document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
 
-        //document.getElementById("projectSelectContainer").appendChild(projectSelectHtml);
-
         onChangeProject();
 
     }
@@ -160,38 +158,7 @@
                 }
                 document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
         }
-        //else need a project for show her bag hours
 
-
-
-        /*
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         if(bagHoursInProject.length > 0){
-         for (bag_hour of bagHoursInProject){
-         let option = document.createElement("option");
-         option.value = bag_hour.bag_hour_id;
-         option.innerText = bag_hour.bag_hour_type_name;
-         bagHourSelectHtml.appendChild(option);
-         }
-         }
-         else{
-         let option = document.createElement("option");
-         option.innerText = "No bag hours asigned to this project";
-         bagHourSelectHtml.disabled = true;
-         bagHourSelectHtml.appendChild(option);
-         }
-         
-         if(document.getElementsByName('bag_hours')[0] != null){
-         document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
-         }
-         
-         document.getElementById("bagHourSelectContainer").insertBefore(bagHourSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
-         */
     }
 
     //Get the object from json
@@ -205,23 +172,6 @@
         document.getElementsByName('users')[0].addEventListener("change", function () {
             onChangeUser(users_info);
         });
-
-        //Listener for onchange projects
-//        document.getElementsByName('projects')[0].addEventListener("change", function(){
-//            onChangeProject(users_info);
-//        });
-
-
-        //Charge the bag hours depending on project on load page
-        //onChangeProject(users_info);
-
-
-
-        //Listener for onchange projects
-        /*document.getElementsByName('projects')[0].addEventListener("change", function(){
-         onChangeProject(users_info);
-         });*/
-
 
     }
 </script>
