@@ -86,7 +86,7 @@
                 let option = document.createElement("option");
                 option.value = project.id;
                 option.innerText = project.name+" ("+project.customer+")";
-                projectSelectHtml.appendChild(option)
+                projectSelectHtml.appendChild(option);
             }
         }
         else{
@@ -132,9 +132,13 @@
                     option.innerText = bag_hour.bag_hour_type_name;
                     bagHoursSelectHtml.appendChild(option);
                 }
+                if(document.getElementsByName('bag_hours')[0] != null){
+                    document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
+                }
+                document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
             }
             
-            document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
+            
            
         }
         //else need a project for show her bag hours
