@@ -204,13 +204,15 @@ class ProjectController extends Controller {
     
     public function addUser(Request $request, $project_id, $lang) {
         
+        $request_explode = explode('|', $request->user);
+        
         UsersProject::create([
-            'user_id' => $request->user,
+            'user_id' => $request_explode[0],
             'project_id' => $project_id,
         ]);
         
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
-                        ->with('success', __('message.user') . " " . $request->user_id . " " . __('message.added'));
+                        ->with('success', __('message.user') . " " . $request_explode[1] . " " . __('message.added'));
     }
 
 }
