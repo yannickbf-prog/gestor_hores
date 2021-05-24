@@ -117,6 +117,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'update'])->name('projects.update');
     Route::delete("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::post('control-panel/projects/delete_filters/', [ProjectController::class, 'deleteFilters'])->name('projects.delete_filters');
+    Route::post('control-panel/projects/remove_user/{project_id}/{lang}', [ProjectController::class, 'removeUser'])->name('projects.remove_user');
 
     //Control panel - Projects - en 
     Route::get("en/control-panel/projects", [ProjectController::class, 'index'])->name('en_projects.index');

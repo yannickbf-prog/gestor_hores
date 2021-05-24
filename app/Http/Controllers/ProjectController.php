@@ -176,5 +176,9 @@ class ProjectController extends Controller {
         
         return view('projects.add_remove', compact('project','lang','customer','users_in_project'));
     }
+    
+     public function removeUser(Request $request, $project_id, $lang){
+        return $request;
+    }
 
 }
