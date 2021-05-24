@@ -174,8 +174,6 @@ class ProjectController extends Controller {
                 ->select('users.id AS id', 'users.nickname AS nickname', 'users.role AS role', 'users.name AS name', 'users.surname AS surname', 'users.email AS email', 'users.phone AS phone')
                 ->get();
 
-        
-        
         $users_not_id_array = [];
         
         foreach ($users_in_project as $user){    

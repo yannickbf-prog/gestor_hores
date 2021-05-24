@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HourEntry;
+use App\Models\UsersProject;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests\CreateHourEntryRequest;
@@ -26,8 +27,7 @@ class HourEntryController extends Controller {
     }
 
     public function getBDInfo() {
-        $data = DB::table('users_projects')
-                ->join('users', 'users_projects.user_id', '=', 'users.id')
+        $data = UsersProject::join('users', 'users_projects.user_id', '=', 'users.id')
                 ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                 ->join('customers', 'projects.customer_id', '=', 'customers.id')
                 ->join('hours_entry', 'users_projects.id', '=', 'hours_entry.user_project_id')

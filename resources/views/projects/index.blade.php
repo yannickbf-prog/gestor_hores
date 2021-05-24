@@ -149,7 +149,7 @@
         <th>{{ __('message.action') }}</th>
     </tr>
     @endif
-    @forelse ($data as $key => $value)
+    @forelse ($data as $value)
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $value->name }}</td>

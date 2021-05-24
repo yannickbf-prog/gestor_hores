@@ -13,4 +13,9 @@ class UsersProject extends Model
         'user_id',
         'project_id'
     ];
+    
+    public function scopeValidated($query)
+    {
+        return $query->where('hours_entry.validate', '=', 0);
+    }
 }
