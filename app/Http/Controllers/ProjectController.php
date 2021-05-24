@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Customer;
+use App\Models\UsersProject;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\EditProjectRequest;
@@ -199,6 +200,17 @@ class ProjectController extends Controller {
 
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
                         ->with('success', __('message.user') . " " . $request->user_id . " " . __('message.unseted'));
+    }
+    
+    public function addUser(Request $request, $project_id, $lang) {
+        
+        UsersProject::create([
+            'user_id' => $request->user,
+            'project_id' => $project_id,
+        ]);
+        
+        return redirect()->route($lang . '_projects.add_remove_users', $project_id)
+                        ->with('success', __('message.user') . " " . $request->user_id . " " . __('message.added'));
     }
 
 }

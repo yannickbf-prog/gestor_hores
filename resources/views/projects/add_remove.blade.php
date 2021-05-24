@@ -58,15 +58,24 @@
     <div class="col-12">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h3>Assign projects to {{ __('message.users') }}:</h3>
+                <h3>Assign {{ __('message.users') }} to {{ __('message.project') }}:</h3>
             </div>
         </div>
+
+
+
         @if (count($users_not_in_project) > 0)
-        <select>
-            @foreach($users_not_in_project as $user)
-            <option value="{{$user->id}}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
-            @endforeach
-        </select>
+        <form action="{{ route('projects.add_user', [$project->id, $lang]) }}" method="POST">
+            @csrf
+            <select name="user">
+                @foreach($users_not_in_project as $user)
+                <option value="{{[$user->id, $user->nickname]}}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
+                @endforeach
+            </select>
+
+            <button type="submit" class="btn btn-success">Assign</button>
+
+        </form>
         @else
         <li>No users available to project {{ $project->name}}</li>
         @endif
