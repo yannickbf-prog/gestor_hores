@@ -8,7 +8,7 @@ return [
     'spanish' => 'Spanish',
     'catalan' => 'Catalan',
     
-    'control_panel' => 'Panel de control',
+    'control_panel' => 'Control panel',
     
     'created' => 'created successfully',
     'updated' => 'updated successfully',

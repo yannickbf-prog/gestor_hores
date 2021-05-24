@@ -3,6 +3,23 @@
 @section('title', __('message.control_panel')." - ". __('message.home'))
 
 @section('content')
+@if ($message = Session::get('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ $message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>{{ __('message.unvalidated') }} {{ __('message.time_entries') }}</h3>
+        </div>
+    </div>
+</div>
+
 <table class="table table-bordered">
     @if (count($info_for_table) > 0)
     <tr>
@@ -45,7 +62,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                            <a class="btn btn-success" href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}">{{ __('message.validate') }}</a>
+                            <a class="btn btn-success" href="{{ route('home_entry_hours.validate',[$value->hours_entry_id, $lang]) }}">{{ __('message.validate') }}</a>
                         </div>
                     </div>
                 </div>
@@ -87,4 +104,8 @@
     {!! $info_for_table->links() !!} 
 </div>
 
+@endsection
+
+@section('js')
+<script type="text/javascript" src="{{ URL::asset('js/home_index.js') }}"></script>
 @endsection
