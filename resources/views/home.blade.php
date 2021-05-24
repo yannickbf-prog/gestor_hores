@@ -15,9 +15,9 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="d-flex justify-content-end">
-            <a class="btn btn-info" href="{{ route($lang.'_projects.create') }}">{{ __('message.create') }} {{ __('message.project') }}<a>
-            <a class="btn btn-info" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.bag_of_hours') }}<a>
-            <a class="btn btn-info" href="{{ route($lang.'_projects.create') }}">{{ __('message.create') }} {{ __('message.project') }}<a>
+            <a class="btn btn-info mr-1" href="{{ route($lang.'_projects.create') }}">{{ __('message.create') }} {{ __('message.project') }}<a>
+            <a class="btn btn-info mr-1" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.bag_of_hours') }}<a>
+            <a class="btn btn-info" href="{{ route($lang.'_time_entries.create') }}">{{ __('message.create') }} {{ __('message.time_entries') }}<a>
         </div>
     </div>
 </div>
