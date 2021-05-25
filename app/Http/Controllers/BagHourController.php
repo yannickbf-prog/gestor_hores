@@ -23,7 +23,7 @@ class BagHourController extends Controller
             ($request['type'] == "") ? session(['bag_hour_type' => '%']) : session(['bag_hour_type' => $request['type']]);
             ($request['project'] == "") ? session(['bag_hour_project' => '%']) : session(['bag_hour_project' => $request['project']]);
             ($request['contracted_hours'] == "") ? session(['bag_hour_contracted_hours' => '%']) : session(['bag_hour_contracted_hours' => $request['contracted_hours']]);
-            ($request['hours_available'] == "") ? session(['bag_hour_hours_available' => '%']) : session(['bag_hour_hours_available' => $request['hours_available']]);
+            
             ($request['hour_price'] == "") ? session(['bag_hour_hour_price' => '%']) : session(['bag_hour_hour_price' => str_replace(",", ".", $request['hour_price'])]);        
             ($request['total_price'] == "") ? session(['bag_hour_total_price' => '%']) : session(['bag_hour_total_price' => str_replace(",", ".", $request['total_price'])]);        
         
@@ -36,7 +36,7 @@ class BagHourController extends Controller
         $type = session('bag_hour_type', "%");
         $project = session('bag_hour_project', "%");
         $contracted_hours = session('bag_hour_contracted_hours', "%");
-        $hours_available = session('bag_hour_hours_available', "%");
+        
         
         $hour_price = session('bag_hour_hour_price', "%");
         
@@ -63,7 +63,6 @@ class BagHourController extends Controller
             ->where('type_bag_hours.name', 'like', "%".$type."%")
             ->where('projects.name', 'like', "%".$project."%")
             ->where('contracted_hours', 'like', $contracted_hours)
-            ->where('hours_available', 'like', $hours_available)
             ->where('hour_price', 'like', $hour_price)
             ->where('total_price', 'like', $total_price)
             ->whereBetween('bag_hours.created_at', $dates)
@@ -80,7 +79,6 @@ class BagHourController extends Controller
         session(['bag_hour_type' => '%']);
         session(['bag_hour_type_project' => '%']);
         session(['bag_hour_contracted_hours' => '%']);
-        session(['bag_hour_hours_available' => '%']);
         session(['bag_hour_hour_price' => "%"]);
         session(['bag_hour_total_price' => "%"]);
         session(['bag_hour_date_from' => ""]);
@@ -127,7 +125,6 @@ class BagHourController extends Controller
             'project_id' => $request->get("type_id"),
             'type_id' => $request->get("type_id"),
             'contracted_hours' => $request->get("contracted_hours"),
-            'hours_available' => $request->get("contracted_hours"),
             'total_price' => $request->get("total_price"),
             'created_at' => now(),
             'updated_at' => now(),

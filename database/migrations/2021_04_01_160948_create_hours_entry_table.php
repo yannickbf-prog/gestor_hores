@@ -18,7 +18,7 @@ class CreateHoursEntryTable extends Migration
             $table->unsignedBigInteger('user_project_id');
             $table->foreign('user_project_id')->references('id')->on('users_projects');
             $table->unsignedBigInteger('bag_hours_id');
-            $table->foreign('bag_hours_id')->references('id')->on('bag_hours');
+            $table->foreign('bag_hours_id')->references('id')->on('bag_hours')->nullable();
             $table->integer('hours');
             $table->boolean('validate');
             $table->timestamps();

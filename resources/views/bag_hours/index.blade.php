@@ -57,14 +57,14 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!--<div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.hours_available') }}:</strong>
                 <input type="text" name="hours_available" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.hours_available') }}" value="@if(session('bag_hour_hours_available') != '%'){{session('bag_hour_hours_available')}}@endif">
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -177,7 +177,7 @@
         <td>{{ $value->project_name }}</td>
         <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ $value->contracted_hours }}h</td>
-        <td>{{ $value->hours_available }}h</td>
+        <td>put hour available h</td>
         <td>{{ number_format($value->type_hour_price, 2, ',', '.') }}€</td>
         <td style="width:100px">{{ number_format($value->total_price, 2, ',', '.') }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
