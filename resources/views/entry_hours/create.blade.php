@@ -130,10 +130,12 @@
             let res = projectsInUser.filter((item) => {
                 return item.id == projectId;
             });
-            bagHourInProject = res[0]['bag_hour'];
+            let bagHourInProject = res[0]['bag_hour'];
+            
+            
         }
         
-        console.log(bagHourInProject);
+        
     }
 
 
