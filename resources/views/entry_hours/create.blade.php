@@ -132,7 +132,9 @@
             });
             let bagHourInProject = res[0]['bag_hour'];
             
-            
+            if(bagHourInProject == true){
+                let inputedHoursInputHtml = document.createElement("select");
+            }
         }
         
         
