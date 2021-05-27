@@ -63,8 +63,9 @@
             <input type="number" name="hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.hours_worked')}}" value="{{old('hours')}}">
         </div>
     </div>
+    
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="col-xs-12 col-sm-12 col-md-12" id="validatedContainer">
         <div class="form-group">
             <strong>*{{ __('message.state') }}:</strong><br>
             <input type="radio" id="validated" name="validate" value="1" checked>
@@ -133,7 +134,17 @@
             let bagHourInProject = res[0]['bag_hour'];
             
             if(bagHourInProject == true){
-                let inputedHoursInputHtml = document.createElement("select");
+                let inputedHoursContainerHtml = document.createElement("div");
+                inputedHoursContainerHtml.id = 'inputedHoursContainer';
+                
+                let inputedHoursTitleHtml = document.createElement("strong");
+                inputedHoursTitleHtml.innerText = "*{{__('message.hours_imputed')}}:";
+                let inputedHoursInputHtml = document.createElement("input");
+                inputedHoursInputHtml.type = "name";
+                inputedHoursInputHtml.name = "hours_imputed";
+                inputedHoursContainerHtml.appendChild(inputedHoursTitleHtml);
+                inputedHoursContainerHtml.appendChild(inputedHoursInputHtml);
+                document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
             }
         }
         
