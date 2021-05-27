@@ -33,7 +33,7 @@ class CreateHourEntryRequest extends FormRequest
         return [
             'users' => 'required',
             'projects' => 'required|required_without:no_project|numeric',
-            'bag_hours' => 'required|required_without:no_bag_hour|numeric',
+            'bag_hours' => 'nullable|numeric',
             'hours' => 'required|numeric',
             'validate' => 'required|required_with:0,1|numeric'
         ];

@@ -57,7 +57,7 @@
 
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group" id="bagHourSelectContainer">
-            <strong>*{{ __('message.bag_of_hours') }}: </strong>
+            <strong>{{ __('message.bag_of_hours') }}: </strong>
             <a href="{{ route($lang."_bag_hours.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.bag_of_hours') }}</a>
         </div>
     </div>
