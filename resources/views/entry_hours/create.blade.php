@@ -55,12 +55,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group" id="bagHourSelectContainer">
-            <strong>{{ __('message.bag_of_hours') }}: </strong>
-            <a href="{{ route($lang."_bag_hours.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.bag_of_hours') }}</a>
-        </div>
-    </div>
+
 
     <div class="col-xs-8 col-sm-8 col-md-8">
         <div class="form-group">
@@ -94,7 +89,6 @@
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
-        projectSelectHtml.setAttribute("onchange", "onChangeProject()");
 
         //Get the projects of the users from the json
         let userId = document.getElementsByName('users')[0].value;
@@ -124,63 +118,8 @@
 
         document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
 
-        onChangeProject();
-
     }
 
-    function onChangeProject() {
-
-        //Create the select of bag_hours
-        let bagHoursSelectHtml = document.createElement("select");
-        bagHoursSelectHtml.name = "bag_hours";
-
-        //Get user id and project id
-        let projectId = document.getElementsByName('projects')[0].value;
-
-        if (projectsInUser.length > 0) {
-
-            let res = projectsInUser.filter((item) => {
-                return item.id == projectId;
-            });
-
-            bagHoursInProject = res[0]['bag_hours'];
-
-            if (bagHoursInProject.length > 0) {
-                for (bag_hour of bagHoursInProject) {
-                    let option = document.createElement("option");
-                    option.value = bag_hour.bag_hour_id;
-                    option.innerText = bag_hour.bag_hour_type_name;
-                    bagHoursSelectHtml.appendChild(option);
-                }
-                if (document.getElementsByName('bag_hours')[0] != null) {
-                    document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
-                }
-                document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
-            } else {
-                let option = document.createElement("option");
-                option.value = "no_bag_hour";
-                option.innerText = "No bags of hours assigned to this project";
-                bagHoursSelectHtml.disabled = true;
-                bagHoursSelectHtml.appendChild(option);
-                if (document.getElementsByName('bag_hours')[0] != null) {
-                    document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
-                }
-                document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
-            }
-
-        } else {
-            let option = document.createElement("option");
-            option.value = "no_bag_hour";
-            option.innerText = "Select a project to see her bags of hours";
-            bagHoursSelectHtml.disabled = true;
-            bagHoursSelectHtml.appendChild(option);
-            if (document.getElementsByName('bag_hours')[0] != null) {
-                document.getElementById("bagHourSelectContainer").removeChild(document.getElementsByName('bag_hours')[0]);
-            }
-            document.getElementById("bagHourSelectContainer").insertBefore(bagHoursSelectHtml, document.getElementById("bagHourSelectContainer").getElementsByTagName("a")[0]);
-        }
-
-    }
 
     //Get the object from json
     var users_info = @json($users_info);
