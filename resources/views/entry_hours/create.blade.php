@@ -89,6 +89,7 @@
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
+        projectSelectHtml.setAttribute("onchange", "onChangeProject()");
 
         //Get the projects of the users from the json
         let userId = document.getElementsByName('users')[0].value;
@@ -118,6 +119,11 @@
 
         document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
 
+        onChangeProject();
+    }
+    
+    function onChangeProject() {
+        alert("hello");
     }
 
 

@@ -20,6 +20,7 @@ class CreateHoursEntryTable extends Migration
             $table->unsignedBigInteger('bag_hours_id');
             $table->nullable()->foreign('bag_hours_id')->references('id')->on('bag_hours');
             $table->integer('hours');
+            $table->integer('hours_imputed')->nullable();
             $table->boolean('validate');
             $table->timestamps();
             
