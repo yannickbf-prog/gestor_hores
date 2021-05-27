@@ -23,8 +23,7 @@ class HourEntryController extends Controller {
                 ->paginate(10);
         
         $join = DB::table('hours_entry')->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')->select('type_bag_hours.name')->get();
-        
-        
+             
 
         return view('entry_hours.index', compact(['lang', 'data']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
@@ -88,10 +87,20 @@ class HourEntryController extends Controller {
             $users_projects = [];
             foreach ($projects_users_data as $project_in_user) {
                 
+                $bag_hour;
+                
+                if(DB::table('bag_hours')->where('project_id', $project_in_user->project_id)->exists()){
+                    $bag_hour = true;
+                }
+                else{
+                    $bag_hour = false;
+                }
+                
                 $users_projects[] = [
                     'id' => $project_in_user->project_id,
                     'name' => $project_in_user->project_name,
                     'customer' => $project_in_user->customer_name,
+                    'bag_hour' => $bag_hour,
                 ];
                 
                 

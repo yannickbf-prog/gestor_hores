@@ -122,8 +122,18 @@
         onChangeProject();
     }
     
-    function onChangeProject() {
-        alert("hello");
+    function onChangeProject() {     
+        
+        let projectId = document.getElementsByName('projects')[0].value;
+        
+        if (projectsInUser.length > 0) {
+            let res = projectsInUser.filter((item) => {
+                return item.id == projectId;
+            });
+            bagHourInProject = res[0]['bag_hour'];
+        }
+        
+        console.log(bagHourInProject);
     }
 
 
