@@ -76,7 +76,8 @@
             </div>
         </div> 
 
-        <button type="button" class="btn btn-outline-success btn-sm" onclick="addEntry(1)">+</button>
+        <input hidden name="time_entry_id" value="1">
+        <a type="button" class="btn btn-outline-success btn-sm" id="btnEntry" onclick="addEntry()">+</a>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
@@ -90,21 +91,27 @@
 
 @section('js')
 <script>
+        
     var countEntries = 1;
-    function addEntry(containerId) {
-        countEntries++;
-        let clone = document.getElementById('timeEntryContainer1').cloneNode(true);
-        clone.setAttribute('id', 'timeEntryContainer'+countEntries);
+    function addEntry() {
+       
         
+
+        document.getElementById('btnEntry').setAttribute('name', 'prueva');
+//        countEntries++;
+//        let clone = document.getElementById('timeEntryContainer1').cloneNode(true);
+//        clone.setAttribute('id', 'timeEntryContainer'+countEntries);
+//       
+//        document.getElementById('timeEntryContainer'+containerId).after(clone);
         
-        document.getElementById('timeEntryContainer'+containerId).after(clone);
+        //document.getElementById('timeEntryContainer'+containerId).getElementsByName('button')[0].setAttribute('name', 'prueva');
         
 
 
     }
 
 
-    var projectsInUser;
+    /*var projectsInUser;
     function onChangeUser(users_info) {
 
         //Create the select of projects
@@ -171,7 +178,7 @@
 
     }
 
-
+   
     //Get the object from json
     var users_info = @json($users_info);
             //Charge the projects depending on users on load page
@@ -185,5 +192,7 @@
         });
 
     }
+     * 
+     */
 </script>
 @endsection
