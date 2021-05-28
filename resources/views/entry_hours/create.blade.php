@@ -31,59 +31,79 @@
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
-<form action="{{ route('time_entries.store',$lang) }}" method="POST">
+<form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
     @csrf
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>*{{ __('message.user') }}: </strong>
-            @if (count($users_data) > 0)
-            <select name="users">
-                @foreach($users_data as $user)
-                <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
-                @endforeach
-            </select>
-            @endif
-            <a href="{{ route($lang."_users.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.user') }}</a>
+    <div id="timeEntryContainer1">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>*{{ __('message.user') }}: </strong>
+                @if (count($users_data) > 0)
+                <select name="users[]">
+                    @foreach($users_data as $user)
+                    <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
+                    @endforeach
+                </select>
+                @endif
+                <a href="{{ route($lang."_users.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.user') }}</a>
+            </div>
+
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group" id="projectSelectContainer">
+                <strong>*{{ __('message.project') }}: </strong>
+                <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
+            </div>
+        </div>
+
+
+
+        <div class="col-xs-8 col-sm-8 col-md-8">
+            <div class="form-group">
+                <strong>*{{__('message.hours')}}:</strong>
+                <input type="number" name="hours[]" class="form-control" placeholder="{{__('message.enter')." ".__('message.hours_worked')}}" value="{{old('hours')}}">
+            </div>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12" id="validatedContainer">
+            <div class="form-group">
+                <strong>*{{ __('message.state') }}:</strong><br>
+                <input type="radio" id="validated" name="validate[]" value="1" checked>
+                <label for="validated">{{__('message.validated')}}</label><br>
+                <input type="radio" id="invalidated" name="validate[]" value="0">
+                <label for="invalidated">{{__('message.invalidated')}}</label><br>  
+            </div>
+        </div> 
+
+        <button type="button" class="btn btn-outline-success btn-sm" onclick="addEntry(1)">+</button>
     </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group" id="projectSelectContainer">
-            <strong>*{{ __('message.project') }}: </strong>
-            <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
-        </div>
-    </div>
-
-
-
-    <div class="col-xs-8 col-sm-8 col-md-8">
-        <div class="form-group">
-            <strong>*{{__('message.hours')}}:</strong>
-            <input type="number" name="hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.hours_worked')}}" value="{{old('hours')}}">
-        </div>
-    </div>
-    
-
-    <div class="col-xs-12 col-sm-12 col-md-12" id="validatedContainer">
-        <div class="form-group">
-            <strong>*{{ __('message.state') }}:</strong><br>
-            <input type="radio" id="validated" name="validate" value="1" checked>
-            <label for="validated">{{__('message.validated')}}</label><br>
-            <input type="radio" id="invalidated" name="validate" value="0">
-            <label for="invalidated">{{__('message.invalidated')}}</label><br>  
-        </div>
-    </div> 
-
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
     </div>
+
+
+
 </form>
 @endsection
 
 
 @section('js')
 <script>
+    var countEntries = 1;
+    function addEntry(containerId) {
+        countEntries++;
+        let clone = document.getElementById('timeEntryContainer1').cloneNode(true);
+        clone.setAttribute('id', 'timeEntryContainer'+countEntries);
+        
+        
+        document.getElementById('timeEntryContainer'+containerId).after(clone);
+        
+
+
+    }
+
+
     var projectsInUser;
     function onChangeUser(users_info) {
 
@@ -120,35 +140,35 @@
 
         document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
 
-        onChangeProject();
+
     }
-    
-    function onChangeProject() {     
-        
-        let projectId = document.getElementsByName('projects')[0].value;
-        
-        if (projectsInUser.length > 0) {
-            let res = projectsInUser.filter((item) => {
-                return item.id == projectId;
-            });
-            let bagHourInProject = res[0]['bag_hour'];
-            
-            if(bagHourInProject == true){
-                let inputedHoursContainerHtml = document.createElement("div");
-                inputedHoursContainerHtml.id = 'inputedHoursContainer';
-                
-                let inputedHoursTitleHtml = document.createElement("strong");
-                inputedHoursTitleHtml.innerText = "*{{__('message.hours_imputed')}}:";
-                let inputedHoursInputHtml = document.createElement("input");
-                inputedHoursInputHtml.type = "name";
-                inputedHoursInputHtml.name = "hours_imputed";
-                inputedHoursContainerHtml.appendChild(inputedHoursTitleHtml);
-                inputedHoursContainerHtml.appendChild(inputedHoursInputHtml);
-                document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
-            }
-        }
-        
-        
+
+    function onChangeProject() {
+
+//        let projectId = document.getElementsByName('projects')[0].value;
+//        
+//        if (projectsInUser.length > 0) {
+//            let res = projectsInUser.filter((item) => {
+//                return item.id == projectId;
+//            });
+//            let bagHourInProject = res[0]['bag_hour'];
+//            
+//            if(bagHourInProject == true){
+//                let inputedHoursContainerHtml = document.createElement("div");
+//                inputedHoursContainerHtml.id = 'inputedHoursContainer';
+//                
+//                let inputedHoursTitleHtml = document.createElement("strong");
+//                inputedHoursTitleHtml.innerText = "*{{__('message.hours_imputed')}}:";
+//                let inputedHoursInputHtml = document.createElement("input");
+//                inputedHoursInputHtml.type = "name";
+//                inputedHoursInputHtml.name = "hours_imputed";
+//                inputedHoursContainerHtml.appendChild(inputedHoursTitleHtml);
+//                inputedHoursContainerHtml.appendChild(inputedHoursInputHtml);
+//                document.getElementById("projectSelectContainer").insertBefore(projectSelectHtml, document.getElementById("projectSelectContainer").getElementsByTagName("a")[0]);
+//            }
+//        }
+//        
+
     }
 
 
