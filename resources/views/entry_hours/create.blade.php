@@ -94,19 +94,24 @@
     var users_info = @json($users_info);
     
     function addAgregateButtons(containerId){
+        //Create buttons container
+        let agregateButtonsContainer = document.createElement("div");
+        
         //Plus button
         let plusButton = document.createElement("a");
         plusButton.innerText = '+';
         plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
         plusButton.setAttribute('onclick', 'addEntry('+countEntries+')');
-        document.getElementById('timeEntryContainer'+containerId).appendChild(plusButton); 
+        agregateButtonsContainer.appendChild(plusButton); 
         
         //Take off button
         let takeOffButton = document.createElement("a");
         takeOffButton.innerText = '-';
         takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
         takeOffButton.setAttribute('onclick', 'removeEntry('+countEntries+')');
-        document.getElementById('timeEntryContainer'+containerId).appendChild(takeOffButton); 
+        agregateButtonsContainer.appendChild(takeOffButton); 
+        
+        document.getElementById('timeEntryContainer'+containerId).after(agregateButtonsContainer);
     }
     
     function showHideImputedHours(containerId, projectsInUser){
@@ -137,6 +142,11 @@
             
             formGroup4.appendChild(imputedHoursHtml);
             document.getElementById('timeEntryContainer'+containerId).appendChild(formGroup4);
+        }
+        else{
+            if (document.getElementById('inputedHoursContainer'+containerId) != null) {
+                document.getElementById('inputedHoursContainer'+containerId).remove();
+            }
         }
         
         
@@ -170,6 +180,10 @@
             option.innerText = "No projects asigned to this user";
             projectSelectHtml.disabled = true;
             projectSelectHtml.appendChild(option);
+            
+            if (document.getElementById('inputedHoursContainer'+containerId) != null) {
+                document.getElementById('inputedHoursContainer'+containerId).remove();
+            }
         }
 
         if (document.getElementById('projects'+containerId) != null) {
@@ -224,6 +238,8 @@
         showProjectsOfUser(countEntries);
         
         addAgregateButtons(countEntries);
+        
+        
         
     }
     
