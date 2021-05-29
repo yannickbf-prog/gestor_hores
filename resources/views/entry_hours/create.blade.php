@@ -38,7 +38,7 @@
             <div class="form-group">
                 <strong>*{{ __('message.user') }}: </strong>
                 @if (count($users_data) > 0)
-                <select name="users[]">
+                <select name="users[]" id="users">
                     @foreach($users_data as $user)
                     <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
                     @endforeach
@@ -97,7 +97,12 @@
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects";
-        projectSelectHtml.setAttribute("onchange", "onChangeProject()");
+        
+        let userId = document.getElementById('users'+containerId).value;
+        let res = users_info.filter((item) => {
+            return item.id == userId;
+        });
+        projectsInUser = res[0]['projects'];
     }
     
     function removeEntry(containerId){
@@ -120,6 +125,8 @@
         formGroup1.appendChild(strongUser);
         
         let userSelectHtml = document.createElement("select");
+        userSelectHtml.setAttribute('id', 'users'+countEntries);
+        userSelectHtml.setAttribute('onchange', 'showProjectsOfUser('+countEntries+')');
         if (users_info.length > 0) {
             for (user of users_info) {
                 let option = document.createElement("option");
@@ -149,6 +156,8 @@
         document.getElementById('timeEntryContainer'+containerId).after(entryContainerHtml);
         
         console.log(users_info);
+        
+        showProjectsOfUser(countEntries);
         
         //let foo = document.getElementsByClassName('btnEntry1')[0].value;
         //document.getElementById('btnEntry').setAttribute('onclick', 'addEntry('+countEntries+')');
