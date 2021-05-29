@@ -93,27 +93,6 @@
     //Get the object from json
     var users_info = @json($users_info);
     
-    function addAgregateButtons(containerId){
-        //Create buttons container
-        let agregateButtonsContainer = document.createElement("div");
-        
-        //Plus button
-        let plusButton = document.createElement("a");
-        plusButton.innerText = '+';
-        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
-        plusButton.setAttribute('onclick', 'addEntry('+countEntries+')');
-        agregateButtonsContainer.appendChild(plusButton); 
-        
-        //Take off button
-        let takeOffButton = document.createElement("a");
-        takeOffButton.innerText = '-';
-        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
-        takeOffButton.setAttribute('onclick', 'removeEntry('+countEntries+')');
-        agregateButtonsContainer.appendChild(takeOffButton); 
-        
-        document.getElementById('timeEntryContainer'+containerId).after(agregateButtonsContainer);
-    }
-    
     function showHideImputedHours(containerId, projectsInUser){
         let projectId = document.getElementById("projects"+containerId).value;
         
@@ -207,7 +186,27 @@
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer'+countEntries);
         
-        //Show daw with datepiker
+        //Show add/remove buttons
+        //Create buttons container
+        let agregateButtonsContainer = document.createElement("div");
+        
+        //Plus button
+        let plusButton = document.createElement("a");
+        plusButton.innerText = '+';
+        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
+        plusButton.setAttribute('onclick', 'addEntry('+countEntries+')');
+        agregateButtonsContainer.appendChild(plusButton); 
+        
+        //Take off button
+        let takeOffButton = document.createElement("a");
+        takeOffButton.innerText = '-';
+        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
+        takeOffButton.setAttribute('onclick', 'removeEntry('+countEntries+')');
+        agregateButtonsContainer.appendChild(takeOffButton); 
+        
+        entryContainerHtml.appendChild(agregateButtonsContainer);
+        
+        //Show day with datepiker
         
         
         //Select users
@@ -236,10 +235,6 @@
         document.getElementById('timeEntryContainer'+containerId).after(entryContainerHtml);
         
         showProjectsOfUser(countEntries);
-        
-        addAgregateButtons(countEntries);
-        
-        
         
     }
     
