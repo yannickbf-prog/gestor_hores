@@ -97,7 +97,8 @@
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects[]";
-        
+        projectSelectHtml.setAttribute('id', 'projects'+countEntries)
+                
         let userId = document.getElementById('users'+containerId).value;
         let res = users_info.filter((item) => {
             return item.id == userId;
@@ -120,9 +121,9 @@
             projectSelectHtml.appendChild(option);
         }
 
-        /*if (document.getElementById('projects'+containerId) != null) {
-            document.getElementById("projectSelectContainer").removeChild(document.getElementById('projects'+containerId));
-        }*/
+        if (document.getElementById('projects'+containerId) != null) {
+            document.getElementById('projects'+containerId).remove();
+        }
 
         document.getElementById('timeEntryContainer'+containerId).appendChild(projectSelectHtml);
     }
@@ -148,6 +149,7 @@
         
         let userSelectHtml = document.createElement("select");
         userSelectHtml.setAttribute('id', 'users'+countEntries);
+        userSelectHtml.setAttribute('name', 'users[]');
         userSelectHtml.setAttribute('onchange', 'showProjectsOfUser('+countEntries+')');
         if (users_info.length > 0) {
             for (user of users_info) {
