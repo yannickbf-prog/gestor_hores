@@ -103,7 +103,9 @@
         let projectBagHourAvailable = res[0]['bag_hour'];
         
         if(projectBagHourAvailable){
-            
+            let projectSelectHtml = document.createElement("input");
+            projectSelectHtml.setAttribute('type', 'text');
+            document.getElementById('timeEntryContainer'+containerId).appendChild(projectSelectHtml);
         }
         
     }
