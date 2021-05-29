@@ -99,28 +99,28 @@
         
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer'+countEntries);
+        
+        //Select users
         let formGroup1 = document.createElement("div");
         formGroup1.setAttribute('class', 'form-group');
-        let strongUser = document.createElement("strong");       
-        
+        let strongUser = document.createElement("strong");     
         strongUser.innerText = "*{{ __('message.user') }}: ";
-        
         formGroup1.appendChild(strongUser);
         
-//        let userSelectHtml = document.createElement("select");
-//        if (users_info.length > 0) {
-//            for (user of users_info) {
-//                let option = document.createElement("option");
-//                option.value = user.id;
-//                option.innerText = user.nickname;//{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif
-//                userSelectHtml.appendChild(option);
-//            }
-//        }
-//        
-//        formGroup1.appendChild(userSelectHtml);
+        let userSelectHtml = document.createElement("select");
+        if (users_info.length > 0) {
+            for (user of users_info) {
+                let option = document.createElement("option");
+                option.value = user.id;
+                option.innerText = user.nickname;
+                userSelectHtml.appendChild(option);
+            }
+        }
         
-                
-        document.getElementById('timeEntryContainer'+containerId).after(userSelectHtml);
+        formGroup1.appendChild(userSelectHtml);
+        
+        entryContainerHtml.appendChild(formGroup1);        
+        document.getElementById('timeEntryContainer'+containerId).after(entryContainerHtml);
         
         console.log(users_info);
         
