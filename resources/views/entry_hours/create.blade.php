@@ -118,8 +118,22 @@
         }
         
         formGroup1.appendChild(userSelectHtml);
+        entryContainerHtml.appendChild(formGroup1);     
         
-        entryContainerHtml.appendChild(formGroup1);        
+        //Plus button
+        let plusButton = document.createElement("a");
+        plusButton.innerText = '+';
+        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
+        plusButton.setAttribute('onclick', 'addEntry('+countEntries+')');
+        entryContainerHtml.appendChild(plusButton); 
+        
+        //Take off button
+        let takeOffButton = document.createElement("a");
+        takeOffButton.innerText = '-';
+        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
+        takeOffButton.setAttribute('onclick', 'removeEntry('+countEntries+')');
+        entryContainerHtml.appendChild(takeOffButton); 
+        
         document.getElementById('timeEntryContainer'+containerId).after(entryContainerHtml);
         
         console.log(users_info);
@@ -131,6 +145,10 @@
         
 
 
+    }
+    
+    function removeEntry(containerId){
+        
     }
 
 
