@@ -207,7 +207,16 @@
         entryContainerHtml.appendChild(agregateButtonsContainer);
         
         //Show day with datepiker
-        
+        let formGroup0 = document.createElement("div");
+        formGroup0.setAttribute('class', 'form-group');
+        let strongDay = document.createElement("strong");     
+        strongDay.innerText = "*{{ __('message.day') }}: ";
+        formGroup0.appendChild(strongDay);
+        let inputDay = document.createElement("input");
+        inputDay.setAttribute('name', 'day[]');
+        inputDay.setAttribute('class', 'datepicker');
+        formGroup0.appendChild(inputDay);
+        entryContainerHtml.appendChild(formGroup0);
         
         //Select users
         let formGroup1 = document.createElement("div");
@@ -239,7 +248,9 @@
     }
     
 
-
+  $( function() {
+    $( ".datepicker" ).datepicker();
+  } );
 
     /*var projectsInUser;
     function onChangeUser(users_info) {
