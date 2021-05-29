@@ -93,6 +93,22 @@
     //Get the object from json
     var users_info = @json($users_info);
     
+    function addAgregateButtons(containerId){
+        //Plus button
+        let plusButton = document.createElement("a");
+        plusButton.innerText = '+';
+        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
+        plusButton.setAttribute('onclick', 'addEntry('+countEntries+')');
+        document.getElementById('timeEntryContainer'+containerId).appendChild(plusButton); 
+        
+        //Take off button
+        let takeOffButton = document.createElement("a");
+        takeOffButton.innerText = '-';
+        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
+        takeOffButton.setAttribute('onclick', 'removeEntry('+countEntries+')');
+        document.getElementById('timeEntryContainer'+containerId).appendChild(takeOffButton); 
+    }
+    
     function showHideImputedHours(containerId, projectsInUser){
         let projectId = document.getElementById("projects"+containerId).value;
         
@@ -112,6 +128,9 @@
             formGroup4.setAttribute('class', 'form-group');
             formGroup4.setAttribute('id', 'inputedHoursContainer'+containerId);
             
+            let strongImputedHours= document.createElement("strong"); 
+            
+            
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('name', 'inputed_hours');
             imputedHoursHtml.setAttribute('type', 'text');
@@ -119,6 +138,8 @@
             formGroup4.appendChild(imputedHoursHtml);
             document.getElementById('timeEntryContainer'+containerId).appendChild(formGroup4);
         }
+        
+        
         
     }
     
@@ -172,6 +193,9 @@
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer'+countEntries);
         
+        //Show daw with datepiker
+        
+        
         //Select users
         let formGroup1 = document.createElement("div");
         formGroup1.setAttribute('class', 'form-group');
@@ -193,35 +217,14 @@
         }
         
         formGroup1.appendChild(userSelectHtml);
-        entryContainerHtml.appendChild(formGroup1);     
-        
-        //Plus button
-        let plusButton = document.createElement("a");
-        plusButton.innerText = '+';
-        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
-        plusButton.setAttribute('onclick', 'addEntry('+countEntries+')');
-        entryContainerHtml.appendChild(plusButton); 
-        
-        //Take off button
-        let takeOffButton = document.createElement("a");
-        takeOffButton.innerText = '-';
-        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
-        takeOffButton.setAttribute('onclick', 'removeEntry('+countEntries+')');
-        entryContainerHtml.appendChild(takeOffButton); 
+        entryContainerHtml.appendChild(formGroup1);
         
         document.getElementById('timeEntryContainer'+containerId).after(entryContainerHtml);
         
-        console.log(users_info);
-        
         showProjectsOfUser(countEntries);
         
-        //let foo = document.getElementsByClassName('btnEntry1')[0].value;
-        //document.getElementById('btnEntry').setAttribute('onclick', 'addEntry('+countEntries+')');
+        addAgregateButtons(countEntries);
         
-        //document.getElementById('timeEntryContainer'+containerId).getElementsByName('button')[0].setAttribute('name', 'prueva');
-        
-
-
     }
     
 
