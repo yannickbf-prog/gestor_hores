@@ -102,12 +102,15 @@
         
         let projectBagHourAvailable = res[0]['bag_hour'];
         
-        
+        if (document.getElementById('inputedHoursContainer'+containerId) != null) {
+            document.getElementById('inputedHoursContainer'+containerId).remove();
+        }
         
         if(projectBagHourAvailable){
             
             let formGroup4 = document.createElement("div");
             formGroup4.setAttribute('class', 'form-group');
+            formGroup4.setAttribute('id', 'inputedHoursContainer'+containerId);
             
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('name', 'inputed_hours');
