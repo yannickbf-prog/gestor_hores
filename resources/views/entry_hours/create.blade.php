@@ -96,13 +96,35 @@
     function showProjectsOfUser(containerId){
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
-        projectSelectHtml.name = "projects";
+        projectSelectHtml.name = "projects[]";
         
         let userId = document.getElementById('users'+containerId).value;
         let res = users_info.filter((item) => {
             return item.id == userId;
         });
         projectsInUser = res[0]['projects'];
+        
+        if (projectsInUser.length > 0) {
+            for (project of projectsInUser) {
+                let option = document.createElement("option");
+                option.value = project.id;
+                option.innerText = project.name + " (" + project.customer + ")";
+                projectSelectHtml.appendChild(option);
+            }
+        }
+        else {
+            let option = document.createElement("option");
+            option.value = "no_project";
+            option.innerText = "No projects asigned to this user";
+            projectSelectHtml.disabled = true;
+            projectSelectHtml.appendChild(option);
+        }
+
+        /*if (document.getElementById('projects'+containerId) != null) {
+            document.getElementById("projectSelectContainer").removeChild(document.getElementById('projects'+containerId));
+        }*/
+
+        document.getElementById('timeEntryContainer'+containerId).appendChild(projectSelectHtml);
     }
     
     function removeEntry(containerId){
