@@ -102,10 +102,19 @@
         
         let projectBagHourAvailable = res[0]['bag_hour'];
         
+        
+        
         if(projectBagHourAvailable){
-            let projectSelectHtml = document.createElement("input");
-            projectSelectHtml.setAttribute('type', 'text');
-            document.getElementById('timeEntryContainer'+containerId).appendChild(projectSelectHtml);
+            
+            let formGroup4 = document.createElement("div");
+            formGroup4.setAttribute('class', 'form-group');
+            
+            let imputedHoursHtml = document.createElement("input");
+            imputedHoursHtml.setAttribute('name', 'inputed_hours');
+            imputedHoursHtml.setAttribute('type', 'text');
+            
+            formGroup4.appendChild(imputedHoursHtml);
+            document.getElementById('timeEntryContainer'+containerId).appendChild(formGroup4);
         }
         
     }
