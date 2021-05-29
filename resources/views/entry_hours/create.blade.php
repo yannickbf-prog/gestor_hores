@@ -92,6 +92,18 @@
 <script>
     //Get the object from json
     var users_info = @json($users_info);
+    
+    function showProjectsOfUser(containerId){
+        //Create the select of projects
+        let projectSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "projects";
+        projectSelectHtml.setAttribute("onchange", "onChangeProject()");
+    }
+    
+    function removeEntry(containerId){
+        document.getElementById("timeEntryContainer"+containerId).remove();
+    }
+    
     var countEntries = 1;
     function addEntry(containerId) {
 
@@ -147,9 +159,7 @@
 
     }
     
-    function removeEntry(containerId){
-        
-    }
+
 
 
     /*var projectsInUser;
