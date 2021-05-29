@@ -76,8 +76,7 @@
             </div>
         </div> 
 
-        <input hidden name="time_entry_id" value="1">
-        <a type="button" class="btn btn-outline-success btn-sm" id="btnEntry" onclick="addEntry(1)">+</a>
+        <a type="button" class="btn btn-outline-success btn-sm" onclick="addEntry(1)">+</a>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
@@ -91,16 +90,42 @@
 
 @section('js')
 <script>
-        
+    //Get the object from json
+    var users_info = @json($users_info);
     var countEntries = 1;
     function addEntry(containerId) {
+
         countEntries++;
-        let clone = document.getElementById('timeEntryContainer1').cloneNode(true);
-        clone.setAttribute('id', 'timeEntryContainer'+countEntries);
-       
-        document.getElementById('timeEntryContainer'+containerId).after(clone);
         
-        document.getElementById('btnEntry').setAttribute('onclick', 'addEntry('+countEntries+')');
+        let entryContainerHtml = document.createElement("div");
+        entryContainerHtml.setAttribute('id', 'timeEntryContainer'+countEntries);
+        let formGroup1 = document.createElement("div");
+        formGroup1.setAttribute('class', 'form-group');
+        let strongUser = document.createElement("strong");       
+        
+        strongUser.innerText = "*{{ __('message.user') }}: ";
+        
+        formGroup1.appendChild(strongUser);
+        
+//        let userSelectHtml = document.createElement("select");
+//        if (users_info.length > 0) {
+//            for (user of users_info) {
+//                let option = document.createElement("option");
+//                option.value = user.id;
+//                option.innerText = user.nickname;//{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif
+//                userSelectHtml.appendChild(option);
+//            }
+//        }
+//        
+//        formGroup1.appendChild(userSelectHtml);
+        
+                
+        document.getElementById('timeEntryContainer'+containerId).after(userSelectHtml);
+        
+        console.log(users_info);
+        
+        //let foo = document.getElementsByClassName('btnEntry1')[0].value;
+        //document.getElementById('btnEntry').setAttribute('onclick', 'addEntry('+countEntries+')');
         
         //document.getElementById('timeEntryContainer'+containerId).getElementsByName('button')[0].setAttribute('name', 'prueva');
         
