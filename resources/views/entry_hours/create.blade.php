@@ -93,6 +93,21 @@
     //Get the object from json
     var users_info = @json($users_info);
     
+    function showHideImputedHours(containerId, projectsInUser){
+        let projectId = document.getElementById("projects"+containerId).value;
+        
+        let res = projectsInUser.filter((item) => {
+            return item.id == projectId;
+        });
+        
+        let projectBagHourAvailable = res[0]['bag_hour'];
+        
+        if(projectBagHourAvailable){
+            
+        }
+        
+    }
+    
     function showProjectsOfUser(containerId){
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
@@ -103,7 +118,8 @@
         let res = users_info.filter((item) => {
             return item.id == userId;
         });
-        projectsInUser = res[0]['projects'];
+        let projectsInUser = res[0]['projects'];
+        console.log(projectsInUser);
         
         if (projectsInUser.length > 0) {
             for (project of projectsInUser) {
@@ -126,6 +142,8 @@
         }
 
         document.getElementById('timeEntryContainer'+containerId).appendChild(projectSelectHtml);
+        
+        showHideImputedHours(containerId, projectsInUser);
     }
     
     function removeEntry(containerId){
