@@ -205,6 +205,14 @@
             }
 
     function showProjectsOfUser(containerId) {
+
+        let formGroup4 = document.createElement("div");
+        formGroup4.setAttribute('class', 'form-group');
+        formGroup4.setAttribute('id', 'projectContainer' + containerId);
+        let strongProject = document.createElement("strong");
+        strongProject.innerText = "*{{ __('message.project') }}: ";
+        formGroup4.appendChild(strongProject);
+
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects[]";
@@ -236,11 +244,12 @@
             }
         }
 
-        if (document.getElementById('projects' + containerId) != null) {
-            document.getElementById('projects' + containerId).remove();
+        if (document.getElementById('projectContainer' + containerId) != null) {
+            document.getElementById('projectContainer' + containerId).remove();
         }
 
-        document.getElementById('timeEntryContainer' + containerId).appendChild(projectSelectHtml);
+        formGroup4.appendChild(projectSelectHtml);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
 
         showHideImputedHours(containerId, projectsInUser);
     }
@@ -278,25 +287,38 @@
         entryContainerHtml.appendChild(agregateButtonsContainer);
 
         //Show day with datepiker
-        let formGroup0 = document.createElement("div");
-        formGroup0.setAttribute('class', 'form-group');
+        let formGroup1 = document.createElement("div");
+        formGroup1.setAttribute('class', 'form-group');
         let strongDay = document.createElement("strong");
         strongDay.innerText = "*{{ __('message.day') }}: ";
-        formGroup0.appendChild(strongDay);
+        formGroup1.appendChild(strongDay);
         let inputDay = document.createElement("input");
         inputDay.setAttribute('name', 'day[]');
         inputDay.setAttribute('id', 'dp');
         inputDay.setAttribute('onclick', "$('#dp').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp').datepicker('show');");
-        
-        formGroup0.appendChild(inputDay);
-        entryContainerHtml.appendChild(formGroup0);
+
+        formGroup1.appendChild(inputDay);
+        entryContainerHtml.appendChild(formGroup1);
+
+        //Show hours
+        let formGroup2 = document.createElement("div");
+        formGroup2.setAttribute('class', 'form-group');
+        let strongHours = document.createElement("strong");
+        strongHours.innerText = "*{{ __('message.hours') }}: ";
+        formGroup2.appendChild(strongHours);
+        let inputHours = document.createElement("input");
+        inputHours.setAttribute('name', 'hours[]');
+        inputHours.setAttribute('type', 'number');
+
+        formGroup2.appendChild(inputHours);
+        entryContainerHtml.appendChild(formGroup2);
 
         //Select users
-        let formGroup1 = document.createElement("div");
-        formGroup1.setAttribute('class', 'form-group');
+        let formGroup3 = document.createElement("div");
+        formGroup3.setAttribute('class', 'form-group');
         let strongUser = document.createElement("strong");
         strongUser.innerText = "*{{ __('message.user') }}: ";
-        formGroup1.appendChild(strongUser);
+        formGroup3.appendChild(strongUser);
 
         let userSelectHtml = document.createElement("select");
         userSelectHtml.setAttribute('id', 'users' + countEntries);
@@ -311,8 +333,8 @@
             }
         }
 
-        formGroup1.appendChild(userSelectHtml);
-        entryContainerHtml.appendChild(formGroup1);
+        formGroup3.appendChild(userSelectHtml);
+        entryContainerHtml.appendChild(formGroup3);
 
         document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
 
