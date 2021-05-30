@@ -117,7 +117,27 @@
     //Get the object from json
     var users_info = @json($users_info);
     
+    function showDescription(containerId){
+        //Create task description
+        if (document.getElementById('descContainer' + containerId) != null) {
+            document.getElementById('descContainer' + containerId).remove();
+        }
+        
+        let formGroup7 = document.createElement("div");
+        formGroup7.setAttribute('class', 'form-group');
+        formGroup7.setAttribute('id', 'descContainer'+ containerId);
+        let strongDesc = document.createElement("strong");
+        strongDesc.innerText = "*{{ __('message.task_description') }}: ";
+        formGroup7.appendChild(strongDesc);
+        let inputDesc = document.createElement("input");
+        inputDesc.setAttribute('name', 'desc[]');
+        formGroup7.appendChild(inputDesc);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+
+    }
+    
     function showHideImputedHours(containerId, projectsInUser) {
+        
         let projectId = document.getElementById("projects" + containerId).value;
 
         let res = projectsInUser.filter((item) => {
@@ -152,8 +172,7 @@
             }
         }
 
-
-
+        showDescription(containerId);
     }
 
     function showProjectsOfUser(containerId) {
@@ -175,7 +194,6 @@
             return item.id == userId;
         });
         let projectsInUser = res[0]['projects'];
-        console.log(projectsInUser);
 
         if (projectsInUser.length > 0) {
             for (project of projectsInUser) {
@@ -204,6 +222,8 @@
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
 
         showHideImputedHours(containerId, projectsInUser);
+        
+        
     }
 
     function removeEntry(containerId) {
@@ -290,13 +310,16 @@
         
         if(containerId == 1){
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
+            document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn btn-outline-danger btn-sm disabled");
         }
         else{
             document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
         }
 
         showProjectsOfUser(countEntries);
-
+        
+        
+        
     }
 
     addEntry(1);
