@@ -33,57 +33,7 @@
 
 <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
     @csrf
-    <div id="timeEntryContainer1">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>*{{ __('message.user') }}: </strong>
-                @if (count($users_data) > 0)
-                <select name="users[]" id="users">
-                    @foreach($users_data as $user)
-                    <option value="{{ $user->id }}">{{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif</option>
-                    @endforeach
-                </select>
-                @endif
-                <a href="{{ route($lang."_users.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.user') }}</a>
-            </div>
-
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group" id="projectSelectContainer">
-                <strong>*{{ __('message.project') }}: </strong>
-                <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
-            </div>
-        </div>
-
-
-
-        <div class="col-xs-8 col-sm-8 col-md-8">
-            <div class="form-group">
-                <strong>*{{__('message.hours')}}:</strong>
-                <input type="number" name="hours[]" class="form-control" placeholder="{{__('message.enter')." ".__('message.hours_worked')}}" value="{{old('hours')}}">
-            </div>
-        </div>
-
-
-        <div class="col-xs-12 col-sm-12 col-md-12" id="validatedContainer">
-            <div class="form-group">
-                <strong>*{{ __('message.state') }}:</strong><br>
-                <input type="radio" id="validated" name="validate[]" value="1" checked>
-                <label for="validated">{{__('message.validated')}}</label><br>
-                <input type="radio" id="invalidated" name="validate[]" value="0">
-                <label for="invalidated">{{__('message.invalidated')}}</label><br>  
-            </div>
-        </div> 
-
-        <a type="button" class="btn btn-outline-success btn-sm" onclick="addEntry(1)">+</a>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
-    </div>
-
-
-
+    
 </form>
 @endsection
 
@@ -191,8 +141,8 @@
             formGroup4.appendChild(strongImputedHours);
 
             let imputedHoursHtml = document.createElement("input");
+            imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
-            imputedHoursHtml.setAttribute('type', 'text');
 
             formGroup4.appendChild(imputedHoursHtml);
             document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
@@ -260,7 +210,7 @@
         document.getElementById("timeEntryContainer" + containerId).remove();
     }
 
-    var countEntries = 1;
+    var countEntries = 0;
     function addEntry(containerId) {
 
         countEntries++;
@@ -337,14 +287,19 @@
 
         formGroup3.appendChild(userSelectHtml);
         entryContainerHtml.appendChild(formGroup3);
-
-        document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
+        
+        if(containerId == 1){
+            document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
+        }
+        else{
+            document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
+        }
 
         showProjectsOfUser(countEntries);
 
     }
 
-
+    addEntry(1);
     /*var projectsInUser;
      function onChangeUser(users_info) {
      
