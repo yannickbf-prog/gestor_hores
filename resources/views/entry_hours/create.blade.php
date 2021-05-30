@@ -33,7 +33,7 @@
 
 <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
     @csrf
-    
+
 </form>
 @endsection
 
@@ -59,8 +59,6 @@
         showMonthAfterYear: false,
         yearSuffix: ''
     };
-
-
     $.datepicker.regional["ca"] = {
         closeText: "Tancar",
         prevText: "< Ant",
@@ -116,61 +114,67 @@
 
     //Get the object from json
     var users_info = @json($users_info);
-    
-    function showDescription(containerId){
-        //Create task description
-        if (document.getElementById('descContainer' + containerId) != null) {
-            document.getElementById('descContainer' + containerId).remove();
-        }
-        
-        let formGroup7 = document.createElement("div");
-        formGroup7.setAttribute('class', 'form-group');
-        formGroup7.setAttribute('id', 'descContainer'+ containerId);
-        let strongDesc = document.createElement("strong");
-        strongDesc.innerText = "*{{ __('message.task_description') }}: ";
-        formGroup7.appendChild(strongDesc);
-        let inputDesc = document.createElement("input");
-        inputDesc.setAttribute('name', 'desc[]');
-        formGroup7.appendChild(inputDesc);
-        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+            function showDescription(containerId) {
+                //Create task description
+                if (document.getElementById('descContainer' + containerId) != null) {
+                    document.getElementById('descContainer' + containerId).remove();
+                }
 
-    }
-    
+                let formGroup7 = document.createElement("div");
+                formGroup7.setAttribute('class', 'form-group');
+                formGroup7.setAttribute('id', 'descContainer' + containerId);
+                let strongDesc = document.createElement("strong");
+                strongDesc.innerText = "*{{ __('message.task_description') }}: ";
+                formGroup7.appendChild(strongDesc);
+                let inputDesc = document.createElement("input");
+                inputDesc.setAttribute('name', 'desc[]');
+                formGroup7.appendChild(inputDesc);
+                document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+
+            }
+
     function showHideImputedHours(containerId, projectsInUser) {
-        
-        let projectId = document.getElementById("projects" + containerId).value;
 
-        let res = projectsInUser.filter((item) => {
-            return item.id == projectId;
-        });
+        if (projectsInUser.length > 0) {
+            let projectId = document.getElementById("projects" + containerId).value;
 
-        let projectBagHourAvailable = res[0]['bag_hour'];
+            let res = projectsInUser.filter((item) => {
+                return item.id == projectId;
+            });
 
-        if (document.getElementById('inputedHoursContainer' + containerId) != null) {
-            document.getElementById('inputedHoursContainer' + containerId).remove();
-        }
+            let projectBagHourAvailable = res[0]['bag_hour'];
 
-        if (projectBagHourAvailable) {
-
-            let formGroup4 = document.createElement("div");
-            formGroup4.setAttribute('class', 'form-group');
-            formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
-
-            let strongImputedHours = document.createElement("strong");
-            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-            formGroup4.appendChild(strongImputedHours);
-
-            let imputedHoursHtml = document.createElement("input");
-            imputedHoursHtml.setAttribute('type', 'number');
-            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
-
-            formGroup4.appendChild(imputedHoursHtml);
-            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
-        } else {
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
             }
+
+            if (projectBagHourAvailable) {
+
+                let formGroup4 = document.createElement("div");
+                formGroup4.setAttribute('class', 'form-group');
+                formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
+
+                let strongImputedHours = document.createElement("strong");
+                strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+                formGroup4.appendChild(strongImputedHours);
+
+                let imputedHoursHtml = document.createElement("input");
+                imputedHoursHtml.setAttribute('type', 'number');
+                imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+
+                formGroup4.appendChild(imputedHoursHtml);
+                document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
+            } else {
+                if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+                    document.getElementById('inputedHoursContainer' + containerId).remove();
+                }
+            }
         }
+        else{
+            
+        }
+
+
 
         showDescription(containerId);
     }
@@ -222,8 +226,8 @@
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
 
         showHideImputedHours(containerId, projectsInUser);
-        
-        
+
+
     }
 
     function removeEntry(containerId) {
@@ -307,19 +311,18 @@
 
         formGroup3.appendChild(userSelectHtml);
         entryContainerHtml.appendChild(formGroup3);
-        
-        if(containerId == 1){
+
+        if (containerId == 1) {
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
             document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn btn-outline-danger btn-sm disabled");
-        }
-        else{
+        } else {
             document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
         }
 
         showProjectsOfUser(countEntries);
-        
-        
-        
+
+
+
     }
 
     addEntry(1);
