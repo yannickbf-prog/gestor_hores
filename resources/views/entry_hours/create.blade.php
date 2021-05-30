@@ -166,43 +166,45 @@
 
     //Get the object from json
     var users_info = @json($users_info);
-            function showHideImputedHours(containerId, projectsInUser) {
-                let projectId = document.getElementById("projects" + containerId).value;
+    
+    function showHideImputedHours(containerId, projectsInUser) {
+        let projectId = document.getElementById("projects" + containerId).value;
 
-                let res = projectsInUser.filter((item) => {
-                    return item.id == projectId;
-                });
+        let res = projectsInUser.filter((item) => {
+            return item.id == projectId;
+        });
 
-                let projectBagHourAvailable = res[0]['bag_hour'];
+        let projectBagHourAvailable = res[0]['bag_hour'];
 
-                if (document.getElementById('inputedHoursContainer' + containerId) != null) {
-                    document.getElementById('inputedHoursContainer' + containerId).remove();
-                }
+        if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+            document.getElementById('inputedHoursContainer' + containerId).remove();
+        }
 
-                if (projectBagHourAvailable) {
+        if (projectBagHourAvailable) {
 
-                    let formGroup4 = document.createElement("div");
-                    formGroup4.setAttribute('class', 'form-group');
-                    formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
+            let formGroup4 = document.createElement("div");
+            formGroup4.setAttribute('class', 'form-group');
+            formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
 
-                    let strongImputedHours = document.createElement("strong");
+            let strongImputedHours = document.createElement("strong");
+            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            formGroup4.appendChild(strongImputedHours);
 
+            let imputedHoursHtml = document.createElement("input");
+            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+            imputedHoursHtml.setAttribute('type', 'text');
 
-                    let imputedHoursHtml = document.createElement("input");
-                    imputedHoursHtml.setAttribute('name', 'inputed_hours');
-                    imputedHoursHtml.setAttribute('type', 'text');
-
-                    formGroup4.appendChild(imputedHoursHtml);
-                    document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
-                } else {
-                    if (document.getElementById('inputedHoursContainer' + containerId) != null) {
-                        document.getElementById('inputedHoursContainer' + containerId).remove();
-                    }
-                }
-
-
-
+            formGroup4.appendChild(imputedHoursHtml);
+            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
+        } else {
+            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+                document.getElementById('inputedHoursContainer' + containerId).remove();
             }
+        }
+
+
+
+    }
 
     function showProjectsOfUser(containerId) {
 
