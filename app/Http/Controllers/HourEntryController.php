@@ -110,52 +110,40 @@ class HourEntryController extends Controller {
             $users_info[] = [
                 'id' => $user->id,
                 'nickname' => $user->nickname,
-                'name' => $user->name,
-                'surname' => $user->surname,
-                'email' => $user->email,
-                'phone' =>  $user->phone,
-                'role' => $user->role,
                 'projects' => $users_projects
             ];
         }
         
-        //Create the JSON of the relation of users and customers
-        //$users_customers = [];
-        /*$users_customers_data =  DB::table('users')
-                ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
-                ->distinct()
-                ->join('projects', 'users_projects.id', '=', 'projects.id')
-                ->join('customers', 'projects.customer_id', '=', 'customers.id')
-                ->select('users.id AS user_id', 'users.name AS user_name', 'customers.id AS customer_id', 'customers.name AS customer_name')
-                ->get();*/
+        return $users_info;
         
+        //Create the JSON of the relation of users and customers
         $users_customers = [];
         $users_with_projects = DB::table('users')
                 ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
-                ->distinct()->get(['users.id', 'users.name']);
+                ->distinct()->get(['users.id', 'users.nickname', 'users.name', 'users.surname', 'users.email', 'users.phone', 'users.role']);
         
         foreach ($users_with_projects as $user) {
             
-            $users_customers_data =  DB::table('users')
-                ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
+            $users_customers_data =  DB::table('users_projects')
                 ->join('projects', 'users_projects.id', '=', 'projects.id')
                 ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
                 ->where('users_projects.user_id', $user->id)    
                 ->select('customers.id AS customer_id', 'customers.name AS customer_name')
                 ->get();
-            
-            
-            
+                
             $users_customers[] = [
                 'user_id' => $user->id,
+                'user_nickname' => $user->nickname,
                 'user_name' => $user->name,
+                'user_surname' => $user->surname,
+                'user_email' => $user->email,
+                'user_phone' =>  $user->phone,
+                'user_role' => $user->role,
                 'customers' => $users_customers_data,
             ];
         }
         
-        return $users_customers;
-
-        return view('entry_hours.create', compact(['lang', 'users_data', 'users_info']));
+        return view('entry_hours.create', compact(['lang', 'users_data', 'users_info', 'users_customers']));
     }
 
     /**
