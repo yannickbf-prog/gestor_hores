@@ -71,11 +71,11 @@ class HourEntryController extends Controller {
 
         //Create json with the info of DB, need for selects user, project and bag of hours. This work with JavaScript
         $users_info = [];
-        $users_data =  DB::table('users')->get();
+        $users_data =  DB::table('users_projects')->distinct()->select('user_id')->get();
 
         foreach ($users_data as $user) {
 
-            $user_id = $user->id;
+            $user_id = $user->user_id;
             $projects_users_data = DB::table('users_projects')
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')
@@ -97,8 +97,8 @@ class HourEntryController extends Controller {
                 }
                 
                 $users_projects[] = [
-                    'id' => $project_in_user->project_id,
-                    'name' => $project_in_user->project_name,
+                    'project_id' => $project_in_user->project_id,
+                    'project_name' => $project_in_user->project_name,
                     'customer_id' => $project_in_user->customer_id,
                     'customer_name' => $project_in_user->customer_name,
                     'bag_hour' => $bag_hour,
@@ -108,9 +108,8 @@ class HourEntryController extends Controller {
             }
             
             $users_info[] = [
-                'id' => $user->id,
-                'nickname' => $user->nickname,
-                'projects' => $users_projects
+                'user_id' => $user->user_id,
+                'user_projects' => $users_projects
             ];
         }
         
