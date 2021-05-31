@@ -170,10 +170,6 @@
                 }
             }
         }
-        else{
-            
-        }
-
 
 
         showDescription(containerId);
@@ -321,7 +317,18 @@
 
         showProjectsOfUser(countEntries);
 
-
+        //Create submit button
+        if(document.getElementById("submitContainer")!= null) document.getElementById("submitContainer").remove();
+        let formGroup8 = document.createElement("div");
+        formGroup8.setAttribute('class', 'form-group');
+        formGroup8.setAttribute('id', 'submitContainer');
+        let submitHtml = document.createElement("button");
+        submitHtml.innerText = "{{ __('message.save') }}";
+        submitHtml.setAttribute('type', 'submit');
+        submitHtml.setAttribute('class', 'btn btn-primary');
+        formGroup8.appendChild(submitHtml);
+        
+        document.getElementById('timeEntriesForm').appendChild(formGroup8);
 
     }
 
