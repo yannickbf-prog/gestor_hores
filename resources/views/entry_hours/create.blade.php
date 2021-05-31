@@ -227,6 +227,27 @@
 
 
     }
+    
+    function showCustomersOfUser(containerId){
+        let formGroup4 = document.createElement("div");
+        formGroup4.setAttribute('class', 'form-group');
+        formGroup4.setAttribute('id', 'customerContainer' + containerId);
+        let strongCustomer = document.createElement("strong");
+        strongCustomer.innerText = "*{{ __('message.customer') }}: ";
+        formGroup4.appendChild(strongCustomer);
+        
+        //Create the select of customers
+        let customerSelectHtml = document.createElement("select");
+        customerSelectHtml.name = "customers[]";
+        customerSelectHtml.setAttribute('id', 'customers' + countEntries);
+        
+        let userId = document.getElementById('users' + containerId).value;
+        let res = users_customers.filter((item) => {
+            return item.user_id == userId;
+        });
+        let projectsInUser = res[0]['customers'];
+        console.log(projectsInUser);
+    }
 
     function removeEntry(containerId) {
         document.getElementById("timeEntryContainer" + containerId).remove();
@@ -297,12 +318,12 @@
         let userSelectHtml = document.createElement("select");
         userSelectHtml.setAttribute('id', 'users' + countEntries);
         userSelectHtml.setAttribute('name', 'users[]');
-        userSelectHtml.setAttribute('onchange', 'showProjectsOfUser(' + countEntries + ')');
-        if (users_info.length > 0) {
-            for (user of users_info) {
+        userSelectHtml.setAttribute('onchange', 'showCustomersOfUser(' + countEntries + ')');
+        if (users_customers.length > 0) {
+            for (user of users_customers) {
                 let option = document.createElement("option");
-                option.value = user.id;
-                option.innerText = user.nickname;
+                option.value = user.user_id;
+                option.innerText = user.user_nickname;
                 userSelectHtml.appendChild(option);
             }
         }
@@ -317,7 +338,7 @@
             document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
         }
 
-        showProjectsOfUser(countEntries);
+        showCustomersOfUser(countEntries);
 
         //Create submit button
         if(document.getElementById("submitContainer")!= null) document.getElementById("submitContainer").remove();
