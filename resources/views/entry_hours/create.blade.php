@@ -136,7 +136,7 @@
 
     }
 
-    function showHideImputedHours(containerId, projectsInUser) {
+    function showHideImputedHours2(containerId, projectsInUser) {
 
         if (projectsInUser.length > 0) {
             let projectId = document.getElementById("projects" + containerId).value;
@@ -227,6 +227,10 @@
         showHideImputedHours(containerId, projectsInUser);
 
     }
+    
+    function showHideImputedHours(containerId){
+        alert("hello")
+    }
 
     function showProjectsOfUserAndCustomer(containerId) {
         let formGroup5 = document.createElement("div");
@@ -239,7 +243,8 @@
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects[]";
-        projectSelectHtml.setAttribute('id', 'projects' + countEntries);
+        projectSelectHtml.setAttribute('id', 'projects' + containerId);
+        projectSelectHtml.setAttribute('onchange', 'showHideImputedHours(' + containerId + ')');
 
         let userId = document.getElementById('users' + containerId).value;
         let customerId = document.getElementById('customers' + containerId).value;
@@ -263,6 +268,8 @@
 
         formGroup5.appendChild(projectSelectHtml);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup5);
+        
+        showHideImputedHours(containerId);
     }
 
     function showCustomersOfUser(containerId) {
@@ -276,8 +283,8 @@
         //Create the select of customers
         let customerSelectHtml = document.createElement("select");
         customerSelectHtml.name = "customers[]";
-        customerSelectHtml.setAttribute('id', 'customers' + countEntries);
-        customerSelectHtml.setAttribute('onchange', 'showProjectsOfUserAndCustomer(' + countEntries + ')');
+        customerSelectHtml.setAttribute('id', 'customers' + containerId);
+        customerSelectHtml.setAttribute('onchange', 'showProjectsOfUserAndCustomer(' + containerId + ')');
 
         let userId = document.getElementById('users' + containerId).value;
         let res = users_customers.filter((item) => {
