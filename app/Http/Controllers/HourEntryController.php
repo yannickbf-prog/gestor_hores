@@ -131,7 +131,7 @@ class HourEntryController extends Controller {
         
         $users_with_projects = DB::table('users')
                 ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
-                ->distinct()->pluck('users.id');
+                ->distinct()->get(['users.id', 'users.name']);
         
         foreach ($users_data as $user) {
             
