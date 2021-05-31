@@ -115,6 +115,7 @@
     //Get the object from json
     var users_info = @json($users_info);
             var users_customers = @json($users_customers);
+    console.log(users_info);
     console.log(users_customers);
     function showDescription(containerId) {
         //Create task description
@@ -227,6 +228,43 @@
 
     }
 
+    function showProjectsOfUserAndCustomer(containerId) {
+        let formGroup5 = document.createElement("div");
+        formGroup5.setAttribute('class', 'form-group');
+        formGroup5.setAttribute('id', 'projectContainer' + containerId);
+        let strongProject = document.createElement("strong");
+        strongProject.innerText = "*{{ __('message.project') }}: ";
+        formGroup5.appendChild(strongProject);
+
+        //Create the select of projects
+        let projectSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "projects[]";
+        projectSelectHtml.setAttribute('id', 'projects' + countEntries);
+
+        let userId = document.getElementById('users' + containerId).value;
+        let customerId = document.getElementById('customers' + containerId).value;
+        let res = users_info.filter((item) => {
+            return item.user_id == userId;
+        });
+        let projectsInUser = res[0]['user_projects'];
+
+        for (project of projectsInUser) {
+            if (project.customer_id == customerId) {
+                let option = document.createElement("option");
+                option.value = project.project_id;
+                option.innerText = project.project_name;
+                projectSelectHtml.appendChild(option);
+            }
+        }
+        
+        if (document.getElementById('projectContainer' + containerId) != null) {
+            document.getElementById('projectContainer' + containerId).remove();
+        }
+
+        formGroup5.appendChild(projectSelectHtml);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup5);
+    }
+
     function showCustomersOfUser(containerId) {
         let formGroup4 = document.createElement("div");
         formGroup4.setAttribute('class', 'form-group');
@@ -239,6 +277,7 @@
         let customerSelectHtml = document.createElement("select");
         customerSelectHtml.name = "customers[]";
         customerSelectHtml.setAttribute('id', 'customers' + countEntries);
+        customerSelectHtml.setAttribute('onchange', 'showProjectsOfUserAndCustomer(' + countEntries + ')');
 
         let userId = document.getElementById('users' + containerId).value;
         let res = users_customers.filter((item) => {
@@ -252,13 +291,15 @@
             option.innerText = customer.customer_name;
             customerSelectHtml.appendChild(option);
         }
-        
+
         if (document.getElementById('customerContainer' + containerId) != null) {
             document.getElementById('customerContainer' + containerId).remove();
         }
-        
+
         formGroup4.appendChild(customerSelectHtml);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
+
+        showProjectsOfUserAndCustomer(containerId)
     }
 
     function removeEntry(containerId) {
@@ -369,8 +410,6 @@
     }
 
     addEntry(1);
-
-    console.log(users_info);
     /*var projectsInUser;
      function onChangeUser(users_info) {
      
