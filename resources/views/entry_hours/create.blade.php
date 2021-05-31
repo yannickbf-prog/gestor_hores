@@ -114,7 +114,7 @@
 
     //Get the object from json
     var users_info = @json($users_info);
-    var users_customers = @json($users_customers);
+            var users_customers = @json($users_customers);
     console.log(users_customers);
     function showDescription(containerId) {
         //Create task description
@@ -225,28 +225,40 @@
 
         showHideImputedHours(containerId, projectsInUser);
 
-
     }
-    
-    function showCustomersOfUser(containerId){
+
+    function showCustomersOfUser(containerId) {
         let formGroup4 = document.createElement("div");
         formGroup4.setAttribute('class', 'form-group');
         formGroup4.setAttribute('id', 'customerContainer' + containerId);
         let strongCustomer = document.createElement("strong");
         strongCustomer.innerText = "*{{ __('message.customer') }}: ";
         formGroup4.appendChild(strongCustomer);
-        
+
         //Create the select of customers
         let customerSelectHtml = document.createElement("select");
         customerSelectHtml.name = "customers[]";
         customerSelectHtml.setAttribute('id', 'customers' + countEntries);
-        
+
         let userId = document.getElementById('users' + containerId).value;
         let res = users_customers.filter((item) => {
             return item.user_id == userId;
         });
-        let projectsInUser = res[0]['customers'];
-        console.log(projectsInUser);
+        let customersInUser = res[0]['customers'];
+
+        for (customer of customersInUser) {
+            let option = document.createElement("option");
+            option.value = customer.customer_id;
+            option.innerText = customer.customer_name;
+            customerSelectHtml.appendChild(option);
+        }
+        
+        if (document.getElementById('customerContainer' + containerId) != null) {
+            document.getElementById('customerContainer' + containerId).remove();
+        }
+        
+        formGroup4.appendChild(customerSelectHtml);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
     }
 
     function removeEntry(containerId) {
@@ -341,7 +353,8 @@
         showCustomersOfUser(countEntries);
 
         //Create submit button
-        if(document.getElementById("submitContainer")!= null) document.getElementById("submitContainer").remove();
+        if (document.getElementById("submitContainer") != null)
+            document.getElementById("submitContainer").remove();
         let formGroup8 = document.createElement("div");
         formGroup8.setAttribute('class', 'form-group');
         formGroup8.setAttribute('id', 'submitContainer');
@@ -350,13 +363,13 @@
         submitHtml.setAttribute('type', 'submit');
         submitHtml.setAttribute('class', 'btn btn-primary');
         formGroup8.appendChild(submitHtml);
-        
+
         document.getElementById('timeEntriesForm').appendChild(formGroup8);
 
     }
 
     addEntry(1);
-    
+
     console.log(users_info);
     /*var projectsInUser;
      function onChangeUser(users_info) {
