@@ -333,6 +333,8 @@
     }
 
     addEntry(1);
+    
+    console.log(users_info);
     /*var projectsInUser;
      function onChangeUser(users_info) {
      

@@ -81,7 +81,7 @@ class HourEntryController extends Controller {
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')
                     ->where('users_projects.user_id', $user_id)
                     ->where('projects.active', 1)
-                    ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
+                    ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.id AS customer_id',  'customers.name AS customer_name')
                     ->get();
             
             $users_projects = [];
@@ -99,7 +99,8 @@ class HourEntryController extends Controller {
                 $users_projects[] = [
                     'id' => $project_in_user->project_id,
                     'name' => $project_in_user->project_name,
-                    'customer' => $project_in_user->customer_name,
+                    'customer_id' => $project_in_user->customer_id,
+                    'customer_name' => $project_in_user->customer_name,
                     'bag_hour' => $bag_hour,
                 ];
                 
