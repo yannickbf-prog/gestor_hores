@@ -349,8 +349,8 @@
         formGroup1.appendChild(strongDay);
         let inputDay = document.createElement("input");
         inputDay.setAttribute('name', 'day[]');
-        inputDay.setAttribute('id', 'dp');
-        inputDay.setAttribute('onclick', "$('#dp').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp').datepicker('show');");
+        inputDay.setAttribute('id', 'dp'+countEntries);
+        inputDay.setAttribute('onclick', "$('#dp"+countEntries+"').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp"+countEntries+"').datepicker('show');");
 
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
