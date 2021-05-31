@@ -113,7 +113,6 @@ class HourEntryController extends Controller {
             ];
         }
         
-        return $users_info;
         
         //Create the JSON of the relation of users and customers
         $users_customers = [];

@@ -114,24 +114,26 @@
 
     //Get the object from json
     var users_info = @json($users_info);
-            function showDescription(containerId) {
-                //Create task description
-                if (document.getElementById('descContainer' + containerId) != null) {
-                    document.getElementById('descContainer' + containerId).remove();
-                }
+    var users_customers = @json($users_customers);
+    console.log(users_customers);
+    function showDescription(containerId) {
+        //Create task description
+        if (document.getElementById('descContainer' + containerId) != null) {
+            document.getElementById('descContainer' + containerId).remove();
+        }
 
-                let formGroup7 = document.createElement("div");
-                formGroup7.setAttribute('class', 'form-group');
-                formGroup7.setAttribute('id', 'descContainer' + containerId);
-                let strongDesc = document.createElement("strong");
-                strongDesc.innerText = "*{{ __('message.task_description') }}: ";
-                formGroup7.appendChild(strongDesc);
-                let inputDesc = document.createElement("input");
-                inputDesc.setAttribute('name', 'desc[]');
-                formGroup7.appendChild(inputDesc);
-                document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+        let formGroup7 = document.createElement("div");
+        formGroup7.setAttribute('class', 'form-group');
+        formGroup7.setAttribute('id', 'descContainer' + containerId);
+        let strongDesc = document.createElement("strong");
+        strongDesc.innerText = "*{{ __('message.task_description') }}: ";
+        formGroup7.appendChild(strongDesc);
+        let inputDesc = document.createElement("input");
+        inputDesc.setAttribute('name', 'desc[]');
+        formGroup7.appendChild(inputDesc);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
 
-            }
+    }
 
     function showHideImputedHours(containerId, projectsInUser) {
 
