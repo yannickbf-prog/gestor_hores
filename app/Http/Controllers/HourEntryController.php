@@ -118,6 +118,26 @@ class HourEntryController extends Controller {
                 'projects' => $users_projects
             ];
         }
+        
+        //Create the JSON of the relation of users and customers
+        $users_customers = [];
+        /*$users_customers_data =  DB::table('users')
+                ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
+                ->distinct()
+                ->join('projects', 'users_projects.id', '=', 'projects.id')
+                ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                ->select('users.id AS user_id', 'users.name AS user_name', 'customers.id AS customer_id', 'customers.name AS customer_name')
+                ->get();*/
+        
+        $users_with_projects = DB::table('users')
+                ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
+                ->distinct()->pluck('users.id');
+        
+        foreach ($users_data as $user) {
+            
+        }
+        
+        return $users_with_projects;
 
         return view('entry_hours.create', compact(['lang', 'users_data', 'users_info']));
     }
