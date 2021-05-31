@@ -120,7 +120,7 @@ class HourEntryController extends Controller {
         }
         
         //Create the JSON of the relation of users and customers
-        $users_customers = [];
+        //$users_customers = [];
         /*$users_customers_data =  DB::table('users')
                 ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
                 ->distinct()
@@ -129,15 +129,31 @@ class HourEntryController extends Controller {
                 ->select('users.id AS user_id', 'users.name AS user_name', 'customers.id AS customer_id', 'customers.name AS customer_name')
                 ->get();*/
         
+        $users_customers = [];
         $users_with_projects = DB::table('users')
                 ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
                 ->distinct()->get(['users.id', 'users.name']);
         
-        foreach ($users_data as $user) {
+        foreach ($users_with_projects as $user) {
             
+            $users_customers_data =  DB::table('users')
+                ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
+                ->join('projects', 'users_projects.id', '=', 'projects.id')
+                ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
+                ->where('users_projects.user_id', $user->id)    
+                ->select('customers.id AS customer_id', 'customers.name AS customer_name')
+                ->get();
+            
+            
+            
+            $users_customers[] = [
+                'user_id' => $user->id,
+                'user_name' => $user->name,
+                'customers' => $users_customers_data,
+            ];
         }
         
-        return $users_with_projects;
+        return $users_customers;
 
         return view('entry_hours.create', compact(['lang', 'users_data', 'users_info']));
     }
