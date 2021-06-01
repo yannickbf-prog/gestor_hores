@@ -138,20 +138,20 @@
 
         if (projectBagHourAvailable) {
             if (document.getElementById('inputedHoursContainer' + containerId) == null) {
-                let formGroup4 = document.createElement("div");
-                formGroup4.setAttribute('class', 'form-group');
-                formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
+                let formGroup6 = document.createElement("div");
+                formGroup6.setAttribute('class', 'form-group');
+                formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
                 let strongImputedHours = document.createElement("strong");
                 strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-                formGroup4.appendChild(strongImputedHours);
+                formGroup6.appendChild(strongImputedHours);
 
                 let imputedHoursHtml = document.createElement("input");
                 imputedHoursHtml.setAttribute('type', 'number');
                 imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
 
-                formGroup4.appendChild(imputedHoursHtml);
-                document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
+                formGroup6.appendChild(imputedHoursHtml);
+                document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
             }
         } else {
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
@@ -331,16 +331,16 @@
         //Create submit button
         if (document.getElementById("submitContainer") != null)
             document.getElementById("submitContainer").remove();
-        let formGroup8 = document.createElement("div");
-        formGroup8.setAttribute('class', 'form-group');
-        formGroup8.setAttribute('id', 'submitContainer');
+        let buttonContainer = document.createElement("div");
+        buttonContainer.setAttribute('class', 'form-group');
+        buttonContainer.setAttribute('id', 'submitContainer');
         let submitHtml = document.createElement("button");
         submitHtml.innerText = "{{ __('message.save') }}";
         submitHtml.setAttribute('type', 'submit');
         submitHtml.setAttribute('class', 'btn btn-primary');
-        formGroup8.appendChild(submitHtml);
+        buttonContainer.appendChild(submitHtml);
 
-        document.getElementById('timeEntriesForm').appendChild(formGroup8);
+        document.getElementById('timeEntriesForm').appendChild(buttonContainer);
 
     }
 
