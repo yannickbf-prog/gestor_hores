@@ -227,9 +227,41 @@
         showHideImputedHours(containerId, projectsInUser);
 
     }
-    
-    function showHideImputedHours(containerId){
-        alert("hello")
+
+    function showHideImputedHours(containerId, projectsInUser) {
+
+        let projectId = document.getElementById("projects" + containerId).value;
+
+        let res = projectsInUser.filter((item) => {
+            return item.project_id == projectId;
+        });
+
+        let projectBagHourAvailable = res[0]['bag_hour'];
+        
+        console.log(projectBagHourAvailable);
+
+        if (projectBagHourAvailable) {
+
+            let formGroup4 = document.createElement("div");
+            formGroup4.setAttribute('class', 'form-group');
+            formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
+
+            let strongImputedHours = document.createElement("strong");
+            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            formGroup4.appendChild(strongImputedHours);
+
+            let imputedHoursHtml = document.createElement("input");
+            imputedHoursHtml.setAttribute('type', 'number');
+            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+
+            formGroup4.appendChild(imputedHoursHtml);
+            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
+            
+        } else {
+            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+                document.getElementById('inputedHoursContainer' + containerId).remove();
+            }
+        }
     }
 
     function showProjectsOfUserAndCustomer(containerId) {
@@ -244,7 +276,6 @@
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects[]";
         projectSelectHtml.setAttribute('id', 'projects' + containerId);
-        projectSelectHtml.setAttribute('onchange', 'showHideImputedHours(' + containerId + ')');
 
         let userId = document.getElementById('users' + containerId).value;
         let customerId = document.getElementById('customers' + containerId).value;
@@ -252,6 +283,8 @@
             return item.user_id == userId;
         });
         let projectsInUser = res[0]['user_projects'];
+
+        projectSelectHtml.setAttribute('onchange', 'showHideImputedHours(' + containerId + ', ' + projectsInUser + ')');
 
         for (project of projectsInUser) {
             if (project.customer_id == customerId) {
@@ -261,15 +294,15 @@
                 projectSelectHtml.appendChild(option);
             }
         }
-        
+
         if (document.getElementById('projectContainer' + containerId) != null) {
             document.getElementById('projectContainer' + containerId).remove();
         }
 
         formGroup5.appendChild(projectSelectHtml);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup5);
-        
-        showHideImputedHours(containerId);
+
+        showHideImputedHours(containerId, projectsInUser);
     }
 
     function showCustomersOfUser(containerId) {
@@ -349,8 +382,8 @@
         formGroup1.appendChild(strongDay);
         let inputDay = document.createElement("input");
         inputDay.setAttribute('name', 'day[]');
-        inputDay.setAttribute('id', 'dp'+countEntries);
-        inputDay.setAttribute('onclick', "$('#dp"+countEntries+"').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp"+countEntries+"').datepicker('show');");
+        inputDay.setAttribute('id', 'dp' + countEntries);
+        inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
 
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
