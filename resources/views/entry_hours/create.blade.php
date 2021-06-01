@@ -244,41 +244,30 @@
             return item.project_id == projectId;
         });
         
-        let bagHourActive = res2[0]['bag_hour'];
-        console.log(bagHourActive);
-        
-        
-//
-//        let res = projectsInUser.filter((item) => {
-//            return item.project_id == projectId;
-//        });
-//
-//        let projectBagHourAvailable = res[0]['bag_hour'];
-//        
-//        console.log(projectBagHourAvailable);
-//
-//        if (projectBagHourAvailable) {
-//
-//            let formGroup4 = document.createElement("div");
-//            formGroup4.setAttribute('class', 'form-group');
-//            formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
-//
-//            let strongImputedHours = document.createElement("strong");
-//            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-//            formGroup4.appendChild(strongImputedHours);
-//
-//            let imputedHoursHtml = document.createElement("input");
-//            imputedHoursHtml.setAttribute('type', 'number');
-//            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
-//
-//            formGroup4.appendChild(imputedHoursHtml);
-//            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
-//            
-//        } else {
-//            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
-//                document.getElementById('inputedHoursContainer' + containerId).remove();
-//            }
-//        }
+        let projectBagHourAvailable = res2[0]['bag_hour'];
+
+        if (projectBagHourAvailable) {
+            if (document.getElementById('inputedHoursContainer' + containerId) == null) {
+                let formGroup4 = document.createElement("div");
+                formGroup4.setAttribute('class', 'form-group');
+                formGroup4.setAttribute('id', 'inputedHoursContainer' + containerId);
+
+                let strongImputedHours = document.createElement("strong");
+                strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+                formGroup4.appendChild(strongImputedHours);
+
+                let imputedHoursHtml = document.createElement("input");
+                imputedHoursHtml.setAttribute('type', 'number');
+                imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+
+                formGroup4.appendChild(imputedHoursHtml);
+                document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
+            }
+        } else {
+            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+                document.getElementById('inputedHoursContainer' + containerId).remove();
+            }
+        }
     }
 
     function showProjectsOfUserAndCustomer(containerId) {
