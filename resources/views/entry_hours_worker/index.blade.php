@@ -3,69 +3,219 @@
 @section('title', 'Login - Home')
 
 @section('nav_and_content')
-<div class="row bg bg-warning">
-    <div class="col-12">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <h2>{{ __('message.entry_hours_worked') }}</h2>
-            <form action="{{ route($lang.'_entry_hours.index') }}" method="GET">
-                @csrf
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <h3>{{ __('message.select') }} {{ __('message.project') }}</h3>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    @if (count($data) > 0)
-                    <select name="projects">
-                        @foreach($data as $key => $value)
-                        <option value='{{$value->project_id}}'>{{$value->project_name}} ({{$value->customer_name}})</option>
-                        @endforeach
-                    </select>
-                    @else
-                    <li>{{ __('message.no') }} {{ __('message.projects') }} {{ __('message.avalible') }} </li>
-                    @endif
-                </div>
-                <br>
-                <button type="submit" class="btn btn-success">{{ __('message.select_project') }}</button>
-            </form>
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>{{ __('message.add_new')." ".__('message.time_entry') }}</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route($lang.'_time_entries.index') }}"> {{__('message.back')}}</a>
         </div>
     </div>
-    <div class="col-12">
-        <div class="col-xs-12 col-sm-12 col-md-12 invisible" id="secondForm">
-            <form action="{{ route($lang.'_entry_hours.store') }}" method="POST">
-                @csrf
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <h3>{{ __('message.service_on_project') }}: @if($bag_hours != []){{$bag_hours[0]->project_name}}. {{ __('message.customer') }}: {{ $customer_name->customer_name }}@endif</h3>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <strong>*{{__('message.service')}}:</strong><br>
-                    @if (count($bag_hours) > 0)
-                    <select name="bag_hour_in_project">
-                        @foreach($bag_hours as $key => $value)
-                        <option value='{{$value->bag_hour_id}}'>{{$value->type_bag_hour_name}}</option>
-                        @endforeach
-                    </select>
-                    @else
-                    <li>{{ __('message.no') }} {{ __('message.bag_hours') }} {{ __('message.avalible') }} </li>
-                    @endif
-                </div>
-
-                <div class="col-xs-8 col-sm-8 col-md-8">
-
-                    <div class="form-group">
-                        <strong>*{{__('message.hours')}}:</strong>
-                        <input type="number" name="hours_worked" class="form-control" placeholder="{{__('message.enter')." ".__('message.hours_worked')}}" value="{{old('hours_worked')}}">
-                    </div>
-                </div>
-
-                <input type="hidden" name="user_id" value="{{$user_id}}">
-                <input type="hidden" name="project_id" value="{{$project_id}}">
-
-                <button type="submit" class="btn btn-success">{{ __('message.entry_hours_worked') }}</button>
-
-            </form>
-        </div>
-    </div>
-
-</form>
 </div>
 
+@if ($errors->any())
+<div class="alert alert-danger mt-3">
+    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="alert alert-info mt-2">
+    <strong>{{__('message.fields_are_required')}}</strong>
+</div>
+
+<form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
+    @csrf
+
+</form>
 @stop
+
+@section('js')
+<script>
+
+
+    $.datepicker.regional['es'] = {
+        closeText: 'Cerrar',
+        prevText: '< Ant',
+        nextText: 'Sig >',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.regional["ca"] = {
+        closeText: "Tancar",
+        prevText: "< Ant",
+        nextText: "Seg >",
+        currentText: "Hoy",
+        monthNames: [
+            "Gener",
+            "Febrer",
+            "Març",
+            "Abril",
+            "Maig",
+            "Juny",
+            "Juliol",
+            "Agost",
+            "Septembre",
+            "Octubre",
+            "Novembre",
+            "Desembre",
+        ],
+        monthNamesShort: [
+            "Gen",
+            "Feb",
+            "Mar",
+            "Abr",
+            "Mai",
+            "Jun",
+            "Jul",
+            "Ago",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ],
+        dayNames: [
+            "Diumenje",
+            "Dilluns",
+            "Dimarts",
+            "Dimecres",
+            "Dijous",
+            "Divendres",
+            "Dissabte",
+        ],
+        dayNamesShort: ["Diu", "Dil", "Dim", "Dme", "Dij", "Div", "Dis"],
+        dayNamesMin: ["Di", "Dl", "Dm", "Dc", "Dj", "Dv", "Ds"],
+        weekHeader: "Sm",
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: "",
+    };
+
+
+    //Get the object from json
+    var json_data = @json($json_data);
+    console.log(json_data);
+    
+    function showCustomersOfUser(containerId) {
+        let formGroup3 = document.createElement("div");
+        formGroup3.setAttribute('class', 'form-group');
+        formGroup3.setAttribute('id', 'customerContainer' + containerId);
+        let strongCustomer = document.createElement("strong");
+        strongCustomer.innerText = "*{{ __('message.customer') }}: ";
+        formGroup3.appendChild(strongCustomer);
+
+        //Create the select of customers
+        let customerSelectHtml = document.createElement("select");
+        customerSelectHtml.name = "customers[]";
+        customerSelectHtml.setAttribute('id', 'customers' + containerId);
+        customerSelectHtml.setAttribute('onchange', 'showProjectsOfUserAndCustomer(' + containerId + ')');
+
+        for (customer of json_data) {
+            let option = document.createElement("option");
+            option.value = customer.customer_id;
+            option.innerText = customer.customer_name;
+            customerSelectHtml.appendChild(option);
+        }
+
+        if (document.getElementById('customerContainer' + containerId) != null) {
+            document.getElementById('customerContainer' + containerId).remove();
+        }
+
+        formGroup3.appendChild(customerSelectHtml);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup3);
+
+        //showProjectsOfUserAndCustomer(containerId)
+    }
+    
+    function removeEntry(containerId) {
+        document.getElementById("timeEntryContainer" + containerId).remove();
+    }
+    
+    var countEntries = 0;
+    function addEntry(containerId) {
+
+        countEntries++;
+
+        let entryContainerHtml = document.createElement("div");
+        entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
+
+        //Show add/remove buttons
+        //Create buttons container
+        let agregateButtonsContainer = document.createElement("div");
+
+        //Plus button
+        let plusButton = document.createElement("a");
+        plusButton.innerText = '+';
+        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
+        plusButton.setAttribute('onclick', 'addEntry(' + countEntries + ')');
+        agregateButtonsContainer.appendChild(plusButton);
+
+        //Take off button
+        let takeOffButton = document.createElement("a");
+        takeOffButton.innerText = '-';
+        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
+        takeOffButton.setAttribute('onclick', 'removeEntry(' + countEntries + ')');
+        agregateButtonsContainer.appendChild(takeOffButton);
+
+        entryContainerHtml.appendChild(agregateButtonsContainer);
+
+        //Show day with datepiker
+        let formGroup1 = document.createElement("div");
+        formGroup1.setAttribute('class', 'form-group');
+        let strongDay = document.createElement("strong");
+        strongDay.innerText = "*{{ __('message.day') }}: ";
+        formGroup1.appendChild(strongDay);
+        let inputDay = document.createElement("input");
+        inputDay.setAttribute('name', 'days[]');
+        inputDay.setAttribute('id', 'dp' + countEntries);
+        inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
+
+        formGroup1.appendChild(inputDay);
+        entryContainerHtml.appendChild(formGroup1);
+
+        //Show hours
+        let formGroup2 = document.createElement("div");
+        formGroup2.setAttribute('class', 'form-group');
+        let strongHours = document.createElement("strong");
+        strongHours.innerText = "*{{ __('message.hours') }}: ";
+        formGroup2.appendChild(strongHours);
+        let inputHours = document.createElement("input");
+        inputHours.setAttribute('name', 'hours[]');
+        inputHours.setAttribute('type', 'number');
+
+        formGroup2.appendChild(inputHours);
+        entryContainerHtml.appendChild(formGroup2);
+
+        if (containerId == 1) {
+            document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
+            document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn btn-outline-danger btn-sm disabled");
+        } else {
+            document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
+        }
+        
+        showCustomersOfUser(countEntries);
+    }
+    
+    addEntry(1);
+    
+
+</script>
+
+@endsection

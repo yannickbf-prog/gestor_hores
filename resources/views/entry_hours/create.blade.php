@@ -117,47 +117,70 @@
     var users_customers = @json($users_customers);
     console.log(users_info);
     console.log(users_customers);
+    
+    function showDescription(containerId) {
+        //Create task description
+        if (document.getElementById('descContainer' + containerId) != null) {
+            document.getElementById('descContainer' + containerId).remove();
+        }
+        let formGroup7 = document.createElement("div");
+        formGroup7.setAttribute('class', 'form-group');
+        formGroup7.setAttribute('id', 'descContainer' + containerId);
+        let strongDesc = document.createElement("strong");
+        strongDesc.innerText = "*{{ __('message.task_description') }}: ";
+        formGroup7.appendChild(strongDesc);
+        let inputDesc = document.createElement("input");
+        inputDesc.setAttribute('name', 'desc[]');
+        formGroup7.appendChild(inputDesc);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+    }
 
     function showHideImputedHours(containerId) {
 
         let userId = document.getElementById("users" + containerId).value;
         let projectId = document.getElementById("projects" + containerId).value;
-        
+
         let res = users_info.filter((item) => {
             return item.user_id == userId;
         });
-        
+
         let userProjects = res[0]['user_projects'];
         console.log(userProjects);
-        
+
         let res2 = userProjects.filter((item) => {
             return item.project_id == projectId;
         });
-        
+
         let projectBagHourAvailable = res2[0]['bag_hour'];
 
         if (projectBagHourAvailable) {
-            if (document.getElementById('inputedHoursContainer' + containerId) == null) {
-                let formGroup6 = document.createElement("div");
-                formGroup6.setAttribute('class', 'form-group');
-                formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
-                let strongImputedHours = document.createElement("strong");
-                strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-                formGroup6.appendChild(strongImputedHours);
+            let formGroup6 = document.createElement("div");
+            formGroup6.setAttribute('class', 'form-group');
+            formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
-                let imputedHoursHtml = document.createElement("input");
-                imputedHoursHtml.setAttribute('type', 'number');
-                imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+            let strongImputedHours = document.createElement("strong");
+            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            formGroup6.appendChild(strongImputedHours);
 
-                formGroup6.appendChild(imputedHoursHtml);
-                document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
+            let imputedHoursHtml = document.createElement("input");
+            imputedHoursHtml.setAttribute('type', 'number');
+            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+            
+            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+                document.getElementById('inputedHoursContainer' + containerId).remove();
             }
+
+            formGroup6.appendChild(imputedHoursHtml);
+            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
+            
         } else {
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
             }
         }
+        
+        showDescription(containerId);
     }
 
     function showProjectsOfUserAndCustomer(containerId) {
@@ -276,7 +299,7 @@
         strongDay.innerText = "*{{ __('message.day') }}: ";
         formGroup1.appendChild(strongDay);
         let inputDay = document.createElement("input");
-        inputDay.setAttribute('name', 'day[]');
+        inputDay.setAttribute('name', 'days[]');
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
 

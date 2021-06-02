@@ -6,8 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\App;
 use Auth;
 
-class CreateHourEntryRequest extends FormRequest
-{
+class CreateHourEntryRequest extends FormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,16 +26,15 @@ class CreateHourEntryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         App::setLocale($this->lang);
 
         return [
-            'users' => 'required',
-            'projects' => 'required|required_without:no_project|numeric',
-            'bag_hours' => 'nullable|numeric',
-            'hours' => 'required|numeric',
-            'validate' => 'required|required_with:0,1|numeric'
+            "days" => "required",
+            "days.*" => "required|string",
+            "users" => "required|array",
+            "users.*" => "required|string",
         ];
     }
+
 }

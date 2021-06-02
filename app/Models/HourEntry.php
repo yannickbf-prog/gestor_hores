@@ -10,7 +10,7 @@ class HourEntry extends Model
 {
     use HasFactory;
     
-    protected $dates = ['updated_at'];
+    protected $dates = ['updated_at', 'days'];
    
     
 }
