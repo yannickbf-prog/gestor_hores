@@ -111,8 +111,47 @@
 
     //Get the object from json
     var json_data = @json($json_data);
-    console.log(json_data);
-    
+            console.log(json_data);
+
+    function showProjectsOfUserAndCustomer(containerId) {
+        let formGroup5 = document.createElement("div");
+        formGroup5.setAttribute('class', 'form-group');
+        formGroup5.setAttribute('id', 'projectContainer' + containerId);
+        let strongProject = document.createElement("strong");
+        strongProject.innerText = "*{{ __('message.project') }}: ";
+        formGroup5.appendChild(strongProject);
+
+        //Create the select of projects
+        let projectSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "projects[]";
+        projectSelectHtml.setAttribute('id', 'projects' + containerId);
+        projectSelectHtml.setAttribute('onchange', 'showHideImputedHours(' + containerId + ')');
+
+        let customerId = document.getElementById('customers' + containerId).value;
+        let res = json_data.filter((item) => {
+            return item.customer_id == customerId;
+        });
+        let projectsCustomer = res[0]['customer_projects'];
+
+        for (project of projectsCustomer) {
+
+            let option = document.createElement("option");
+            option.value = project.project_id;
+            option.innerText = project.project_name;
+            projectSelectHtml.appendChild(option);
+
+        }
+
+        if (document.getElementById('projectContainer' + containerId) != null) {
+            document.getElementById('projectContainer' + containerId).remove();
+        }
+
+        formGroup5.appendChild(projectSelectHtml);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup5);
+
+        //showHideImputedHours(containerId);
+    }
+
     function showCustomersOfUser(containerId) {
         let formGroup3 = document.createElement("div");
         formGroup3.setAttribute('class', 'form-group');
@@ -141,13 +180,13 @@
         formGroup3.appendChild(customerSelectHtml);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup3);
 
-        //showProjectsOfUserAndCustomer(containerId)
+        showProjectsOfUserAndCustomer(containerId)
     }
-    
+
     function removeEntry(containerId) {
         document.getElementById("timeEntryContainer" + containerId).remove();
     }
-    
+
     var countEntries = 0;
     function addEntry(containerId) {
 
@@ -209,12 +248,12 @@
         } else {
             document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
         }
-        
+
         showCustomersOfUser(countEntries);
     }
-    
+
     addEntry(1);
-    
+
 
 </script>
 
