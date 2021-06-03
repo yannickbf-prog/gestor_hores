@@ -205,32 +205,37 @@
 
     //Get the object from json
     var users_info = @json($users_info);
-    var users_customers = @json($users_customers);
+            var users_customers = @json($users_customers);
     console.log(users_info);
     console.log(users_customers);
-    
+
     var countActiveEntries = 0;
 
     function createCountOfHours() {
-        alert("hello2");
+
+        let totalCountHtml = document.createElement("div");
+        totalCountHtml.setAttribute('id', 'totalCount');
+        totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
+
+        let strongTotalcount = document.createElement("strong");
+        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+
+        let totalCount = 0;
+        for (let i = 0; i < document.getElementsByName('hours[]').length; i++) {
+            if (document.getElementsByName('inputed_hours[]')[i] == null) {
+                
+                totalCount += parseInt(document.getElementsByName('hours[]')[i].value);
+            } else {
+                totalCount += parseInt(document.getElementsByName('inputed_hours[]')[i].value);
+            }
+        }
+
+        strongTotalcount.innerText += totalCount;
         
-//        let totalCountHtml = document.createElement("div");
-//        totalCountHtml.setAttribute('id', 'totalCount');
-//       
-//        let strongTotalcount = document.createElement("strong");
-//        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
-//        
-//        for(let i = 0; i < document.getElementsByName('hours[]').length; i++){
-//            if(document.getElementsByName('hours[]')[i] == null) {
-//                alert("hello");
-//            }
-//        }
+        totalCountHtml.appendChild(strongTotalcount);
         
-//        if (document.getElementById("submitContainer") != null)
-//            document.getElementById("submitContainer").remove();
+        document.getElementById('submitContainer').before(totalCountHtml);
         
-        
-        //document.getElementById("submitContainer").before(var);
     }
 
     function showDescription(containerId) {
