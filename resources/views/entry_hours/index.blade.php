@@ -209,8 +209,6 @@
     console.log(users_info);
     console.log(users_customers);
 
-    var countActiveEntries = 0;
-
     function createCountOfHours() {
         
         if (document.getElementById('totalCount') != null) {
@@ -293,7 +291,7 @@
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
-            imputedHoursHtml.setAttribute('onchange', 'createCountOfHours()');
+            imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
@@ -389,7 +387,6 @@
     }
 
     function removeEntry(containerId) {
-        countActiveEntries--;
         document.getElementById("timeEntryContainer" + containerId).remove();
 
         createCountOfHours(countActiveEntries);
@@ -397,8 +394,6 @@
 
     var countEntries = 0;
     function addEntry(containerId) {
-
-        countActiveEntries++;
 
         countEntries++;
 
@@ -442,7 +437,7 @@
         //Show hours
         let formGroup2 = document.createElement("div");
         formGroup2.setAttribute('class', 'form-group');
-        formGroup2.setAttribute('onchange', 'createCountOfHours()');
+        formGroup2.setAttribute('oninput', 'createCountOfHours()');
         let strongHours = document.createElement("strong");
         strongHours.innerText = "*{{ __('message.hours') }}: ";
         formGroup2.appendChild(strongHours);

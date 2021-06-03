@@ -112,6 +112,40 @@
     //Get the object from json
     var json_data = @json($json_data);
             console.log(json_data);
+            
+    function createCountOfHours() {
+        
+        if (document.getElementById('totalCount') != null) {
+            document.getElementById('totalCount').remove();
+        }
+        
+        let totalCountHtml = document.createElement("div");
+        totalCountHtml.setAttribute('id', 'totalCount');
+        totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
+
+        let strongTotalcount = document.createElement("strong");
+        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+
+        let totalCount = 0;
+        for (let i = 0; i < document.getElementsByName('hours[]').length; i++) {
+            if (document.getElementsByName('inputed_hours[]')[i] == null) {                
+                if(Number.isInteger(parseInt(document.getElementsByName('hours[]')[i].value))){
+                    totalCount += parseInt(document.getElementsByName('hours[]')[i].value);
+                }
+            } else {
+                if(Number.isInteger(parseInt(document.getElementsByName('inputed_hours[]')[i].value))){
+                    totalCount += parseInt(document.getElementsByName('inputed_hours[]')[i].value);
+                }
+            }
+        }
+
+        strongTotalcount.innerText += totalCount+"h";
+        
+        totalCountHtml.appendChild(strongTotalcount);
+        
+        document.getElementById('submitContainer').before(totalCountHtml);
+        
+    }
 
     function showDescription(containerId) {
         //Create task description
