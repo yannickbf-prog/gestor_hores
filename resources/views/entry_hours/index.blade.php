@@ -213,6 +213,10 @@
 
     function createCountOfHours() {
         
+        if (document.getElementById('totalCount') != null) {
+            document.getElementById('totalCount').remove();
+        }
+        
         let totalCountHtml = document.createElement("div");
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
