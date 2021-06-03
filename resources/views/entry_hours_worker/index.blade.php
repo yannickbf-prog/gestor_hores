@@ -129,7 +129,6 @@
         });
 
         let projectBagHourAvailable = res2[0]['projects_active'];
-        projectBagHourAvailable = projectBagHourAvailable === 0 ? false : true;
 
         console.log(projectBagHourAvailable);
 

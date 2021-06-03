@@ -43,15 +43,13 @@ class EntryHoursController extends Controller {
                     ->select('projects.id AS project_id', 'projects.name AS project_name')
                     ->get();
 
-//            $bag_hour;
-//
-//            if (DB::table('bag_hours')->where('project_id', $user_id)->exists()) {
-//                $bag_hour = true;
-//            } else {
-//                $bag_hour = false;
-//            }
-//            
-//            $user_customer_projects['projects_active'] = $bag_hour;
+            foreach($user_customer_projects as $project){
+                if (DB::table('bag_hours')->where('project_id', $project->project_id)->exists()) {
+                    $project->projects_active = true;
+                } else {
+                    $project->projects_active = false;
+                }
+            }
 
             $json_data[] = [
                 'customer_id' => $customer->customer_id,
