@@ -25,8 +25,79 @@ class HourEntryController extends Controller {
         
         $join = DB::table('hours_entry')->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')->select('type_bag_hours.name')->get();
              
+        //Create json with the info of DB, need for selects user, project and bag of hours. This work with JavaScript
+        $users_info = [];
+        $users_data =  DB::table('users_projects')->distinct()->select('user_id')->get();
 
-        return view('entry_hours.index', compact(['lang', 'data']))
+        foreach ($users_data as $user) {
+
+            $user_id = $user->user_id;
+            $projects_users_data = DB::table('users_projects')
+                    ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+                    ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                    ->where('users_projects.user_id', $user_id)
+                    ->where('projects.active', 1)
+                    ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.id AS customer_id',  'customers.name AS customer_name')
+                    ->get();
+            
+            $users_projects = [];
+            foreach ($projects_users_data as $project_in_user) {
+                
+                $bag_hour;
+                
+                if(DB::table('bag_hours')->where('project_id', $project_in_user->project_id)->exists()){
+                    $bag_hour = true;
+                }
+                else{
+                    $bag_hour = false;
+                }
+                
+                $users_projects[] = [
+                    'project_id' => $project_in_user->project_id,
+                    'project_name' => $project_in_user->project_name,
+                    'customer_id' => $project_in_user->customer_id,
+                    'customer_name' => $project_in_user->customer_name,
+                    'bag_hour' => $bag_hour,
+                ];
+                
+                
+            }
+            
+            $users_info[] = [
+                'user_id' => $user->user_id,
+                'user_projects' => $users_projects
+            ];
+        }
+        
+        
+        //Create the JSON of the relation of users and customers
+        $users_customers = [];
+        $users_with_projects = DB::table('users')
+                ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
+                ->distinct()->get(['users.id', 'users.nickname', 'users.name', 'users.surname', 'users.email', 'users.phone', 'users.role']);
+        
+        foreach ($users_with_projects as $user) {
+            
+            $users_customers_data =  DB::table('users_projects')
+                ->join('projects', 'users_projects.id', '=', 'projects.id')
+                ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
+                ->where('users_projects.user_id', $user->id)    
+                ->select('customers.id AS customer_id', 'customers.name AS customer_name')
+                ->get();
+                
+            $users_customers[] = [
+                'user_id' => $user->id,
+                'user_nickname' => $user->nickname,
+                'user_name' => $user->name,
+                'user_surname' => $user->surname,
+                'user_email' => $user->email,
+                'user_phone' =>  $user->phone,
+                'user_role' => $user->role,
+                'customers' => $users_customers_data,
+            ];
+        }
+
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 

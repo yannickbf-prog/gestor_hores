@@ -152,7 +152,7 @@ return [
     'hours_worked_successfully_recorded' => 'Horas trabajadas registradas con éxito',
     'entry_more' => 'Entrar mas',
     
-    'time_entries' => "Entradas de horas",
+    'time_entries' => "Entrada de horas",
     'time_entries_list' => "Lista de entradas de horas",
     "time_entry" => "Entrada de horas",
     'validated' => "Validada",
