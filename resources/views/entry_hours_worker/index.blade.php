@@ -194,6 +194,7 @@
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+            imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
@@ -330,6 +331,7 @@
         //Show hours
         let formGroup2 = document.createElement("div");
         formGroup2.setAttribute('class', 'form-group');
+        formGroup2.setAttribute('oninput', 'createCountOfHours()');
         let strongHours = document.createElement("strong");
         strongHours.innerText = "*{{ __('message.hours') }}: ";
         formGroup2.appendChild(strongHours);
@@ -363,6 +365,8 @@
 
         document.getElementById('timeEntriesForm').appendChild(buttonContainer);
 
+        //Create total count of hours
+        createCountOfHours();
     }
 
     addEntry(1);
