@@ -113,55 +113,68 @@
     var json_data = @json($json_data);
             console.log(json_data);
 
+    function showDescription(containerId) {
+        //Create task description
+        if (document.getElementById('descContainer' + containerId) != null) {
+            document.getElementById('descContainer' + containerId).remove();
+        }
+        let formGroup7 = document.createElement("div");
+        formGroup7.setAttribute('class', 'form-group');
+        formGroup7.setAttribute('id', 'descContainer' + containerId);
+        let strongDesc = document.createElement("strong");
+        strongDesc.innerText = "*{{ __('message.task_description') }}: ";
+        formGroup7.appendChild(strongDesc);
+        let inputDesc = document.createElement("input");
+        inputDesc.setAttribute('name', 'desc[]');
+        formGroup7.appendChild(inputDesc);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+    }
+
     function showHideImputedHours(containerId) {
 
         let projectId = document.getElementById("projects" + containerId).value;
         let customerId = document.getElementById('customers' + containerId).value;
-        
+
         let res = json_data.filter((item) => {
             return item.customer_id == customerId;
         });
         let projectsCustomer = res[0]['customer_projects'];
-        
-        
+
+
         let res2 = projectsCustomer.filter((item) => {
             return item.project_id == projectId;
         });
 
         let projectBagHourAvailable = res2[0]['projects_active'];
 
-        console.log(projectBagHourAvailable);
-
         if (projectBagHourAvailable) {
-            
-           
 
-//            let formGroup6 = document.createElement("div");
-//            formGroup6.setAttribute('class', 'form-group');
-//            formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
-//
-//            let strongImputedHours = document.createElement("strong");
-//            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-//            formGroup6.appendChild(strongImputedHours);
-//
-//            let imputedHoursHtml = document.createElement("input");
-//            imputedHoursHtml.setAttribute('type', 'number');
-//            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
-//
-//            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
-//                document.getElementById('inputedHoursContainer' + containerId).remove();
-//            }
-//
-//            formGroup6.appendChild(imputedHoursHtml);
-//            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
+            let formGroup6 = document.createElement("div");
+            formGroup6.setAttribute('class', 'form-group');
+            formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
+
+            let strongImputedHours = document.createElement("strong");
+            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            formGroup6.appendChild(strongImputedHours);
+
+            let imputedHoursHtml = document.createElement("input");
+            imputedHoursHtml.setAttribute('type', 'number');
+            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+
+            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+                document.getElementById('inputedHoursContainer' + containerId).remove();
+            }
+
+            formGroup6.appendChild(imputedHoursHtml);
+            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
 
         } else {
-//            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
-//                document.getElementById('inputedHoursContainer' + containerId).remove();
-//            }
+            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+                document.getElementById('inputedHoursContainer' + containerId).remove();
+            }
         }
 
-//        showDescription(containerId);
+        showDescription(containerId);
     }
 
     function showProjectsOfUserAndCustomer(containerId) {
