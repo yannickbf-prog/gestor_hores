@@ -122,7 +122,7 @@ class BagHourController extends Controller
         //BagHour::create($request->validated());
         
         DB::table('bag_hours')->insert([
-            'project_id' => $request->get("type_id"),
+            'project_id' => $request->get("project_id"),
             'type_id' => $request->get("type_id"),
             'contracted_hours' => $request->get("contracted_hours"),
             'total_price' => $request->get("total_price"),

@@ -47,7 +47,7 @@ class CreateBagHourRequest extends FormRequest {
 
         return [
             'type_id' => 'required|numeric',
-            'project_id' => 'required|numeric',
+            'project_id' => 'required|numeric|unique:bag_hours',
             'contracted_hours' => 'required|numeric|max:100000000',
             'total_price' => 'required|numeric|max:9999999',
         ];

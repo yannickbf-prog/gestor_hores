@@ -84,8 +84,8 @@
                             {{ __('message.confirm_validate') }}
                         </div>
                         <div class="modal-footer">
-                           <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                           <a class="btn btn-success" href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}">{{ __('message.validate') }}</a>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                            <a class="btn btn-success" href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}">{{ __('message.validate') }}</a>
                         </div>
                     </div>
                 </div>
@@ -108,8 +108,8 @@
                             {{ __('message.confirm_invalidate') }}
                         </div>
                         <div class="modal-footer">
-                           <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                           <a class="btn btn-success" href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}">{{ __('message.invalidate') }}</a>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                            <a class="btn btn-success" href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}">{{ __('message.invalidate') }}</a>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
 </div>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{ URL::asset('js/hour_bags_index.js') }}"></script>
+
 
 <script>
 
@@ -209,6 +209,30 @@
     console.log(users_info);
     console.log(users_customers);
     
+    var countActiveEntries = 0;
+
+    function createCountOfHours() {
+        alert("hello2");
+        
+//        let totalCountHtml = document.createElement("div");
+//        totalCountHtml.setAttribute('id', 'totalCount');
+//       
+//        let strongTotalcount = document.createElement("strong");
+//        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+//        
+//        for(let i = 0; i < document.getElementsByName('hours[]').length; i++){
+//            if(document.getElementsByName('hours[]')[i] == null) {
+//                alert("hello");
+//            }
+//        }
+        
+//        if (document.getElementById("submitContainer") != null)
+//            document.getElementById("submitContainer").remove();
+        
+        
+        //document.getElementById("submitContainer").before(var);
+    }
+
     function showDescription(containerId) {
         //Create task description
         if (document.getElementById('descContainer' + containerId) != null) {
@@ -257,20 +281,20 @@
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
-            
+
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
             }
 
             formGroup6.appendChild(imputedHoursHtml);
             document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
-            
+
         } else {
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
             }
         }
-        
+
         showDescription(containerId);
     }
 
@@ -352,11 +376,16 @@
     }
 
     function removeEntry(containerId) {
+        countActiveEntries--;
         document.getElementById("timeEntryContainer" + containerId).remove();
+
+        createCountOfHours(countActiveEntries);
     }
 
     var countEntries = 0;
     function addEntry(containerId) {
+
+        countActiveEntries++;
 
         countEntries++;
 
@@ -400,6 +429,7 @@
         //Show hours
         let formGroup2 = document.createElement("div");
         formGroup2.setAttribute('class', 'form-group');
+        formGroup2.setAttribute('onchange', 'createCountOfHours()');
         let strongHours = document.createElement("strong");
         strongHours.innerText = "*{{ __('message.hours') }}: ";
         formGroup2.appendChild(strongHours);
@@ -456,10 +486,13 @@
 
         document.getElementById('timeEntriesForm').appendChild(buttonContainer);
 
+        //Create total count of hours
+        createCountOfHours();
+
     }
 
     addEntry(1);
-    
-    </script>
+
+</script>
 @endsection
 
