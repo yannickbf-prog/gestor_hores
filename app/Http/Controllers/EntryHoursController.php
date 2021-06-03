@@ -23,7 +23,7 @@ class EntryHoursController extends Controller {
         $lang = setGetLang();
 
         $user_id = Auth::user()->getUserId();
-        
+
         $json_data = [];
 
         $user_customers_data = DB::table('users_projects')
@@ -32,16 +32,26 @@ class EntryHoursController extends Controller {
                 ->where('users_projects.user_id', $user_id)
                 ->select('customers.id AS customer_id', 'customers.name AS customer_name')
                 ->get();
-        
-        foreach($user_customers_data as $customer){
+
+        foreach ($user_customers_data as $customer) {
             $user_customer_projects = DB::table('users_projects')
-                ->join('projects', 'users_projects.project_id', '=', 'projects.id')
-                ->join('customers', 'projects.customer_id', '=', 'customers.id')
-                ->where('users_projects.user_id', $user_id)
-                ->where('customers.id', $customer->customer_id)
-                ->where('projects.active', 1)
-                ->select('projects.id AS project_id', 'projects.name AS project_name')
-                ->get();
+                    ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+                    ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                    ->where('users_projects.user_id', $user_id)
+                    ->where('customers.id', $customer->customer_id)
+                    ->where('projects.active', 1)
+                    ->select('projects.id AS project_id', 'projects.name AS project_name')
+                    ->get();
+
+//            $bag_hour;
+//
+//            if (DB::table('bag_hours')->where('project_id', $user_id)->exists()) {
+//                $bag_hour = true;
+//            } else {
+//                $bag_hour = false;
+//            }
+//            
+//            $user_customer_projects['projects_active'] = $bag_hour;
 
             $json_data[] = [
                 'customer_id' => $customer->customer_id,

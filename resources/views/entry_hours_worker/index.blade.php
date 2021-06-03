@@ -113,13 +113,65 @@
     var json_data = @json($json_data);
             console.log(json_data);
 
+    function showHideImputedHours(containerId) {
+
+        let projectId = document.getElementById("projects" + containerId).value;
+        let customerId = document.getElementById('customers' + containerId).value;
+        
+        let res = json_data.filter((item) => {
+            return item.customer_id == customerId;
+        });
+        let projectsCustomer = res[0]['customer_projects'];
+        
+        
+        let res2 = projectsCustomer.filter((item) => {
+            return item.project_id == projectId;
+        });
+
+        let projectBagHourAvailable = res2[0]['projects_active'];
+        projectBagHourAvailable = projectBagHourAvailable === 0 ? false : true;
+
+        console.log(projectBagHourAvailable);
+
+        if (projectBagHourAvailable) {
+            
+           
+
+//            let formGroup6 = document.createElement("div");
+//            formGroup6.setAttribute('class', 'form-group');
+//            formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
+//
+//            let strongImputedHours = document.createElement("strong");
+//            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+//            formGroup6.appendChild(strongImputedHours);
+//
+//            let imputedHoursHtml = document.createElement("input");
+//            imputedHoursHtml.setAttribute('type', 'number');
+//            imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+//
+//            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+//                document.getElementById('inputedHoursContainer' + containerId).remove();
+//            }
+//
+//            formGroup6.appendChild(imputedHoursHtml);
+//            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
+
+        } else {
+//            if (document.getElementById('inputedHoursContainer' + containerId) != null) {
+//                document.getElementById('inputedHoursContainer' + containerId).remove();
+//            }
+        }
+
+//        showDescription(containerId);
+    }
+
     function showProjectsOfUserAndCustomer(containerId) {
-        let formGroup5 = document.createElement("div");
-        formGroup5.setAttribute('class', 'form-group');
-        formGroup5.setAttribute('id', 'projectContainer' + containerId);
+        let formGroup4 = document.createElement("div");
+        formGroup4.setAttribute('class', 'form-group');
+        formGroup4.setAttribute('id', 'projectContainer' + containerId);
         let strongProject = document.createElement("strong");
         strongProject.innerText = "*{{ __('message.project') }}: ";
-        formGroup5.appendChild(strongProject);
+        formGroup4.appendChild(strongProject);
 
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
@@ -146,10 +198,10 @@
             document.getElementById('projectContainer' + containerId).remove();
         }
 
-        formGroup5.appendChild(projectSelectHtml);
-        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup5);
+        formGroup4.appendChild(projectSelectHtml);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup4);
 
-        //showHideImputedHours(containerId);
+        showHideImputedHours(containerId);
     }
 
     function showCustomersOfUser(containerId) {
