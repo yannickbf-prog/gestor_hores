@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 class EntryHoursController extends Controller {
 
@@ -59,43 +60,6 @@ class EntryHoursController extends Controller {
         }
 
         return view('entry_hours_worker.index', compact(['lang', 'json_data']));
-
-        /* $data = DB::table('users_projects')
-          ->join('projects', 'users_projects.project_id', '=', 'projects.id')
-          ->join('customers', 'projects.customer_id', '=', 'customers.id')
-          ->where('users_projects.user_id', $user_id)
-          ->select('projects.id AS project_id', 'projects.name AS project_name', 'customers.name AS customer_name')
-          ->get();
-
-          if ($request->has('_token')) {
-
-          echo "<script>";
-          echo "window.onload = function () {";
-          echo "document.getElementById('secondForm').classList.remove('invisible')";
-          echo "};";
-          echo "</script>";
-
-          $project_id = $request['projects'];
-
-          $customer_name = DB::table('customers')
-          ->join('projects', 'customers.id', '=', 'projects.customer_id')
-          ->where('projects.id', $project_id)
-          ->select('customers.name AS customer_name')
-          ->first();
-
-          $bag_hours = DB::table('projects')
-          ->join('bag_hours', 'projects.id', '=', 'bag_hours.project_id')
-          ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
-          ->where('projects.id', $project_id)
-          ->select('type_bag_hours.name AS type_bag_hour_name', 'bag_hours.id AS bag_hour_id', 'projects.name AS project_name')
-          ->get();
-
-          return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project_id', 'customer_name']));
-          }
-          $bag_hours = [];
-          $project_id = "";
-          $customer_name = "";
-          return view('entry_hours_worker.index', compact(['lang', 'data', 'bag_hours', 'user_id', 'project_id', 'customer_name'])); */
     }
 
     /**
@@ -114,25 +78,47 @@ class EntryHoursController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $user_project_id = DB::table('users_projects')
-                ->where('user_id', $request['user_id'])
-                ->where('project_id', $request['project_id'])
-                ->select('id')
-                ->first();
-
-        $bag_hour_id = $request['bag_hour_in_project'];
-
-        $hours = $request['hours_worked'];
-
-        DB::table('hours_entry')->insert([
-            'user_project_id' => $user_project_id->id,
-            'bag_hours_id' => $bag_hour_id,
-            'hours' => $hours,
-            'validate' => 0,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
+        
+        $inputed_hours_index = 0;
+        for ($i = 0; $i < count($request->days); $i++) {
+            $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
+            $hours = $request->hours[$i];
+            $user = Auth::user()->getUserId();
+            $customer = $request->customers[$i];
+            $project = $request->projects[$i];
+            $description = $request->desc[$i];
+            
+            $user_project_id = DB::table('users_projects')
+                    ->where('user_id', $user)
+                    ->where('project_id', $project)
+                    ->select('id')
+                    ->get();
+            
+            $bag_hour_id;
+            $inputed_hours;
+            if(DB::table('bag_hours')->where('project_id', $project)->select('id')->exists()){
+                $bag_hour_id = DB::table('bag_hours')->where('project_id', $project)->select('id')->get()[0]->id;
+                $inputed_hours = $request->inputed_hours[$inputed_hours_index];
+                $inputed_hours_index++;
+            }
+            else{
+                $bag_hour_id = NULL;
+                $inputed_hours = $request->hours[$i];
+            }
+            
+            DB::table('hours_entry')->insert([
+                'user_project_id' => $user_project_id[0]->id,
+                'bag_hours_id' => $bag_hour_id,
+                'day' => $day,
+                'hours' => $hours,
+                'hours_imputed' => $inputed_hours,
+                'description' => $description,
+                'validate' => 1,
+                'created_at' => now(),
+                'updated_at' => now(), 
+            ]);
+        }
+        
         $lang = setGetLang();
 
         return view('entry_hours_worker.success', compact('lang'));

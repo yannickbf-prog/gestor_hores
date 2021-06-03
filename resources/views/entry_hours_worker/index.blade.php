@@ -29,7 +29,7 @@
     <strong>{{__('message.fields_are_required')}}</strong>
 </div>
 
-<form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
+<form action="{{ route($lang.'_entry_hours.store') }}" method="POST" id="timeEntriesForm">
     @csrf
 
 </form>
@@ -314,6 +314,21 @@
         }
 
         showCustomersOfUser(countEntries);
+        
+        //Create submit button
+        if (document.getElementById("submitContainer") != null)
+            document.getElementById("submitContainer").remove();
+        let buttonContainer = document.createElement("div");
+        buttonContainer.setAttribute('class', 'form-group');
+        buttonContainer.setAttribute('id', 'submitContainer');
+        let submitHtml = document.createElement("button");
+        submitHtml.innerText = "{{ __('message.save') }}";
+        submitHtml.setAttribute('type', 'submit');
+        submitHtml.setAttribute('class', 'btn btn-primary');
+        buttonContainer.appendChild(submitHtml);
+
+        document.getElementById('timeEntriesForm').appendChild(buttonContainer);
+
     }
 
     addEntry(1);

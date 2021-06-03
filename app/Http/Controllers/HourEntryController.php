@@ -157,6 +157,8 @@ class HourEntryController extends Controller {
         
         $request->validated();
         
+        $inputed_hours_index = 0;
+        
         for ($i = 0; $i < count($request->days); $i++) {
             $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
             $hours = $request->hours[$i];
@@ -173,7 +175,7 @@ class HourEntryController extends Controller {
             
             $bag_hour_id;
             $inputed_hours;
-            $inputed_hours_index = 0;
+            
             if(DB::table('bag_hours')->where('project_id', $project)->select('id')->exists()){
                 $bag_hour_id = DB::table('bag_hours')->where('project_id', $project)->select('id')->get()[0]->id;
                 $inputed_hours = $request->inputed_hours[$inputed_hours_index];
