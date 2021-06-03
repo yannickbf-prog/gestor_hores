@@ -212,7 +212,7 @@
     var countActiveEntries = 0;
 
     function createCountOfHours() {
-
+        
         let totalCountHtml = document.createElement("div");
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
@@ -222,15 +222,18 @@
 
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByName('hours[]').length; i++) {
-            if (document.getElementsByName('inputed_hours[]')[i] == null) {
-                
-                totalCount += parseInt(document.getElementsByName('hours[]')[i].value);
+            if (document.getElementsByName('inputed_hours[]')[i] == null) {                
+                if(Number.isInteger(parseInt(document.getElementsByName('hours[]')[i].value))){
+                    totalCount += parseInt(document.getElementsByName('hours[]')[i].value);
+                }
             } else {
-                totalCount += parseInt(document.getElementsByName('inputed_hours[]')[i].value);
+                if(Number.isInteger(parseInt(document.getElementsByName('inputed_hours[]')[i].value))){
+                    totalCount += parseInt(document.getElementsByName('inputed_hours[]')[i].value);
+                }
             }
         }
 
-        strongTotalcount.innerText += totalCount;
+        strongTotalcount.innerText += totalCount+"h";
         
         totalCountHtml.appendChild(strongTotalcount);
         
@@ -286,6 +289,7 @@
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+            imputedHoursHtml.setAttribute('onchange', 'createCountOfHours()');
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
