@@ -118,16 +118,16 @@
         if (document.getElementById('descContainer' + containerId) != null) {
             document.getElementById('descContainer' + containerId).remove();
         }
-        let formGroup7 = document.createElement("div");
-        formGroup7.setAttribute('class', 'form-group');
-        formGroup7.setAttribute('id', 'descContainer' + containerId);
+        let formGroup6 = document.createElement("div");
+        formGroup6.setAttribute('class', 'form-group');
+        formGroup6.setAttribute('id', 'descContainer' + containerId);
         let strongDesc = document.createElement("strong");
         strongDesc.innerText = "*{{ __('message.task_description') }}: ";
-        formGroup7.appendChild(strongDesc);
+        formGroup6.appendChild(strongDesc);
         let inputDesc = document.createElement("input");
         inputDesc.setAttribute('name', 'desc[]');
-        formGroup7.appendChild(inputDesc);
-        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+        formGroup6.appendChild(inputDesc);
+        document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
     }
 
     function showHideImputedHours(containerId) {
@@ -149,13 +149,13 @@
 
         if (projectBagHourAvailable) {
 
-            let formGroup6 = document.createElement("div");
-            formGroup6.setAttribute('class', 'form-group');
-            formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
+            let formGroup5 = document.createElement("div");
+            formGroup5.setAttribute('class', 'form-group');
+            formGroup5.setAttribute('id', 'inputedHoursContainer' + containerId);
 
             let strongImputedHours = document.createElement("strong");
             strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-            formGroup6.appendChild(strongImputedHours);
+            formGroup5.appendChild(strongImputedHours);
 
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
@@ -165,8 +165,8 @@
                 document.getElementById('inputedHoursContainer' + containerId).remove();
             }
 
-            formGroup6.appendChild(imputedHoursHtml);
-            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
+            formGroup5.appendChild(imputedHoursHtml);
+            document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup5);
 
         } else {
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
