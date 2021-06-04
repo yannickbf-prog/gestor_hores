@@ -239,8 +239,9 @@
         
         totalCountHtml.appendChild(strongTotalcount);
         
-        document.getElementById('submitContainer').before(totalCountHtml);
+        document.getElementById('timeEntriesForm').lastChild.appendChild(totalCountHtml);
         
+               
     }
 
     function showDescription(containerId) {
@@ -258,6 +259,9 @@
         inputDesc.setAttribute('name', 'desc[]');
         formGroup7.appendChild(inputDesc);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+        
+        //Create total count of hours
+        createCountOfHours();
     }
 
     function showHideImputedHours(containerId) {
@@ -493,9 +497,6 @@
         buttonContainer.appendChild(submitHtml);
 
         document.getElementById('timeEntriesForm').appendChild(buttonContainer);
-
-        //Create total count of hours
-        createCountOfHours();
 
     }
 
