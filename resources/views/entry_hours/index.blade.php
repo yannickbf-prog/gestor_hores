@@ -207,8 +207,7 @@
     var users_info = @json($users_info);
             var users_customers = @json($users_customers);
     console.log(users_info);
-    console.log(users_customers);
-
+   
     function createCountOfHours() {
         
         let totalCountHtml = document.createElement("div");
@@ -275,6 +274,7 @@
 
         let userProjects = res[0]['user_projects'];
         console.log(userProjects);
+        console.log(projectId);
 
         let res2 = userProjects.filter((item) => {
             return item.project_id == projectId;
