@@ -211,10 +211,6 @@
 
     function createCountOfHours() {
         
-        if (document.getElementById('totalCount') != null) {
-            document.getElementById('totalCount').remove();
-        }
-        
         let totalCountHtml = document.createElement("div");
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
@@ -239,9 +235,13 @@
         
         totalCountHtml.appendChild(strongTotalcount);
         
-        document.getElementById('timeEntriesForm').lastChild.appendChild(totalCountHtml);
-        
-               
+        if(document.getElementById('totalCount') == null){
+            document.getElementById('timeEntriesForm').lastChild.appendChild(totalCountHtml);
+        }
+        else{            
+            document.getElementById('totalCount').remove();
+            document.getElementById('submitContainer').before(totalCountHtml);
+        }
     }
 
     function showDescription(containerId) {
@@ -497,6 +497,8 @@
         buttonContainer.appendChild(submitHtml);
 
         document.getElementById('timeEntriesForm').appendChild(buttonContainer);
+        
+        createCountOfHours();
 
     }
 
