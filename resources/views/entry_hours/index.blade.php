@@ -217,8 +217,11 @@
         let strongTotalcount = document.createElement("strong");
         strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
 
+        let timeEntriesFormChildrens = document.getElementById('timeEntriesForm').children;
+        console.log(timeEntriesFormChildrens[0]);
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByName('hours[]').length; i++) {
+            
             if (document.getElementsByName('inputed_hours[]')[i] == null) {                
                 if(Number.isInteger(parseInt(document.getElementsByName('hours[]')[i].value))){
                     totalCount += parseInt(document.getElementsByName('hours[]')[i].value);
@@ -393,7 +396,7 @@
     function removeEntry(containerId) {
         document.getElementById("timeEntryContainer" + containerId).remove();
 
-        createCountOfHours(countActiveEntries);
+        createCountOfHours();
     }
 
     var countEntries = 0;
@@ -403,6 +406,7 @@
 
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
+        entryContainerHtml.setAttribute('class', 'time_entry_container');
 
         //Show add/remove buttons
         //Create buttons container
