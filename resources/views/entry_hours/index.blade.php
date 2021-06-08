@@ -216,19 +216,28 @@
 
         let strongTotalcount = document.createElement("strong");
         strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+        
+        
 
-        let timeEntriesFormChildrens = document.getElementById('timeEntriesForm').children;
-        console.log(timeEntriesFormChildrens[0]);
+//        let timeEntriesFormChildrens = document.getElementById('timeEntriesForm').children;
+//        console.log(timeEntriesFormChildrens[0]);
+
+        console.log(document.getElementsByClassName('time_entry_container')[0].getElementsByClassName('hours')[0]);
+        
+//        let timeEntryContainers = document.querySelectorAll('.time_entry_container');
+//        for (let i = 0; i < timeEntryContainers.length; i++) {
+//            console.log(timeEntryContainers.getElementsByClassName("hello"));
+//        }
         let totalCount = 0;
-        for (let i = 0; i < document.getElementsByName('hours[]').length; i++) {
+        for (let i = 0; i < document.getElementsByClassName('time_entry_container').length; i++) {
             
-            if (document.getElementsByName('inputed_hours[]')[i] == null) {                
-                if(Number.isInteger(parseInt(document.getElementsByName('hours[]')[i].value))){
-                    totalCount += parseInt(document.getElementsByName('hours[]')[i].value);
+            if (document.getElementsByClassName('time_entry_container')[i].getElementsByClassName('inputed_hours')[0] == null) {                
+                if(Number.isInteger(parseInt(document.getElementsByClassName('time_entry_container')[i].getElementsByClassName('hours')[0].value))){
+                    totalCount += parseInt(document.getElementsByClassName('time_entry_container')[i].getElementsByClassName('hours')[0].value);
                 }
             } else {
-                if(Number.isInteger(parseInt(document.getElementsByName('inputed_hours[]')[i].value))){
-                    totalCount += parseInt(document.getElementsByName('inputed_hours[]')[i].value);
+                if(Number.isInteger(parseInt(document.getElementsByClassName('time_entry_container')[i].getElementsByClassName('inputed_hours')[0].value))){
+                    totalCount += parseInt(document.getElementsByClassName('time_entry_container')[i].getElementsByClassName('inputed_hours')[0].value);
                 }
             }
         }
@@ -298,6 +307,7 @@
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+            imputedHoursHtml.setAttribute('class', 'inputed_hours');
             imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
@@ -452,6 +462,7 @@
         let inputHours = document.createElement("input");
         inputHours.setAttribute('name', 'hours[]');
         inputHours.setAttribute('type', 'number');
+        inputHours.setAttribute('class', 'hours');
 
         formGroup2.appendChild(inputHours);
         entryContainerHtml.appendChild(formGroup2);
