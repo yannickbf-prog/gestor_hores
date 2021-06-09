@@ -128,6 +128,7 @@
 @section('js')
 
 
+
 <script>
 
 
@@ -211,8 +212,8 @@
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
 
-        let spanTotalcount = document.createElement("span");
-        spanTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+        let labelTotalcount = document.createElement("label");
+        labelTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
 
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByClassName('time_entry_container').length; i++) {
@@ -228,9 +229,9 @@
             }
         }
 
-        spanTotalcount.innerText += totalCount+"h";
+        labelTotalcount.innerText += totalCount+"h";
         
-        totalCountHtml.appendChild(spanTotalcount);
+        totalCountHtml.appendChild(labelTotalcount);
         
         if(document.getElementById('totalCount') == null){
             document.getElementById('timeEntriesForm').lastChild.appendChild(totalCountHtml);
@@ -249,9 +250,9 @@
         let formGroup7 = document.createElement("div");
         formGroup7.setAttribute('class', 'form-group');
         formGroup7.setAttribute('id', 'descContainer' + containerId);
-        let spanDesc = document.createElement("span");
-        spanDesc.innerText = "*{{ __('message.task_description') }}: ";
-        formGroup7.appendChild(spanDesc);
+        let labelDesc = document.createElement("label");
+        labelDesc.innerText = "*{{ __('message.task_description') }}: ";
+        formGroup7.appendChild(labelDesc);
         let inputDesc = document.createElement("input");
         inputDesc.setAttribute('name', 'desc[]');
         formGroup7.appendChild(inputDesc);
@@ -284,9 +285,9 @@
             formGroup6.setAttribute('class', 'form-group');
             formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
-            let spanImputedHours = document.createElement("span");
-            spanImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-            formGroup6.appendChild(spanImputedHours);
+            let labelImputedHours = document.createElement("label");
+            labelImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            formGroup6.appendChild(labelImputedHours);
 
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
@@ -314,9 +315,9 @@
         let formGroup5 = document.createElement("div");
         formGroup5.setAttribute('class', 'form-group');
         formGroup5.setAttribute('id', 'projectContainer' + containerId);
-        let spanProject = document.createElement("span");
-        spanProject.innerText = "*{{ __('message.project') }}: ";
-        formGroup5.appendChild(spanProject);
+        let labelProject = document.createElement("label");
+        labelProject.innerText = "*{{ __('message.project') }}: ";
+        formGroup5.appendChild(labelProject);
 
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
@@ -354,9 +355,9 @@
         let formGroup4 = document.createElement("div");
         formGroup4.setAttribute('class', 'form-group');
         formGroup4.setAttribute('id', 'customerContainer' + containerId);
-        let spanCustomer = document.createElement("span");
-        spanCustomer.innerText = "*{{ __('message.customer') }}: ";
-        formGroup4.appendChild(spanCustomer);
+        let labelCustomer = document.createElement("label");
+        labelCustomer.innerText = "*{{ __('message.customer') }}: ";
+        formGroup4.appendChild(labelCustomer);
 
         //Create the select of customers
         let customerSelectHtml = document.createElement("select");
@@ -428,9 +429,9 @@
         let formGroup1 = document.createElement("div");
         formGroup1.setAttribute('class', 'form-group');
         formGroup1.setAttribute('class', 'col-12');
-        let spanDay = document.createElement("span");
-        spanDay.innerText = "*{{ __('message.day') }}: ";
-        formGroup1.appendChild(spanDay);
+        let labelDay = document.createElement("label");
+        labelDay.innerText = "*{{ __('message.day') }}: ";
+        formGroup1.appendChild(labelDay);
         let inputDay = document.createElement("input");
         inputDay.setAttribute('name', 'days[]');
         inputDay.setAttribute('class', 'form-control');
@@ -444,9 +445,9 @@
         let formGroup2 = document.createElement("div");
         formGroup2.setAttribute('class', 'form-group');
         formGroup2.setAttribute('oninput', 'createCountOfHours()');
-        let spanHours = document.createElement("span");
-        spanHours.innerText = "*{{ __('message.hours') }}: ";
-        formGroup2.appendChild(spanHours);
+        let labelHours = document.createElement("label");
+        labelHours.innerText = "*{{ __('message.hours') }}: ";
+        formGroup2.appendChild(labelHours);
         let inputHours = document.createElement("input");
         inputHours.setAttribute('name', 'hours[]');
         inputHours.setAttribute('type', 'number');
@@ -458,9 +459,9 @@
         //Select users
         let formGroup3 = document.createElement("div");
         formGroup3.setAttribute('class', 'form-group');
-        let spanUser = document.createElement("span");
-        spanUser.innerText = "*{{ __('message.user') }}: ";
-        formGroup3.appendChild(spanUser);
+        let labelUser = document.createElement("label");
+        labelUser.innerText = "*{{ __('message.user') }}: ";
+        formGroup3.appendChild(labelUser);
 
         let userSelectHtml = document.createElement("select");
         userSelectHtml.setAttribute('id', 'users' + countEntries);
