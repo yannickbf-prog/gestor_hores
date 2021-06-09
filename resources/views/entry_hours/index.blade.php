@@ -24,21 +24,19 @@
 </div>
 @endif
 
-<div class="alert alert-info mt-2">
-    <strong>{{__('message.fields_are_required')}}</strong>
-</div>
-
-<form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
-    @csrf
-
-</form>
-
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>{{ __('message.time_entries') }}</h2>
         </div>
     </div>
+</div>
+<div class="mt-2 bg-primary" id="timeEntriesFormContainer">
+    <strong>{{__('message.fields_are_required')}}</strong>
+    <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
+        @csrf
+
+    </form>
 </div>
 
 <table class="table table-bordered">
@@ -205,8 +203,7 @@
 
     //Get the object from json
     var users_info = @json($users_info);
-            var users_customers = @json($users_customers);
-    console.log(users_info);
+    var users_customers = @json($users_customers);
    
     function createCountOfHours() {
         
@@ -214,20 +211,9 @@
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
 
-        let strongTotalcount = document.createElement("strong");
-        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
-        
-        
+        let spanTotalcount = document.createElement("span");
+        spanTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
 
-//        let timeEntriesFormChildrens = document.getElementById('timeEntriesForm').children;
-//        console.log(timeEntriesFormChildrens[0]);
-
-        console.log(document.getElementsByClassName('time_entry_container')[0].getElementsByClassName('hours')[0]);
-        
-//        let timeEntryContainers = document.querySelectorAll('.time_entry_container');
-//        for (let i = 0; i < timeEntryContainers.length; i++) {
-//            console.log(timeEntryContainers.getElementsByClassName("hello"));
-//        }
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByClassName('time_entry_container').length; i++) {
             
@@ -242,9 +228,9 @@
             }
         }
 
-        strongTotalcount.innerText += totalCount+"h";
+        spanTotalcount.innerText += totalCount+"h";
         
-        totalCountHtml.appendChild(strongTotalcount);
+        totalCountHtml.appendChild(spanTotalcount);
         
         if(document.getElementById('totalCount') == null){
             document.getElementById('timeEntriesForm').lastChild.appendChild(totalCountHtml);
@@ -263,9 +249,9 @@
         let formGroup7 = document.createElement("div");
         formGroup7.setAttribute('class', 'form-group');
         formGroup7.setAttribute('id', 'descContainer' + containerId);
-        let strongDesc = document.createElement("strong");
-        strongDesc.innerText = "*{{ __('message.task_description') }}: ";
-        formGroup7.appendChild(strongDesc);
+        let spanDesc = document.createElement("span");
+        spanDesc.innerText = "*{{ __('message.task_description') }}: ";
+        formGroup7.appendChild(spanDesc);
         let inputDesc = document.createElement("input");
         inputDesc.setAttribute('name', 'desc[]');
         formGroup7.appendChild(inputDesc);
@@ -285,8 +271,6 @@
         });
 
         let userProjects = res[0]['user_projects'];
-        console.log(userProjects);
-        console.log(projectId);
 
         let res2 = userProjects.filter((item) => {
             return item.project_id == projectId;
@@ -300,9 +284,9 @@
             formGroup6.setAttribute('class', 'form-group');
             formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
-            let strongImputedHours = document.createElement("strong");
-            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-            formGroup6.appendChild(strongImputedHours);
+            let spanImputedHours = document.createElement("span");
+            spanImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            formGroup6.appendChild(spanImputedHours);
 
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
@@ -330,9 +314,9 @@
         let formGroup5 = document.createElement("div");
         formGroup5.setAttribute('class', 'form-group');
         formGroup5.setAttribute('id', 'projectContainer' + containerId);
-        let strongProject = document.createElement("strong");
-        strongProject.innerText = "*{{ __('message.project') }}: ";
-        formGroup5.appendChild(strongProject);
+        let spanProject = document.createElement("span");
+        spanProject.innerText = "*{{ __('message.project') }}: ";
+        formGroup5.appendChild(spanProject);
 
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
@@ -370,9 +354,9 @@
         let formGroup4 = document.createElement("div");
         formGroup4.setAttribute('class', 'form-group');
         formGroup4.setAttribute('id', 'customerContainer' + containerId);
-        let strongCustomer = document.createElement("strong");
-        strongCustomer.innerText = "*{{ __('message.customer') }}: ";
-        formGroup4.appendChild(strongCustomer);
+        let spanCustomer = document.createElement("span");
+        spanCustomer.innerText = "*{{ __('message.customer') }}: ";
+        formGroup4.appendChild(spanCustomer);
 
         //Create the select of customers
         let customerSelectHtml = document.createElement("select");
@@ -417,10 +401,12 @@
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
         entryContainerHtml.setAttribute('class', 'time_entry_container');
+        entryContainerHtml.setAttribute('class', 'row');
 
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
+        agregateButtonsContainer.setAttribute('class', 'order-10');
 
         //Plus button
         let plusButton = document.createElement("a");
@@ -441,24 +427,26 @@
         //Show day with datepiker
         let formGroup1 = document.createElement("div");
         formGroup1.setAttribute('class', 'form-group');
-        let strongDay = document.createElement("strong");
-        strongDay.innerText = "*{{ __('message.day') }}: ";
-        formGroup1.appendChild(strongDay);
+        formGroup1.setAttribute('class', 'col-12');
+        let spanDay = document.createElement("span");
+        spanDay.innerText = "*{{ __('message.day') }}: ";
+        formGroup1.appendChild(spanDay);
         let inputDay = document.createElement("input");
         inputDay.setAttribute('name', 'days[]');
+        inputDay.setAttribute('class', 'form-control');
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
 
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
-
+        
         //Show hours
         let formGroup2 = document.createElement("div");
         formGroup2.setAttribute('class', 'form-group');
         formGroup2.setAttribute('oninput', 'createCountOfHours()');
-        let strongHours = document.createElement("strong");
-        strongHours.innerText = "*{{ __('message.hours') }}: ";
-        formGroup2.appendChild(strongHours);
+        let spanHours = document.createElement("span");
+        spanHours.innerText = "*{{ __('message.hours') }}: ";
+        formGroup2.appendChild(spanHours);
         let inputHours = document.createElement("input");
         inputHours.setAttribute('name', 'hours[]');
         inputHours.setAttribute('type', 'number');
@@ -470,9 +458,9 @@
         //Select users
         let formGroup3 = document.createElement("div");
         formGroup3.setAttribute('class', 'form-group');
-        let strongUser = document.createElement("strong");
-        strongUser.innerText = "*{{ __('message.user') }}: ";
-        formGroup3.appendChild(strongUser);
+        let spanUser = document.createElement("span");
+        spanUser.innerText = "*{{ __('message.user') }}: ";
+        formGroup3.appendChild(spanUser);
 
         let userSelectHtml = document.createElement("select");
         userSelectHtml.setAttribute('id', 'users' + countEntries);

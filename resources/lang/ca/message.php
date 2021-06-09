@@ -157,5 +157,12 @@ return [
     'time_entries_list' => "Llista d'entrades d'hores",
     "time_entry" => "Entrada d'hores",
     'validated' => "Validada",
-    'invalidated' => 'Invalidada'
+    'invalidated' => 'Invalidada',
+    
+    'day' => 'Dia',
+    'inputed_hours' => 'Hores imputades',
+    'task_description' => 'Descripció tasca',
+    'hour_count' => 'Total hores',
+    'save' => 'Guardar',
+    
 ];

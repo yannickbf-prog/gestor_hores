@@ -156,5 +156,11 @@ return [
     'time_entries_list' => "Lista de entradas de horas",
     "time_entry" => "Entrada de horas",
     'validated' => "Validada",
-    'invalidated' => 'Invalidada'
+    'invalidated' => 'Invalidada',
+    
+    'day' => 'Día',
+    'inputed_hours' => 'Horas imputadas',
+    'task_description' => 'Descripción tarea',
+    'hour_count' => 'Total horas',
+    'save' => 'Guardar',
 ];

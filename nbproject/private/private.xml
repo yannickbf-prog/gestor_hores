@@ -17,6 +17,7 @@
             <file>file:/var/www/gestor_hores/resources/views/entry_hours/create.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/views/entry_hours_worker/index.blade.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/layout.blade.php</file>
         </group>
     </open-files>
 </project-private>

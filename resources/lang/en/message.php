@@ -157,5 +157,11 @@ return [
     'time_entries_list' => "Time enrtries list",
     "time_entry" => "Time entry",
     'validated' => "Validated",
-    'invalidated' => 'Invalidted'
+    'invalidated' => 'Invalidted',
+    
+    'day' => 'Day',
+    'inputed_hours' => 'Hours charged',
+    'task_description' => 'Task description',
+    'hour_count' => 'Total hours',
+    'save' => 'Save',
 ];

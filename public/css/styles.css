@@ -1,55 +1,59 @@
- #app{
-                width: 95%;
-                margin: auto;
-            }
+#app{
+    width: 95%;
+    margin: auto;
+}
 
-            svg{
-                width: 20px;
-                height: 20px;
-            }
+svg{
+    width: 20px;
+    height: 20px;
+}
 
-            #paginationContainer > nav{
-                display: flex;
-                justify-content: space-between;
-            }
+#paginationContainer > nav{
+    display: flex;
+    justify-content: space-between;
+}
 
-            #paginationContainer > nav > div{
-                width: 50%;
-            }
+#paginationContainer > nav > div{
+    width: 50%;
+}
 
-            #paginationContainer > nav > div:nth-child(2){
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-            }
+#paginationContainer > nav > div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 
-            #paginationContainer > nav > div:nth-child(2) > div:first-child{
-                order: 2;
-                margin-top: 10px;
-            }
+#paginationContainer > nav > div:nth-child(2) > div:first-child{
+    order: 2;
+    margin-top: 10px;
+}
 
-            #datePopover{
-                opacity: 0;
-                transition: opacity .3s;
-            }
+#datePopover{
+    opacity: 0;
+    transition: opacity .3s;
+}
 
-            .alert-success{
-                display: none;
-            }
+.alert-success{
+    display: none;
+}
 
-            .logo {
-                max-width: 350px;
-                max-height: 150px;
-            }
-            
-			
-			
-			 thead::after{
-                content: '';
-                width: 100%;
-                height: 2px;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                background: black;
-			}
+.logo {
+    max-width: 350px;
+    max-height: 150px;
+}
+
+
+
+thead::after{
+    content: '';
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: black;
+}
+
+#timeEntriesFormContainer span {
+    display: inherit;
+}
