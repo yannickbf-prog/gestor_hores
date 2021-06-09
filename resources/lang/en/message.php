@@ -29,7 +29,7 @@ return [
     'bag_hour_type' => "Type of hour bag",
     'project_name' => 'Project name',
     'customer_name' => 'Customer name',
-    'hours' => 'Hours',
+    'hours' => 'Nº of hours',
     'creation_day' => 'Creation day',
     'validate' => 'Validate',
     'invalidate' => 'Invalidate',

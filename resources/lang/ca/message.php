@@ -30,7 +30,7 @@ return [
     'bag_hour_type' => "Tipus de bosssa d'hores",
     'project_name' => 'Nom del projecte',
     'customer_name' => 'Nom del client',
-    'hours' => 'Hores',
+    'hours' => 'Nº hores',
     'creation_day' => 'Data de creació',
     'validate' => 'Validar',
     'invalidate' => 'Invalidar',

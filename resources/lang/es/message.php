@@ -30,7 +30,7 @@ return [
     'bag_hour_type' => "Tipo de bolsa de horas",
     'project_name' => 'Nombre del proyecto',
     'customer_name' => 'Nombre del cliente',
-    'hours' => 'Horas',
+    'hours' => 'Nº de horas',
     'creation_day' => 'Fecha de creación',
     'validate' => 'Validar',
     'invalidate' => 'Invalidar',

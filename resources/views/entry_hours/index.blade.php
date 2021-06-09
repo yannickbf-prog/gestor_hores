@@ -354,16 +354,20 @@
     function showCustomersOfUser(containerId) {
         let formGroup4 = document.createElement("div");
         formGroup4.setAttribute('class', 'form-group');
+        formGroup4.setAttribute('class', 'col-12');
         formGroup4.setAttribute('id', 'customerContainer' + containerId);
         let labelCustomer = document.createElement("label");
         labelCustomer.innerText = "*{{ __('message.customer') }}: ";
+        labelCustomer.setAttribute('for', 'customers' + containerId);
         formGroup4.appendChild(labelCustomer);
+        
 
         //Create the select of customers
         let customerSelectHtml = document.createElement("select");
         customerSelectHtml.name = "customers[]";
         customerSelectHtml.setAttribute('id', 'customers' + containerId);
         customerSelectHtml.setAttribute('onchange', 'showProjectsOfUserAndCustomer(' + containerId + ')');
+        customerSelectHtml.setAttribute('class', 'form-control');
 
         let userId = document.getElementById('users' + containerId).value;
         let res = users_customers.filter((item) => {
@@ -428,15 +432,17 @@
         //Show day with datepiker
         let formGroup1 = document.createElement("div");
         formGroup1.setAttribute('class', 'form-group');
-        formGroup1.setAttribute('class', 'col-12');
+        formGroup1.setAttribute('class', 'col-6');
         let labelDay = document.createElement("label");
         labelDay.innerText = "*{{ __('message.day') }}: ";
+        labelDay.setAttribute('for', 'dp' + countEntries);
         formGroup1.appendChild(labelDay);
         let inputDay = document.createElement("input");
         inputDay.setAttribute('name', 'days[]');
         inputDay.setAttribute('class', 'form-control');
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
+        inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
 
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
@@ -444,14 +450,19 @@
         //Show hours
         let formGroup2 = document.createElement("div");
         formGroup2.setAttribute('class', 'form-group');
+        formGroup2.setAttribute('class', 'col-6');
         formGroup2.setAttribute('oninput', 'createCountOfHours()');
         let labelHours = document.createElement("label");
+        labelHours.setAttribute('for', 'hours' + countEntries);
         labelHours.innerText = "*{{ __('message.hours') }}: ";
         formGroup2.appendChild(labelHours);
         let inputHours = document.createElement("input");
+        inputHours.setAttribute('id', 'hours' + countEntries)
         inputHours.setAttribute('name', 'hours[]');
         inputHours.setAttribute('type', 'number');
         inputHours.setAttribute('class', 'hours');
+        inputHours.setAttribute('class', 'form-control');
+        inputHours.setAttribute('placeholder', "*{{ __('message.hours') }}: ");
 
         formGroup2.appendChild(inputHours);
         entryContainerHtml.appendChild(formGroup2);
@@ -459,7 +470,9 @@
         //Select users
         let formGroup3 = document.createElement("div");
         formGroup3.setAttribute('class', 'form-group');
+        formGroup3.setAttribute('class', 'col-12');
         let labelUser = document.createElement("label");
+        labelUser.setAttribute('for', 'users' + countEntries);
         labelUser.innerText = "*{{ __('message.user') }}: ";
         formGroup3.appendChild(labelUser);
 
@@ -467,6 +480,7 @@
         userSelectHtml.setAttribute('id', 'users' + countEntries);
         userSelectHtml.setAttribute('name', 'users[]');
         userSelectHtml.setAttribute('onchange', 'showCustomersOfUser(' + countEntries + ')');
+        userSelectHtml.setAttribute('class', 'form-control');
         if (users_customers.length > 0) {
             for (user of users_customers) {
                 let option = document.createElement("option");
