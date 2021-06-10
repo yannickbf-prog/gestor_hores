@@ -205,6 +205,7 @@
     //Get the object from json
     var users_info = @json($users_info);
     var users_customers = @json($users_customers);
+        
    
     function createCountOfHours() {
         
@@ -410,7 +411,7 @@
 
     var countEntries = 0;
     function addEntry(containerId) {
-
+        
         countEntries++;
 
         let entryContainerHtml = document.createElement("div");
@@ -426,7 +427,7 @@
         //Plus button
         let plusButton = document.createElement("a");
         plusButton.innerText = '+';
-        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
+        plusButton.setAttribute('class', "btn btn-outline-success btn-sm clickme")
         plusButton.setAttribute('onclick', 'addEntry(' + countEntries + ')');
         agregateButtonsContainer.appendChild(plusButton);
 
@@ -527,8 +528,10 @@
     }
 
     addEntry(1);
-
-
+    
+    $( ".clickme" ).click(function() {
+        $('#timeEntryContainer2').slideDown(600);
+    });
 
 </script>
 @endsection
