@@ -212,8 +212,8 @@
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
 
-        let labelTotalcount = document.createElement("label");
-        labelTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+        let strongTotalcount = document.createElement("strong");
+        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
 
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByClassName('time_entry_container').length; i++) {
@@ -229,9 +229,9 @@
             }
         }
 
-        labelTotalcount.innerText += totalCount+"h";
+        strongTotalcount.innerText += totalCount+"h";
         
-        totalCountHtml.appendChild(labelTotalcount);
+        totalCountHtml.appendChild(strongTotalcount);
         
         if(document.getElementById('totalCount') == null){
             document.getElementById('timeEntriesForm').lastChild.appendChild(totalCountHtml);
@@ -250,11 +250,16 @@
         let formGroup7 = document.createElement("div");
         formGroup7.setAttribute('class', 'form-group');
         formGroup7.setAttribute('id', 'descContainer' + containerId);
+        formGroup7.setAttribute('class', 'col-12');
         let labelDesc = document.createElement("label");
         labelDesc.innerText = "*{{ __('message.task_description') }}: ";
+        labelDesc.setAttribute('for', 'desc' + containerId);
         formGroup7.appendChild(labelDesc);
         let inputDesc = document.createElement("input");
         inputDesc.setAttribute('name', 'desc[]');
+        inputDesc.setAttribute('id', 'desc' + containerId);
+        inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
+        inputDesc.setAttribute('class', "form-control");
         formGroup7.appendChild(inputDesc);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
         
@@ -283,17 +288,22 @@
 
             let formGroup6 = document.createElement("div");
             formGroup6.setAttribute('class', 'form-group');
+            formGroup6.setAttribute('class', 'col-12');
             formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
             let labelImputedHours = document.createElement("label");
             labelImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            labelImputedHours.setAttribute('for', 'inputedHours' + containerId);
             formGroup6.appendChild(labelImputedHours);
 
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
             imputedHoursHtml.setAttribute('class', 'inputed_hours');
+            imputedHoursHtml.setAttribute('class', 'form-control');
+            imputedHoursHtml.setAttribute('placeholder', "{{ __('message.inputed_hours') }}");
             imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
+            imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
@@ -314,8 +324,10 @@
     function showProjectsOfUserAndCustomer(containerId) {
         let formGroup5 = document.createElement("div");
         formGroup5.setAttribute('class', 'form-group');
+        formGroup5.setAttribute('class', 'col-12');
         formGroup5.setAttribute('id', 'projectContainer' + containerId);
         let labelProject = document.createElement("label");
+        labelProject.setAttribute('for', 'projects' + containerId);
         labelProject.innerText = "*{{ __('message.project') }}: ";
         formGroup5.appendChild(labelProject);
 
@@ -324,6 +336,7 @@
         projectSelectHtml.name = "projects[]";
         projectSelectHtml.setAttribute('id', 'projects' + containerId);
         projectSelectHtml.setAttribute('onchange', 'showHideImputedHours(' + containerId + ')');
+        projectSelectHtml.setAttribute('class', 'form-control');
 
         let userId = document.getElementById('users' + containerId).value;
         let customerId = document.getElementById('customers' + containerId).value;
@@ -411,7 +424,7 @@
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
-        agregateButtonsContainer.setAttribute('class', 'order-10');
+        agregateButtonsContainer.setAttribute('class', 'order-10');        
 
         //Plus button
         let plusButton = document.createElement("a");
@@ -462,7 +475,7 @@
         inputHours.setAttribute('type', 'number');
         inputHours.setAttribute('class', 'hours');
         inputHours.setAttribute('class', 'form-control');
-        inputHours.setAttribute('placeholder', "*{{ __('message.hours') }}: ");
+        inputHours.setAttribute('placeholder', "{{ __('message.hours') }} ");
 
         formGroup2.appendChild(inputHours);
         entryContainerHtml.appendChild(formGroup2);
