@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "toc": "markdown-toc -i README.md"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.2.1",
@@ -19,5 +20,8 @@
         "postcss": "^8.2.1",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.0.2"
+    },
+    "dependencies": {
+        "markdown-toc": "^1.2.0"
     }
 }

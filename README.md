@@ -5,6 +5,52 @@
 
 ### Índex
 
+<!-- toc -->
+
+  * [1. Introducció](#1-introduccio)
+    + [Dades](#dades)
+    + [Descripció](#descripcio)
+    + [Objectius](#objectius)
+    + [Tecnologies](#tecnologies)
+  * [2. Desenvolupament de l’Aplicació](#2-desenvolupament-de-laplicacio)
+    + [Anàlisi Previ](#analisi-previ)
+    + [Disseny/Implementacio](#dissenyimplementacio)
+    + [Producció](#produccio)
+  * [3. Desplegament](#3-desplegament)
+  * [4. Resultats i conclusions](#4-resultats-i-conclusions)
+  * [5. Bibliografia i webgrafia](#5-bibliografia-i-webgrafia)
+- [Documentació funcional](#documentacio-funcional)
+  * [Índex de continguts](#index-de-continguts)
+  * [1. Exposició del projecte](#1-exposicio-del-projecte)
+  * [2. Casos d’us](#2-casos-dus)
+    + [2.1 Diagrama de casos d’us](#21-diagrama-de-casos-dus)
+    + [2.2 Explicació prèvia](#22-explicacio-previa)
+    + [2.3 Especificació de casos d’us](#23-especificacio-de-casos-dus)
+        * [2.3.1 Validar usuari](#231-validar-usuari)
+      - [2.3.2 Panell de control d’administrador](#232-panell-de-control-dadministrador)
+      - [2.3.3. Dades empresa](#233-dades-empresa)
+      - [2.3.4. Usuaris](#234-usuaris)
+      - [2.3.5 Veure usuari amb les seves bosses d’hores i les seves entrades d’hores](#235-veure-usuari-amb-les-seves-bosses-dhores-i-les-seves-entrades-dhores)
+      - [2.3.6. Clients](#236-clients)
+      - [2.3.7. Veure client i els seus projectes](#237-veure-client-i-els-seus-projectes)
+      - [2.3.8. Projectes](#238-projectes)
+      - [2.3.9. Veure projecte i les seves bosses d’hores](#239-veure-projecte-i-les-seves-bosses-dhores)
+      - [2.3.10. Tipus de bosses d’hores](#2310-tipus-de-bosses-dhores)
+      - [2.3.11. Veure tipus de bossa d’hores](#2311-veure-tipus-de-bossa-dhores)
+      - [2.3.12. Bosses d’hores](#2312-bosses-dhores)
+      - [2.3.13. Alta](#2313-alta)
+      - [2.3.14. Edició](#2314-edicio)
+      - [2.3.15. Eliminació](#2315-eliminacio)
+      - [2.3.16. Validar i invalidar](#2316-validar-i-invalidar)
+        * [2.3.17. Rebre avis quan s’esgoti una bossa d’hores](#2317-rebre-avis-quan-sesgoti-una-bossa-dhores)
+      - [2.3.18. Panell de control del treballador](#2318-panell-de-control-del-treballador)
+      - [2.3.19. Contractar bosses d’hores](#2319-contractar-bosses-dhores)
+  * [3. Diagrama de classes](#3-diagrama-de-classes)
+  * [4. Diagrama de navegació](#4-diagrama-de-navegacio)
+  * [5. Mockups del projecte [link a mockups](https://balsamiq.cloud/sudexx1/pnrc5zt)](#5-mockups-del-projecte-link-a-mockupshttpsbalsamiqcloudsudexx1pnrc5zt)
+
+<!-- tocstop -->
+
 ### 1. Introducció
 
 #### Dades
