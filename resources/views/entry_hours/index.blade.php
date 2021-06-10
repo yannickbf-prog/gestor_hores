@@ -299,8 +299,8 @@
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
-            imputedHoursHtml.setAttribute('class', 'inputed_hours');
-            imputedHoursHtml.setAttribute('class', 'form-control');
+            imputedHoursHtml.setAttribute('class', 'inputed_hours form-control');
+
             imputedHoursHtml.setAttribute('placeholder', "{{ __('message.inputed_hours') }}");
             imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
             imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
@@ -418,8 +418,7 @@
 
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
-        entryContainerHtml.setAttribute('class', 'time_entry_container');
-        entryContainerHtml.setAttribute('class', 'row');
+        entryContainerHtml.setAttribute('class', 'time_entry_container row');
 
         //Show add/remove buttons
         //Create buttons container
@@ -473,8 +472,7 @@
         inputHours.setAttribute('id', 'hours' + countEntries)
         inputHours.setAttribute('name', 'hours[]');
         inputHours.setAttribute('type', 'number');
-        inputHours.setAttribute('class', 'hours');
-        inputHours.setAttribute('class', 'form-control');
+        inputHours.setAttribute('class', 'hours form-control');
         inputHours.setAttribute('placeholder', "{{ __('message.hours') }} ");
 
         formGroup2.appendChild(inputHours);
