@@ -213,7 +213,7 @@
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
 
         let strongTotalcount = document.createElement("strong");
-        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+        strongTotalcount.innerText = "{{ __('message.hour_count') }}: ";
 
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByClassName('time_entry_container').length; i++) {
@@ -287,8 +287,7 @@
         if (projectBagHourAvailable) {
 
             let formGroup6 = document.createElement("div");
-            formGroup6.setAttribute('class', 'form-group');
-            formGroup6.setAttribute('class', 'col-12');
+            formGroup6.setAttribute('class', 'form-group col-12');
             formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
             let labelImputedHours = document.createElement("label");
@@ -323,8 +322,7 @@
 
     function showProjectsOfUserAndCustomer(containerId) {
         let formGroup5 = document.createElement("div");
-        formGroup5.setAttribute('class', 'form-group');
-        formGroup5.setAttribute('class', 'col-12');
+        formGroup5.setAttribute('class', 'form-group col-12');
         formGroup5.setAttribute('id', 'projectContainer' + containerId);
         let labelProject = document.createElement("label");
         labelProject.setAttribute('for', 'projects' + containerId);
@@ -366,8 +364,7 @@
 
     function showCustomersOfUser(containerId) {
         let formGroup4 = document.createElement("div");
-        formGroup4.setAttribute('class', 'form-group');
-        formGroup4.setAttribute('class', 'col-12');
+        formGroup4.setAttribute('class', 'form-group col-12');
         formGroup4.setAttribute('id', 'customerContainer' + containerId);
         let labelCustomer = document.createElement("label");
         labelCustomer.innerText = "*{{ __('message.customer') }}: ";
@@ -443,8 +440,7 @@
 
         //Show day with datepiker
         let formGroup1 = document.createElement("div");
-        formGroup1.setAttribute('class', 'form-group');
-        formGroup1.setAttribute('class', 'col-6');
+        formGroup1.setAttribute('class', 'form-group col-6');
         let labelDay = document.createElement("label");
         labelDay.innerText = "*{{ __('message.day') }}: ";
         labelDay.setAttribute('for', 'dp' + countEntries);
@@ -461,8 +457,7 @@
         
         //Show hours
         let formGroup2 = document.createElement("div");
-        formGroup2.setAttribute('class', 'form-group');
-        formGroup2.setAttribute('class', 'col-6');
+        formGroup2.setAttribute('class', 'form-group col-6');
         formGroup2.setAttribute('oninput', 'createCountOfHours()');
         let labelHours = document.createElement("label");
         labelHours.setAttribute('for', 'hours' + countEntries);
@@ -480,8 +475,7 @@
 
         //Select users
         let formGroup3 = document.createElement("div");
-        formGroup3.setAttribute('class', 'form-group');
-        formGroup3.setAttribute('class', 'col-12');
+        formGroup3.setAttribute('class', 'form-group col-12');
         let labelUser = document.createElement("label");
         labelUser.setAttribute('for', 'users' + countEntries);
         labelUser.innerText = "*{{ __('message.user') }}: ";
