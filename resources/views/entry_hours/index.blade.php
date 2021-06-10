@@ -250,7 +250,7 @@
         let formGroup7 = document.createElement("div");
         formGroup7.setAttribute('class', 'form-group');
         formGroup7.setAttribute('id', 'descContainer' + containerId);
-        formGroup7.setAttribute('class', 'col-12');
+        formGroup7.setAttribute('class', 'col-12 col-md-6 col-lg-5');
         let labelDesc = document.createElement("label");
         labelDesc.innerText = "*{{ __('message.task_description') }}: ";
         labelDesc.setAttribute('for', 'desc' + containerId);
@@ -287,7 +287,7 @@
         if (projectBagHourAvailable) {
 
             let formGroup6 = document.createElement("div");
-            formGroup6.setAttribute('class', 'form-group col-12');
+            formGroup6.setAttribute('class', 'form-group col-12 col-md-6 col-lg-2');
             formGroup6.setAttribute('id', 'inputedHoursContainer' + containerId);
 
             let labelImputedHours = document.createElement("label");
@@ -322,7 +322,7 @@
 
     function showProjectsOfUserAndCustomer(containerId) {
         let formGroup5 = document.createElement("div");
-        formGroup5.setAttribute('class', 'form-group col-12');
+        formGroup5.setAttribute('class', 'form-group col-12 col-md-6 col-lg-3');
         formGroup5.setAttribute('id', 'projectContainer' + containerId);
         let labelProject = document.createElement("label");
         labelProject.setAttribute('for', 'projects' + containerId);
@@ -364,7 +364,7 @@
 
     function showCustomersOfUser(containerId) {
         let formGroup4 = document.createElement("div");
-        formGroup4.setAttribute('class', 'form-group col-12');
+        formGroup4.setAttribute('class', 'form-group col-12 col-md-6 col-lg-3');
         formGroup4.setAttribute('id', 'customerContainer' + containerId);
         let labelCustomer = document.createElement("label");
         labelCustomer.innerText = "*{{ __('message.customer') }}: ";
@@ -420,7 +420,7 @@
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
-        agregateButtonsContainer.setAttribute('class', 'order-10');        
+        agregateButtonsContainer.setAttribute('class', 'order-10 col d-flex justify-content-end align-items-center');        
         agregateButtonsContainer.setAttribute('id', 'addRemoveEntryContainer');        
 
         //Plus button
@@ -441,7 +441,7 @@
 
         //Show day with datepiker
         let formGroup1 = document.createElement("div");
-        formGroup1.setAttribute('class', 'form-group col-6');
+        formGroup1.setAttribute('class', 'form-group col-6 col-md-3 col-lg-2');
         let labelDay = document.createElement("label");
         labelDay.innerText = "*{{ __('message.day') }}: ";
         labelDay.setAttribute('for', 'dp' + countEntries);
@@ -458,7 +458,7 @@
         
         //Show hours
         let formGroup2 = document.createElement("div");
-        formGroup2.setAttribute('class', 'form-group col-6');
+        formGroup2.setAttribute('class', 'form-group col-6 col-md-3 col-lg-2');
         formGroup2.setAttribute('oninput', 'createCountOfHours()');
         let labelHours = document.createElement("label");
         labelHours.setAttribute('for', 'hours' + countEntries);
@@ -476,7 +476,7 @@
 
         //Select users
         let formGroup3 = document.createElement("div");
-        formGroup3.setAttribute('class', 'form-group col-12');
+        formGroup3.setAttribute('class', 'form-group col-12 col-md-6 col-lg-2');
         let labelUser = document.createElement("label");
         labelUser.setAttribute('for', 'users' + countEntries);
         labelUser.innerText = "*{{ __('message.user') }}: ";
@@ -527,6 +527,8 @@
     }
 
     addEntry(1);
+
+
 
 </script>
 @endsection
