@@ -42,8 +42,6 @@ svg{
     max-height: 150px;
 }
 
-
-
 thead::after{
     content: '';
     width: 100%;
@@ -52,4 +50,11 @@ thead::after{
     bottom: 0;
     left: 0;
     background: black;
+}
+
+@media (max-width: 768px) {
+  #addRemoveEntryContainer {
+    margin: auto;
+    margin-top: 10px;
+  }
 }

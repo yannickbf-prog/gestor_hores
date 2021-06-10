@@ -421,6 +421,7 @@
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
         agregateButtonsContainer.setAttribute('class', 'order-10');        
+        agregateButtonsContainer.setAttribute('id', 'addRemoveEntryContainer');        
 
         //Plus button
         let plusButton = document.createElement("a");
