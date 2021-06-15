@@ -420,12 +420,12 @@
 
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
-        entryContainerHtml.setAttribute('class', 'time_entry_container');
+        entryContainerHtml.setAttribute('class', 'time_entry_container d-flex flex-wrap');
 
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
-        agregateButtonsContainer.setAttribute('class', 'order-10 col d-flex justify-content-end align-items-center');        
+        agregateButtonsContainer.setAttribute('class', 'order-10 justify-content-end align-items-center');        
         agregateButtonsContainer.setAttribute('id', 'addRemoveEntryContainer');        
 
         //Plus button
@@ -463,7 +463,7 @@
         
         //Show hours
         let formGroup2 = document.createElement("div");
-        formGroup2.setAttribute('class', 'form-group');
+        formGroup2.setAttribute('class', 'form-group w');
         formGroup2.setAttribute('oninput', 'createCountOfHours()');
         let labelHours = document.createElement("label");
         labelHours.setAttribute('for', 'hours' + countEntries);
