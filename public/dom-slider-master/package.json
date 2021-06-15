@@ -1,0 +1,37 @@
+{
+  "name": "dom-slider",
+  "version": "2.1.6",
+  "description": "Plain JavaScript version of jQuery's slideToggle(), slideDown(), & slideUp(), but does not use display: none.",
+  "main": "dist/dom-slider.js",
+  "scripts": {
+    "babel": "babel src/dom-slider.js --out-file dist/dom-slider.js",
+    "babel:watch": "babel src --watch --out-file dist/dom-slider.js",
+    "prepublish": "npm run babel"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrentonCozby/dom-slider.git"
+  },
+  "keywords": [
+    "jQuery",
+    "animation",
+    "slideDown",
+    "slideUp",
+    "slideToggle",
+    "vanilla-js"
+  ],
+  "author": "Brenton Cozby <brenton.cozby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrentonCozby/dom-slider/issues"
+  },
+  "homepage": "https://github.com/BrentonCozby/dom-slider#readme"
+}

@@ -127,7 +127,7 @@
 @endsection
 @section('js')
 
-
+<script type="text/javascript" src="{{ URL::asset('./dom-slider-master/dist/dom-slider.js') }}"></script>
 
 <script>
 
@@ -417,6 +417,7 @@
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
         entryContainerHtml.setAttribute('class', 'time_entry_container row');
+        entryContainerHtml.style.height = "0px";
 
         //Show add/remove buttons
         //Create buttons container
@@ -427,7 +428,7 @@
         //Plus button
         let plusButton = document.createElement("a");
         plusButton.innerText = '+';
-        plusButton.setAttribute('class', "btn btn-outline-success btn-sm clickme")
+        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
         plusButton.setAttribute('onclick', 'addEntry(' + countEntries + ')');
         agregateButtonsContainer.appendChild(plusButton);
 
@@ -528,10 +529,7 @@
     }
 
     addEntry(1);
-    
-    $( ".clickme" ).click(function() {
-        $('#timeEntryContainer2').slideDown(600);
-    });
+       
 
 </script>
 @endsection
