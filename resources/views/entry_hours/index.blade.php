@@ -404,9 +404,13 @@
 
     function removeEntry(containerId) {
         
+        $('#timeEntryContainer'+containerId).on('hidden.bs.collapse', function () {
+            document.getElementById("timeEntryContainer" + containerId).remove();
+            createCountOfHours();
+        })
+        
         $('#timeEntryContainer'+containerId).collapse('hide');
-
-        createCountOfHours();
+     
     }
 
     var countEntries = 0;
