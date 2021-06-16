@@ -112,7 +112,9 @@ svg{
    background-color: #ffd8d8;
 }
 
-
+#addRemoveEntryContainer {
+    margin: auto;
+}
 
 #submitContainer > button {
     background-color: white;
@@ -186,6 +188,12 @@ svg{
     
     .form_group_7 {
         flex-basis: 40%;
+    }
+    
+    #addRemoveEntryContainer {
+        margin: initial;
+        margin-left: auto;
+        margin-right: 17px;
     }
     
 }

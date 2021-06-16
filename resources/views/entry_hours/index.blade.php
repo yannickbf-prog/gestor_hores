@@ -425,7 +425,7 @@
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
-        agregateButtonsContainer.setAttribute('class', 'order-10 ml-auto align-self-center');        
+        agregateButtonsContainer.setAttribute('class', 'order-10 align-self-center');        
         agregateButtonsContainer.setAttribute('id', 'addRemoveEntryContainer');        
 
         //Plus button
