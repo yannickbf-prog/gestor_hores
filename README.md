@@ -78,7 +78,7 @@ Els usuaris que assignem a la bossa d’hores tindran dret a «entrar hores» tr
 
 #### Objectius
 
-**Objectius de Software**:
+**Objectius de Software**: donar solucio  
 
 **Objectius Personals**:
 
@@ -89,7 +89,7 @@ Els usuaris que assignem a la bossa d’hores tindran dret a «entrar hores» tr
 
 **Framewoks utilitzats:**
 
-- **Bootstrap** per entorn client
+- **Bootstrap i jQuery** per entorn client
 - **Laravel** per entorn servidor
 
 ### 2. Desenvolupament de l’Aplicació
