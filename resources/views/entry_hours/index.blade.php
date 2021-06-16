@@ -31,8 +31,8 @@
         </div>
     </div>
 </div>
-<div class="mt-2" id="timeEntriesFormContainer">
-    <strong>{{__('message.fields_are_required')}}</strong>
+<div class="mt-2 pt-1" id="timeEntriesFormContainer">
+    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
     <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
         @csrf
 
@@ -214,6 +214,7 @@
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
 
         let strongTotalcount = document.createElement("strong");
+        strongTotalcount.setAttribute('class', 'ml-2');
         strongTotalcount.innerText = "{{ __('message.hour_count') }}: ";
 
         let totalCount = 0;
