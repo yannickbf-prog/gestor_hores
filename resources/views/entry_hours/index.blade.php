@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-<div class="mt-2 bg-primary" id="timeEntriesFormContainer">
+<div class="mt-2" id="timeEntriesFormContainer">
     <strong>{{__('message.fields_are_required')}}</strong>
     <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
         @csrf
@@ -431,14 +431,14 @@
         //Plus button
         let plusButton = document.createElement("a");
         plusButton.innerText = '+';
-        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
+        plusButton.setAttribute('class', "btn btn-add")
         plusButton.setAttribute('onclick', 'addEntry(' + countEntries + ')');
         agregateButtonsContainer.appendChild(plusButton);
 
         //Take off button
         let takeOffButton = document.createElement("a");
         takeOffButton.innerText = '-';
-        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
+        takeOffButton.setAttribute('class', "btn btn-remove")
         takeOffButton.setAttribute('onclick', 'removeEntry(' + countEntries + ')');
         agregateButtonsContainer.appendChild(takeOffButton);
 
@@ -506,7 +506,7 @@
 
         if (containerId == 1) {
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
-            document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn btn-outline-danger btn-sm disabled");
+            document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn disabled btn-remove");
         } else {
             document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
         }
