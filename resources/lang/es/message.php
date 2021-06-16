@@ -162,5 +162,5 @@ return [
     'inputed_hours' => 'Horas imputadas',
     'task_description' => 'Descripción tarea',
     'hour_count' => 'Total horas',
-    'save' => 'Guardar',
+    'save' => 'GUARDAR',
 ];

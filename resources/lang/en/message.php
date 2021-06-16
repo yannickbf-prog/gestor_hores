@@ -163,5 +163,5 @@ return [
     'inputed_hours' => 'Hours charged',
     'task_description' => 'Task description',
     'hour_count' => 'Total hours',
-    'save' => 'Save',
+    'save' => 'SAVE',
 ];

@@ -425,7 +425,7 @@
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
-        agregateButtonsContainer.setAttribute('class', 'order-10 justify-content-end align-items-center');        
+        agregateButtonsContainer.setAttribute('class', 'order-10 ml-auto align-self-center');        
         agregateButtonsContainer.setAttribute('id', 'addRemoveEntryContainer');        
 
         //Plus button
@@ -517,7 +517,7 @@
         if (document.getElementById("submitContainer") != null)
             document.getElementById("submitContainer").remove();
         let buttonContainer = document.createElement("div");
-        buttonContainer.setAttribute('class', 'form-group');
+        buttonContainer.setAttribute('class', 'form-group d-flex justify-content-end');
         buttonContainer.setAttribute('id', 'submitContainer');
         let submitHtml = document.createElement("button");
         submitHtml.innerText = "{{ __('message.save') }}";

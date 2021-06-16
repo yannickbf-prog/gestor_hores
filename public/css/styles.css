@@ -90,6 +90,7 @@ svg{
     border-radius: 7px;
     margin-right: 3px;
     width: 50px;
+    transition: background .4s;
 }
 
 #addRemoveEntryContainer > .btn-add:hover{
@@ -104,14 +105,28 @@ svg{
     padding: 7 0;
     border-radius: 7px;
     width: 50px;
+    transition: background .4s;
 }
 
 #addRemoveEntryContainer > .btn-remove:hover{
    background-color: #ffd8d8;
 }
 
-#addRemoveEntryContainer {
-    margin: auto;
+
+
+#submitContainer > button {
+    background-color: white;
+    border: 2px solid #2da0e2;
+    font-weight: bold;
+    color: #2da0e2;
+    border-radius: 7px;
+    margin-right: 3px;
+    transition: background .4s;
+    margin: 15px;
+}
+
+#submitContainer > button:hover{
+    background-color: #d9f3f7;
 }
 
 @media (min-width: 768px) {
@@ -172,4 +187,5 @@ svg{
     .form_group_7 {
         flex-basis: 40%;
     }
+    
 }
