@@ -122,7 +122,8 @@
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
 
         let strongTotalcount = document.createElement("strong");
-        strongTotalcount.innerText = "*{{ __('message.hour_count') }}: ";
+        strongTotalcount.setAttribute('class', 'ml-2');
+        strongTotalcount.innerText = "{{ __('message.hour_count') }}: ";
 
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByName('hours[]').length; i++) {
@@ -381,7 +382,7 @@
         if (document.getElementById("submitContainer") != null)
             document.getElementById("submitContainer").remove();
         let buttonContainer = document.createElement("div");
-        buttonContainer.setAttribute('class', 'form-group');
+        buttonContainer.setAttribute('class', 'form-group d-flex justify-content-end');
         buttonContainer.setAttribute('id', 'submitContainer');
         let submitHtml = document.createElement("button");
         submitHtml.innerText = "{{ __('message.save') }}";
