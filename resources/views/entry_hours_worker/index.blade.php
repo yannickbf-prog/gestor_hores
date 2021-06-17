@@ -24,15 +24,13 @@
     </ul>
 </div>
 @endif
+<div class="mt-2 pt-1" id="timeEntriesFormContainer">
+    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
+    <form action="{{ route($lang.'_entry_hours.store') }}" method="POST" id="timeEntriesForm">
+        @csrf
 
-<div class="alert alert-info mt-2">
-    <strong>{{__('message.fields_are_required')}}</strong>
+    </form>
 </div>
-
-<form action="{{ route($lang.'_entry_hours.store') }}" method="POST" id="timeEntriesForm">
-    @csrf
-
-</form>
 @stop
 
 @section('js')
@@ -283,7 +281,12 @@
     }
 
     function removeEntry(containerId) {
-        document.getElementById("timeEntryContainer" + containerId).remove();
+        $('#timeEntryContainer'+containerId).on('hidden.bs.collapse', function () {
+            document.getElementById("timeEntryContainer" + containerId).remove();
+            createCountOfHours();
+        })
+        
+        $('#timeEntryContainer'+containerId).collapse('hide');
     }
 
     var countEntries = 0;
@@ -293,22 +296,25 @@
 
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
+        entryContainerHtml.setAttribute('class', 'time_entry_container d-flex flex-wrap');
 
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
+        agregateButtonsContainer.setAttribute('class', 'order-10 align-self-center');        
+        agregateButtonsContainer.setAttribute('id', 'addRemoveEntryContainer');
 
         //Plus button
         let plusButton = document.createElement("a");
         plusButton.innerText = '+';
-        plusButton.setAttribute('class', "btn btn-outline-success btn-sm")
+        plusButton.setAttribute('class', "btn btn-add")
         plusButton.setAttribute('onclick', 'addEntry(' + countEntries + ')');
         agregateButtonsContainer.appendChild(plusButton);
 
         //Take off button
         let takeOffButton = document.createElement("a");
         takeOffButton.innerText = '-';
-        takeOffButton.setAttribute('class', "btn btn-outline-danger btn-sm")
+        takeOffButton.setAttribute('class', "btn btn-remove")
         takeOffButton.setAttribute('onclick', 'removeEntry(' + countEntries + ')');
         agregateButtonsContainer.appendChild(takeOffButton);
 
@@ -344,7 +350,7 @@
 
         if (containerId == 1) {
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
-            document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn btn-outline-danger btn-sm disabled");
+            document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn disabled btn-remove");
         } else {
             document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
         }
@@ -367,6 +373,10 @@
 
         //Create total count of hours
         createCountOfHours();
+        
+        if(countEntries != 1){
+            $('#timeEntryContainer'+countEntries).collapse();
+        }
     }
 
     addEntry(1);
