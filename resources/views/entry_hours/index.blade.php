@@ -505,9 +505,6 @@
         formGroup3.appendChild(userSelectHtml);
         entryContainerHtml.appendChild(formGroup3);
 
-        console.log("container: "+containerId)
-        console.log("count entries: "+countEntries)
-        
         if (containerId == 1 && countEntries == 1) {
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
             document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn disabled btn-remove");

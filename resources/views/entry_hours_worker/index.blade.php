@@ -251,18 +251,20 @@
 
     function showCustomersOfUser(containerId) {
         let formGroup3 = document.createElement("div");
-        formGroup3.setAttribute('class', 'form-group');
+        formGroup3.setAttribute('class', 'form-group form_group_4');
         formGroup3.setAttribute('id', 'customerContainer' + containerId);
-        let strongCustomer = document.createElement("strong");
-        strongCustomer.innerText = "*{{ __('message.customer') }}: ";
-        formGroup3.appendChild(strongCustomer);
+        let labelCustomer = document.createElement("label");
+        labelCustomer.innerText = "*{{ __('message.customer') }}: ";
+        labelCustomer.setAttribute('for', 'customers' + containerId);
+        formGroup3.appendChild(labelCustomer);
 
         //Create the select of customers
         let customerSelectHtml = document.createElement("select");
         customerSelectHtml.name = "customers[]";
         customerSelectHtml.setAttribute('id', 'customers' + containerId);
         customerSelectHtml.setAttribute('onchange', 'showProjectsOfUserAndCustomer(' + containerId + ')');
-
+        customerSelectHtml.setAttribute('class', 'form-control');
+        
         for (customer of json_data) {
             let option = document.createElement("option");
             option.value = customer.customer_id;
@@ -322,33 +324,40 @@
 
         //Show day with datepiker
         let formGroup1 = document.createElement("div");
-        formGroup1.setAttribute('class', 'form-group');
-        let strongDay = document.createElement("strong");
-        strongDay.innerText = "*{{ __('message.day') }}: ";
-        formGroup1.appendChild(strongDay);
+        formGroup1.setAttribute('class', 'form-group form_group_1');
+        let labelDay = document.createElement("label");
+        labelDay.innerText = "*{{ __('message.day') }}: ";
+        labelDay.setAttribute('for', 'dp' + countEntries);
+        formGroup1.appendChild(labelDay);
         let inputDay = document.createElement("input");
         inputDay.setAttribute('name', 'days[]');
+        inputDay.setAttribute('class', 'form-control');
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
-
+        inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
+        
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
 
         //Show hours
         let formGroup2 = document.createElement("div");
-        formGroup2.setAttribute('class', 'form-group');
+        formGroup2.setAttribute('class', 'form-group form_group_2');
         formGroup2.setAttribute('oninput', 'createCountOfHours()');
-        let strongHours = document.createElement("strong");
-        strongHours.innerText = "*{{ __('message.hours') }}: ";
-        formGroup2.appendChild(strongHours);
+        let labelHours = document.createElement("label");
+        labelHours.setAttribute('for', 'hours' + countEntries);
+        labelHours.innerText = "*{{ __('message.hours') }}: ";
+        formGroup2.appendChild(labelHours);
         let inputHours = document.createElement("input");
+        inputHours.setAttribute('id', 'hours' + countEntries)
         inputHours.setAttribute('name', 'hours[]');
         inputHours.setAttribute('type', 'number');
+        inputHours.setAttribute('class', 'hours form-control');
+        inputHours.setAttribute('placeholder', "{{ __('message.hours') }} ");
 
         formGroup2.appendChild(inputHours);
         entryContainerHtml.appendChild(formGroup2);
 
-        if (containerId == 1) {
+        if (containerId == 1 && countEntries == 1) {
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
             document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn disabled btn-remove");
         } else {
