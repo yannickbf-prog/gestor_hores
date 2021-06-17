@@ -151,13 +151,17 @@
             document.getElementById('descContainer' + containerId).remove();
         }
         let formGroup6 = document.createElement("div");
-        formGroup6.setAttribute('class', 'form-group');
+        formGroup6.setAttribute('class', 'form-group form_group_7');
         formGroup6.setAttribute('id', 'descContainer' + containerId);
-        let strongDesc = document.createElement("strong");
-        strongDesc.innerText = "*{{ __('message.task_description') }}: ";
-        formGroup6.appendChild(strongDesc);
+        let labelDesc = document.createElement("label");
+        labelDesc.innerText = "*{{ __('message.task_description') }}: ";
+        labelDesc.setAttribute('for', 'desc' + containerId);
+        formGroup6.appendChild(labelDesc);
         let inputDesc = document.createElement("input");
         inputDesc.setAttribute('name', 'desc[]');
+        inputDesc.setAttribute('id', 'desc' + containerId);
+        inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
+        inputDesc.setAttribute('class', "form-control");
         formGroup6.appendChild(inputDesc);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
     }
@@ -182,17 +186,22 @@
         if (projectBagHourAvailable) {
 
             let formGroup5 = document.createElement("div");
-            formGroup5.setAttribute('class', 'form-group');
+            formGroup5.setAttribute('class', 'form-group form_group_6');
             formGroup5.setAttribute('id', 'inputedHoursContainer' + containerId);
 
-            let strongImputedHours = document.createElement("strong");
-            strongImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
-            formGroup5.appendChild(strongImputedHours);
+            let labelImputedHours = document.createElement("label");
+            labelImputedHours.innerText = "*{{ __('message.inputed_hours') }}: ";
+            labelImputedHours.setAttribute('for', 'inputedHours' + containerId);
+            formGroup5.appendChild(labelImputedHours);
 
             let imputedHoursHtml = document.createElement("input");
             imputedHoursHtml.setAttribute('type', 'number');
             imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+            imputedHoursHtml.setAttribute('class', 'inputed_hours form-control');
+
+            imputedHoursHtml.setAttribute('placeholder', "{{ __('message.inputed_hours') }}");
             imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
+            imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
@@ -212,17 +221,19 @@
 
     function showProjectsOfUserAndCustomer(containerId) {
         let formGroup4 = document.createElement("div");
-        formGroup4.setAttribute('class', 'form-group');
+        formGroup4.setAttribute('class', 'form-group form_group_5');
         formGroup4.setAttribute('id', 'projectContainer' + containerId);
-        let strongProject = document.createElement("strong");
-        strongProject.innerText = "*{{ __('message.project') }}: ";
-        formGroup4.appendChild(strongProject);
+        let labelProject = document.createElement("label");
+        labelProject.setAttribute('for', 'projects' + containerId);
+        labelProject.innerText = "*{{ __('message.project') }}: ";
+        formGroup4.appendChild(labelProject);
 
         //Create the select of projects
         let projectSelectHtml = document.createElement("select");
         projectSelectHtml.name = "projects[]";
         projectSelectHtml.setAttribute('id', 'projects' + containerId);
         projectSelectHtml.setAttribute('onchange', 'showHideImputedHours(' + containerId + ')');
+        projectSelectHtml.setAttribute('class', 'form-control');
 
         let customerId = document.getElementById('customers' + containerId).value;
         let res = json_data.filter((item) => {
