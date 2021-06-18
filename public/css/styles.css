@@ -203,9 +203,5 @@ svg{
   color: gray !important;
   /* And disable the pointer events */
   pointer-events: none;
-  
-}
 
-.disabledd:hover{
-    text-decoration: none;
 }

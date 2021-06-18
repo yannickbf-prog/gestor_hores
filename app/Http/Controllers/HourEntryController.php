@@ -188,7 +188,8 @@ class HourEntryController extends Controller {
 //                ->where('hours_entry.id', $id)
 //                ->update(['validate' => 0]);
 
-        return redirect()->route($lang . '_time_entries.index');
+        return redirect()->route($lang . '_time_entries.index')
+                ->with('success', __('message.time_entry') . " " . __('message.invalidated'));
     }
 
     /**

@@ -52,7 +52,7 @@
         <th>{{ __('message.dedicated_hours') }}</th>
         <th>{{ __('message.imputed_hours') }}</th>
         <th>{{ __('message.created_at') }}</th>
-        <th>{{ __('message.action') }}</th>
+     
     </tr>
     @endif
     @forelse ($data as $value)
@@ -73,16 +73,18 @@
         <td>
             @isset($value->hours_entry_bag_hours_id)
             <div>
-                <a href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}" class="text-danger {{ ($value->hour_entry_validate == '0') ? 'disabledd' : ''}}">
+                <a href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}" style="text-decoration: none" class="text-danger {{ ($value->hour_entry_validate == '0') ? 'disabledd' : ''}}">
                     <i class="bi bi-x-square-fill fa-lg"></i>
                 </a>
                 
-                <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}" class="text-success {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}">
+                <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-success {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}">
                     <i class="bi bi-check-square-fill fa-lg"></i>
                 </a>
                 
-                <a href="#">ch</a>
-                
+                <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-success {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}">
+                    <i class="bi bi-square-fill fa-lg"></i>
+                </a>
+                               
             </div>
             @endisset
         </td>
@@ -102,7 +104,11 @@
 <script type="text/javascript" src="{{ URL::asset('./dom-slider-master/dist/dom-slider.js') }}"></script>
 
 <script>
+    $(".alert-success").slideDown(400);
 
+    $(".alert-success").delay(6000).slideUp(400, function () {
+        $(this).alert('close');
+    });
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
