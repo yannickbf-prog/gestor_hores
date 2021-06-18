@@ -72,7 +72,7 @@
         </td>
         <td>
             @isset($value->hours_entry_bag_hours_id)
-            <div>
+            <div class="validate_btns_container">
                 <a href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}" style="text-decoration: none" class="text-danger {{ ($value->hour_entry_validate == '0') ? 'disabledd' : ''}}">
                     <i class="bi bi-x-square-fill fa-lg"></i>
                 </a>
@@ -81,7 +81,7 @@
                     <i class="bi bi-check-square-fill fa-lg"></i>
                 </a>
                 
-                <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-success {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}">
+                <a href="{{ $value->hour_entry_validate == '0' ? route('entry_hours.validate',[$value->hours_entry_id, $lang]) : route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-secondary">
                     <i class="bi bi-square-fill fa-lg"></i>
                 </a>
                                
