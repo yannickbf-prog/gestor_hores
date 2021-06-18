@@ -191,6 +191,10 @@ class HourEntryController extends Controller {
         return redirect()->route($lang . '_time_entries.index')
                 ->with('success', __('message.time_entry') . " " . __('message.invalidated'));
     }
+    
+    public function validateAllHours(){
+        
+    }
 
     /**
      * Show the form for creating a new resource.

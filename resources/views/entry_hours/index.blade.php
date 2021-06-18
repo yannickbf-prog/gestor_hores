@@ -90,11 +90,15 @@
         </td>
         <td>{{ $value->hours_entry_id }}</td>
     </tr>
+    
     @empty
     <li>{{__('message.no')}} {{__('message.time_entries')}} {{__('message.to_show')}}</li>
     @endforelse
 
 </table> 
+@if (count($data) > 0)
+<a class="btn btn-primary">{{ __('message.validate_all_hours') }}</a>
+@endif
 <div id="paginationContainer">
     {!! $data->links() !!} 
 </div>

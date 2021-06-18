@@ -209,3 +209,7 @@ svg{
 .validate_btns_container{
     width: 73px;
 }
+
+th {
+    text-decoration: underline;
+}
