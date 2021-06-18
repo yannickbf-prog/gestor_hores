@@ -42,7 +42,7 @@
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
-        <th>Nº</th>
+        
         <th>{{ __('message.date') }}</th>  
         <th>{{ __('message.worker_name') }}</th>
         <th>{{ __('message.username') }}</th>
@@ -56,9 +56,9 @@
         <th>{{ __('message.action') }}</th>
     </tr>
     @endif
-    @forelse ($data as $key => $value)
+    @forelse ($data as $value)
     <tr>
-        <td>{{ ++$i }}</td>
+        
         <td>{{ Carbon\Carbon::parse($value->hours_entry_day)->format('d/m/y') }}</td>
         <td>{{ $value->user_name." ".$value->user_surname }}</td>
         <td>{{ $value->user_nickname }}</td>
@@ -126,32 +126,16 @@
         <td>
             @isset($value->hours_entry_bag_hours_id)
             <div>
-                
-                <a href="#" class="text-danger {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}" data-toggle="modal" data-target="#validateModal1">
+                <a href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}" class="text-danger {{ ($value->hour_entry_validate == '0') ? 'disabledd' : ''}}">
                     <i class="bi bi-x-square-fill fa-lg"></i>
                 </a>
-                <!-- Modal Validate-->
-                <div class="modal fade" id="validateModal1" tabindex="-1" role="dialog" aria-labelledby="validateModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.validate') }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                {{ __('message.confirm_validate') }}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                <a class="btn btn-success" href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}">{{ __('message.validate') }}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 
-                <a href="#">val</a>
+                
+                <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}" class="text-danger {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}">
+                    <i class="bi bi-x-square-fill fa-lg"></i>
+                </a>
+                
+                
                 <a href="#">ch</a>
                 
             </div>

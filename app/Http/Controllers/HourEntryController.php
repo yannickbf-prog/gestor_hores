@@ -28,6 +28,53 @@ class HourEntryController extends Controller {
         //Create json with the info of DB, need for selects user, project and bag of hours. This work with JavaScript
         $users_info = [];
         $users_data = DB::table('users_projects')->distinct()->select('user_id')->get();
+        
+          /*
+          //Create json to storage users with projects, there customers and there projects
+          $json = [];
+          $users_data = DB::table('users_projects')
+          ->join('users', 'users_projects.user_id', '=', 'users.id')->distinct()
+          ->select(['users.id', 'users.nickname', 'users.name', 'users.surname', 'users.email', 'users.phone', 'users.role'])->get();
+
+          foreach ($users_data as $user) {
+
+          //Get the customers of the users (users with projects)
+          $customers_in_user_data = DB::table('users_projects')
+          ->join('projects', 'users_projects.id', '=', 'projects.id')
+          ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
+          ->where('users_projects.user_id', $user->id)
+          ->select('customers.id AS customer_id', 'customers.name AS customer_name')
+          ->get();
+
+          $json[] = [
+          'user_id' => $user->id,
+          'user_nickname' => $user->nickname,
+          'user_name' => $user->name,
+          'user_surname' => $user->surname,
+          'user_email' => $user->email,
+          'user_phone' => $user->phone,
+          'user_role' => $user->role,
+          'customers' => $customers_in_user_data,
+          ];
+          }
+
+          //        $results=DB::select(DB::raw("
+          //            select * from users_projects
+          //                INNER JOIN projects
+          //            ON `users_projects`.`project_id` = `projects`.`id`
+          //                WHERE `users_projects`.`user_id`=3"));
+
+          $customers_in_user_data = DB::table('users')
+          ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
+          ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+          ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
+          ->select('customers.name')
+          ->where('users.id', '=', 2)
+          ->get();
+
+          return $customers_in_user_data; */
+
+
 
         foreach ($users_data as $user) {
 
@@ -121,20 +168,25 @@ class HourEntryController extends Controller {
         return $data;
     }
 
-    public function validateEntryHour($id, $lang) {
+    public function validateEntryHour($hours_entry_id, $lang) {
+        
+        DB::statement("UPDATE hours_entry SET validate = 1 where id = ".$hours_entry_id);
+        
+//        DB::table('hours_entry')
+//                ->where('hours_entry.id', $hour_entry_id)
+//                ->update(['validate' => 1]);
 
-        DB::table('hours_entry')
-                ->where('hours_entry.id', $id)
-                ->update(['validate' => 1]);
-
-        return redirect()->route($lang . '_time_entries.index');
+        return redirect()->route($lang . '_time_entries.index')
+                ->with('success', __('message.time_entry') . " " . __('message.validated'));
     }
 
-    public function inValidateEntryHour($id, $lang) {
+    public function inValidateEntryHour($hours_entry_id, $lang) {
+        
+        DB::statement("UPDATE hours_entry SET validate = 0 where id = ".$hours_entry_id);
 
-        DB::table('hours_entry')
-                ->where('hours_entry.id', $id)
-                ->update(['validate' => 0]);
+//        DB::table('hours_entry')
+//                ->where('hours_entry.id', $id)
+//                ->update(['validate' => 0]);
 
         return redirect()->route($lang . '_time_entries.index');
     }
