@@ -43,11 +43,14 @@
     @if (count($data) > 0)
     <tr>
         <th>Nº</th>
+        <th>{{ __('message.date') }}</th>  
+        <th>{{ __('message.worker_name') }}</th>
         <th>{{ __('message.username') }}</th>
-        <th>{{ __('message.bag_hour_type') }}</th>
-        <th>{{ __('message.project_name') }}</th>
+        <th>{{ __('message.project') }}</th>
         <th>{{ __('message.customer_name') }}</th>
-        <th>{{ __('message.hours') }}</th>
+        <th>{{ __('message.bag_hour') }}</th>
+        <th>{{ __('message.dedicated_hours') }}</th>
+        <th>{{ __('message.imputed_hours') }}</th>
         <th>{{ __('message.state') }}</th>
         <th>{{ __('message.created_at') }}</th>
         <th>{{ __('message.action') }}</th>
@@ -56,11 +59,14 @@
     @forelse ($data as $key => $value)
     <tr>
         <td>{{ ++$i }}</td>
-        <td>{{ $value->user_name }}</td>
-        <td>{{ $value->type_bag_hour_name }}</td>
+        <td>{{ Carbon\Carbon::parse($value->hours_entry_day)->format('d/m/y') }}</td>
+        <td>{{ $value->user_name." ".$value->user_surname }}</td>
+        <td>{{ $value->user_nickname }}</td>
         <td>{{ $value->project_name }} </td>
         <td>{{ $value->customer_name }}</td>
+        <td>{{ $value->type_bag_hour_name }}</td>
         <td>{{ $value->hour_entry_hours }}h</td>
+        <td>{{ $value->hour_entry_hours_imputed }}h</td>
         <td>{{ ($value->hour_entry_validate == '1') ? __('message.validated') : __('message.invalidated') }}</td>
         <td>{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
         <td>
@@ -114,6 +120,17 @@
             </div>
             @endif
         </td>
+        <td>
+            @isset($value->hours_entry_bag_hours_id)
+            <div>
+                
+                <a href="#" class="text-danger {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}"><i class="bi bi-x-square-fill fa-lg"></i></a>
+                <a href="#">val</a>
+                <a href="#">ch</a>
+                
+            </div>
+            @endisset
+        </td>
         <td>{{ $value->hours_entry_id }}</td>
     </tr>
     @empty
@@ -126,7 +143,7 @@
 </div>
 @endsection
 @section('js')
-
+<script src="https://kit.fontawesome.com/ad4ed42faf.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ URL::asset('./dom-slider-master/dist/dom-slider.js') }}"></script>
 
 <script>

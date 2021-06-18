@@ -29,7 +29,7 @@ return [
     'unvalidated_hour_bags' => "Bolsas de horas sin validar",
     'bag_hour_type' => "Tipo de bolsa de horas",
     'project_name' => 'Nombre del proyecto',
-    'customer_name' => 'Nombre del cliente',
+    'customer_name' => 'Nombre cliente',
     'hours' => 'Nº de horas',
     'creation_day' => 'Fecha de creación',
     'validate' => 'Validar',
@@ -163,4 +163,10 @@ return [
     'task_description' => 'Descripción tarea',
     'hour_count' => 'Total horas',
     'save' => 'GUARDAR',
+    
+    'date' => 'Fecha',
+    'worker_name' => 'Nombre trabajador',
+    'bag_hour' => 'Bolsa de horas',
+    'dedicated_hours' => 'H. dedicadas',
+    'imputed_hours' => 'H. imputadas',
 ];

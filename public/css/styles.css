@@ -197,3 +197,10 @@ svg{
     }
     
 }
+
+.disabledd{
+  /* Make the disabled links grayish*/
+  color: gray !important;
+  /* And disable the pointer events */
+  pointer-events: none;
+}

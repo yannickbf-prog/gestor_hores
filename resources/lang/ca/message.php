@@ -29,7 +29,7 @@ return [
     'user' => 'Usuari',
     'bag_hour_type' => "Tipus de bosssa d'hores",
     'project_name' => 'Nom del projecte',
-    'customer_name' => 'Nom del client',
+    'customer_name' => 'Nom client',
     'hours' => 'Nº hores',
     'creation_day' => 'Data de creació',
     'validate' => 'Validar',
@@ -165,4 +165,9 @@ return [
     'hour_count' => 'Total hores',
     'save' => 'GUARDAR',
     
+    'date' => 'Data',
+    'worker_name' => 'Nom treballador',
+    'bag_hour' => "Bossa d'hores",
+    'dedicated_hours' => 'H. dedicades',
+    'imputed_hours' => 'H. imputades',
 ];

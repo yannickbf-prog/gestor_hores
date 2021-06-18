@@ -164,4 +164,10 @@ return [
     'task_description' => 'Task description',
     'hour_count' => 'Total hours',
     'save' => 'SAVE',
+    
+    'date' => 'Date',
+    'worker_name' => 'Worker name',
+    'bag_hour' => 'Bag hour',
+    'dedicated_hours' => 'Dedicated H.',
+    'imputed_hours' => 'Imputed H.',
 ];

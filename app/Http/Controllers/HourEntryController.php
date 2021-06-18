@@ -25,52 +25,6 @@ class HourEntryController extends Controller {
 
         $join = DB::table('hours_entry')->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')->select('type_bag_hours.name')->get();
 
-        /*
-          //Create json to storage users with projects, there customers and there projects
-          $json = [];
-          $users_data = DB::table('users_projects')
-          ->join('users', 'users_projects.user_id', '=', 'users.id')->distinct()
-          ->select(['users.id', 'users.nickname', 'users.name', 'users.surname', 'users.email', 'users.phone', 'users.role'])->get();
-
-          foreach ($users_data as $user) {
-
-          //Get the customers of the users (users with projects)
-          $customers_in_user_data = DB::table('users_projects')
-          ->join('projects', 'users_projects.id', '=', 'projects.id')
-          ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
-          ->where('users_projects.user_id', $user->id)
-          ->select('customers.id AS customer_id', 'customers.name AS customer_name')
-          ->get();
-
-          $json[] = [
-          'user_id' => $user->id,
-          'user_nickname' => $user->nickname,
-          'user_name' => $user->name,
-          'user_surname' => $user->surname,
-          'user_email' => $user->email,
-          'user_phone' => $user->phone,
-          'user_role' => $user->role,
-          'customers' => $customers_in_user_data,
-          ];
-          }
-
-          //        $results=DB::select(DB::raw("
-          //            select * from users_projects
-          //                INNER JOIN projects
-          //            ON `users_projects`.`project_id` = `projects`.`id`
-          //                WHERE `users_projects`.`user_id`=3"));
-
-          $customers_in_user_data = DB::table('users')
-          ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
-          ->join('projects', 'users_projects.project_id', '=', 'projects.id')
-          ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
-          ->select('customers.name')
-          ->where('users.id', '=', 2)
-          ->get();
-
-          return $customers_in_user_data; */
-
-
         //Create json with the info of DB, need for selects user, project and bag of hours. This work with JavaScript
         $users_info = [];
         $users_data = DB::table('users_projects')->distinct()->select('user_id')->get();
@@ -159,9 +113,10 @@ class HourEntryController extends Controller {
                 ->join('hours_entry', 'users_projects.id', '=', 'hours_entry.user_project_id')
                 ->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
                 ->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
-                ->select('users.nickname AS user_name', 'projects.name AS project_name', 'customers.name AS customer_name',
-                'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.validate AS hour_entry_validate',
-                'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id');
+                ->select('users.nickname AS user_nickname', 'users.name AS user_name', 'users.surname AS user_surname', 'projects.name AS project_name', 'customers.name AS customer_name',
+                'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
+                'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id', 
+                'hours_entry.day AS hours_entry_day');
 
         return $data;
     }
