@@ -71,17 +71,67 @@
         <td>{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
         <td>
 
+            @if($value->hour_entry_validate == '0')
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#validateModal">
+                {{ __('message.validate') }}
+            </button>
+            <!-- Modal Validate-->
+            <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="validateModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ __('message.validate') }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ __('message.confirm_validate') }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                            <a class="btn btn-success" href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}">{{ __('message.validate') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @else
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#invalidateModal">
+                {{ __('message.invalidate') }}
+            </button>
+            <!-- Modal Invalidate-->
+            <div class="modal fade" id="invalidateModal" tabindex="-1" role="dialog" aria-labelledby="invalidateModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">{{ __('message.invalidate') }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ __('message.confirm_invalidate') }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                            <a class="btn btn-success" href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}">{{ __('message.invalidate') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+
 
         </td>
         <td>
             @isset($value->hours_entry_bag_hours_id)
             <div>
                 
-                <a href="#" class="text-danger {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}"  data-toggle="modal" data-target="#validateModal">
+                <a href="#" class="text-danger {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}" data-toggle="modal" data-target="#validateModal1">
                     <i class="bi bi-x-square-fill fa-lg"></i>
                 </a>
                 <!-- Modal Validate-->
-                <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="validateModalLabel" aria-hidden="true">
+                <div class="modal fade" id="validateModal1" tabindex="-1" role="dialog" aria-labelledby="validateModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
