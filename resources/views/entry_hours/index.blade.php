@@ -46,12 +46,6 @@ $load_old_hour_entries = true;
     </form>
 </div>
 
-@if (session('count_hours_entries'))
-    <div class="alert alert-success">
-        {{ session('count_hours_entries') }}
-    </div>
-@endif
-
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>   
@@ -502,7 +496,12 @@ $load_old_hour_entries = true;
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
             document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn disabled btn-remove");
         } else {
-            document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
+            if("{{ $load_old_hour_entries }}") {
+                document.getElementById('timeEntryContainer' + (containerId - 1) ).after(entryContainerHtml);
+            }
+            else {
+                document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
+            }
         }
 
         showCustomersOfUser(countEntries);
@@ -527,10 +526,17 @@ $load_old_hour_entries = true;
             $('#timeEntryContainer'+countEntries).collapse();
         }
     }
-
-    addEntry(1);
        
-    console.log("{{ $load_old_hour_entries }}");
+    if("{{ $load_old_hour_entries }}") {
+        let numEntries = parseInt("{{ session('count_hours_entries', '%') }}");
+        
+        for(let i = 1; i<=numEntries; i++) {
+            addEntry(i);
+        }
+    }
+    else{
+        addEntry(1);
+    }
 </script>
 @endsection
 

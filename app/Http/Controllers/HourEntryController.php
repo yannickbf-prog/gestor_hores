@@ -288,16 +288,16 @@ class HourEntryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(CreateHourEntryRequest $request, $lang) {
+        
+        $count_hours_entries = count($request->days);
+        
+        session(['count_hours_entries' => $count_hours_entries]);
 
         App::setLocale($lang);
 
         $request->validated();
 
         $inputed_hours_index = 0;
-        
-        $count_hours_entries = count($request->days);
-        
-        session(['count_hours_entries' => $count_hours_entries]);
 
         for ($i = 0; $i < $count_hours_entries; $i++) {
             $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
