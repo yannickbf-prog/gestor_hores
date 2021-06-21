@@ -18,6 +18,7 @@ class HourEntryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        
         $lang = setGetLang();
 
         $data = HourEntryController::getBDInfo()
@@ -192,8 +193,12 @@ class HourEntryController extends Controller {
                 ->with('success', __('message.time_entry') . " " . __('message.invalidated'));
     }
     
-    public function validateAllHours(){
+    public function validateAllHours($lang){
         
+        $entries_to_validate = HourEntryController::getBDInfo()->validated()->update(['validate' => 1]);
+        
+        return redirect()->route($lang . '_time_entries.index')
+                ->with('success', __('message.time_entries') . " " . __('message.validated'));
     }
 
     /**
@@ -289,8 +294,12 @@ class HourEntryController extends Controller {
         $request->validated();
 
         $inputed_hours_index = 0;
+        
+        $count_hours_entries = count($request->days);
+        
+        session(['count_hours_entries' => $count_hours_entries]);
 
-        for ($i = 0; $i < count($request->days); $i++) {
+        for ($i = 0; $i < $count_hours_entries; $i++) {
             $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
             $hours = $request->hours[$i];
             $user = $request->users[$i];
@@ -328,9 +337,10 @@ class HourEntryController extends Controller {
                 'updated_at' => now(),
             ]);
         }
-
+       
         return redirect()->route($lang . '_time_entries.index')
                         ->with('success', __('message.time_entry') . " " . __('message.created'));
+
     }
 
     /**

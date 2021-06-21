@@ -169,4 +169,5 @@ return [
     'bag_hour' => 'Bolsa de horas',
     'dedicated_hours' => 'H. dedicadas',
     'imputed_hours' => 'H. imputadas',
+    'validate_all_hours' => 'VALIDAR TODAS LAS HORAS'
 ];

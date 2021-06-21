@@ -170,4 +170,5 @@ return [
     'bag_hour' => 'Bag hour',
     'dedicated_hours' => 'Dedicated H.',
     'imputed_hours' => 'Imputed H.',
+    'validate_all_hours' => 'VALIDATE ALL HOURS'
 ];

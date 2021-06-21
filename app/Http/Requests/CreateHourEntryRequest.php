@@ -31,10 +31,26 @@ class CreateHourEntryRequest extends FormRequest {
 
         return [
             "days" => "required",
-            "days.*" => "required|string",
+            "days.*" => ["required", "string", "date_format:d/m/Y", 'before_or_equal:' . now()->format('d/m/Y')],
+            "hours" => "required|array",
+            "hours.*" => "required|int|min:1|max:24",
             "users" => "required|array",
             "users.*" => "required|string",
+            "customers" => "required|array",
+            "customers.*" => "required|string",
+            "projects" => "required|array",
+            "projects.*" => "required|string",
+            "inputed_hours" => "required|array",
+            "inputed_hours.*" => "required|int|min:1|max:24",
+            "desc" => "required|array",
+            "desc.*" => "required|string|min:5|max:150",
         ];
+    }
+    
+    public $validator = null;
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $this->validator = $validator;
     }
 
 }

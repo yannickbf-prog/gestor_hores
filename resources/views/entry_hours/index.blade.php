@@ -39,10 +39,15 @@
     </form>
 </div>
 
+@if (session('count_hours_entries'))
+    <div class="alert alert-success">
+        {{ session('count_hours_entries') }}
+    </div>
+@endif
+
 <table class="table table-bordered">
     @if (count($data) > 0)
-    <tr>
-        
+    <tr>   
         <th>{{ __('message.date') }}</th>  
         <th>{{ __('message.worker_name') }}</th>
         <th>{{ __('message.username') }}</th>
@@ -52,7 +57,6 @@
         <th>{{ __('message.dedicated_hours') }}</th>
         <th>{{ __('message.imputed_hours') }}</th>
         <th>{{ __('message.created_at') }}</th>
-     
     </tr>
     @endif
     @forelse ($data as $value)
@@ -97,7 +101,7 @@
 
 </table> 
 @if (count($data) > 0)
-<a class="btn btn-primary">{{ __('message.validate_all_hours') }}</a>
+<a class="btn general_button" href="{{ route('entry_hours.validate_all', $lang) }}">{{ __('message.validate_all_hours') }}</a>
 @endif
 <div id="paginationContainer">
     {!! $data->links() !!} 
@@ -505,7 +509,7 @@
         let submitHtml = document.createElement("button");
         submitHtml.innerText = "{{ __('message.save') }}";
         submitHtml.setAttribute('type', 'submit');
-        submitHtml.setAttribute('class', 'btn btn-primary');
+        submitHtml.setAttribute('class', 'btn general_button');
         buttonContainer.appendChild(submitHtml);
 
         document.getElementById('timeEntriesForm').appendChild(buttonContainer);
