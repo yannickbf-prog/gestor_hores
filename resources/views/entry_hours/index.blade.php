@@ -496,7 +496,7 @@ $load_old_hour_entries = true;
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
             document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn disabled btn-remove");
         } else {
-            if("{{ $load_old_hour_entries }}") {
+            if("{{ $load_old_hour_entries }}" && !loadFinish) {
                 document.getElementById('timeEntryContainer' + (containerId - 1) ).after(entryContainerHtml);
             }
             else {
@@ -526,13 +526,17 @@ $load_old_hour_entries = true;
             $('#timeEntryContainer'+countEntries).collapse();
         }
     }
-       
+    
+    var loadFinish = false;
+    
     if("{{ $load_old_hour_entries }}") {
         let numEntries = parseInt("{{ session('count_hours_entries', '%') }}");
         
         for(let i = 1; i<=numEntries; i++) {
             addEntry(i);
         }
+        
+        loadFinish = true;
     }
     else{
         addEntry(1);
