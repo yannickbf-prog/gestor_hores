@@ -13,6 +13,10 @@
 </div>
 @endif
 
+@php
+$load_old_hour_entries = false;
+@endphp
+
 @if ($errors->any())
 <div class="alert alert-danger mt-3">
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
@@ -22,6 +26,9 @@
         @endforeach
     </ul>
 </div>
+@php
+$load_old_hour_entries = true;
+@endphp
 @endif
 
 <div class="row py-2">
@@ -523,7 +530,7 @@
 
     addEntry(1);
        
-
+    console.log("{{ $load_old_hour_entries }}");
 </script>
 @endsection
 
