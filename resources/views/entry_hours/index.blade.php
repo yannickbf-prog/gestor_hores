@@ -445,6 +445,7 @@ $load_old_hour_entries = true;
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
         inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
+        inputDay.setAttribute('value', oldValueIndex);
 
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
@@ -528,9 +529,10 @@ $load_old_hour_entries = true;
     }
     
     var loadFinish = false;
+    var oldValueIndex = "{{ old('days.0') }}";
     
     if("{{ $load_old_hour_entries }}") {
-        let numEntries = parseInt("{{ session('count_hours_entries', '%') }}");
+        let numEntries = parseInt("{{ session('count_hours_entries') }}");
         
         for(let i = 1; i<=numEntries; i++) {
             addEntry(i);
