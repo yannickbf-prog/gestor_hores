@@ -408,7 +408,7 @@ $load_old_hour_entries = true;
 
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
-        entryContainerHtml.setAttribute('class', 'time_entry_container d-flex flex-wrap');
+        entryContainerHtml.setAttribute('class', 'time_entry_container d-flex flex-wrap mt-4');
 
         //Show add/remove buttons
         //Create buttons container
@@ -446,7 +446,9 @@ $load_old_hour_entries = true;
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
         inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
         if(old_data.length != 0 && !loadFinish){
-            inputDay.setAttribute('value', old_data.old_days[old_data_index]);
+            if(old_data.old_days[old_data_index] != null){
+                inputDay.setAttribute('value', old_data.old_days[old_data_index]);
+            }
             old_data_index++;
         }
 
