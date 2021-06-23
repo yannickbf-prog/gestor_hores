@@ -19,10 +19,23 @@ class HourEntryController extends Controller {
      */
     public function index() {
         
-        
+        $old_data[] = [];
+
         $old_days = old('days');
 
-                
+        if ($old_days != null) {
+            $old_data[] = [
+                'old_days' => $old_days,
+                'old_hours' => old('hours'),
+                'old_users' => old('users'),
+                'old_customers' => old('customers'),
+                'old_projects' => old('projects'),
+                'old_desc' => old('desc'),
+            ];
+        }
+        
+        $old_inputed_hours = old('inputed_hours');
+
         $lang = setGetLang();
 
         $data = HourEntryController::getBDInfo()
@@ -154,7 +167,7 @@ class HourEntryController extends Controller {
             ];
         }
 
-        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_days']))
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'old_inputed_hours']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -292,15 +305,14 @@ class HourEntryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(CreateHourEntryRequest $request, $lang) {
-        
+
         $count_hours_entries = count($request->days);
-         
+
         session(['count_hours_entries' => $count_hours_entries]);
 
         if (!$request->validated()) {
-            
+
             return back()->withInput();
-              
         } else {
             App::setLocale($lang);
 
