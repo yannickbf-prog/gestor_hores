@@ -292,6 +292,11 @@ class HourEntryController extends Controller {
         $count_hours_entries = count($request->days);
         
         session(['count_hours_entries' => $count_hours_entries]);
+                     
+        if (!$request) {
+            
+            return back()->withInput();
+        }
 
         App::setLocale($lang);
 

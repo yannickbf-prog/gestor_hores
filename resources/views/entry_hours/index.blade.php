@@ -108,6 +108,9 @@ $load_old_hour_entries = true;
     {!! $data->links() !!} 
 </div>
 @endsection
+@php
+$old_value_index = 0;
+@endphp
 @section('js')
 <script src="https://kit.fontawesome.com/ad4ed42faf.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ URL::asset('./dom-slider-master/dist/dom-slider.js') }}"></script>
@@ -445,7 +448,8 @@ $load_old_hour_entries = true;
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
         inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
-        inputDay.setAttribute('value', oldValueIndex);
+        
+        //inputDay.setAttribute('value', old2);
 
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
@@ -529,10 +533,13 @@ $load_old_hour_entries = true;
     }
     
     var loadFinish = false;
-    var oldValueIndex = "{{ old('days.0') }}";
+    
+    
     
     if("{{ $load_old_hour_entries }}") {
         let numEntries = parseInt("{{ session('count_hours_entries') }}");
+        
+        console.log("{{ session('old_days'), '%' }}");
         
         for(let i = 1; i<=numEntries; i++) {
             addEntry(i);
