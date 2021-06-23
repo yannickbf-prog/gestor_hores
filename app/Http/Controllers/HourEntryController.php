@@ -19,6 +19,8 @@ class HourEntryController extends Controller {
      */
     public function index() {
         
+        $old_days = old('days');
+
         $lang = setGetLang();
 
         $data = HourEntryController::getBDInfo()
@@ -29,8 +31,8 @@ class HourEntryController extends Controller {
         //Create json with the info of DB, need for selects user, project and bag of hours. This work with JavaScript
         $users_info = [];
         $users_data = DB::table('users_projects')->distinct()->select('user_id')->get();
-        
-          /*
+
+        /*
           //Create json to storage users with projects, there customers and there projects
           $json = [];
           $users_data = DB::table('users_projects')
@@ -129,7 +131,7 @@ class HourEntryController extends Controller {
 //                    ->where('users_projects.user_id', $user->id)
 //                    ->select('customers.id AS customer_id', 'customers.name AS customer_name')
 //                    ->get();
-            
+
             $users_customers_data = DB::table('users')
                     ->join('users_projects', 'users.id', '=', 'users_projects.user_id')
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
@@ -150,7 +152,7 @@ class HourEntryController extends Controller {
             ];
         }
 
-        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers']))
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_days']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -163,42 +165,42 @@ class HourEntryController extends Controller {
                 ->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                 ->select('users.nickname AS user_nickname', 'users.name AS user_name', 'users.surname AS user_surname', 'projects.name AS project_name', 'customers.name AS customer_name',
                 'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
-                'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id', 
+                'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
                 'hours_entry.day AS hours_entry_day');
 
         return $data;
     }
 
     public function validateEntryHour($hours_entry_id, $lang) {
-        
-        DB::statement("UPDATE hours_entry SET validate = 1 where id = ".$hours_entry_id);
-        
+
+        DB::statement("UPDATE hours_entry SET validate = 1 where id = " . $hours_entry_id);
+
 //        DB::table('hours_entry')
 //                ->where('hours_entry.id', $hour_entry_id)
 //                ->update(['validate' => 1]);
 
         return redirect()->route($lang . '_time_entries.index')
-                ->with('success', __('message.time_entry') . " " . __('message.validated'));
+                        ->with('success', __('message.time_entry') . " " . __('message.validated'));
     }
 
     public function inValidateEntryHour($hours_entry_id, $lang) {
-        
-        DB::statement("UPDATE hours_entry SET validate = 0 where id = ".$hours_entry_id);
+
+        DB::statement("UPDATE hours_entry SET validate = 0 where id = " . $hours_entry_id);
 
 //        DB::table('hours_entry')
 //                ->where('hours_entry.id', $id)
 //                ->update(['validate' => 0]);
 
         return redirect()->route($lang . '_time_entries.index')
-                ->with('success', __('message.time_entry') . " " . __('message.invalidated'));
+                        ->with('success', __('message.time_entry') . " " . __('message.invalidated'));
     }
-    
-    public function validateAllHours($lang){
-        
+
+    public function validateAllHours($lang) {
+
         $entries_to_validate = HourEntryController::getBDInfo()->validated()->update(['validate' => 1]);
-        
+
         return redirect()->route($lang . '_time_entries.index')
-                ->with('success', __('message.time_entries') . " " . __('message.validated'));
+                        ->with('success', __('message.time_entries') . " " . __('message.validated'));
     }
 
     /**
@@ -290,62 +292,62 @@ class HourEntryController extends Controller {
     public function store(CreateHourEntryRequest $request, $lang) {
         
         $count_hours_entries = count($request->days);
-        
+         
         session(['count_hours_entries' => $count_hours_entries]);
-                     
-        if (!$request) {
+
+        if (!$request->validated()) {
             
             return back()->withInput();
-        }
+              
+        } else {
+            App::setLocale($lang);
 
-        App::setLocale($lang);
+            $request->validated();
 
-        $request->validated();
+            $inputed_hours_index = 0;
 
-        $inputed_hours_index = 0;
+            for ($i = 0; $i < $count_hours_entries; $i++) {
+                $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
+                $hours = $request->hours[$i];
+                $user = $request->users[$i];
+                $customer = $request->customers[$i];
+                $project = $request->projects[$i];
+                $description = $request->desc[$i];
 
-        for ($i = 0; $i < $count_hours_entries; $i++) {
-            $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
-            $hours = $request->hours[$i];
-            $user = $request->users[$i];
-            $customer = $request->customers[$i];
-            $project = $request->projects[$i];
-            $description = $request->desc[$i];
+                $user_project_id = DB::table('users_projects')
+                        ->where('user_id', $user)
+                        ->where('project_id', $project)
+                        ->select('id')
+                        ->get();
 
-            $user_project_id = DB::table('users_projects')
-                    ->where('user_id', $user)
-                    ->where('project_id', $project)
-                    ->select('id')
-                    ->get();
+                $bag_hour_id;
+                $inputed_hours;
 
-            $bag_hour_id;
-            $inputed_hours;
+                if (DB::table('bag_hours')->where('project_id', $project)->select('id')->exists()) {
+                    $bag_hour_id = DB::table('bag_hours')->where('project_id', $project)->select('id')->get()[0]->id;
+                    $inputed_hours = $request->inputed_hours[$inputed_hours_index];
+                    $inputed_hours_index++;
+                } else {
+                    $bag_hour_id = NULL;
+                    $inputed_hours = $request->hours[$i];
+                }
 
-            if (DB::table('bag_hours')->where('project_id', $project)->select('id')->exists()) {
-                $bag_hour_id = DB::table('bag_hours')->where('project_id', $project)->select('id')->get()[0]->id;
-                $inputed_hours = $request->inputed_hours[$inputed_hours_index];
-                $inputed_hours_index++;
-            } else {
-                $bag_hour_id = NULL;
-                $inputed_hours = $request->hours[$i];
+                DB::table('hours_entry')->insert([
+                    'user_project_id' => $user_project_id[0]->id,
+                    'bag_hours_id' => $bag_hour_id,
+                    'day' => $day,
+                    'hours' => $hours,
+                    'hours_imputed' => $inputed_hours,
+                    'description' => $description,
+                    'validate' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
 
-            DB::table('hours_entry')->insert([
-                'user_project_id' => $user_project_id[0]->id,
-                'bag_hours_id' => $bag_hour_id,
-                'day' => $day,
-                'hours' => $hours,
-                'hours_imputed' => $inputed_hours,
-                'description' => $description,
-                'validate' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            return redirect()->route($lang . '_time_entries.index')
+                            ->with('success', __('message.time_entry') . " " . __('message.created'));
         }
-       
-        return redirect()->route($lang . '_time_entries.index')
-                        ->with('success', __('message.time_entry') . " " . __('message.created'));
-
     }
 
     /**
