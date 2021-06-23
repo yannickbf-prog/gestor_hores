@@ -530,6 +530,11 @@ $load_old_hour_entries = true;
         }
     }
     
+    var old_data = @json($old_data);
+    var old_inputed_hours = @json($old_inputed_hours);
+    
+    console.log(old_data);
+    console.log(old_inputed_hours);
 
     var loadFinish = false;
     

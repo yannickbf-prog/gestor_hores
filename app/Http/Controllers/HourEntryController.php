@@ -19,12 +19,12 @@ class HourEntryController extends Controller {
      */
     public function index() {
         
-        $old_data[] = [];
+        $old_data = [];
 
         $old_days = old('days');
 
         if ($old_days != null) {
-            $old_data[] = [
+            $old_data = [
                 'old_days' => $old_days,
                 'old_hours' => old('hours'),
                 'old_users' => old('users'),
