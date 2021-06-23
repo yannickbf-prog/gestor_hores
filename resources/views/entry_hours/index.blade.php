@@ -449,7 +449,7 @@ $old_value_index = 0;
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
         inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
         
-        //inputDay.setAttribute('value', old2);
+        inputDay.setAttribute('value', "<?php if(isset($old_days)) echo $old_days[0] ?>");
 
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
@@ -534,12 +534,8 @@ $old_value_index = 0;
     
     var loadFinish = false;
     
-    
-    
     if("{{ $load_old_hour_entries }}") {
         let numEntries = parseInt("{{ session('count_hours_entries') }}");
-        
-        console.log("{{ session('old_days'), '%' }}");
         
         for(let i = 1; i<=numEntries; i++) {
             addEntry(i);

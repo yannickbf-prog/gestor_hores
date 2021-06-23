@@ -19,8 +19,10 @@ class HourEntryController extends Controller {
      */
     public function index() {
         
+        
         $old_days = old('days');
 
+                
         $lang = setGetLang();
 
         $data = HourEntryController::getBDInfo()
