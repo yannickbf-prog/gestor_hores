@@ -445,7 +445,7 @@ $load_old_hour_entries = true;
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
         inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
-        if(old_data.length != 0){
+        if(old_data.length != 0 && !loadFinish){
             inputDay.setAttribute('value', old_data.old_days[old_data_index]);
             old_data_index++;
         }
