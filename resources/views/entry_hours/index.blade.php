@@ -39,7 +39,7 @@ $load_old_hour_entries = true;
     </div>
 </div>
 <div class="mt-2 pt-1" id="timeEntriesFormContainer">
-    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
+    <strong class="ml-2 mt-4">{{__('message.fields_are_required')}}</strong>
     <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
         @csrf
 
@@ -198,6 +198,7 @@ $load_old_hour_entries = true;
         
         let totalCountHtml = document.createElement("div");
         totalCountHtml.setAttribute('id', 'totalCount');
+        totalCountHtml.setAttribute('class', ' mt-3');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
 
         let strongTotalcount = document.createElement("strong");
@@ -469,6 +470,13 @@ $load_old_hour_entries = true;
         inputHours.setAttribute('type', 'number');
         inputHours.setAttribute('class', 'hours form-control');
         inputHours.setAttribute('placeholder', "{{ __('message.hours') }} ");
+        
+//        if(old_data.length != 0 && !loadFinish){
+//            if(old_data.old_hours[old_data_index] != null){
+//                inputDay.setAttribute('value', old_data.old_hours[old_data_index]);
+//            }
+//            old_data_index++;
+//        }
 
         formGroup2.appendChild(inputHours);
         entryContainerHtml.appendChild(formGroup2);
