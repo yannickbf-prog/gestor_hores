@@ -30,12 +30,11 @@ class HourEntryController extends Controller {
                 'old_users' => old('users'),
                 'old_customers' => old('customers'),
                 'old_projects' => old('projects'),
+                'old_inputed_hours' => old('inputed_hours'),
                 'old_desc' => old('desc'),
             ];
         }
         
-        $old_inputed_hours = old('inputed_hours');
-
         $lang = setGetLang();
 
         $data = HourEntryController::getBDInfo()
@@ -167,7 +166,7 @@ class HourEntryController extends Controller {
             ];
         }
 
-        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'old_inputed_hours']))
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 

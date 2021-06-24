@@ -299,8 +299,8 @@ function showHideImputedHours(containerId) {
         imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
         imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
         
-        if (old_inputed_hours != null && !loadFinish && old_inputed_hours[old_inputed_hours_index] != null) {
-            imputedHoursHtml.setAttribute('value', old_inputed_hours[old_inputed_hours_index]);
+        if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
+            imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
         }
         
         old_inputed_hours_index++;
@@ -550,12 +550,9 @@ function addEntry(containerId) {
 }
 
 var old_data = @json($old_data);
-        var old_inputed_hours = @json($old_inputed_hours);
+        
 var old_data_index = 0;
 var old_inputed_hours_index = 0;
-
-console.log(old_data);
-console.log(old_inputed_hours);
 
 var loadFinish = false;
 
