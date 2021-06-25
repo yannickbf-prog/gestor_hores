@@ -167,7 +167,7 @@ $load_old_hour_entries = true;
         labelDesc.innerText = "*{{ __('message.task_description') }}: ";
         labelDesc.setAttribute('for', 'desc' + containerId);
         formGroup6.appendChild(labelDesc);
-        let inputDesc = document.createElement("input");
+        let inputDesc = document.createElement("textarea");
         inputDesc.setAttribute('name', 'desc[]');
         inputDesc.setAttribute('id', 'desc' + containerId);
         inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
@@ -412,6 +412,11 @@ $load_old_hour_entries = true;
             $('#timeEntryContainer'+countEntries).collapse();
         }
     }
+    
+    var old_data = @json($old_data);
+        
+    var old_data_index = 0;
+    var old_inputed_hours_index = 0;
 
     var loadFinish = false;
 

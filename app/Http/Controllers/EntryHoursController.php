@@ -22,6 +22,22 @@ class EntryHoursController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
+        
+        $old_data = [];
+
+        $old_days = old('days');
+
+        if ($old_days != null) {
+            $old_data = [
+                'old_days' => $old_days,
+                'old_hours' => old('hours'),
+                'old_customers' => old('customers'),
+                'old_projects' => old('projects'),
+                'old_inputed_hours' => old('inputed_hours'),
+                'old_desc' => old('desc'),
+            ];
+        }
+        
         $lang = setGetLang();
 
         $user_id = Auth::user()->getUserId();
@@ -60,7 +76,7 @@ class EntryHoursController extends Controller {
             ];
         }
 
-        return view('entry_hours_worker.index', compact(['lang', 'json_data']));
+        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data']));
     }
 
     /**
