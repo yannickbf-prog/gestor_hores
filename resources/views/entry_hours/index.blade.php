@@ -39,7 +39,7 @@ $load_old_hour_entries = true;
     </div>
 </div>
 <div class="mt-2 pt-1" id="timeEntriesFormContainer">
-    <strong class="ml-2 mt-4">{{__('message.fields_are_required')}}</strong>
+    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
     <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
         @csrf
 

@@ -128,6 +128,7 @@ $load_old_hour_entries = true;
         let totalCountHtml = document.createElement("div");
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
+        totalCountHtml.setAttribute('class', 'mt-3');
 
         let strongTotalcount = document.createElement("strong");
         strongTotalcount.setAttribute('class', 'ml-2');
@@ -318,7 +319,7 @@ $load_old_hour_entries = true;
 
         let entryContainerHtml = document.createElement("div");
         entryContainerHtml.setAttribute('id', 'timeEntryContainer' + countEntries);
-        entryContainerHtml.setAttribute('class', 'time_entry_container d-flex flex-wrap');
+        entryContainerHtml.setAttribute('class', 'time_entry_container d-flex flex-wrap mt-4');
 
         //Show add/remove buttons
         //Create buttons container
@@ -399,7 +400,7 @@ $load_old_hour_entries = true;
         let submitHtml = document.createElement("button");
         submitHtml.innerText = "{{ __('message.save') }}";
         submitHtml.setAttribute('type', 'submit');
-        submitHtml.setAttribute('class', 'btn btn-primary');
+        submitHtml.setAttribute('class', 'btn general_button');
         buttonContainer.appendChild(submitHtml);
 
         document.getElementById('timeEntriesForm').appendChild(buttonContainer);
