@@ -268,7 +268,7 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = project.project_id;
             option.innerText = project.project_name;
-            if(project.project_id == last_customer_and_project.project_id) option.selected = true; 
+            if(last_customer_and_project != null && project.project_id == last_customer_and_project.project_id) option.selected = true; 
             if(old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index]) option.selected = true;
             projectSelectHtml.appendChild(option);
 
@@ -304,7 +304,7 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = customer.customer_id;
             option.innerText = customer.customer_name;
-            if(customer.customer_id == last_customer_and_project.customer_id) option.selected = true; 
+            if(last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id) option.selected = true; 
             if(old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index]) option.selected = true; 
             customerSelectHtml.appendChild(option);
         }
