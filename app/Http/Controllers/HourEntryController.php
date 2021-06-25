@@ -178,7 +178,7 @@ class HourEntryController extends Controller {
                 ->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
                 ->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                 ->select('users.nickname AS user_nickname', 'users.name AS user_name', 'users.surname AS user_surname', 'projects.name AS project_name', 'customers.name AS customer_name',
-                'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
+                'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours_imputed AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
                 'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
                 'hours_entry.day AS hours_entry_day');
 
@@ -310,12 +310,12 @@ class HourEntryController extends Controller {
         session(['count_hours_entries' => $count_hours_entries]);
 
         if (!$request->validated()) {
-
+            
             return back()->withInput();
+            
         } else {
+            
             App::setLocale($lang);
-
-            $request->validated();
 
             $inputed_hours_index = 0;
 

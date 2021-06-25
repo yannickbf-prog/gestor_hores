@@ -14,6 +14,10 @@
     </div>
 </div>
 
+@php
+$load_old_hour_entries = false;
+@endphp
+
 @if ($errors->any())
 <div class="alert alert-danger mt-3">
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
@@ -23,7 +27,11 @@
         @endforeach
     </ul>
 </div>
+@php
+$load_old_hour_entries = true;
+@endphp
 @endif
+
 <div class="mt-2 pt-1" id="timeEntriesFormContainer">
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
     <form action="{{ route($lang.'_entry_hours.store') }}" method="POST" id="timeEntriesForm">
@@ -373,7 +381,11 @@
             document.getElementById('timeEntriesForm').appendChild(entryContainerHtml);
             document.getElementById('timeEntryContainer1').getElementsByTagName('div')[0].getElementsByTagName('a')[1].setAttribute('class', "btn disabled btn-remove");
         } else {
-            document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
+            if ("{{ $load_old_hour_entries }}" && !loadFinish) {
+                document.getElementById('timeEntryContainer' + (containerId - 1)).after(entryContainerHtml);
+            } else {
+                document.getElementById('timeEntryContainer' + containerId).after(entryContainerHtml);
+            }
         }
 
         showCustomersOfUser(countEntries);
@@ -400,7 +412,19 @@
         }
     }
 
-    addEntry(1);
+    var loadFinish = false;
+
+    if ("{{ $load_old_hour_entries }}") {
+        let numEntries = parseInt("{{ session('count_hours_entries_user') }}");
+
+        for (let i = 1; i <= numEntries; i++) {
+            addEntry(i);
+        }
+
+        loadFinish = true;
+    } else {
+        addEntry(1);
+    }
 
 
 </script>

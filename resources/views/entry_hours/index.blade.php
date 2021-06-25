@@ -243,14 +243,14 @@ function showDescription(containerId) {
     labelDesc.innerText = "*{{ __('message.task_description') }}: ";
     labelDesc.setAttribute('for', 'desc' + containerId);
     formGroup7.appendChild(labelDesc);
-    let inputDesc = document.createElement("input");
+    let inputDesc = document.createElement("textarea");
     inputDesc.setAttribute('name', 'desc[]');
     inputDesc.setAttribute('id', 'desc' + containerId);
     inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
     inputDesc.setAttribute('class', "form-control");
     
     if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
-        inputDesc.setAttribute('value', old_data.old_desc[old_data_index]);
+        inputDesc.innerHTML = old_data.old_desc[old_data_index];
     }
     old_data_index++;
     
@@ -349,6 +349,7 @@ function showProjectsOfUserAndCustomer(containerId) {
             let option = document.createElement("option");
             option.value = project.project_id;
             option.innerText = project.project_name;
+            if(old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index]) option.selected = true; 
             projectSelectHtml.appendChild(option);
         }
     }
@@ -463,6 +464,9 @@ function addEntry(containerId) {
     if (old_data.length != 0 && !loadFinish && old_data.old_days[old_data_index] != null) {
         inputDay.setAttribute('value', old_data.old_days[old_data_index]);
     }
+    else {
+        inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}" );
+    }
 
     formGroup1.appendChild(inputDay);
     entryContainerHtml.appendChild(formGroup1);
@@ -484,6 +488,9 @@ function addEntry(containerId) {
 
     if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
         inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
+    }
+    else{
+        inputHours.setAttribute('value', 8)
     }
 
     formGroup2.appendChild(inputHours);

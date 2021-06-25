@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use App\Http\Requests\CreateHourEntryRequestUser;
 
 class EntryHoursController extends Controller {
 
@@ -77,51 +78,63 @@ class EntryHoursController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CreateHourEntryRequestUser $request) {
         
-        $inputed_hours_index = 0;
-        for ($i = 0; $i < count($request->days); $i++) {
-            $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
-            $hours = $request->hours[$i];
-            $user = Auth::user()->getUserId();
-            $customer = $request->customers[$i];
-            $project = $request->projects[$i];
-            $description = $request->desc[$i];
-            
-            $user_project_id = DB::table('users_projects')
-                    ->where('user_id', $user)
-                    ->where('project_id', $project)
-                    ->select('id')
-                    ->get();
-            
-            $bag_hour_id;
-            $inputed_hours;
-            if(DB::table('bag_hours')->where('project_id', $project)->select('id')->exists()){
-                $bag_hour_id = DB::table('bag_hours')->where('project_id', $project)->select('id')->get()[0]->id;
-                $inputed_hours = $request->inputed_hours[$inputed_hours_index];
-                $inputed_hours_index++;
-            }
-            else{
-                $bag_hour_id = NULL;
-                $inputed_hours = $request->hours[$i];
-            }
-            
-            DB::table('hours_entry')->insert([
-                'user_project_id' => $user_project_id[0]->id,
-                'bag_hours_id' => $bag_hour_id,
-                'day' => $day,
-                'hours' => $hours,
-                'hours_imputed' => $inputed_hours,
-                'description' => $description,
-                'validate' => 1,
-                'created_at' => now(),
-                'updated_at' => now(), 
-            ]);
-        }
-        
-        $lang = setGetLang();
+        $count_hours_entries = count($request->days);
 
-        return view('entry_hours_worker.success', compact('lang'));
+        session(['count_hours_entries_user' => $count_hours_entries]);
+        
+        if (!$request->validated()) {
+            
+            return back()->withInput();
+            
+        } 
+        else {
+        
+            $inputed_hours_index = 0;
+            for ($i = 0; $i < count($request->days); $i++) {
+                $day = Carbon::createFromFormat('d/m/Y', $request->days[$i])->format('Y-m-d');
+                $hours = $request->hours[$i];
+                $user = Auth::user()->getUserId();
+                $customer = $request->customers[$i];
+                $project = $request->projects[$i];
+                $description = $request->desc[$i];
+
+                $user_project_id = DB::table('users_projects')
+                        ->where('user_id', $user)
+                        ->where('project_id', $project)
+                        ->select('id')
+                        ->get();
+
+                $bag_hour_id;
+                $inputed_hours;
+                if(DB::table('bag_hours')->where('project_id', $project)->select('id')->exists()){
+                    $bag_hour_id = DB::table('bag_hours')->where('project_id', $project)->select('id')->get()[0]->id;
+                    $inputed_hours = $request->inputed_hours[$inputed_hours_index];
+                    $inputed_hours_index++;
+                }
+                else{
+                    $bag_hour_id = NULL;
+                    $inputed_hours = $request->hours[$i];
+                }
+
+                DB::table('hours_entry')->insert([
+                    'user_project_id' => $user_project_id[0]->id,
+                    'bag_hours_id' => $bag_hour_id,
+                    'day' => $day,
+                    'hours' => $hours,
+                    'hours_imputed' => $inputed_hours,
+                    'description' => $description,
+                    'validate' => 0,
+                    'created_at' => now(),
+                    'updated_at' => now(), 
+                ]);
+            }
+
+            $lang = setGetLang();
+
+            return view('entry_hours_worker.success', compact('lang'));
+        }
     }
 
     /**
