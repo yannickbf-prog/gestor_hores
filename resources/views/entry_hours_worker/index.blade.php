@@ -172,6 +172,12 @@ $load_old_hour_entries = true;
         inputDesc.setAttribute('id', 'desc' + containerId);
         inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
         inputDesc.setAttribute('class', "form-control");
+        
+        if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
+            inputDesc.innerHTML = old_data.old_desc[old_data_index];
+        }
+        old_data_index++;
+        
         formGroup6.appendChild(inputDesc);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
     }
@@ -212,6 +218,12 @@ $load_old_hour_entries = true;
             imputedHoursHtml.setAttribute('placeholder', "{{ __('message.inputed_hours') }}");
             imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
             imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
+            
+            if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
+                imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
+            }
+
+            old_inputed_hours_index++;
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
                 document.getElementById('inputedHoursContainer' + containerId).remove();
@@ -256,6 +268,8 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = project.project_id;
             option.innerText = project.project_name;
+            if(project.project_id == last_customer_and_project.project_id) option.selected = true; 
+            if(old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index]) option.selected = true;
             projectSelectHtml.appendChild(option);
 
         }
@@ -290,6 +304,8 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = customer.customer_id;
             option.innerText = customer.customer_name;
+            if(customer.customer_id == last_customer_and_project.customer_id) option.selected = true; 
+            if(old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index]) option.selected = true; 
             customerSelectHtml.appendChild(option);
         }
 
@@ -357,6 +373,13 @@ $load_old_hour_entries = true;
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
         inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
         
+        if (old_data.length != 0 && !loadFinish && old_data.old_days[old_data_index] != null) {
+            inputDay.setAttribute('value', old_data.old_days[old_data_index]);
+        }
+        else {
+            inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}" );
+        }
+        
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
 
@@ -374,6 +397,13 @@ $load_old_hour_entries = true;
         inputHours.setAttribute('type', 'number');
         inputHours.setAttribute('class', 'hours form-control');
         inputHours.setAttribute('placeholder', "{{ __('message.hours') }} ");
+        
+        if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
+            inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
+        }
+        else{
+            inputHours.setAttribute('value', 8)
+        }
 
         formGroup2.appendChild(inputHours);
         entryContainerHtml.appendChild(formGroup2);
@@ -412,6 +442,10 @@ $load_old_hour_entries = true;
             $('#timeEntryContainer'+countEntries).collapse();
         }
     }
+    
+    var last_customer_and_project = @json($last_customer_and_project);
+    
+    console.log(last_customer_and_project);
     
     var old_data = @json($old_data);
         

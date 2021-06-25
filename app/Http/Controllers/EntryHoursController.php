@@ -75,8 +75,26 @@ class EntryHoursController extends Controller {
                 'customer_projects' => $user_customer_projects,
             ];
         }
+        
+        $last_project_entry = DB::table('hours_entry')
+                ->join('users_projects', 'hours_entry.user_project_id', '=', 'users_projects.id')
+                ->select('users_projects.project_id')
+                ->where('users_projects.user_id', $user_id)
+                ->latest('hours_entry.created_at')
+                ->first();
+       
+        
+        $last_customer_entry = DB::table('projects')
+                ->select('customer_id')
+                ->where('projects.id', $last_project_entry->project_id)
+                ->first();
+        
+        $last_customer_and_project = [
+            'customer_id' => $last_customer_entry->customer_id,
+            'project_id' => $last_project_entry->project_id,
+        ];
 
-        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data']));
+        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project']));
     }
 
     /**
