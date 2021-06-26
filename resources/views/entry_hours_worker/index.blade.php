@@ -8,9 +8,6 @@
         <div class="pull-left">
             <h2>{{ __('message.add_new')." ".__('message.time_entry') }}</h2>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route($lang.'_time_entries.index') }}"> {{__('message.back')}}</a>
-        </div>
     </div>
 </div>
 
@@ -64,14 +61,14 @@ $load_old_hour_entries = true;
         <td class="align-middle">{{ $value->hour_entry_hours_imputed }}h</td>
         <td class="align-middle">{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
         <td class="align-middle">
-            @if($value->hour_entry_validate == '0')
+            @if($value->hour_entry_validate == '1')
             <div class="d-flex align-items-stretch justify-content-center text-success">
                 <i class="bi bi-check-square-fill validate_icon"></i>
             </div>         
             @endif
         </td>
     </tr>
-            
+
     @empty
     <li>{{__('message.no')}} {{__('message.time_entries')}} {{__('message.to_show')}}</li>
     @endforelse
@@ -198,6 +195,7 @@ $load_old_hour_entries = true;
     }
 
     function showDescription(containerId) {
+
         //Create task description
         if (document.getElementById('descContainer' + containerId) != null) {
             document.getElementById('descContainer' + containerId).remove();
@@ -218,6 +216,7 @@ $load_old_hour_entries = true;
         if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
             inputDesc.innerHTML = old_data.old_desc[old_data_index];
         }
+        
         old_data_index++;
 
         formGroup6.appendChild(inputDesc);
@@ -225,12 +224,14 @@ $load_old_hour_entries = true;
     }
 
     function showHideImputedHours(containerId) {
-        
-        let valueBeforeRefresh = null;
-                
-        if(document.getElementById("inputedHours"+containerId) != null){
-            valueBeforeRefresh = document.getElementById("inputedHours"+containerId).value;
-        }
+
+        let descValueBeforeRefresh = null;
+
+//        if (document.getElementById("desc" + containerId) != null) {
+//            descvalueBeforeRefresh = document.getElementById("desc" + containerId).innerText;
+//        }
+//        
+//        console.log(descValueBeforeRefresh);
 
         let projectId = document.getElementById("projects" + containerId).value;
         let customerId = document.getElementById('customers' + containerId).value;
@@ -270,10 +271,7 @@ $load_old_hour_entries = true;
             if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
                 imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
             }
-            if (valueBeforeRefresh != null) {
-                imputedHoursHtml.setAttribute('value', valueBeforeRefresh);
-            }
-
+            
             old_inputed_hours_index++;
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
@@ -357,13 +355,13 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = customer.customer_id;
             option.innerText = customer.customer_name;
-            
+
             if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
                 option.selected = true;
-            
+
             if (last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id && "{{ $load_old_hour_entries }}" == false)
                 option.selected = true;
-            
+
             customerSelectHtml.appendChild(option);
         }
 

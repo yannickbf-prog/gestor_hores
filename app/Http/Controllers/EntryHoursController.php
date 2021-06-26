@@ -167,13 +167,16 @@ class EntryHoursController extends Controller {
 
                 $bag_hour_id;
                 $inputed_hours;
+                $validate;
                 if (DB::table('bag_hours')->where('project_id', $project)->select('id')->exists()) {
                     $bag_hour_id = DB::table('bag_hours')->where('project_id', $project)->select('id')->get()[0]->id;
                     $inputed_hours = $request->inputed_hours[$inputed_hours_index];
                     $inputed_hours_index++;
+                    $validate = 0;
                 } else {
                     $bag_hour_id = NULL;
                     $inputed_hours = $request->hours[$i];
+                    $validate = 1;
                 }
 
                 DB::table('hours_entry')->insert([
@@ -183,7 +186,7 @@ class EntryHoursController extends Controller {
                     'hours' => $hours,
                     'hours_imputed' => $inputed_hours,
                     'description' => $description,
-                    'validate' => 0,
+                    'validate' => $validate,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
