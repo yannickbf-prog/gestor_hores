@@ -39,6 +39,48 @@ $load_old_hour_entries = true;
 
     </form>
 </div>
+
+<table class="table table-bordered mt-3">
+    @if (count($data) > 0)
+    <tr>   
+        <th>{{ __('message.date') }}</th>  
+        <th>{{ __('message.project') }}</th>
+        <th>{{ __('message.customer_name') }}</th>
+        <th>{{ __('message.bag_hour') }}</th>
+        <th>{{ __('message.dedicated_hours') }}</th>
+        <th>{{ __('message.imputed_hours') }}</th>
+        <th>{{ __('message.created_at') }}</th>
+        <th>{{ __('message.validated') }}</th>
+    </tr>
+    @endif
+    @forelse ($data as $value)
+    <tr>
+
+        <td class="align-middle">{{ Carbon\Carbon::parse($value->hours_entry_day)->format('d/m/y') }}</td>
+        <td class="align-middle">{{ $value->project_name }} </td>
+        <td class="align-middle">{{ $value->customer_name }}</td>
+        <td class="align-middle">{{ $value->type_bag_hour_name }}</td>
+        <td class="align-middle">{{ $value->hour_entry_hours }}h</td>
+        <td class="align-middle">{{ $value->hour_entry_hours_imputed }}h</td>
+        <td class="align-middle">{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
+        <td class="align-middle">
+            @if($value->hour_entry_validate == '0')
+            <div class="d-flex align-items-stretch justify-content-center text-success">
+                <i class="bi bi-check-square-fill validate_icon"></i>
+            </div>         
+            @endif
+        </td>
+    </tr>
+            
+    @empty
+    <li>{{__('message.no')}} {{__('message.time_entries')}} {{__('message.to_show')}}</li>
+    @endforelse
+
+</table> 
+
+<div id="paginationContainer">
+    {!! $data->links() !!} 
+</div>
 @stop
 
 @section('js')
@@ -117,14 +159,14 @@ $load_old_hour_entries = true;
 
     //Get the object from json
     var json_data = @json($json_data);
-            console.log(json_data);
-            
+    console.log(json_data);
+
     function createCountOfHours() {
-        
+
         if (document.getElementById('totalCount') != null) {
             document.getElementById('totalCount').remove();
         }
-        
+
         let totalCountHtml = document.createElement("div");
         totalCountHtml.setAttribute('id', 'totalCount');
         totalCountHtml.setAttribute('onchange', 'createCountOfHours()');
@@ -136,23 +178,23 @@ $load_old_hour_entries = true;
 
         let totalCount = 0;
         for (let i = 0; i < document.getElementsByName('hours[]').length; i++) {
-            if (document.getElementsByName('inputed_hours[]')[i] == null) {                
-                if(Number.isInteger(parseInt(document.getElementsByName('hours[]')[i].value))){
+            if (document.getElementsByName('inputed_hours[]')[i] == null) {
+                if (Number.isInteger(parseInt(document.getElementsByName('hours[]')[i].value))) {
                     totalCount += parseInt(document.getElementsByName('hours[]')[i].value);
                 }
             } else {
-                if(Number.isInteger(parseInt(document.getElementsByName('inputed_hours[]')[i].value))){
+                if (Number.isInteger(parseInt(document.getElementsByName('inputed_hours[]')[i].value))) {
                     totalCount += parseInt(document.getElementsByName('inputed_hours[]')[i].value);
                 }
             }
         }
 
-        strongTotalcount.innerText += totalCount+"h";
-        
+        strongTotalcount.innerText += totalCount + "h";
+
         totalCountHtml.appendChild(strongTotalcount);
-        
+
         document.getElementById('submitContainer').before(totalCountHtml);
-        
+
     }
 
     function showDescription(containerId) {
@@ -172,17 +214,23 @@ $load_old_hour_entries = true;
         inputDesc.setAttribute('id', 'desc' + containerId);
         inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
         inputDesc.setAttribute('class', "form-control");
-        
+
         if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
             inputDesc.innerHTML = old_data.old_desc[old_data_index];
         }
         old_data_index++;
-        
+
         formGroup6.appendChild(inputDesc);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup6);
     }
 
     function showHideImputedHours(containerId) {
+        
+        let valueBeforeRefresh = null;
+                
+        if(document.getElementById("inputedHours"+containerId) != null){
+            valueBeforeRefresh = document.getElementById("inputedHours"+containerId).value;
+        }
 
         let projectId = document.getElementById("projects" + containerId).value;
         let customerId = document.getElementById('customers' + containerId).value;
@@ -218,9 +266,12 @@ $load_old_hour_entries = true;
             imputedHoursHtml.setAttribute('placeholder', "{{ __('message.inputed_hours') }}");
             imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
             imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
-            
+
             if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
                 imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
+            }
+            if (valueBeforeRefresh != null) {
+                imputedHoursHtml.setAttribute('value', valueBeforeRefresh);
             }
 
             old_inputed_hours_index++;
@@ -268,8 +319,10 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = project.project_id;
             option.innerText = project.project_name;
-            if(last_customer_and_project != null && project.project_id == last_customer_and_project.project_id) option.selected = true; 
-            if(old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index]) option.selected = true;
+            if (last_customer_and_project != null && project.project_id == last_customer_and_project.project_id)
+                option.selected = true;
+            if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
+                option.selected = true;
             projectSelectHtml.appendChild(option);
 
         }
@@ -299,13 +352,18 @@ $load_old_hour_entries = true;
         customerSelectHtml.setAttribute('id', 'customers' + containerId);
         customerSelectHtml.setAttribute('onchange', 'showProjectsOfUserAndCustomer(' + containerId + ')');
         customerSelectHtml.setAttribute('class', 'form-control');
-        
+
         for (customer of json_data) {
             let option = document.createElement("option");
             option.value = customer.customer_id;
             option.innerText = customer.customer_name;
-            if(last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id) option.selected = true; 
-            if(old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index]) option.selected = true; 
+            
+            if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
+                option.selected = true;
+            
+            if (last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id && "{{ $load_old_hour_entries }}" == false)
+                option.selected = true;
+            
             customerSelectHtml.appendChild(option);
         }
 
@@ -320,12 +378,12 @@ $load_old_hour_entries = true;
     }
 
     function removeEntry(containerId) {
-        $('#timeEntryContainer'+containerId).on('hidden.bs.collapse', function () {
+        $('#timeEntryContainer' + containerId).on('hidden.bs.collapse', function () {
             document.getElementById("timeEntryContainer" + containerId).remove();
             createCountOfHours();
         })
-        
-        $('#timeEntryContainer'+containerId).collapse('hide');
+
+        $('#timeEntryContainer' + containerId).collapse('hide');
     }
 
     var countEntries = 0;
@@ -340,7 +398,7 @@ $load_old_hour_entries = true;
         //Show add/remove buttons
         //Create buttons container
         let agregateButtonsContainer = document.createElement("div");
-        agregateButtonsContainer.setAttribute('class', 'order-10 align-self-center');        
+        agregateButtonsContainer.setAttribute('class', 'order-10 align-self-center');
         agregateButtonsContainer.setAttribute('id', 'addRemoveEntryContainer');
 
         //Plus button
@@ -372,14 +430,13 @@ $load_old_hour_entries = true;
         inputDay.setAttribute('id', 'dp' + countEntries);
         inputDay.setAttribute('onclick', "$('#dp" + countEntries + "').datepicker({dateFormat: 'dd/mm/yy'}).val();$('#dp" + countEntries + "').datepicker('show');");
         inputDay.setAttribute('placeholder', 'dd/mm/aaaa');
-        
+
         if (old_data.length != 0 && !loadFinish && old_data.old_days[old_data_index] != null) {
             inputDay.setAttribute('value', old_data.old_days[old_data_index]);
+        } else {
+            inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}");
         }
-        else {
-            inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}" );
-        }
-        
+
         formGroup1.appendChild(inputDay);
         entryContainerHtml.appendChild(formGroup1);
 
@@ -397,11 +454,10 @@ $load_old_hour_entries = true;
         inputHours.setAttribute('type', 'number');
         inputHours.setAttribute('class', 'hours form-control');
         inputHours.setAttribute('placeholder', "{{ __('message.hours') }} ");
-        
+
         if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
             inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
-        }
-        else{
+        } else {
             inputHours.setAttribute('value', 8)
         }
 
@@ -420,7 +476,7 @@ $load_old_hour_entries = true;
         }
 
         showCustomersOfUser(countEntries);
-        
+
         //Create submit button
         if (document.getElementById("submitContainer") != null)
             document.getElementById("submitContainer").remove();
@@ -437,18 +493,16 @@ $load_old_hour_entries = true;
 
         //Create total count of hours
         createCountOfHours();
-        
-        if(countEntries != 1){
-            $('#timeEntryContainer'+countEntries).collapse();
+
+        if (countEntries != 1) {
+            $('#timeEntryContainer' + countEntries).collapse();
         }
     }
-    
+
     var last_customer_and_project = @json($last_customer_and_project);
-    
-    console.log(last_customer_and_project);
-    
+
     var old_data = @json($old_data);
-        
+
     var old_data_index = 0;
     var old_inputed_hours_index = 0;
 

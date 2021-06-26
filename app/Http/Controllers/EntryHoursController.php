@@ -9,6 +9,7 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use App\Http\Requests\CreateHourEntryRequestUser;
+use App\Models\UsersProject;
 
 class EntryHoursController extends Controller {
 
@@ -103,8 +104,24 @@ class EntryHoursController extends Controller {
                 'project_id' => $last_project_entry->project_id,
             ];
         }
+        
+        //Data to create table
+        
+        $data = UsersProject::join('users', 'users_projects.user_id', '=', 'users.id')
+                ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+                ->join('customers', 'projects.customer_id', '=', 'customers.id')
+                ->join('hours_entry', 'users_projects.id', '=', 'hours_entry.user_project_id')
+                ->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
+                ->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
+                ->where('users.id', $user_id)
+                ->select('projects.name AS project_name', 'customers.name AS customer_name',
+                'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours_imputed AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
+                'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
+                'hours_entry.day AS hours_entry_day')
+                ->paginate(10);
+        
 
-        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project']));
+        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data']));
     }
 
     /**
