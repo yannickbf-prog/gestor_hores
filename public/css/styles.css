@@ -218,3 +218,8 @@ th {
     background-color: #d9f3f7;
     color: #2da0e2;
 }
+
+#filterDiv {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc
+}

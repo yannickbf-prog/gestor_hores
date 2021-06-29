@@ -46,8 +46,12 @@ $load_old_hour_entries = true;
     </form>
 </div>
 
-<div>
+<div id="filterDiv">
     <div class="d-flex align-content-stretch align-items-center"><h3 class="d-inline-block m-0">Filtre</h3><i class=" pl-1 bi bi-chevron-up fa-lg"></i></div>
+    <div class="form-group col-md-6">
+        <label for="dp1">*Dia: </label>
+        <input id="name" class="form-control">
+    </div>
 </div>
 
 <table class="table table-bordered">
