@@ -46,6 +46,10 @@ $load_old_hour_entries = true;
     </form>
 </div>
 
+<div>
+    <div class="d-flex align-content-stretch align-items-center"><h3 class="d-inline-block m-0">Filtre</h3><i class=" pl-1 bi bi-chevron-up fa-lg"></i></div>
+</div>
+
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>   
@@ -72,26 +76,17 @@ $load_old_hour_entries = true;
         <td>{{ $value->hour_entry_hours }}h</td>
         <td>{{ $value->hour_entry_hours_imputed }}h</td>
         <td>{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
+      
         <td>
-
-        </td>
-        <td>
-            @isset($value->hours_entry_bag_hours_id)
+            @if($value->hour_entry_validate == '0')
             <div class="validate_btns_container">
-                <a href="{{ route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}" style="text-decoration: none" class="text-danger {{ ($value->hour_entry_validate == '0') ? 'disabledd' : ''}}">
-                    <i class="bi bi-x-square-fill fa-lg"></i>
-                </a>
-
-                <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-success {{ ($value->hour_entry_validate == '1') ? 'disabledd' : ''}}">
+                
+                <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-success">
                     <i class="bi bi-check-square-fill fa-lg"></i>
                 </a>
 
-                <a href="{{ $value->hour_entry_validate == '0' ? route('entry_hours.validate',[$value->hours_entry_id, $lang]) : route('entry_hours.invalidate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-secondary">
-                    <i class="bi bi-square-fill fa-lg"></i>
-                </a>
-
             </div>
-            @endisset
+            @endif
         </td>
         <td>{{ $value->hours_entry_id }}</td>
     </tr>
