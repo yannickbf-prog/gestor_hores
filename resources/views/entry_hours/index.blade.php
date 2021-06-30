@@ -67,7 +67,12 @@ $load_old_hour_entries = true;
                 </select>
             </div>
         </div>
+        <div class="form-group d-flex justify-content-end mb-0">
+            <button class="btn general_button mr-0 mb-2">BORRAR FILTRES</button>
+            <button class="btn general_button mr-0 mb-2">FILTRAR</button>
+        </div>
     </div>
+    
 </div>
 
 <table class="table table-bordered">
