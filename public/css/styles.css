@@ -233,3 +233,18 @@ th {
 .bi-chevron-down {
     transition: transform .6s ease-in-out;
 }
+
+#formGroupFilterName {
+    width: 20% !important;
+    margin-right: 25px;
+}
+
+#formGroupFilterCustomers {
+    width: 20%;
+    margin-right: 25px;
+}
+
+#formGroupFilterProjects {
+    width: 20%;
+    
+}

@@ -52,18 +52,20 @@ $load_old_hour_entries = true;
             <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
         </div>
     </div>
-    <div class="collapse row" id="collapseExample">
-        <div class="form-group col-md-3">
-            <label for="selectFilterName">*Cognoms, Nom: </label>
-            <select id="selectFilterName" name="select_filter_name" class="form-control" onchange="filterShowCustomersOfUser()">
-                @forelse ($users_with_projects as $value)
-                <option value="{{ $value->id }}">
-                    {{ $value->name." ".$value->surname }}
-                </option>
-                @empty
-                <li>{{__('message.no')}} {{__('message.users')}} {{__('message.to_show')}}</li>
-                @endforelse
-            </select>
+    <div class="collapse" id="collapseExample">
+        <div class="d-flex" id="inputsContainer">
+            <div class="form-group" id="formGroupFilterName">
+                <label for="selectFilterName">*Cognoms, Nom: </label>
+                <select id="selectFilterName" name="select_filter_name" class="form-control" onchange="filterShowCustomersOfUser()">
+                    @forelse ($users_with_projects as $value)
+                    <option value="{{ $value->id }}">
+                        {{ $value->name." ".$value->surname }}
+                    </option>
+                    @empty
+                    <li>{{__('message.no')}} {{__('message.users')}} {{__('message.to_show')}}</li>
+                    @endforelse
+                </select>
+            </div>
         </div>
     </div>
 </div>
@@ -621,7 +623,7 @@ function filterShowProjectsOfUserAndCustomer() {
     }
 
     formGroup.appendChild(projectSelectHtml);
-    document.getElementById('collapseExample').appendChild(formGroup);
+    document.getElementById('inputsContainer').appendChild(formGroup);
 
 }
 
@@ -642,6 +644,7 @@ function filterShowCustomersOfUser() {
     customerSelectHtml.name = "select_filter_customers";
     customerSelectHtml.setAttribute('id', 'selectFilterCustomers');
     customerSelectHtml.setAttribute('class', 'form-control');
+    customerSelectHtml.setAttribute('onchange', 'filterShowProjectsOfUserAndCustomer()');
 
     let userId = document.getElementById('selectFilterName').value;
 
@@ -665,7 +668,7 @@ function filterShowCustomersOfUser() {
     
     formGroup.appendChild(customerSelectHtml);
 
-    document.getElementById("collapseExample").appendChild(formGroup);
+    document.getElementById("inputsContainer").appendChild(formGroup);
     
     filterShowProjectsOfUserAndCustomer();
 }
