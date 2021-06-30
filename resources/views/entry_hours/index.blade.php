@@ -46,11 +46,25 @@ $load_old_hour_entries = true;
     </form>
 </div>
 
-<div id="filterDiv">
-    <div class="d-flex align-content-stretch align-items-center"><h3 class="d-inline-block m-0">Filtre</h3><i class=" pl-1 bi bi-chevron-up fa-lg"></i></div>
-    <div class="form-group col-md-6">
-        <label for="dp1">*Dia: </label>
-        <input id="name" class="form-control">
+<div id="filterDiv" class="p-4 mb-2">
+    <div class="mb-4">
+        <div class="d-flex align-content-stretch align-items-center" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
+        </div>
+    </div>
+    <div class="collapse row" id="collapseExample">
+        <div class="form-group col-md-3">
+            <label for="selectFilterName">*Cognoms, Nom: </label>
+            <select id="selectFilterName" name="select_filter_name" class="form-control" onchange="filterShowCustomersOfUser()">
+                @forelse ($users_with_projects as $value)
+                <option value="{{ $value->id }}">
+                    {{ $value->name." ".$value->surname }}
+                </option>
+                @empty
+                <li>{{__('message.no')}} {{__('message.users')}} {{__('message.to_show')}}</li>
+                @endforelse
+            </select>
+        </div>
     </div>
 </div>
 
@@ -80,11 +94,11 @@ $load_old_hour_entries = true;
         <td>{{ $value->hour_entry_hours }}h</td>
         <td>{{ $value->hour_entry_hours_imputed }}h</td>
         <td>{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
-      
+
         <td>
             @if($value->hour_entry_validate == '0')
             <div class="validate_btns_container">
-                
+
                 <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-success">
                     <i class="bi bi-check-square-fill fa-lg"></i>
                 </a>
@@ -112,6 +126,15 @@ $load_old_hour_entries = true;
 <script type="text/javascript" src="{{ URL::asset('./dom-slider-master/dist/dom-slider.js') }}"></script>
 
 <script>
+
+$('#collapseExample').on('show.bs.collapse', function () {
+    $('.bi-chevron-down').css("transform", "rotate(180deg)");
+})
+
+$('#collapseExample').on('hide.bs.collapse', function () {
+    $('.bi-chevron-down').css("transform", "rotate(0deg)");
+})
+
 $(".alert-success").slideDown(400);
 
 $(".alert-success").delay(6000).slideUp(400, function () {
@@ -247,12 +270,12 @@ function showDescription(containerId) {
     inputDesc.setAttribute('id', 'desc' + containerId);
     inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
     inputDesc.setAttribute('class', "form-control");
-    
+
     if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
         inputDesc.innerHTML = old_data.old_desc[old_data_index];
     }
     old_data_index++;
-    
+
     formGroup7.appendChild(inputDesc);
     document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
 
@@ -297,13 +320,13 @@ function showHideImputedHours(containerId) {
         imputedHoursHtml.setAttribute('oninput', 'createCountOfHours()');
         imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
         imputedHoursHtml.setAttribute('id', 'inputedHours' + containerId);
-        
+
         if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
             imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
         }
-        
+
         old_inputed_hours_index++;
-        
+
         if (document.getElementById('inputedHoursContainer' + containerId) != null) {
             document.getElementById('inputedHoursContainer' + containerId).remove();
         }
@@ -348,7 +371,8 @@ function showProjectsOfUserAndCustomer(containerId) {
             let option = document.createElement("option");
             option.value = project.project_id;
             option.innerText = project.project_name;
-            if(old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index]) option.selected = true; 
+            if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
+                option.selected = true;
             projectSelectHtml.appendChild(option);
         }
     }
@@ -390,7 +414,8 @@ function showCustomersOfUser(containerId) {
         let option = document.createElement("option");
         option.value = customer.customer_id;
         option.innerText = customer.customer_name;
-        if(old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index]) option.selected = true; 
+        if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
+            option.selected = true;
         customerSelectHtml.appendChild(option);
     }
 
@@ -462,9 +487,8 @@ function addEntry(containerId) {
 
     if (old_data.length != 0 && !loadFinish && old_data.old_days[old_data_index] != null) {
         inputDay.setAttribute('value', old_data.old_days[old_data_index]);
-    }
-    else {
-        inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}" );
+    } else {
+        inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}");
     }
 
     formGroup1.appendChild(inputDay);
@@ -487,8 +511,7 @@ function addEntry(containerId) {
 
     if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
         inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
-    }
-    else{
+    } else {
         inputHours.setAttribute('value', 8)
     }
 
@@ -513,7 +536,8 @@ function addEntry(containerId) {
             let option = document.createElement("option");
             option.value = user.user_id;
             option.innerText = user.user_nickname;
-            if(old_data.length != 0 && user.user_id == old_data.old_users[old_data_index]) option.selected = true;
+            if (old_data.length != 0 && user.user_id == old_data.old_users[old_data_index])
+                option.selected = true;
             userSelectHtml.appendChild(option);
         }
     }
@@ -555,8 +579,100 @@ function addEntry(containerId) {
     }
 }
 
+//Filter section functions
+
+function filterShowProjectsOfUserAndCustomer() {
+    
+     let formGroup = document.createElement("div");
+    formGroup.setAttribute('class', 'form-group');
+    formGroup.setAttribute('id', 'formGroupFilterProjects');
+    
+    let labelProject = document.createElement("label");
+    labelProject.setAttribute('for', 'selectFilterProjects');
+    labelProject.innerText = "*{{ __('message.project') }}: ";
+    formGroup.appendChild(labelProject);
+
+    //Create the select of projects
+    let projectSelectHtml = document.createElement("select");
+    projectSelectHtml.name = "select_filter_projects";
+    projectSelectHtml.setAttribute('id', 'selectFilterProjects');
+    projectSelectHtml.setAttribute('class', 'form-control');
+
+    let userId = document.getElementById('selectFilterName').value;
+    let customerId = document.getElementById('selectFilterCustomers').value;
+    let res = users_info.filter((item) => {
+        return item.user_id == userId;
+    });
+    let projectsInUser = res[0]['user_projects'];
+
+    for (project of projectsInUser) {
+        if (project.customer_id == customerId) {
+            let option = document.createElement("option");
+            option.value = project.project_id;
+            option.innerText = project.project_name;
+            if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
+                option.selected = true;
+            projectSelectHtml.appendChild(option);
+        }
+    }
+
+    if (document.getElementById('formGroupFilterProjects') != null) {
+        document.getElementById('formGroupFilterProjects').remove();
+    }
+
+    formGroup.appendChild(projectSelectHtml);
+    document.getElementById('collapseExample').appendChild(formGroup);
+
+}
+
+function filterShowCustomersOfUser() {
+
+
+    let formGroup = document.createElement("div");
+    formGroup.setAttribute('class', 'form-group');
+    formGroup.setAttribute('id', 'formGroupFilterCustomers');
+
+    let labelCustomer = document.createElement("label");
+    labelCustomer.innerText = "*{{ __('message.customer') }}: ";
+    labelCustomer.setAttribute('for', 'selectFilterCustomers');
+    formGroup.appendChild(labelCustomer);
+
+    //Create the select of customers
+    let customerSelectHtml = document.createElement("select");
+    customerSelectHtml.name = "select_filter_customers";
+    customerSelectHtml.setAttribute('id', 'selectFilterCustomers');
+    customerSelectHtml.setAttribute('class', 'form-control');
+
+    let userId = document.getElementById('selectFilterName').value;
+
+    let res = users_customers.filter((item) => {
+        return item.user_id == userId;
+    });
+    let customersInUser = res[0]['customers'];
+
+    for (customer of customersInUser) {
+        let option = document.createElement("option");
+        option.value = customer.customer_id;
+        option.innerText = customer.customer_name;
+        if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
+            option.selected = true;
+        customerSelectHtml.appendChild(option);
+    }
+    
+    if (document.getElementById('formGroupFilterCustomers') != null) {
+        document.getElementById('formGroupFilterCustomers').remove();
+    }
+    
+    formGroup.appendChild(customerSelectHtml);
+
+    document.getElementById("collapseExample").appendChild(formGroup);
+    
+    filterShowProjectsOfUserAndCustomer();
+}
+
+
 var old_data = @json($old_data);
-        
+
 var old_data_index = 0;
 var old_inputed_hours_index = 0;
 
@@ -573,6 +689,10 @@ if ("{{ $load_old_hour_entries }}") {
 } else {
     addEntry(1);
 }
+
+//Filters principal program
+filterShowCustomersOfUser();
+
 </script>
 @endsection
 

@@ -166,7 +166,7 @@ class HourEntryController extends Controller {
             ];
         }
 
-        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data']))
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'users_with_projects']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -177,7 +177,7 @@ class HourEntryController extends Controller {
                 ->join('hours_entry', 'users_projects.id', '=', 'hours_entry.user_project_id')
                 ->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
                 ->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
-                ->select('users.nickname AS user_nickname', 'users.name AS user_name', 'users.surname AS user_surname', 'projects.name AS project_name', 'customers.name AS customer_name',
+                ->select('users.id AS user_id', 'users.nickname AS user_nickname', 'users.name AS user_name', 'users.surname AS user_surname', 'projects.name AS project_name', 'customers.name AS customer_name',
                 'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours_imputed AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
                 'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
                 'hours_entry.day AS hours_entry_day');
