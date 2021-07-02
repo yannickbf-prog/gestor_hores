@@ -52,7 +52,8 @@ $load_old_hour_entries = true;
             <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
         </div>
     </div>
-    <div class="collapse" id="collapseExample">
+    <form action="{{ route($lang.'_time_entries.index') }}" method="GET" class="collapse" id="collapseExample"> 
+    @csrf
         <div class="d-flex" id="inputsContainer">
             <div class="form-group" id="formGroupFilterName">
                 <label for="selectFilterName">*Cognoms, Nom: </label>
@@ -69,13 +70,13 @@ $load_old_hour_entries = true;
         </div>
         <div class="form-group d-flex justify-content-end mb-0">
             <button class="btn general_button mr-0 mb-2">BORRAR FILTRES</button>
-            <button class="btn general_button mr-0 mb-2">FILTRAR</button>
+            <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
         </div>
-    </div>
+    </form>
     
 </div>
 
-<table class="table table-bordered">
+<table class="table">
     @if (count($data) > 0)
     <tr>   
         <th>{{ __('message.date') }}</th>  
@@ -87,6 +88,7 @@ $load_old_hour_entries = true;
         <th>{{ __('message.dedicated_hours') }}</th>
         <th>{{ __('message.imputed_hours') }}</th>
         <th>{{ __('message.created_at') }}</th>
+        <th></th>
     </tr>
     @endif
     @forelse ($data as $value)
@@ -113,7 +115,6 @@ $load_old_hour_entries = true;
             </div>
             @endif
         </td>
-        <td>{{ $value->hours_entry_id }}</td>
     </tr>
 
     @empty

@@ -17,7 +17,11 @@ class HourEntryController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index(Request $request) {
+        
+        if ($request->has('_token')) {
+            echo "hello";
+        }
         
         $old_data = [];
 

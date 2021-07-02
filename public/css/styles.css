@@ -248,3 +248,19 @@ th {
     width: 20%;
     
 }
+
+table {
+    border: 1px solid #e8e8e8;
+}
+
+table tr {
+    border-top: 1px solid #e8e8e8 !important;
+}
+
+table tr:hover{
+    background-color: #b7dff5;
+}
+
+table th {
+    background-color: #fafafa;
+}
