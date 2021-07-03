@@ -25,10 +25,10 @@ class EntryHoursController extends Controller {
     public function index(Request $request) {
         
         if ($request->has('_token')) {
-            session(['hour_entry_project' => $request['select_filter_projects']]);
+            session(['entry_hour_project' => $request['select_filter_projects']]);
         }
         
-        $project_id = session('hour_entry_project', "%");
+        $project_id = session('entry_hour_project', "%");
 
         $old_data = [];
 
@@ -153,7 +153,7 @@ class EntryHoursController extends Controller {
     
     public function deleteFilters($lang) {
         
-        session(['hour_entry_project' => "%"]);
+        session(['entry_hour_project' => "%"]);
 
         return redirect()->route($lang.'_entry_hours.index');
 
