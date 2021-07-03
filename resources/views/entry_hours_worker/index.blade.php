@@ -50,7 +50,7 @@ $load_old_hour_entries = true;
             <div class="d-flex" id="inputsContainer">
                 <div class="form-group" id="formGroupFilterCustomer">
                     <label for="selectFilterCustomers">{{__('message.customer')}}</label>
-                    <select id="selectFilterCustomers" name="select_filter_customer" class="form-control" onchange="filterShowCustomersOfUser()">
+                    <select id="selectFilterCustomers" name="select_filter_customer" class="form-control" onchange="filterShowProjectsOfUserAndCustomer()">
                         @forelse ($user_customers_data as $value)
                         <option value="{{ $value->customer_id }}">
                             {{ $value->customer_name }}
@@ -554,14 +554,9 @@ $load_old_hour_entries = true;
         projectSelectHtml.setAttribute('id', 'selectFilterProjects');
         projectSelectHtml.setAttribute('class', 'form-control');
 
-        let userId = "{{ $user_id }}";
         let customerId = document.getElementById('selectFilterCustomers').value;
-        let res = users_info.filter((item) => {
-            return item.user_id == userId;
-        });
-        let projectsInUser = res[0]['user_projects'];
 
-        for (project of projectsInUser) {
+        for (project of users_projects_with_customer) {
             if (project.customer_id == customerId) {
                 let option = document.createElement("option");
                 option.value = project.project_id;
