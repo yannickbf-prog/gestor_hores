@@ -255,12 +255,14 @@ table {
 
 table tr {
     border-top: 1px solid #e8e8e8 !important;
+    transition: background-color 0.3s ease;
 }
 
 table tr:hover{
     background-color: #b7dff5;
 }
 
-table th {
+table thead th {
     background-color: #fafafa;
+    border-bottom: 1px solid #dee2e6 !important;
 }
