@@ -53,6 +53,7 @@ $load_old_hour_entries = true;
         </div>
     </div>
     <div  class="collapse" id="collapseExample">
+
         <form action="{{ route($lang.'_time_entries.index') }}" method="GET"> 
             @csrf
             <div class="d-flex" id="inputsContainer">
@@ -69,15 +70,14 @@ $load_old_hour_entries = true;
                     </select>
                 </div>
             </div>
+                        
             <div class="form-group d-flex justify-content-end mb-0">
+                <a href="{{ route('entry_hours.delete_filters', [$lang]) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
         </form>
-        <form action="{{ route('entry_hours.delete_filters') }}" method="POST"> 
-            @csrf
-            <input type="hidden" name="lang" value="{{ $lang }}">
-            <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</button>
-        </form>
+        
+        
     </div>
 
 

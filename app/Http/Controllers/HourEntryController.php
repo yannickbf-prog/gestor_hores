@@ -47,6 +47,7 @@ class HourEntryController extends Controller {
         $lang = setGetLang();
 
         $data = HourEntryController::getBDInfo($user_id, $project_id)
+                ->orderBy('hours_entry.created_at', 'desc')
                 ->paginate(10);
 
         $join = DB::table('hours_entry')->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')->select('type_bag_hours.name')->get();
@@ -196,12 +197,10 @@ class HourEntryController extends Controller {
         return $data;
     }
     
-    public function deleteFilters(Request $request) {
+    public function deleteFilters($lang) {
         
         session(['hour_entry_user' => "%"]);
         session(['hour_entry_project' => "%"]);
-               
-        $lang = $request->lang;
 
         return redirect()->route($lang.'_time_entries.index');
 
