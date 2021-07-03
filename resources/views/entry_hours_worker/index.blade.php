@@ -48,15 +48,15 @@ $load_old_hour_entries = true;
         <form action="{{ route($lang.'_time_entries.index') }}" method="GET"> 
             @csrf
             <div class="d-flex" id="inputsContainer">
-                <div class="form-group" id="formGroupFilterName">
-                    <label for="selectFilterName">*Cognoms, Nom: </label>
-                    <select id="selectFilterName" name="select_filter_name" class="form-control" onchange="filterShowCustomersOfUser()">
+                <div class="form-group" id="formGroupFilterCustomer">
+                    <label for="selectFilterCustomers">{{__('message.customer')}}</label>
+                    <select id="selectFilterCustomers" name="select_filter_customer" class="form-control" onchange="filterShowCustomersOfUser()">
                         @forelse ($user_customers_data as $value)
                         <option value="{{ $value->customer_id }}">
                             {{ $value->customer_name }}
                         </option>
                         @empty
-                        <li>{{__('message.no')}} {{__('message.users')}} {{__('message.to_show')}}</li>
+                        <li>{{__('message.no')}} {{__('message.customers')}} {{__('message.to_show')}}</li>
                         @endforelse
                     </select>
                 </div>
@@ -254,7 +254,7 @@ $load_old_hour_entries = true;
         if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
             inputDesc.innerHTML = old_data.old_desc[old_data_index];
         }
-        
+
         old_data_index++;
 
         formGroup6.appendChild(inputDesc);
@@ -309,7 +309,7 @@ $load_old_hour_entries = true;
             if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
                 imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
             }
-            
+
             old_inputed_hours_index++;
 
             if (document.getElementById('inputedHoursContainer' + containerId) != null) {
@@ -535,6 +535,52 @@ $load_old_hour_entries = true;
         }
     }
 
+    //Filter section functions
+
+    function filterShowProjectsOfUserAndCustomer() {
+
+        let formGroup = document.createElement("div");
+        formGroup.setAttribute('class', 'form-group');
+        formGroup.setAttribute('id', 'formGroupFilterProjects');
+
+        let labelProject = document.createElement("label");
+        labelProject.setAttribute('for', 'selectFilterProjects');
+        labelProject.innerText = "*{{ __('message.project') }}: ";
+        formGroup.appendChild(labelProject);
+
+        //Create the select of projects
+        let projectSelectHtml = document.createElement("select");
+        projectSelectHtml.name = "select_filter_projects";
+        projectSelectHtml.setAttribute('id', 'selectFilterProjects');
+        projectSelectHtml.setAttribute('class', 'form-control');
+
+        let userId = "{{ $user_id }}";
+        let customerId = document.getElementById('selectFilterCustomers').value;
+        let res = users_info.filter((item) => {
+            return item.user_id == userId;
+        });
+        let projectsInUser = res[0]['user_projects'];
+
+        for (project of projectsInUser) {
+            if (project.customer_id == customerId) {
+                let option = document.createElement("option");
+                option.value = project.project_id;
+                option.innerText = project.project_name;
+                if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
+                    option.selected = true;
+                projectSelectHtml.appendChild(option);
+            }
+        }
+
+        if (document.getElementById('formGroupFilterProjects') != null) {
+            document.getElementById('formGroupFilterProjects').remove();
+        }
+
+        formGroup.appendChild(projectSelectHtml);
+        document.getElementById('inputsContainer').appendChild(formGroup);
+
+    }
+
     var last_customer_and_project = @json($last_customer_and_project);
 
     var old_data = @json($old_data);
@@ -556,6 +602,10 @@ $load_old_hour_entries = true;
         addEntry(1);
     }
 
+    //Filters principal program
+    var users_projects_with_customer = @json($users_projects_with_customer);
+    
+    filterShowProjectsOfUserAndCustomer();
 
 </script>
 
