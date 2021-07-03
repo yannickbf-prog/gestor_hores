@@ -20,7 +20,6 @@ class HourEntryController extends Controller {
     public function index(Request $request) {
         
         if ($request->has('_token')) {
-            echo "hello";
              session(['hour_entry_user' => $request['select_filter_name']]);
              session(['hour_entry_project' => $request['select_filter_projects']]);
         }

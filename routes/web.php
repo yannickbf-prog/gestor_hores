@@ -178,7 +178,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'store'])->name('time_entries.store');
     //Route::put("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
     Route::get("control-panel/time-entries/validate/id/{id}/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
-    Route::get("control-panel/time-entries/invalidate/id/{id}/lang/{lang}", [HourEntryController::class, 'invalidateEntryHour'])->name('entry_hours.invalidate');
+    //Route::get("control-panel/time-entries/invalidate/id/{id}/lang/{lang}", [HourEntryController::class, 'invalidateEntryHour'])->name('entry_hours.invalidate');
     Route::get("control-panel/time-entries/validate-all/lang/{lang}", [HourEntryController::class, 'validateAllHours'])->name('entry_hours.validate_all');
     Route::get('control-panel/time-entries/delete_filters/lang/{lang}', [HourEntryController::class, 'deleteFilters'])->name('entry_hours.delete_filters');
 
@@ -196,6 +196,8 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 //Entry hours - Workers section - Middleware in controller
+Route::get('control-panel/time-entries/delete_filters/lang/{lang}', [HourEntryController::class, 'deleteFilters'])->name('entry_hours.delete_filters');
+
 Route::post("en/entry-hours-worked/success", [EntryHoursController::class, 'store'])->name('en_entry_hours.store');
 Route::post("es/entrar-horas-trabajadas/exito-horas-entradas", [EntryHoursController::class, 'store'])->name('es_entry_hours.store');
 Route::post("ca/entrar-hores-treballades/exit-hores-entrades", [EntryHoursController::class, 'store'])->name('ca_entry_hours.store');

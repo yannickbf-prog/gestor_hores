@@ -45,7 +45,7 @@ $load_old_hour_entries = true;
     </div>
     <div  class="collapse" id="collapseExample">
 
-        <form action="{{ route($lang.'_time_entries.index') }}" method="GET"> 
+        <form action="{{ route($lang.'_entry_hours.index') }}" method="GET"> 
             @csrf
             <div class="d-flex" id="inputsContainer">
                 <div class="form-group" id="formGroupFilterCustomer">
@@ -67,7 +67,6 @@ $load_old_hour_entries = true;
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
         </form>
-
 
     </div>
 

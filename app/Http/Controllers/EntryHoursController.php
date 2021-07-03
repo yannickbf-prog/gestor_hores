@@ -23,6 +23,12 @@ class EntryHoursController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
+        
+        if ($request->has('_token')) {
+            session(['hour_entry_project' => $request['select_filter_projects']]);
+        }
+        
+        $project_id = session('hour_entry_project', "%");
 
         $old_data = [];
 
@@ -118,6 +124,8 @@ class EntryHoursController extends Controller {
                         'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours_imputed AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
                         'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
                         'hours_entry.day AS hours_entry_day')
+                ->where('projects.id', 'like', $project_id)
+                ->orderBy('hours_entry.created_at', 'desc')
                 ->paginate(10);
 
 
@@ -141,6 +149,14 @@ class EntryHoursController extends Controller {
         }
         
         return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data', 'user_id', 'users_projects_with_customer']));
+    }
+    
+    public function deleteFilters($lang) {
+        
+        session(['hour_entry_project' => "%"]);
+
+        return redirect()->route($lang.'_entry_hours.index');
+
     }
 
     /**
