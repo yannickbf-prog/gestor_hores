@@ -31,14 +31,14 @@ $load_old_hour_entries = true;
 @endphp
 @endif
 
-<div class="row py-2">
+<div class="row pt-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>{{ __('message.time_entries') }}</h2>
         </div>
     </div>
 </div>
-<div class="mt-2 pt-1" id="timeEntriesFormContainer">
+<div class="pt-1" id="timeEntriesFormContainer">
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
     <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
         @csrf
@@ -83,6 +83,7 @@ $load_old_hour_entries = true;
 
 </div>
 
+<h3 class="mt-5">Llistat d'hores</h3>
 <table class="table">
     @if (count($data) > 0)
     <thead>

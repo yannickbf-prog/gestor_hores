@@ -37,6 +37,44 @@ $load_old_hour_entries = true;
     </form>
 </div>
 
+<div id="filterDiv" class="p-4 my-3">
+    <div class="mb-4">
+        <div class="d-flex align-content-stretch align-items-center" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
+        </div>
+    </div>
+    <div  class="collapse" id="collapseExample">
+
+        <form action="{{ route($lang.'_time_entries.index') }}" method="GET"> 
+            @csrf
+            <div class="d-flex" id="inputsContainer">
+                <div class="form-group" id="formGroupFilterName">
+                    <label for="selectFilterName">*Cognoms, Nom: </label>
+                    <select id="selectFilterName" name="select_filter_name" class="form-control" onchange="filterShowCustomersOfUser()">
+                        @forelse ($user_customers_data as $value)
+                        <option value="{{ $value->customer_id }}">
+                            {{ $value->customer_name }}
+                        </option>
+                        @empty
+                        <li>{{__('message.no')}} {{__('message.users')}} {{__('message.to_show')}}</li>
+                        @endforelse
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group d-flex justify-content-end mb-0">
+                <a href="{{ route('entry_hours.delete_filters', [$lang]) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
+                <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
+            </div>
+        </form>
+
+
+    </div>
+
+
+</div>
+
+<h3 class="mt-5">Llistat d'hores</h3>
 <table class="table table-bordered mt-3">
     @if (count($data) > 0)
     <tr>   

@@ -121,7 +121,7 @@ class EntryHoursController extends Controller {
                 ->paginate(10);
         
 
-        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data']));
+        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data']));
     }
 
     /**
