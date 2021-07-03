@@ -74,42 +74,46 @@ $load_old_hour_entries = true;
 </div>
 
 <h3 class="mt-5">Llistat d'hores</h3>
-<table class="table table-bordered mt-3">
+<table class="table mt-3">
     @if (count($data) > 0)
-    <tr>   
-        <th>{{ __('message.date') }}</th>  
-        <th>{{ __('message.project') }}</th>
-        <th>{{ __('message.customer_name') }}</th>
-        <th>{{ __('message.bag_hour') }}</th>
-        <th>{{ __('message.dedicated_hours') }}</th>
-        <th>{{ __('message.imputed_hours') }}</th>
-        <th>{{ __('message.created_at') }}</th>
-        <th>{{ __('message.validated') }}</th>
-    </tr>
+    <thead>
+        <tr>   
+            <th>{{ __('message.date') }}</th>  
+            <th>{{ __('message.project') }}</th>
+            <th>{{ __('message.customer_name') }}</th>
+            <th>{{ __('message.bag_hour') }}</th>
+            <th>{{ __('message.dedicated_hours') }}</th>
+            <th>{{ __('message.imputed_hours') }}</th>
+            <th>{{ __('message.created_at') }}</th>
+            <th>{{ __('message.validated') }}</th>
+        </tr>
+    </thead>
     @endif
+    <tbody>
     @forelse ($data as $value)
-    <tr>
 
-        <td class="align-middle">{{ Carbon\Carbon::parse($value->hours_entry_day)->format('d/m/y') }}</td>
-        <td class="align-middle">{{ $value->project_name }} </td>
-        <td class="align-middle">{{ $value->customer_name }}</td>
-        <td class="align-middle">{{ $value->type_bag_hour_name }}</td>
-        <td class="align-middle">{{ $value->hour_entry_hours }}h</td>
-        <td class="align-middle">{{ $value->hour_entry_hours_imputed }}h</td>
-        <td class="align-middle">{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
-        <td class="align-middle">
-            @if($value->hour_entry_validate == '1')
-            <div class="d-flex align-items-stretch justify-content-center text-success">
-                <i class="bi bi-check-square-fill validate_icon"></i>
-            </div>         
-            @endif
-        </td>
-    </tr>
+        <tr>
 
-    @empty
+            <td class="align-middle">{{ Carbon\Carbon::parse($value->hours_entry_day)->format('d/m/y') }}</td>
+            <td class="align-middle">{{ $value->project_name }} </td>
+            <td class="align-middle">{{ $value->customer_name }}</td>
+            <td class="align-middle">{{ $value->type_bag_hour_name }}</td>
+            <td class="align-middle">{{ $value->hour_entry_hours }}h</td>
+            <td class="align-middle">{{ $value->hour_entry_hours_imputed }}h</td>
+            <td class="align-middle">{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
+            <td class="align-middle">
+                @if($value->hour_entry_validate == '1')
+                <div class="d-flex align-items-stretch justify-content-center text-success">
+                    <i class="bi bi-check-square-fill validate_icon"></i>
+                </div>         
+                @endif
+            </td>
+        </tr>
+
+        @empty
     <li>{{__('message.no')}} {{__('message.time_entries')}} {{__('message.to_show')}}</li>
     @endforelse
-
+    </tbody>
 </table> 
 
 <div id="paginationContainer">
@@ -598,7 +602,7 @@ $load_old_hour_entries = true;
 
     //Filters principal program
     var users_projects_with_customer = @json($users_projects_with_customer);
-    
+
     filterShowProjectsOfUserAndCustomer();
 
 </script>
