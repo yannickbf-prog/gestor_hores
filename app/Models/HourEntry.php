@@ -8,6 +8,8 @@ use DB;
 
 class HourEntry extends Model
 {
+    protected $table = 'hours_entry';
+    
     use HasFactory;
     
     protected $dates = ['updated_at', 'days'];

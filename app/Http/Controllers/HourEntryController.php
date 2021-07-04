@@ -432,8 +432,9 @@ class HourEntryController extends Controller {
      * @param  \App\Models\HourEntry  $hourEntry
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HourEntry $hourEntry) {
-        //
+    public function destroy($lang, Request $request) {
+        
+        return $request;
     }
 
 }

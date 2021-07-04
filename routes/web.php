@@ -184,7 +184,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("control-panel/time-entries/validate-all/lang/{lang}", [HourEntryController::class, 'validateAllHours'])->name('entry_hours.validate_all');
     Route::get('control-panel/time-entries/delete_filters/lang/{lang}', [HourEntryController::class, 'deleteFilters'])->name('entry_hours.delete_filters');
     Route::get('control-panel/time-entries/change_num_records/lang/{lang}', [HourEntryController::class, 'changeNumRecords'])->name('time_entries.change_num_records');
-    
+    Route::delete("control-panel/time-entries/destroy/lang/{lang}", [HourEntryController::class, 'destroy'])->name('time_entries.destroy');
     
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
