@@ -20,7 +20,7 @@ class HomeContoller extends Controller
                 ->paginate(10);*/
         
         $data = new HourEntryController();
-        $info_for_table = $data->getBDInfo()->validated()->orderBy('hour_entry_created_at', 'desc')->paginate(10);
+        $info_for_table = $data->getBDInfo("%", "%")->validated()->orderBy('hour_entry_created_at', 'desc')->paginate(10);
 
         return view('home', compact('lang','info_for_table'))
                  ->with('i', (request()->input('page', 1) - 1) * 10);

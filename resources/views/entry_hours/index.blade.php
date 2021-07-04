@@ -135,6 +135,19 @@ $load_old_hour_entries = true;
 </tbody>
 </table> 
 @if (count($data) > 0)
+<form action="{{ route('time_entries.change_num_records', $lang) }}" method="GET"> 
+    @csrf
+    <div class="form-group">
+        <strong>{{ __('message.number_of_records') }}: </strong>
+        <select name="num_records" id="numRecords" onchange="this.form.submit()">
+            <option value="10">10</option>
+            <option value="50" @if(session('hour_entry_num_records') == 50){{'selected'}}@endif>50</option>
+            <option value="100" @if(session('hour_entry_num_records') == 100){{'selected'}}@endif>100</option>
+            <option value="all" @if(session('hour_entry_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
+        </select>
+    </div>
+</form>
+
 <a class="btn general_button" href="{{ route('entry_hours.validate_all', $lang) }}">{{ __('message.validate_all_hours') }}</a>
 @endif
 <div id="paginationContainer">

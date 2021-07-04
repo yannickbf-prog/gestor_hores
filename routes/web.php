@@ -131,11 +131,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("es/panel-de-control/proyectos", [ProjectController::class, 'index'])->name('es_projects.index');
     Route::get("es/panel-de-control/proyectos/crear", [ProjectController::class, 'create'])->name('es_projects.create');
     Route::get("es/panel-de-control/proyectos/{project}/editar", [ProjectController::class, 'edit'])->name('es_projects.edit');
+    Route::get("es/panel-de-control/proyectos/{project}/añadir-eliminar-usuarios", [ProjectController::class, 'addRemoveUsers'])->name('es_projects.add_remove_users');
 
     //Control panel - Projects - ca
     Route::get("ca/panell-de-control/projectes", [ProjectController::class, 'index'])->name('ca_projects.index');
     Route::get("ca/panell-de-control/projectes/crear", [ProjectController::class, 'create'])->name('ca_projects.create');
     Route::get("ca/panell-de-control/projectes/{project}/editar", [ProjectController::class, 'edit'])->name('ca_projects.edit');
+    Route::get("ca/panell-de-control/projectes/{project}/afegir-eliminar-usuaris", [ProjectController::class, 'addRemoveUsers'])->name('ca_projects.add_remove_users');
 
     //Control panel - Bag hours - Operations 
     Route::post("control-panel/hour-bags/lang/{lang}", [BagHourController::class, 'store'])->name('bag_hours.store');
@@ -181,7 +183,9 @@ Route::group(['middleware' => 'admin'], function () {
     //Route::get("control-panel/time-entries/invalidate/id/{id}/lang/{lang}", [HourEntryController::class, 'invalidateEntryHour'])->name('entry_hours.invalidate');
     Route::get("control-panel/time-entries/validate-all/lang/{lang}", [HourEntryController::class, 'validateAllHours'])->name('entry_hours.validate_all');
     Route::get('control-panel/time-entries/delete_filters/lang/{lang}', [HourEntryController::class, 'deleteFilters'])->name('entry_hours.delete_filters');
-
+    Route::get('control-panel/time-entries/change_num_records/lang/{lang}', [HourEntryController::class, 'changeNumRecords'])->name('time_entries.change_num_records');
+    
+    
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
     Route::get("en/control-panel/time-entries/create", [HourEntryController::class, 'create'])->name('en_time_entries.create');
@@ -197,6 +201,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 //Entry hours - Workers section - Middleware in controller
 Route::get('entry-hours-worked/delete_filters/lang/{lang}', [EntryHoursController::class, 'deleteFilters'])->name('hours_entry.delete_filters');
+Route::get('entry-hours-worked/change_num_records/lang/{lang}', [EntryHoursController::class, 'changeNumRecords'])->name('hours_entry.change_num_records');
 
 Route::post("en/entry-hours-worked/success", [EntryHoursController::class, 'store'])->name('en_entry_hours.store');
 Route::post("es/entrar-horas-trabajadas/exito-horas-entradas", [EntryHoursController::class, 'store'])->name('es_entry_hours.store');

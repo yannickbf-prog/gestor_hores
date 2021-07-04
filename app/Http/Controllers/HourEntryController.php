@@ -26,6 +26,11 @@ class HourEntryController extends Controller {
         
         $user_id = session('hour_entry_user', "%");
         $project_id = session('hour_entry_project', "%");
+        $pagination = session('hour_entry_num_records', 10);
+        
+        if($pagination == 'all'){
+            $pagination = DB::table('hours_entry')->count();
+        }
         
         $old_data = [];
 
@@ -44,10 +49,10 @@ class HourEntryController extends Controller {
         }
         
         $lang = setGetLang();
-
+        
         $data = HourEntryController::getBDInfo($user_id, $project_id)
                 ->orderBy('hours_entry.created_at', 'desc')
-                ->paginate(10);
+                ->paginate($pagination);
 
         $join = DB::table('hours_entry')->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')->select('type_bag_hours.name')->get();
 
@@ -235,6 +240,13 @@ class HourEntryController extends Controller {
 
         return redirect()->route($lang . '_time_entries.index')
                         ->with('success', __('message.time_entries') . " " . __('message.validated'));
+    }
+    
+    public function changeNumRecords(Request $request, $lang) {
+        
+        session(['hour_entry_num_records' => $request['num_records']]);
+        
+        return redirect()->route($lang . '_time_entries.index');
     }
 
     /**

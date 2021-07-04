@@ -29,7 +29,9 @@ class EntryHoursController extends Controller {
         }
         
         $project_id = session('entry_hour_project', "%");
-
+        
+        $pagination = session('hour_entry_worker_num_records', 10);
+        
         $old_data = [];
 
         $old_days = old('days');
@@ -125,10 +127,14 @@ class EntryHoursController extends Controller {
                         'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
                         'hours_entry.day AS hours_entry_day')
                 ->where('projects.id', 'like', $project_id)
-                ->orderBy('hours_entry.created_at', 'desc')
-                ->paginate(10);
+                ->orderBy('hours_entry.created_at', 'desc');
+                
 
-
+        if($pagination == 'all'){
+            $pagination = $data->count();
+        }
+        
+        $data = $data->paginate($pagination);
 
         //Create json with the info of DB, need for select projects of customer and user
         $users_projects_with_customer = [];
@@ -157,6 +163,13 @@ class EntryHoursController extends Controller {
 
         return redirect()->route($lang.'_entry_hours.index');
 
+    }
+    
+    public function changeNumRecords(Request $request, $lang) {
+        
+        session(['hour_entry_worker_num_records' => $request['num_records']]);
+        
+        return redirect()->route($lang.'_entry_hours.index');
     }
 
     /**
