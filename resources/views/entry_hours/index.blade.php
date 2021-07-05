@@ -139,7 +139,7 @@ $load_old_hour_entries = true;
 
                     <!-- Modal -->
                     <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <form action="{{ route('time_entries.destroy',[$lang]) }}" method="POST"> 
+                        <form action="{{ route('time_entries.destroy',[$value->hours_entry_id, $lang]) }}" method="POST"> 
                             @csrf
                             @method('DELETE')  
                             
@@ -160,7 +160,6 @@ $load_old_hour_entries = true;
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="ids" value="{{ $value->hours_entry_id }}">
                         </form>
                     </div>    
                 </div>

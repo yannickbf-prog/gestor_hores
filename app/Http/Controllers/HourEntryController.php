@@ -432,9 +432,14 @@ class HourEntryController extends Controller {
      * @param  \App\Models\HourEntry  $hourEntry
      * @return \Illuminate\Http\Response
      */
-    public function destroy($lang, Request $request) {
+    public function destroy(HourEntry $hourEntry, $lang) {
         
-        return $request;
+        App::setLocale($lang);
+        
+        $hourEntry->delete();
+
+        return redirect()->route($lang . '_time_entries.index')
+                        ->with('success', __('message.hour_entry')." ".__('message.deleted'));
     }
 
 }
