@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HourEntry;
 use App\Models\UsersProject;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests\CreateHourEntryRequest;
@@ -19,7 +20,40 @@ class HourEntryController extends Controller {
      */
     public function index(Request $request) {
         
-        if ($request->has('_token')) {
+        $values_before_edit_json = null;
+        
+        if ($request->has('_token') && $request->has('entry_hour_id')) {
+            $show_edit = true;
+            
+            $hour_entry = HourEntry::find($request['entry_hour_id']);
+            
+            $day = $hour_entry->day;
+            $hours = $hour_entry->hours;
+            $hours_imputed = $hour_entry->hours_imputed;
+            $description = $hour_entry->description;
+            
+            $user_project_id = $hour_entry->user_project_id;
+            
+            $user_id = UsersProject::find($user_project_id)->user_id;
+            
+            $project_id = UsersProject::find($user_project_id)->project_id;
+            
+            $customer_id = Project::find($project_id)->customer_id;
+                    
+            $values_before_edit_json = [
+                'day' => $day,
+                'hours' => $hours,
+                'hours_imputed' => $hours_imputed,
+                'description' => $description,
+                'user_project_id' => $user_project_id,
+                'user_id' => $user_id,
+                'project_id' => $project_id,
+                'customer_id' => $customer_id,
+            ];
+        }
+        
+        
+        if ($request->has('_token') && $request->has('select_filter_name')) {
              session(['hour_entry_user' => $request['select_filter_name']]);
              session(['hour_entry_project' => $request['select_filter_projects']]);
         }
@@ -180,7 +214,7 @@ class HourEntryController extends Controller {
             ];
         }
 
-        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'users_with_projects']))
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'users_with_projects', 'values_before_edit_json']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 

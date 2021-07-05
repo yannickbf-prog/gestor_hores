@@ -102,11 +102,13 @@ $load_old_hour_entries = true;
             <td class="align-middle">{{ $value->hour_entry_hours_imputed }}h</td>
             <td class="align-middle">{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
             <td class="align-middle">
-                @if($value->hour_entry_validate == '1')
-                <div class="d-flex align-items-stretch justify-content-center text-success">
-                    <i class="bi bi-check-square-fill validate_icon"></i>
-                </div>         
-                @endif
+                <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
+                    @if($value->hour_entry_validate == '1')
+                    <div class="d-flex align-items-stretch justify-content-center text-success">
+                        <i class="bi bi-check-square-fill validate_icon"></i>
+                    </div>         
+                    @endif
+                </div>
             </td>
         </tr>
 

@@ -118,23 +118,35 @@ $load_old_hour_entries = true;
 
             <td class="align-middle">
 
+                
+
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
                     @if($value->hour_entry_validate == '0')
                     <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-success">
                         <i class="bi bi-check-square-fill fa-lg"></i>
                     </a>
                     @endif
+                    
+                    @php
+                        $form_id = "editForm".$value->hours_entry_id;
+                        $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
+                    @endphp
 
-                    <a href="{{ route('entry_hours.validate',[$value->hours_entry_id, $lang]) }}"  style="text-decoration: none" class="text-dark">
-                        <i class="bi bi-pencil-fill"></i>
+                    <form action="{{ route($lang.'_time_entries.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
+                        @csrf
+                        <input type="hidden" name="entry_hour_id" value="{{ $value->hours_entry_id }}">
+                    </form>
+                    
+                    <a style="text-decoration: none" class="text-dark">
+                        <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
                     </a>
 
                     @php
-                        $id = "exampleModal".$value->hours_entry_id;
+                    $id = "exampleModal".$value->hours_entry_id;
                     @endphp
 
                     <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
-                        <i class="bi bi-trash-fill"></i>
+                        <i class="bi bi-trash-fill fa-lg"></i>
                     </a>
 
                     <!-- Modal -->
@@ -142,7 +154,7 @@ $load_old_hour_entries = true;
                         <form action="{{ route('time_entries.destroy',[$value->hours_entry_id, $lang]) }}" method="POST"> 
                             @csrf
                             @method('DELETE')  
-                            
+
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -163,9 +175,6 @@ $load_old_hour_entries = true;
                         </form>
                     </div>    
                 </div>
-            </td>
-            <td>
-                {{ $id }}
             </td>
         </tr>
 

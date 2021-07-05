@@ -266,3 +266,7 @@ table thead th {
     background-color: #fafafa;
     border-bottom: 1px solid #dee2e6 !important;
 }
+
+.bi-pencil-fill {
+    cursor: pointer;
+}
