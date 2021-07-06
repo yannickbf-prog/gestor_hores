@@ -6,6 +6,7 @@ use App\Models\HourEntry;
 use App\Models\UsersProject;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Http\Requests\EditHourEntryRequest;
 use DB;
 use App\Http\Requests\CreateHourEntryRequest;
 use Illuminate\Support\Facades\App;
@@ -461,8 +462,12 @@ class HourEntryController extends Controller {
      * @param  \App\Models\HourEntry  $hourEntry
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HourEntry $hourEntry, $lang) {
-        return "hello";
+    public function update(EditHourEntryRequest $request, HourEntry $hourEntry, $lang) {
+        
+       
+       
+        return redirect()->route($lang.'_time_entries.index')
+                        ->with('success', __('message.time_entry')." ".$request->name." ".__('message.updated'));
     }
 
     /**
