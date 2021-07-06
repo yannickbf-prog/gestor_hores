@@ -41,7 +41,8 @@ class HourEntryController extends Controller {
             $customer_id = Project::find($project_id)->customer_id;
                     
             $values_before_edit_json = [
-                'day' => $day,
+                'hour_entry_id' => $request['entry_hour_id'],
+                'day' => \Carbon\Carbon::parse($day)->format('d/m/Y'),
                 'hours' => $hours,
                 'hours_imputed' => $hours_imputed,
                 'description' => $description,
@@ -456,7 +457,7 @@ class HourEntryController extends Controller {
      * @param  \App\Models\HourEntry  $hourEntry
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HourEntry $hourEntry) {
+    public function update(Request $request, HourEntry $hourEntry, $lang) {
         //
     }
 

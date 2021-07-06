@@ -40,7 +40,7 @@ $load_old_hour_entries = true;
 </div>
 <div class="pt-1" id="timeEntriesFormContainer">
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
-    <form action="{{ route('time_entries.store',$lang) }}" method="POST" id="timeEntriesForm">
+    <form action="{{ ($values_before_edit_json == null) ? route('time_entries.store',$lang) : route('time_entries.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">
         @csrf
 
     </form>
@@ -356,6 +356,9 @@ $load_old_hour_entries = true;
                 if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
                     inputDesc.innerHTML = old_data.old_desc[old_data_index];
                 }
+                else if (values_before_edit !== null) {
+                    inputDesc.innerHTML = values_before_edit.description;
+                }
                 old_data_index++;
 
                 formGroup7.appendChild(inputDesc);
@@ -406,7 +409,9 @@ $load_old_hour_entries = true;
                     if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
                         imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
                     }
-
+                    else if (values_before_edit !== null)
+                        imputedHoursHtml.setAttribute('value', values_before_edit.hours_imputed);
+                
                     old_inputed_hours_index++;
 
                     if (document.getElementById('inputedHoursContainer' + containerId) != null) {
@@ -455,6 +460,8 @@ $load_old_hour_entries = true;
                         option.innerText = project.project_name;
                         if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
                             option.selected = true;
+                        else if (values_before_edit !== null && project.project_id == values_before_edit.project_id)
+                            option.selected = true;
                         projectSelectHtml.appendChild(option);
                     }
                 }
@@ -498,6 +505,8 @@ $load_old_hour_entries = true;
                     option.innerText = customer.customer_name;
                     if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
                         option.selected = true;
+                    else if (values_before_edit !== null && customer.customer_id == values_before_edit.customer_id)
+                            option.selected = true;
                     customerSelectHtml.appendChild(option);
                 }
 
@@ -569,7 +578,12 @@ $load_old_hour_entries = true;
 
                 if (old_data.length != 0 && !loadFinish && old_data.old_days[old_data_index] != null) {
                     inputDay.setAttribute('value', old_data.old_days[old_data_index]);
-                } else {
+                }
+                else if (values_before_edit !== null){
+                    
+                    inputDay.setAttribute('value', values_before_edit.day);
+                }
+                else {
                     inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}");
                 }
 
@@ -593,7 +607,12 @@ $load_old_hour_entries = true;
 
                 if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
                     inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
-                } else {
+                }
+                else if (values_before_edit !== null){
+                    
+                    inputHours.setAttribute('value', values_before_edit.hours);
+                }
+                else {
                     inputHours.setAttribute('value', 8)
                 }
 
@@ -619,6 +638,8 @@ $load_old_hour_entries = true;
                         option.value = user.user_id;
                         option.innerText = user.user_nickname;
                         if (old_data.length != 0 && user.user_id == old_data.old_users[old_data_index])
+                            option.selected = true;
+                        else if (values_before_edit !== null && user.user_id == values_before_edit.user_id)
                             option.selected = true;
                         userSelectHtml.appendChild(option);
                     }
@@ -760,6 +781,8 @@ $load_old_hour_entries = true;
             var old_inputed_hours_index = 0;
 
             var loadFinish = false;
+            
+            var values_before_edit = @json($values_before_edit_json);
 
             if ("{{ $load_old_hour_entries }}") {
                 let numEntries = parseInt("{{ session('count_hours_entries') }}");
@@ -775,7 +798,9 @@ $load_old_hour_entries = true;
 
 //Filters principal program
             filterShowCustomersOfUser();
-
+            
+            //Edit principal program
+            
 </script>
 @endsection
 
