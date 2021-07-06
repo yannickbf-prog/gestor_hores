@@ -358,11 +358,17 @@ $load_old_hour_entries = true;
                 }
                 else if (values_before_edit !== null) {
                     inputDesc.innerHTML = values_before_edit.description;
+                    //Delete add/remove users if edit
+                    document.getElementById("addRemoveEntryContainer").style.display = "none";
                 }
                 old_data_index++;
 
                 formGroup7.appendChild(inputDesc);
                 document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup7);
+
+                //Delete add/remove users if edit
+                if (values_before_edit !== null)
+                    inputDesc.innerHTML = values_before_edit.description;             
 
                 //Create total count of hours
                 createCountOfHours();
@@ -667,8 +673,18 @@ $load_old_hour_entries = true;
                 let buttonContainer = document.createElement("div");
                 buttonContainer.setAttribute('class', 'form-group d-flex justify-content-end');
                 buttonContainer.setAttribute('id', 'submitContainer');
+                
+                if (values_before_edit !== null) {
+                    let cancelHtml = document.createElement("a");
+                    cancelHtml.innerText = "{{ __('message.cancel') }}";
+                    cancelHtml.setAttribute('class', 'btn general_button mr-0');
+                    cancelHtml.setAttribute('href', '{{ route("time_entries.cancel_edit", $lang) }}');
+                    buttonContainer.appendChild(cancelHtml);
+                    
+                }
+                                        
                 let submitHtml = document.createElement("button");
-                submitHtml.innerText = "{{ __('message.save') }}";
+                submitHtml.innerText = (values_before_edit === null) ? "{{ __('message.save') }}" : "{{ __('message.update') }}";
                 submitHtml.setAttribute('type', 'submit');
                 submitHtml.setAttribute('class', 'btn general_button');
                 buttonContainer.appendChild(submitHtml);

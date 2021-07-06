@@ -429,6 +429,10 @@ class HourEntryController extends Controller {
                             ->with('success', __('message.time_entry') . " " . __('message.created'));
         }
     }
+    
+    function cancelEdit($lang) {
+        return redirect()->route($lang . '_time_entries.index');
+    }
 
     /**
      * Display the specified resource.
@@ -458,7 +462,7 @@ class HourEntryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, HourEntry $hourEntry, $lang) {
-        //
+        return "hello";
     }
 
     /**

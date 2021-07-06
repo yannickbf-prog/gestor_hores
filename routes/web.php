@@ -186,6 +186,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('control-panel/time-entries/change_num_records/lang/{lang}', [HourEntryController::class, 'changeNumRecords'])->name('time_entries.change_num_records');
     Route::delete("control-panel/time-entries/destroy/{hourEntry}/lang/{lang}", [HourEntryController::class, 'destroy'])->name('time_entries.destroy');
     Route::post("control-panel/time-entries/{hourEntry}/lang/{lang}", [HourEntryController::class, 'update'])->name('time_entries.update');
+    Route::get("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'cancelEdit'])->name('time_entries.cancel_edit');
 
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');
