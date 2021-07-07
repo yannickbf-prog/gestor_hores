@@ -334,6 +334,10 @@ $load_old_hour_entries = true;
                     document.getElementById('submitContainer').before(totalCountHtml);
                 }
             }
+            
+            function showValidateInvalidateButton(){
+                let formGroup8 = document.createElement("div");
+            }
 
             function showDescription(containerId) {
                 //Create task description
@@ -370,6 +374,9 @@ $load_old_hour_entries = true;
                 if (values_before_edit !== null)
                     inputDesc.innerHTML = values_before_edit.description;             
 
+                if(values_before_edit !== null && values_before_edit.bag_hour){
+                    showValidateInvalidateButton();
+                }
                 //Create total count of hours
                 createCountOfHours();
             }
@@ -587,7 +594,14 @@ $load_old_hour_entries = true;
                 }
                 else if (values_before_edit !== null){
                     
-                    inputDay.setAttribute('value', values_before_edit.day);
+                    if("{{old('days.0')}}" == ""){
+                        inputDay.setAttribute('value', values_before_edit.day);
+                    }
+                    else{
+                        inputDay.setAttribute('value', "{{old('days.0')}}");
+                    }
+                    
+                    
                 }
                 else {
                     inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}");
@@ -615,8 +629,13 @@ $load_old_hour_entries = true;
                     inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
                 }
                 else if (values_before_edit !== null){
+                    if("{{old('hours.0')}}" == ""){
+                        inputHours.setAttribute('value', values_before_edit.hours);
+                    }
+                    else{
+                        inputHours.setAttribute('value', "{{old('hours.0')}}");
+                    }
                     
-                    inputHours.setAttribute('value', values_before_edit.hours);
                 }
                 else {
                     inputHours.setAttribute('value', 8)
@@ -789,7 +808,7 @@ $load_old_hour_entries = true;
 
                 filterShowProjectsOfUserAndCustomer();
             }
-
+            
 
             var old_data = @json($old_data);
 

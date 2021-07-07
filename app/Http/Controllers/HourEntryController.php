@@ -40,6 +40,12 @@ class HourEntryController extends Controller {
             $project_id = UsersProject::find($user_project_id)->project_id;
 
             $customer_id = Project::find($project_id)->customer_id;
+            
+            $bag_hour = false;
+            
+            if (DB::table('bag_hours')->where('project_id', $project_id)->exists()) {
+                $bag_hour = true;
+            }
 
             $values_before_edit_json = [
                 'hour_entry_id' => $request['entry_hour_id'],
@@ -51,6 +57,7 @@ class HourEntryController extends Controller {
                 'user_id' => $user_id,
                 'project_id' => $project_id,
                 'customer_id' => $customer_id,
+                'bag_hour' => $bag_hour
             ];
         }
 
@@ -472,7 +479,7 @@ class HourEntryController extends Controller {
             
             $inputed_hours = $request->hours[0];
             
-            if($request->inputed_hours[0] != null){
+            if(isset($request->inputed_hours[0])){
                 $inputed_hours = $request->inputed_hours[0];
             }
 
