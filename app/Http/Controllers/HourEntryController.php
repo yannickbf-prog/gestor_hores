@@ -20,27 +20,27 @@ class HourEntryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        
+
         $values_before_edit_json = null;
-        
+
         if ($request->has('_token') && $request->has('entry_hour_id')) {
             $show_edit = true;
-            
+
             $hour_entry = HourEntry::find($request['entry_hour_id']);
-            
+
             $day = $hour_entry->day;
             $hours = $hour_entry->hours;
             $hours_imputed = $hour_entry->hours_imputed;
             $description = $hour_entry->description;
-            
+
             $user_project_id = $hour_entry->user_project_id;
-            
+
             $user_id = UsersProject::find($user_project_id)->user_id;
-            
+
             $project_id = UsersProject::find($user_project_id)->project_id;
-            
+
             $customer_id = Project::find($project_id)->customer_id;
-                    
+
             $values_before_edit_json = [
                 'hour_entry_id' => $request['entry_hour_id'],
                 'day' => \Carbon\Carbon::parse($day)->format('d/m/Y'),
@@ -53,21 +53,21 @@ class HourEntryController extends Controller {
                 'customer_id' => $customer_id,
             ];
         }
-        
-        
+
+
         if ($request->has('_token') && $request->has('select_filter_name')) {
-             session(['hour_entry_user' => $request['select_filter_name']]);
-             session(['hour_entry_project' => $request['select_filter_projects']]);
+            session(['hour_entry_user' => $request['select_filter_name']]);
+            session(['hour_entry_project' => $request['select_filter_projects']]);
         }
-        
+
         $user_id = session('hour_entry_user', "%");
         $project_id = session('hour_entry_project', "%");
         $pagination = session('hour_entry_num_records', 10);
-        
-        if($pagination == 'all'){
+
+        if ($pagination == 'all') {
             $pagination = DB::table('hours_entry')->count();
         }
-        
+
         $old_data = [];
 
         $old_days = old('days');
@@ -83,9 +83,9 @@ class HourEntryController extends Controller {
                 'old_desc' => old('desc'),
             ];
         }
-        
+
         $lang = setGetLang();
-        
+
         $data = HourEntryController::getBDInfo($user_id, $project_id)
                 ->orderBy('hours_entry.created_at', 'desc')
                 ->paginate($pagination);
@@ -228,22 +228,21 @@ class HourEntryController extends Controller {
                 ->leftJoin('bag_hours', 'hours_entry.bag_hours_id', '=', 'bag_hours.id')
                 ->leftJoin('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
                 ->select('users.id AS user_id', 'users.nickname AS user_nickname', 'users.name AS user_name', 'users.surname AS user_surname', 'projects.name AS project_name', 'customers.name AS customer_name',
-                'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours_imputed AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
-                'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
-                'hours_entry.day AS hours_entry_day')
+                        'type_bag_hours.name AS type_bag_hour_name', 'hours_entry.bag_hours_id AS hours_entry_bag_hours_id', 'hours_entry.hours AS hour_entry_hours', 'hours_entry.hours_imputed AS hour_entry_hours_imputed', 'hours_entry.validate AS hour_entry_validate',
+                        'hours_entry.created_at AS hour_entry_created_at', 'bag_hours.id AS bag_hour_id', 'hours_entry.id AS hours_entry_id',
+                        'hours_entry.day AS hours_entry_day')
                 ->where('users.id', 'like', $user_id)
                 ->where('projects.id', 'like', $project_id);
-                
+
         return $data;
     }
-    
+
     public function deleteFilters($lang) {
-        
+
         session(['hour_entry_user' => "%"]);
         session(['hour_entry_project' => "%"]);
 
-        return redirect()->route($lang.'_time_entries.index');
-
+        return redirect()->route($lang . '_time_entries.index');
     }
 
     public function validateEntryHour($hours_entry_id, $lang) {
@@ -277,11 +276,11 @@ class HourEntryController extends Controller {
         return redirect()->route($lang . '_time_entries.index')
                         ->with('success', __('message.time_entries') . " " . __('message.validated'));
     }
-    
+
     public function changeNumRecords(Request $request, $lang) {
-        
+
         session(['hour_entry_num_records' => $request['num_records']]);
-        
+
         return redirect()->route($lang . '_time_entries.index');
     }
 
@@ -378,11 +377,10 @@ class HourEntryController extends Controller {
         session(['count_hours_entries' => $count_hours_entries]);
 
         if (!$request->validated()) {
-            
+
             return back()->withInput();
-            
         } else {
-            
+
             App::setLocale($lang);
 
             $inputed_hours_index = 0;
@@ -430,7 +428,7 @@ class HourEntryController extends Controller {
                             ->with('success', __('message.time_entry') . " " . __('message.created'));
         }
     }
-    
+
     function cancelEdit($lang) {
         return redirect()->route($lang . '_time_entries.index');
     }
@@ -463,7 +461,28 @@ class HourEntryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(EditHourEntryRequest $request, HourEntry $hourEntry, $lang) {
-        
+
+        if ($request->validated()) {
+
+            $user_project_id = DB::table('users_projects')
+                    ->where('user_id', $request->users[0])
+                    ->where('project_id', $request->projects[0])
+                    ->select('id')
+                    ->first();
+
+            DB::table('hours_entry')
+                    ->where('id', $hourEntry->id)
+                    ->update([
+                        'user_project_id' => $user_project_id->id,
+                        'day' => Carbon::createFromFormat('d/m/Y', $request->days[0])->format('Y-m-d'),
+                        'hours' => $request->hours[0],
+                        'description' => $request->desc[0],
+                    ]);
+
+
+            return redirect()->route($lang . '_time_entries.index')
+                            ->with('success', __('message.time_entry') . " " . $request->name . " " . __('message.updated'));
+        }
     }
 
     /**
@@ -473,13 +492,13 @@ class HourEntryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(HourEntry $hourEntry, $lang) {
-        
+
         App::setLocale($lang);
-        
+
         $hourEntry->delete();
 
         return redirect()->route($lang . '_time_entries.index')
-                        ->with('success', __('message.hour_entry')." ".__('message.deleted'));
+                        ->with('success', __('message.hour_entry') . " " . __('message.deleted'));
     }
 
 }
