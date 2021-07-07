@@ -3,6 +3,17 @@
 @section('title', 'Login - Home')
 
 @section('nav_and_content')
+
+@if ($message = Session::get('success'))
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ $message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -86,6 +97,7 @@ $load_old_hour_entries = true;
             <th>{{ __('message.imputed_hours') }}</th>
             <th>{{ __('message.created_at') }}</th>
             <th>{{ __('message.validated') }}</th>
+            <th></th>
         </tr>
     </thead>
     @endif
@@ -108,6 +120,44 @@ $load_old_hour_entries = true;
                         <i class="bi bi-check-square-fill validate_icon"></i>
                     </div>         
                     @endif
+                </div>
+            </td>
+            
+            <td class="align-middle">
+                <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
+                    @php
+                    $id = "exampleModal".$value->hours_entry_id;
+                    @endphp
+
+                    <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
+                        <i class="bi bi-trash-fill fa-lg"></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="{{ route('hours_entry.destroy',[$value->hours_entry_id, $lang]) }}" method="POST"> 
+                            @csrf
+                            @method('DELETE')  
+
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.hour_entry") }} <b>{{ $value->name }}</b>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                        <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>   
                 </div>
             </td>
         </tr>
@@ -141,7 +191,12 @@ $load_old_hour_entries = true;
 
 @section('js')
 <script>
+//Efect in alert when edit and save customer
+$(".alert-success").slideDown(400);
 
+$(".alert-success").delay(6000).slideUp(400, function () {
+    $(this).alert('close');
+});
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -622,6 +677,8 @@ $load_old_hour_entries = true;
     var users_projects_with_customer = @json($users_projects_with_customer);
 
     filterShowProjectsOfUserAndCustomer();
+    
+    
 
 </script>
 

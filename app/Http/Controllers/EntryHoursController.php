@@ -283,8 +283,14 @@ class EntryHoursController extends Controller {
      * @param  \App\Models\EntryHours  $entryHours
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EntryHours $entryHours) {
-        //
+    public function destroy(EntryHours $entryHours, $lang) {
+        
+        App::setLocale($lang);
+
+        $entryHours->delete();
+
+        return redirect()->route($lang . '_entry_hours.index')
+                        ->with('success', __('message.hour_entry') . " " . __('message.deleted'));
     }
 
 }

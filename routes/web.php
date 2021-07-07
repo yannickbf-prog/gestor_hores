@@ -204,7 +204,9 @@ Route::group(['middleware' => 'admin'], function () {
 //Entry hours - Workers section - Middleware in controller
 Route::get('entry-hours-worked/delete_filters/lang/{lang}', [EntryHoursController::class, 'deleteFilters'])->name('hours_entry.delete_filters');
 Route::get('entry-hours-worked/change_num_records/lang/{lang}', [EntryHoursController::class, 'changeNumRecords'])->name('hours_entry.change_num_records');
-
+Route::post("entry-hours-worked/{entryHours}/lang/{lang}", [EntryHoursController::class, 'update'])->name('hours_entry.update');
+Route::delete("entry-hours-worked/destroy/{entryHours}/lang/{lang}", [EntryHoursController::class, 'destroy'])->name('hours_entry.destroy');
+    
 Route::post("en/entry-hours-worked/success", [EntryHoursController::class, 'store'])->name('en_entry_hours.store');
 Route::post("es/entrar-horas-trabajadas/exito-horas-entradas", [EntryHoursController::class, 'store'])->name('es_entry_hours.store');
 Route::post("ca/entrar-hores-treballades/exit-hores-entrades", [EntryHoursController::class, 'store'])->name('ca_entry_hours.store');
