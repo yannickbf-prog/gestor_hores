@@ -14,7 +14,5 @@ class HourEntry extends Model
     
     protected $dates = ['updated_at', 'days'];
    
-    protected $fillable = [
-        'days'
-    ];
+    
 }

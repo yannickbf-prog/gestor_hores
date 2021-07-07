@@ -24,7 +24,7 @@ class HourEntryController extends Controller {
         $values_before_edit_json = null;
         
         if ($request->has('_token') && $request->has('entry_hour_id')) {
-            
+            $show_edit = true;
             
             $hour_entry = HourEntry::find($request['entry_hour_id']);
             
@@ -464,10 +464,6 @@ class HourEntryController extends Controller {
      */
     public function update(EditHourEntryRequest $request, HourEntry $hourEntry, $lang) {
         
-       
-       
-        return redirect()->route($lang.'_time_entries.index')
-                        ->with('success', __('message.time_entry')." ".$request->name." ".__('message.updated'));
     }
 
     /**

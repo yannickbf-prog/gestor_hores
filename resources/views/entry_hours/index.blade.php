@@ -204,7 +204,6 @@ $load_old_hour_entries = true;
 </div>
 @endsection
 @section('js')
-
 <script src="https://kit.fontawesome.com/ad4ed42faf.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ URL::asset('./dom-slider-master/dist/dom-slider.js') }}"></script>
 
