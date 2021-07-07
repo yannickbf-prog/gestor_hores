@@ -469,6 +469,12 @@ class HourEntryController extends Controller {
                     ->where('project_id', $request->projects[0])
                     ->select('id')
                     ->first();
+            
+            $inputed_hours = $request->hours[0];
+            
+            if($request->inputed_hours[0] != null){
+                $inputed_hours = $request->inputed_hours[0];
+            }
 
             DB::table('hours_entry')
                     ->where('id', $hourEntry->id)
@@ -477,6 +483,7 @@ class HourEntryController extends Controller {
                         'day' => Carbon::createFromFormat('d/m/Y', $request->days[0])->format('Y-m-d'),
                         'hours' => $request->hours[0],
                         'description' => $request->desc[0],
+                        'hours_imputed' => $inputed_hours
                     ]);
 
 

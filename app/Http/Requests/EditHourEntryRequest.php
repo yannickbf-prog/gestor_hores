@@ -45,8 +45,8 @@ class EditHourEntryRequest extends FormRequest
             "customers.*" => "required|string",
             "projects" => "required|array",
             "projects.*" => "required|string",
-            "inputed_hours" => "required|array",
-            "inputed_hours.*" => "required|int|min:1|max:24",
+            //"inputed_hours" => "required|array",
+            //"inputed_hours.*" => "required|int|min:1|max:24",
             "desc" => "required|array",
             "desc.*" => "required|string|min:5|max:150",
         ];
