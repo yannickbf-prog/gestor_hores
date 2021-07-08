@@ -344,7 +344,10 @@ $load_old_hour_entries = true;
         inputDesc.setAttribute('class', "form-control");
 
         if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
-            inputDesc.innerHTML = old_data.old_desc[old_data_index];
+            inputDesc.innerText = old_data.old_desc[old_data_index];
+        }
+        else if (values_before_edit !== null) {
+            inputDesc.innerText = values_before_edit.description;
         }
 
         old_data_index++;
@@ -400,6 +403,9 @@ $load_old_hour_entries = true;
 
             if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
                 imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
+            }
+            else if (values_before_edit !== null) {
+                imputedHoursHtml.setAttribute('value', values_before_edit.hours_imputed);
             }
 
             old_inputed_hours_index++;
