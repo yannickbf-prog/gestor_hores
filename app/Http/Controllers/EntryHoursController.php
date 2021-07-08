@@ -277,6 +277,10 @@ class EntryHoursController extends Controller {
                             ->with('success', __('message.time_entry') . " " . __('message.created'));
         }
     }
+    
+    function cancelEdit($lang) {
+        return redirect()->route($lang . '_time_entries.index');
+    }
 
     /**
      * Display the specified resource.
@@ -305,7 +309,7 @@ class EntryHoursController extends Controller {
      * @param  \App\Models\EntryHours  $entryHours
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EntryHours $entryHours) {
+    public function update(Request $request, EntryHours $entryHours, $lang) {
         //
     }
 

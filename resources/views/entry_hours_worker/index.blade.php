@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>{{ __('message.add_new')." ".__('message.time_entry') }}</h2>
+            <h2>{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h2>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@ $load_old_hour_entries = true;
 
 <div class="mt-2 pt-1" id="timeEntriesFormContainer">
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
-    <form action="{{ route('entry_hours.store', $lang) }}" method="POST" id="timeEntriesForm">
+    <form action="{{ ($values_before_edit_json == null) ? route('entry_hours.store', $lang) : route('hours_entry.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">
         @csrf
 
     </form>
@@ -345,8 +345,7 @@ $load_old_hour_entries = true;
 
         if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
             inputDesc.innerText = old_data.old_desc[old_data_index];
-        }
-        else if (values_before_edit !== null) {
+        } else if (values_before_edit !== null) {
             inputDesc.innerText = values_before_edit.description;
         }
 
@@ -403,8 +402,7 @@ $load_old_hour_entries = true;
 
             if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
                 imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
-            }
-            else if (values_before_edit !== null) {
+            } else if (values_before_edit !== null) {
                 imputedHoursHtml.setAttribute('value', values_before_edit.hours_imputed);
             }
 
@@ -453,14 +451,14 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = project.project_id;
             option.innerText = project.project_name;
-            
+
             if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
                 option.selected = true;
-                
+
             if (values_before_edit === null & last_customer_and_project != null && project.project_id == last_customer_and_project.project_id && "{{ $load_old_hour_entries }}" == false)
                 option.selected = true;
 
-            if (values_before_edit !== null && project.project_id == values_before_edit.project_id){
+            if (values_before_edit !== null && project.project_id == values_before_edit.project_id) {
                 option.selected = true;
             }
 
@@ -506,12 +504,12 @@ $load_old_hour_entries = true;
             console.log(last_customer_and_project)
             if (values_before_edit === null & last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id && "{{ $load_old_hour_entries }}" == false)
                 option.selected = true;
-            
+
             console.log(values_before_edit)
-            if (values_before_edit !== null && customer.customer_id == values_before_edit.customer_id){
+            if (values_before_edit !== null && customer.customer_id == values_before_edit.customer_id) {
                 option.selected = true;
             }
-            
+
             customerSelectHtml.appendChild(option);
         }
 
@@ -603,11 +601,9 @@ $load_old_hour_entries = true;
 
         if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
             inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
-        }
-        else if (values_before_edit !== null) {
+        } else if (values_before_edit !== null) {
             inputHours.setAttribute('value', values_before_edit.hours);
-        }
-        else {
+        } else {
             inputHours.setAttribute('value', 8)
         }
 
@@ -633,6 +629,16 @@ $load_old_hour_entries = true;
         let buttonContainer = document.createElement("div");
         buttonContainer.setAttribute('class', 'form-group d-flex justify-content-end');
         buttonContainer.setAttribute('id', 'submitContainer');
+
+        if (values_before_edit !== null) {
+            let cancelHtml = document.createElement("a");
+            cancelHtml.innerText = "{{ __('message.cancel') }}";
+            cancelHtml.setAttribute('class', 'btn general_button mr-0');
+            cancelHtml.setAttribute('href', '{{ route("hours_entry.cancel_edit", $lang) }}');
+            buttonContainer.appendChild(cancelHtml);
+
+        }
+
         let submitHtml = document.createElement("button");
         submitHtml.innerText = "{{ __('message.save') }}";
         submitHtml.setAttribute('type', 'submit');

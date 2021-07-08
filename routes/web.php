@@ -206,6 +206,7 @@ Route::get('entry-hours-worked/delete_filters/lang/{lang}', [EntryHoursControlle
 Route::get('entry-hours-worked/change_num_records/lang/{lang}', [EntryHoursController::class, 'changeNumRecords'])->name('hours_entry.change_num_records');
 Route::post("entry-hours-worked/{entryHours}/lang/{lang}", [EntryHoursController::class, 'update'])->name('hours_entry.update');
 Route::delete("entry-hours-worked/destroy/{entryHours}/lang/{lang}", [EntryHoursController::class, 'destroy'])->name('hours_entry.destroy');
+Route::get("entry-hours-worked/lang/{lang}", [HourEntryController::class, 'cancelEdit'])->name('hours_entry.cancel_edit');
     
 Route::post("entry-hours-worked/lang/{lang}", [EntryHoursController::class, 'store'])->name('entry_hours.store');
 
