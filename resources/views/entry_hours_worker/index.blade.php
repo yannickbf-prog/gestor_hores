@@ -128,8 +128,8 @@ $load_old_hour_entries = true;
 
 
                     @php
-                        $form_id = "editForm".$value->hours_entry_id;
-                        $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
+                    $form_id = "editForm".$value->hours_entry_id;
+                    $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
                     @endphp
 
                     <form action="{{ route($lang.'_entry_hours.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
@@ -143,7 +143,7 @@ $load_old_hour_entries = true;
 
 
                     @php
-                        $id = "exampleModal".$value->hours_entry_id;
+                    $id = "exampleModal".$value->hours_entry_id;
                     @endphp
 
                     <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
@@ -287,7 +287,6 @@ $load_old_hour_entries = true;
 
     //Get the object from json
     var json_data = @json($json_data);
-    console.log(json_data);
 
     function createCountOfHours() {
 
@@ -452,6 +451,8 @@ $load_old_hour_entries = true;
                 option.selected = true;
             if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
                 option.selected = true;
+            if (values_before_edit !== null && project.project_id == values_before_edit.project_id)
+                option.selected = true;
             projectSelectHtml.appendChild(option);
 
         }
@@ -487,18 +488,32 @@ $load_old_hour_entries = true;
             option.value = customer.customer_id;
             option.innerText = customer.customer_name;
 
+            console.log(old_data)
             if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
                 option.selected = true;
 
+            console.log(last_customer_and_project)
             if (last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id && "{{ $load_old_hour_entries }}" == false)
                 option.selected = true;
-
+            
+            console.log(values_before_edit)
+            
             customerSelectHtml.appendChild(option);
         }
-
-        if (document.getElementById('customerContainer' + containerId) != null) {
-            document.getElementById('customerContainer' + containerId).remove();
-        }
+        
+//                if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
+//            inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
+//        }
+//        else if (values_before_edit !== null) {
+//            inputHours.setAttribute('value', values_before_edit.hours);
+//        }
+//        else {
+//            inputHours.setAttribute('value', 8)
+//        }
+//
+//        if (document.getElementById('customerContainer' + containerId) != null) {
+//            document.getElementById('customerContainer' + containerId).remove();
+//        }
 
         formGroup3.appendChild(customerSelectHtml);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup3);
@@ -562,6 +577,8 @@ $load_old_hour_entries = true;
 
         if (old_data.length != 0 && !loadFinish && old_data.old_days[old_data_index] != null) {
             inputDay.setAttribute('value', old_data.old_days[old_data_index]);
+        } else if (values_before_edit !== null) {
+            inputDay.setAttribute('value', values_before_edit.day);
         } else {
             inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}");
         }
@@ -586,7 +603,11 @@ $load_old_hour_entries = true;
 
         if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
             inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
-        } else {
+        }
+        else if (values_before_edit !== null) {
+            inputHours.setAttribute('value', values_before_edit.hours);
+        }
+        else {
             inputHours.setAttribute('value', 8)
         }
 
@@ -677,6 +698,8 @@ $load_old_hour_entries = true;
     var old_inputed_hours_index = 0;
 
     var loadFinish = false;
+
+    var values_before_edit = @json($values_before_edit_json);
 
     if ("{{ $load_old_hour_entries }}") {
         let numEntries = parseInt("{{ session('count_hours_entries_user') }}");

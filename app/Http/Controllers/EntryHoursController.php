@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\EntryHours;
+use App\Models\HourEntry;
+use App\Models\UsersProject;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Auth;
 use DB;
 use Carbon\Carbon;
 use App\Http\Requests\CreateHourEntryRequestUser;
-use App\Models\UsersProject;
 
 class EntryHoursController extends Controller {
 
@@ -24,7 +26,35 @@ class EntryHoursController extends Controller {
      */
     public function index(Request $request) {
         
-        if ($request->has('_token')) {
+        $values_before_edit_json = null;
+        
+        if ($request->has('_token') && $request->has('entry_hour_id')) {
+            $hour_entry = HourEntry::find($request['entry_hour_id']);
+
+            $day = $hour_entry->day;
+            $hours = $hour_entry->hours;
+            $hours_imputed = $hour_entry->hours_imputed;
+            $description = $hour_entry->description;
+            
+            $user_project_id = $hour_entry->user_project_id;
+
+            $project_id = UsersProject::find($user_project_id)->project_id;
+
+            $customer_id = Project::find($project_id)->customer_id;
+            
+            $values_before_edit_json = [
+                'hour_entry_id' => $request['entry_hour_id'],
+                'day' => \Carbon\Carbon::parse($day)->format('d/m/Y'),
+                'hours' => $hours,
+                'hours_imputed' => $hours_imputed,
+                'description' => $description,
+                'user_project_id' => $user_project_id,
+                'project_id' => $project_id,
+                'customer_id' => $customer_id,
+            ];
+        }
+        
+        if ($request->has('_token') && $request->has('select_filter_customer')) {
             session(['entry_hour_project' => $request['select_filter_projects']]);
         }
         
@@ -157,7 +187,7 @@ class EntryHoursController extends Controller {
             ];
         }
         
-        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data', 'user_id', 'users_projects_with_customer']));
+        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data', 'user_id', 'users_projects_with_customer', 'values_before_edit_json']));
     }
     
     public function deleteFilters($lang) {
