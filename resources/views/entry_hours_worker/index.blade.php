@@ -102,7 +102,7 @@ $load_old_hour_entries = true;
     </thead>
     @endif
     <tbody>
-    @forelse ($data as $value)
+        @forelse ($data as $value)
 
         <tr>
 
@@ -122,11 +122,28 @@ $load_old_hour_entries = true;
                     @endif
                 </div>
             </td>
-            
+
             <td class="align-middle">
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
+
+
                     @php
-                    $id = "exampleModal".$value->hours_entry_id;
+                        $form_id = "editForm".$value->hours_entry_id;
+                        $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
+                    @endphp
+
+                    <form action="{{ route($lang.'_entry_hours.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
+                        @csrf
+                        <input type="hidden" name="entry_hour_id" value="{{ $value->hours_entry_id }}">
+                    </form>
+
+                    <a style="text-decoration: none" class="text-dark">
+                        <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
+                    </a>
+
+
+                    @php
+                        $id = "exampleModal".$value->hours_entry_id;
                     @endphp
 
                     <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
@@ -165,7 +182,7 @@ $load_old_hour_entries = true;
         @empty
     <li>{{__('message.no')}} {{__('message.time_entries')}} {{__('message.to_show')}}</li>
     @endforelse
-    </tbody>
+</tbody>
 </table> 
 @if (count($data) > 0)
 
@@ -192,11 +209,11 @@ $load_old_hour_entries = true;
 @section('js')
 <script>
 //Efect in alert when edit and save customer
-$(".alert-success").slideDown(400);
+    $(".alert-success").slideDown(400);
 
-$(".alert-success").delay(6000).slideUp(400, function () {
-    $(this).alert('close');
-});
+    $(".alert-success").delay(6000).slideUp(400, function () {
+        $(this).alert('close');
+    });
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -677,8 +694,8 @@ $(".alert-success").delay(6000).slideUp(400, function () {
     var users_projects_with_customer = @json($users_projects_with_customer);
 
     filterShowProjectsOfUserAndCustomer();
-    
-    
+
+
 
 </script>
 

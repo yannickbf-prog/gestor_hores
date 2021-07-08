@@ -28,7 +28,10 @@ class EntryHoursController extends Controller {
             session(['entry_hour_project' => $request['select_filter_projects']]);
         }
         
-        $project_id = session('entry_hour_project', "%");
+        $project_id = "%";
+        
+        if($request->session()->has('entry_hour_project'))
+        $project_id = session('entry_hour_project');
         
         $pagination = session('hour_entry_worker_num_records', 10);
         
