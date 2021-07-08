@@ -447,12 +447,17 @@ $load_old_hour_entries = true;
             let option = document.createElement("option");
             option.value = project.project_id;
             option.innerText = project.project_name;
-            if (last_customer_and_project != null && project.project_id == last_customer_and_project.project_id)
-                option.selected = true;
+            
             if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
                 option.selected = true;
-            if (values_before_edit !== null && project.project_id == values_before_edit.project_id)
+                
+            if (values_before_edit === null & last_customer_and_project != null && project.project_id == last_customer_and_project.project_id && "{{ $load_old_hour_entries }}" == false)
                 option.selected = true;
+
+            if (values_before_edit !== null && project.project_id == values_before_edit.project_id){
+                option.selected = true;
+            }
+
             projectSelectHtml.appendChild(option);
 
         }
@@ -503,20 +508,6 @@ $load_old_hour_entries = true;
             
             customerSelectHtml.appendChild(option);
         }
-        
-//                if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
-//            inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
-//        }
-//        else if (values_before_edit !== null) {
-//            inputHours.setAttribute('value', values_before_edit.hours);
-//        }
-//        else {
-//            inputHours.setAttribute('value', 8)
-//        }
-//
-//        if (document.getElementById('customerContainer' + containerId) != null) {
-//            document.getElementById('customerContainer' + containerId).remove();
-//        }
 
         formGroup3.appendChild(customerSelectHtml);
         document.getElementById('timeEntryContainer' + containerId).appendChild(formGroup3);
