@@ -207,9 +207,7 @@ Route::get('entry-hours-worked/change_num_records/lang/{lang}', [EntryHoursContr
 Route::post("entry-hours-worked/{entryHours}/lang/{lang}", [EntryHoursController::class, 'update'])->name('hours_entry.update');
 Route::delete("entry-hours-worked/destroy/{entryHours}/lang/{lang}", [EntryHoursController::class, 'destroy'])->name('hours_entry.destroy');
     
-Route::post("en/entry-hours-worked/success", [EntryHoursController::class, 'store'])->name('en_entry_hours.store');
-Route::post("es/entrar-horas-trabajadas/exito-horas-entradas", [EntryHoursController::class, 'store'])->name('es_entry_hours.store');
-Route::post("ca/entrar-hores-treballades/exit-hores-entrades", [EntryHoursController::class, 'store'])->name('ca_entry_hours.store');
+Route::post("entry-hours-worked/lang/{lang}", [EntryHoursController::class, 'store'])->name('entry_hours.store');
 
 Route::get("en/entry-hours-worked", [EntryHoursController::class, 'index'])->name('en_entry_hours.index');
 Route::get("es/entrar-horas-trabajadas", [EntryHoursController::class, 'index'])->name('es_entry_hours.index');

@@ -358,10 +358,10 @@ $load_old_hour_entries = true;
                 inputDesc.setAttribute('class', "form-control");
 
                 if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
-                    inputDesc.innerHTML = old_data.old_desc[old_data_index];
+                    inputDesc.innerText = old_data.old_desc[old_data_index];
                 }
                 else if (values_before_edit !== null) {
-                    inputDesc.innerHTML = values_before_edit.description;
+                    inputDesc.innerText = values_before_edit.description;
                     //Delete add/remove users if edit
                     document.getElementById("addRemoveEntryContainer").style.display = "none";
                 }

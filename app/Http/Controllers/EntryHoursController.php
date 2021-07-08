@@ -220,7 +220,7 @@ class EntryHoursController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateHourEntryRequestUser $request) {
+    public function store(CreateHourEntryRequestUser $request, $lang) {
 
         $count_hours_entries = count($request->days);
 
@@ -273,9 +273,8 @@ class EntryHoursController extends Controller {
                 ]);
             }
 
-            $lang = setGetLang();
-
-            return view('entry_hours_worker.success', compact('lang'));
+            return redirect()->route($lang . '_entry_hours.index')
+                            ->with('success', __('message.time_entry') . " " . __('message.created'));
         }
     }
 
