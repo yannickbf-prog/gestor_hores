@@ -493,10 +493,13 @@ $load_old_hour_entries = true;
                 option.selected = true;
 
             console.log(last_customer_and_project)
-            if (last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id && "{{ $load_old_hour_entries }}" == false)
+            if (values_before_edit === null & last_customer_and_project != null && customer.customer_id == last_customer_and_project.customer_id && "{{ $load_old_hour_entries }}" == false)
                 option.selected = true;
             
             console.log(values_before_edit)
+            if (values_before_edit !== null && customer.customer_id == values_before_edit.customer_id){
+                option.selected = true;
+            }
             
             customerSelectHtml.appendChild(option);
         }
