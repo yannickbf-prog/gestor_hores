@@ -347,6 +347,8 @@ $load_old_hour_entries = true;
             inputDesc.innerText = old_data.old_desc[old_data_index];
         } else if (values_before_edit !== null) {
             inputDesc.innerText = values_before_edit.description;
+            //Delete add/remove users if edit
+            document.getElementById("addRemoveEntryContainer").style.display = "none";
         }
 
         old_data_index++;
@@ -640,7 +642,7 @@ $load_old_hour_entries = true;
         }
 
         let submitHtml = document.createElement("button");
-        submitHtml.innerText = "{{ __('message.save') }}";
+        submitHtml.innerText = (values_before_edit === null) ? "{{ __('message.save') }}" : "{{ __('message.update') }}";
         submitHtml.setAttribute('type', 'submit');
         submitHtml.setAttribute('class', 'btn general_button');
         buttonContainer.appendChild(submitHtml);
