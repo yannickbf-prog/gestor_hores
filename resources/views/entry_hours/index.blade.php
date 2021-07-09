@@ -197,6 +197,9 @@ $load_old_hour_entries = true;
     </div>
 </form>
 
+
+<input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="sm">
+
 <a class="btn general_button" href="{{ route('entry_hours.validate_all', $lang) }}">{{ __('message.validate_all_hours') }}</a>
 @endif
 <div id="paginationContainer">
@@ -337,21 +340,38 @@ $load_old_hour_entries = true;
             
             function showValidateInvalidateButton(){
                 if(values_before_edit !== null && document.getElementById("inputedHours1") !== null ){
+                    
                     let formGroup8 = document.createElement("div");
                     formGroup8.setAttribute('class', 'form-group');
                     formGroup8.setAttribute('id', 'validateInvalidate');
                     
-                    let formCheck1 = document.createElement("div");
+                    //<input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="sm">
 
                     let inputValidated = document.createElement("input");
-                    inputValidated.setAttribute('type', 'radio');
-                    inputValidated.setAttribute('id', 'validate');
+                    inputValidated.setAttribute('type', 'checkbox');
+                    inputValidated.setAttribute('name', 'isValidated');
+                    inputValidated.setAttribute('data-toggle', 'toggle');
+                    inputValidated.setAttribute('data-onstyle', 'outline-success');
+                    inputValidated.setAttribute('data-offstyle', 'outline-danger');
+                    inputValidated.setAttribute('data-size', 'sm');
+                    inputValidated.setAttribute('data-on', "<i class='bi bi-check-square-fill fa-lg'></i> {{ __('message.validated') }}");
+                    inputValidated.setAttribute('data-off', "<i class='bi bi-x-square-fill fa-lg'></i> {{ __('message.invalidated') }}");
+                    inputValidated.setAttribute('data-width', "120");
+                    inputValidated.setAttribute('class', 'form-check-input');
+                    inputValidated.setAttribute('name', 'validate');
+                    
+                    console.log(values_before_edit)
+                    
                     formGroup8.appendChild(inputValidated);
 
-                    let labelValidated = document.createElement("label");
-                    labelValidated.innerText = "*{{ __('message.validated') }}: ";
-                    labelValidated.setAttribute('for', 'validate');
-                    formGroup8.appendChild(labelValidated);
+//                    let labelValidated = document.createElement("label");
+//                    labelValidated.innerText = "*{{ __('message.validated') }} ";
+//                    labelValidated.setAttribute('class', 'form-check-label');
+//                    labelValidated.setAttribute('for', 'validate');
+//                    
+//                    formCheck1.appendChild(labelValidated);
+//                    
+//                    formGroup8.appendChild(formCheck1);
 
                     document.getElementById('timeEntryContainer1').appendChild(formGroup8);
 
