@@ -360,8 +360,9 @@ $load_old_hour_entries = true;
                     inputValidated.setAttribute('class', 'form-check-input');
                     inputValidated.setAttribute('name', 'validate');
                     
-                    console.log(values_before_edit)
-                    
+                    if(values_before_edit.isValidated == 1)
+                        inputValidated.checked = true;
+                                       
                     formGroup8.appendChild(inputValidated);
 
 //                    let labelValidated = document.createElement("label");

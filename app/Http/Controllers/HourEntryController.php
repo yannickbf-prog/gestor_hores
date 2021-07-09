@@ -32,6 +32,7 @@ class HourEntryController extends Controller {
             $hours = $hour_entry->hours;
             $hours_imputed = $hour_entry->hours_imputed;
             $description = $hour_entry->description;
+            $isValidated = $hour_entry->validate;
 
             $user_project_id = $hour_entry->user_project_id;
 
@@ -57,7 +58,8 @@ class HourEntryController extends Controller {
                 'user_id' => $user_id,
                 'project_id' => $project_id,
                 'customer_id' => $customer_id,
-                'bag_hour' => $bag_hour
+                'bag_hour' => $bag_hour,
+                'isValidated' => $isValidated
             ];
         }
 
