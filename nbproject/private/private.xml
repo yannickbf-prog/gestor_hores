@@ -12,11 +12,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/EditUserHourEntryRequest.php</file>
             <file>file:/var/www/gestor_hores/resources/views/entry_hours/index.blade.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/HourEntryController.php</file>
             <file>file:/var/www/gestor_hores/resources/views/entry_hours_worker/index.blade.php</file>
             <file>file:/var/www/gestor_hores/routes/web.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Controllers/EntryHoursController.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/EditHourEntryRequest.php</file>
         </group>
     </open-files>
 </project-private>

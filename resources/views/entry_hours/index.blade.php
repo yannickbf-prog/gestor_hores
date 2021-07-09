@@ -336,7 +336,29 @@ $load_old_hour_entries = true;
             }
             
             function showValidateInvalidateButton(){
-                let formGroup8 = document.createElement("div");
+                if(values_before_edit !== null && document.getElementById("inputedHours1") !== null ){
+                    let formGroup8 = document.createElement("div");
+                    formGroup8.setAttribute('class', 'form-group');
+                    formGroup8.setAttribute('id', 'validateInvalidate');
+                    
+                    let formCheck1 = document.createElement("div");
+
+                    let inputValidated = document.createElement("input");
+                    inputValidated.setAttribute('type', 'radio');
+                    inputValidated.setAttribute('id', 'validate');
+                    formGroup8.appendChild(inputValidated);
+
+                    let labelValidated = document.createElement("label");
+                    labelValidated.innerText = "*{{ __('message.validated') }}: ";
+                    labelValidated.setAttribute('for', 'validate');
+                    formGroup8.appendChild(labelValidated);
+
+                    document.getElementById('timeEntryContainer1').appendChild(formGroup8);
+
+                    let inputInvalidated = document.createElement("input");
+                    
+                    
+                }    
             }
 
             function showDescription(containerId) {
@@ -374,9 +396,9 @@ $load_old_hour_entries = true;
                 if (values_before_edit !== null)
                     inputDesc.innerHTML = values_before_edit.description;             
 
-                if(values_before_edit !== null && values_before_edit.bag_hour){
-                    showValidateInvalidateButton();
-                }
+                
+                showValidateInvalidateButton();
+                
                 //Create total count of hours
                 createCountOfHours();
             }

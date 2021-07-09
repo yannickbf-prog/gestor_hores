@@ -12,6 +12,7 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use App\Http\Requests\CreateHourEntryRequestUser;
+use App\Http\Requests\EditUserHourEntryRequest;
 
 class EntryHoursController extends Controller {
 
@@ -309,8 +310,38 @@ class EntryHoursController extends Controller {
      * @param  \App\Models\EntryHours  $entryHours
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EntryHours $entryHours, $lang) {
-        //
+    public function update(EditUserHourEntryRequest $request, EntryHours $entryHours, $lang) {
+        
+        if ($request->validated()) {
+            
+            $user_id = Auth::user()->getUserId();
+
+            $user_project_id = DB::table('users_projects')
+                    ->where('user_id', $user_id)
+                    ->where('project_id', $request->projects[0])
+                    ->select('id')
+                    ->first();
+            
+            $inputed_hours = $request->hours[0];
+            
+            if(isset($request->inputed_hours[0])){
+                $inputed_hours = $request->inputed_hours[0];
+            }
+
+            DB::table('hours_entry')
+                    ->where('id', $entryHours->id)
+                    ->update([
+                        'user_project_id' => $user_project_id->id,
+                        'day' => Carbon::createFromFormat('d/m/Y', $request->days[0])->format('Y-m-d'),
+                        'hours' => $request->hours[0],
+                        'description' => $request->desc[0],
+                        'hours_imputed' => $inputed_hours
+                    ]);
+
+
+            return redirect()->route($lang . '_entry_hours.index')
+                            ->with('success', __('message.time_entry') . " " . $request->name . " " . __('message.updated'));
+        }
     }
 
     /**
