@@ -25,12 +25,30 @@
 </div>
 
 <div id="filterDiv" class="p-4 my-3">
-    <div class="mb-4">
-        <div class="d-flex align-content-stretch align-items-center" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <div class="mb-4" id="filterTitleContainer">
+        <div class="d-flex align-content-stretch align-items-center">
             <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
         </div>
     </div>
-    <div  class="collapse" id="collapseExample">
+    <div id="filtersContainer">
+        <div class="row">
+
+            <div class="form-group col-xs-6 col-sm-6 col-md-6">
+                <strong>{{ __('message.surname') }}:</strong>
+                <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.surname') }}" value="@if(session('user_surname') != '%'){{session('user_surname')}}@endif">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="filterDiv" class="p-4 my-3">
+    <div class="mb-4">
+        <div class="d-flex align-content-stretch align-items-center">
+            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
+        </div>
+    </div>
+    <div>
 
         <form action="{{ route($lang.'_users.index') }}" method="GET"> 
             @csrf

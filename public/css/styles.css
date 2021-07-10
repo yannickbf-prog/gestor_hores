@@ -224,10 +224,13 @@ th {
     border: 1px solid #ccc
 }
 
-#filterDiv div:first-child div:first-child {
-    display: inline-block;
+#filterTitleContainer {
     cursor: pointer;
     width: 95;
+}
+
+#filtersContainer {
+    display: none;
 }
 
 .bi-chevron-down {

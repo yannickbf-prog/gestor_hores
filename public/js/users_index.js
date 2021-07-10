@@ -113,6 +113,22 @@ $.datepicker.regional["ca"] = {
     yearSuffix: "",
 };
 
+var filterCount = 1;
+  $("#filterTitleContainer").click(function(){
+
+		if(filterCount % 2 == 0) 
+			$('.bi-chevron-down').css("transform", "rotate(0deg)");
+
+		else
+        $('.bi-chevron-down').css("transform", "rotate(180deg)");
+        
+        filterCount++;
+
+        // show hide paragraph on button click
+        $("#filtersContainer").toggle(200);
+    });
+
+
 window.onload = function () {
     //Load popover btn listeners
     document.getElementById("datePopoverBtn").addEventListener("click", togglePopover);
