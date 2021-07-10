@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h2>
+            <h2>{{ __('message.hello')." ".$user_name." ".__('message.welcome') }}</h2>
         </div>
     </div>
 </div>
@@ -41,6 +41,7 @@ $load_old_hour_entries = true;
 @endif
 
 <div class="mt-2 pt-1" id="timeEntriesFormContainer">
+    <h3>{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
     <form action="{{ ($values_before_edit_json == null) ? route('entry_hours.store', $lang) : route('hours_entry.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">
         @csrf
