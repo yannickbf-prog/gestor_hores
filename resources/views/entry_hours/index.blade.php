@@ -197,9 +197,6 @@ $load_old_hour_entries = true;
     </div>
 </form>
 
-
-<input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="sm">
-
 <a class="btn general_button" href="{{ route('entry_hours.validate_all', $lang) }}">{{ __('message.validate_all_hours') }}</a>
 @endif
 <div id="paginationContainer">
@@ -349,7 +346,6 @@ $load_old_hour_entries = true;
 
                     let inputValidated = document.createElement("input");
                     inputValidated.setAttribute('type', 'checkbox');
-                    inputValidated.setAttribute('name', 'isValidated');
                     inputValidated.setAttribute('data-toggle', 'toggle');
                     inputValidated.setAttribute('data-onstyle', 'outline-success');
                     inputValidated.setAttribute('data-offstyle', 'outline-danger');
@@ -365,19 +361,7 @@ $load_old_hour_entries = true;
                                        
                     formGroup8.appendChild(inputValidated);
 
-//                    let labelValidated = document.createElement("label");
-//                    labelValidated.innerText = "*{{ __('message.validated') }} ";
-//                    labelValidated.setAttribute('class', 'form-check-label');
-//                    labelValidated.setAttribute('for', 'validate');
-//                    
-//                    formCheck1.appendChild(labelValidated);
-//                    
-//                    formGroup8.appendChild(formCheck1);
-
-                    document.getElementById('timeEntryContainer1').appendChild(formGroup8);
-
-                    let inputInvalidated = document.createElement("input");
-                    
+                    document.getElementById('timeEntryContainer1').appendChild(formGroup8);                
                     
                 }    
             }

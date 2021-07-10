@@ -492,7 +492,8 @@ class HourEntryController extends Controller {
                         'day' => Carbon::createFromFormat('d/m/Y', $request->days[0])->format('Y-m-d'),
                         'hours' => $request->hours[0],
                         'description' => $request->desc[0],
-                        'hours_imputed' => $inputed_hours
+                        'hours_imputed' => $inputed_hours,
+                        'validate' => ($request->validate == "on") ? 1 : 0
                     ]);
 
 
