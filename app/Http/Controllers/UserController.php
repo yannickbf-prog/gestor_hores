@@ -25,7 +25,6 @@ class UserController extends Controller {
             ($request['phone'] == "") ? session(['user_phone' => '%']) : session(['user_phone' => $request['phone']]);
 
             session(['user_role' => $request['role']]);
-            session(['user_order' => $request['order']]);
             session(['user_num_records' => $request['num_records']]);
         }
 
@@ -39,7 +38,7 @@ class UserController extends Controller {
         $email = session('user_email', "%");
         $phone = session('user_phone', "%");
         $role = session('user_role', "%");
-        $order = session('user_order', "desc");
+        $order = "desc";
         $num_records = session('customer_num_records', 10);
         
         if ($role == "all") {
@@ -74,7 +73,6 @@ class UserController extends Controller {
         session(['user_role' => '%']);
         session(['user_date_from' => ""]);
         session(['user_date_to' => ""]);
-        session(['user_order' => 'asc']);
         session(['user_num_records' => 10]);
         
         $lang = $request->lang;

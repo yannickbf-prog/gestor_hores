@@ -56,7 +56,7 @@ return [
     'customer' => 'Client',
     'filters' => 'Filtres',
     'name' => 'Nom',
-    'email' => 'Email',
+    'email' => 'Correu electrònic',
     'phone' => 'Telèfon',
     'date_creation_interval' => 'INTERVAL DE DATES DE CREACIÓ',
     'from' => 'Desde',
