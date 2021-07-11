@@ -58,7 +58,7 @@ return [
     'name' => 'Nom',
     'email' => 'Email',
     'phone' => 'Telèfon',
-    'date_creation_interval' => 'Interval de dates de creació ',
+    'date_creation_interval' => 'INTERVAL DE DATES DE CREACIÓ',
     'from' => 'Desde',
     'to' => 'Fins',
     'order' => 'Ordre',

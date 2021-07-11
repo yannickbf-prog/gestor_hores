@@ -33,11 +33,68 @@
     <div id="filtersContainer">
         <div class="row">
 
-            <div class="form-group col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group col-xs-3 col-sm-3 col-md-3">
                 <strong>{{ __('message.surname') }}:</strong>
                 <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.surname') }}" value="@if(session('user_surname') != '%'){{session('user_surname')}}@endif">
             </div>
 
+            <div class="form-group col-xs-3 col-sm-3 col-md-3">
+                <strong>{{ __('message.name') }}:</strong>
+                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('user_name') != '%'){{session('user_name')}}@endif">
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 form-group">
+                <strong>{{ __('message.email') }}:</strong>
+                <input type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="@if(session('user_email') != '%'){{session('user_email')}}@endif">
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 form-group">
+                <strong>{{ __('message.username') }}:</strong>
+                <input type="text" name="username" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.username') }}" value="@if(session('user_username') != '%'){{session('user_username')}}@endif">
+            </div>
+
+            <div class="col-xs-3 col-sm-3 col-md-3 form-group">
+                <strong>{{ __('message.phone') }}:</strong>
+                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="@if(session('user_phone') != '%'){{session('user_phone')}}@endif">
+            </div>
+
+
+            <div class="col-xs-3 col-sm-3 col-md-3 form-group">
+                <strong>{{ __('message.role') }}:</strong>
+                <select name="role" id="role" class="form-control form-select">
+                    <option value="all">{{ __('message.all') }}</option>
+                    <option value="admin" @if(session('user_role') == 'admin'){{'selected'}}@endif >{{ __('message.admin') }}</option>
+                    <option value="user" @if(session('user_role') == 'user'){{'selected'}}@endif >{{ __('message.worker') }}</option>
+                </select>
+            </div>
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6 form-group align-self-end">
+                
+                <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+                    <div class="arrow" style="left: 114px;"></div>
+                    <div class="popover-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="form-group">
+                                    <strong>{{ __('message.from') }}:</strong>
+                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('user_date_from') != ''){{session('user_date_from')}}@endif">
+                                </div>
+                                <div class="form-group">
+                                    <strong>{{ __('message.to') }}:</strong>
+                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('user_date_to') != ''){{session('user_date_to')}}@endif">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

@@ -58,7 +58,7 @@ return [
     'name' => 'Name',
     'email' => 'Email',
     'phone' => 'Phone',
-    'date_creation_interval' => 'Date create interval',
+    'date_creation_interval' => 'CREATION DATE INTERVAL',
     'from' => 'From',
     'to' => 'To',
     'order' => 'Order',

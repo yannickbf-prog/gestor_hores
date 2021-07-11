@@ -215,8 +215,24 @@ th {
 }
 
 .general_button:hover{
-    background-color: #d9f3f7;
+    background-color: #666666;
     color: #2da0e2;
+}
+
+#datePopoverBtn {
+    background-color: white;
+    border: 2px solid #666666;
+    font-weight: bold;
+    color: #666666;
+    border-radius: 7px;
+    margin-right: 3px;
+    transition: background .4s;
+    margin: 15px;
+}
+
+#datePopoverBtn:hover{
+    background-color: #e0e0e0;
+    color: #606060;
 }
 
 #filterDiv {
