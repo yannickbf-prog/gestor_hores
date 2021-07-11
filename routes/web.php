@@ -82,7 +82,7 @@ Route::group(['middleware' => 'admin'], function () {
     // Control panel - Users - Operations - Other routes in routes/auth.php
     Route::put("control-panel/users/{user}/lang/{lang}", [UserController::class, 'update'])->name('users.update');
     Route::delete("control-panel/users/{user}/lang/{lang}", [UserController::class, 'destroy'])->name('users.destroy');
-    Route::post('control-panel/users/delete_filters/', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
+    Route::get('control-panel/users/delete_filters/lang/{lang}', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
 
     // Control panel - Users - en
     Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');

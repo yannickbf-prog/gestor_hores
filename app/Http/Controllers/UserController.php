@@ -63,7 +63,7 @@ class UserController extends Controller {
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
     
-    public function deleteFilters(Request $request) {
+    public function deleteFilters($lang) {
         
         session(['user_username' => '%']);
         session(['user_name' => '%']);
@@ -74,8 +74,6 @@ class UserController extends Controller {
         session(['user_date_from' => ""]);
         session(['user_date_to' => ""]);
         session(['user_num_records' => 10]);
-        
-        $lang = $request->lang;
 
         return redirect()->route($lang.'_users.index');
 
