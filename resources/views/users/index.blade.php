@@ -73,21 +73,21 @@
                 
                 <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
 
-                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -176px, 0px); top: 0px; left: 0px;" x-placement="top">
                     <div class="arrow" style="left: 114px;"></div>
                     <div class="popover-body">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-12">
                                 <button type="button" class="close" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <strong>{{ __('message.from') }}:</strong>
-                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('user_date_from') != ''){{session('user_date_from')}}@endif">
+                                    <input autocomplete="off" name="date_from" type="text" class="datepicker form-control form-control-sm" value="@if(session('user_date_from') != ''){{session('user_date_from')}}@endif">
                                 </div>
                                 <div class="form-group">
-                                    <strong>{{ __('message.to') }}:</strong>
-                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('user_date_to') != ''){{session('user_date_to')}}@endif">
+                                    <strong>{{ __('message.to') }}:</strong><br>
+                                    <input autocomplete="off" type="text" name="date_to" class="datepicker form-control form-control-sm" value="@if(session('user_date_to') != ''){{session('user_date_to')}}@endif">
                                 </div>
                             </div>
                         </div>
