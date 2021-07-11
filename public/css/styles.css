@@ -289,3 +289,7 @@ table thead th {
 .bi-pencil-fill {
     cursor: pointer;
 }
+
+#numRecords {
+    width: 70;
+}

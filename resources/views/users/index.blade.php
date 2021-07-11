@@ -187,6 +187,20 @@
     @endforelse
 </tbody>
 </table> 
+@if (count($data) > 0)
+<form action="{{ route('users.change_num_records', $lang) }}" method="GET"> 
+    @csrf
+    <div class="form-group d-flex align-items-center">
+        <strong>{{ __('message.number_of_records') }}:</strong>
+        <select name="num_records" id="numRecords" onchange="this.form.submit()" class="form-control form-select ml-2">
+            <option value="10">10</option>
+            <option value="50" @if(session('users_num_records') == 50){{'selected'}}@endif>50</option>
+            <option value="100" @if(session('users_entry_num_records') == 100){{'selected'}}@endif>100</option>
+            <option value="all" @if(session('users_entry_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
+        </select>
+    </div>
+</form>
+@endif
 <div id="paginationContainer">
     {!! $data->links() !!} 
 </div>

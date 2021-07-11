@@ -39,7 +39,7 @@ class UserController extends Controller {
         $phone = session('user_phone', "%");
         $role = session('user_role', "%");
         $order = "desc";
-        $num_records = session('customer_num_records', 10);
+        $num_records = session('users_num_records', 10);
         
         if ($role == "all") {
             $role = "%";
@@ -77,6 +77,13 @@ class UserController extends Controller {
 
         return redirect()->route($lang.'_users.index');
 
+    }
+    
+    public function changeNumRecords(Request $request, $lang) {
+        
+        session(['users_num_records' => $request['num_records']]);
+        
+        return redirect()->route($lang.'_users.index');
     }
 
     /**
