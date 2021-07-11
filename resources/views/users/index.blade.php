@@ -31,7 +31,8 @@
         </div>
     </div>
     <div id="filtersContainer">
-        <div class="row">
+        <form action="{{ route($lang.'_users.index') }}" method="GET" class="row"> 
+            @csrf
 
             <div class="form-group col-xs-3 col-sm-3 col-md-3">
                 <strong>{{ __('message.surname') }}:</strong>
@@ -100,7 +101,7 @@
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
             
-        </div>
+        </form>
     </div>
 </div>
 

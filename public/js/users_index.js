@@ -125,7 +125,7 @@ var filterCount = 1;
         filterCount++;
 
         // show hide paragraph on button click
-        $("#filtersContainer").toggle(200);
+        $("#filtersContainer").toggle(400);
     });
 
 
