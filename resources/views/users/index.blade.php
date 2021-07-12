@@ -97,6 +97,24 @@
                         $checked = 'checked';
                     }
                 }
+                else {
+                    if($user_to_edit->role == "admin") {
+                        $checked = 'checked';
+                    }
+                    else {
+                        $checked = '';
+                    }
+                    
+                    if(old('role') !== null) {
+                        if(old('role') == "admin") {
+                            $checked = 'checked';
+                        }
+                        else {
+                            $checked = '';
+                        }
+                    }
+                    
+                }
                 @endphp
                 <input type="radio" id="admin" name="role" value="admin" {{$checked}}>
                 <label for="admin">{{ __('message.admin') }}</label><br>  
