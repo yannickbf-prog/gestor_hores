@@ -57,8 +57,8 @@ $load_old_hour_entries = true;
 
         <form action="{{ route($lang.'_time_entries.index') }}" method="GET"> 
             @csrf
-            <div class="d-flex" id="inputsContainer">
-                <div class="form-group" id="formGroupFilterName">
+            <div class="row" id="inputsContainer">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4" id="formGroupFilterName">
                     <label for="selectFilterName">*Cognoms, Nom: </label>
                     <select id="selectFilterName" name="select_filter_name" class="form-control" onchange="filterShowCustomersOfUser()">
                         @forelse ($users_with_projects as $value)
@@ -187,9 +187,9 @@ $load_old_hour_entries = true;
 @if (count($data) > 0)
 <form action="{{ route('time_entries.change_num_records', $lang) }}" method="GET"> 
     @csrf
-    <div class="form-group">
+    <div class="form-group d-flex align-items-center">
         <strong>{{ __('message.number_of_records') }}: </strong>
-        <select name="num_records" id="numRecords" onchange="this.form.submit()">
+        <select name="num_records" id="numRecords" onchange="this.form.submit()" class="form-control form-select ml-2">
             <option value="10">10</option>
             <option value="50" @if(session('hour_entry_num_records') == 50){{'selected'}}@endif>50</option>
             <option value="100" @if(session('hour_entry_num_records') == 100){{'selected'}}@endif>100</option>
@@ -750,7 +750,7 @@ $load_old_hour_entries = true;
             function filterShowProjectsOfUserAndCustomer() {
 
                 let formGroup = document.createElement("div");
-                formGroup.setAttribute('class', 'form-group');
+                formGroup.setAttribute('class', 'form-group col-xs-12 col-sm-6 col-md-4');
                 formGroup.setAttribute('id', 'formGroupFilterProjects');
 
                 let labelProject = document.createElement("label");
@@ -795,7 +795,7 @@ $load_old_hour_entries = true;
 
 
                 let formGroup = document.createElement("div");
-                formGroup.setAttribute('class', 'form-group');
+                formGroup.setAttribute('class', 'form-group col-xs-12 col-sm-6 col-md-4');
                 formGroup.setAttribute('id', 'formGroupFilterCustomers');
 
                 let labelCustomer = document.createElement("label");
