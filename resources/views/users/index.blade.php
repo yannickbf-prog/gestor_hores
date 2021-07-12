@@ -90,7 +90,15 @@
                 <strong>{{ __('message.role') }}:</strong><br>
                 <input type="radio" id="user" name="role" value="user" checked>
                 <label for="user">{{ __('message.worker') }}</label><br>
-                <input type="radio" id="admin" name="role" value="admin">
+                @php
+                $checked = "";
+                if($user_to_edit == null) {
+                    if(old('role') == "admin") {
+                        $checked = 'checked';
+                    }
+                }
+                @endphp
+                <input type="radio" id="admin" name="role" value="admin" {{$checked}}>
                 <label for="admin">{{ __('message.admin') }}</label><br>  
 
             </div>
