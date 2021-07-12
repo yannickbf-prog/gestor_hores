@@ -35,11 +35,19 @@
 
 <div class="pt-1 create_edit_container">
     <h3>{{ __('message.add_new')." ".__('message.user') }}</h3>
-    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
+
+    <div class="alert alert-info mt-2 mx-3">
+        <strong>{{__('message.fields_are_required')}}</strong>
+        @if ($user_to_edit !== null)
+        <hr>
+        <strong>{{__('message.password_edit_info')}}</strong>
+        @endif
+    </div>
     <form action="{{ ($user_to_edit == null) ? route('users.store',$lang) : route('users.update',[$user_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-4">
         @csrf
 
         <div class="row">
+
             <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
                 <strong>*{{__('message.username')}}:</strong>
                 <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{ ($user_to_edit == null) ? old('nickname') : old('nickname', $user_to_edit->nickname) }}">
@@ -75,13 +83,13 @@
             <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
                 <strong>*{{__('message.password')}}:</strong>
-                <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ ($user_to_edit == null) ? old('password') : old('password', $user_to_edit->password) }}">
+                <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password') }}">
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
                 <strong>*{{__('message.password_confirm')}}:</strong>
-                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ ($user_to_edit == null) ? old('password_confirmation') : old('password_confirmation', $user_to_edit->surname) }}">
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password_confirmation') }}">
 
             </div>
 
@@ -93,27 +101,27 @@
                 @php
                 $checked = "";
                 if($user_to_edit == null) {
-                    if(old('role') == "admin") {
-                        $checked = 'checked';
-                    }
+                if(old('role') == "admin") {
+                $checked = 'checked';
+                }
                 }
                 else {
-                    if($user_to_edit->role == "admin") {
-                        $checked = 'checked';
-                    }
-                    else {
-                        $checked = '';
-                    }
-                    
-                    if(old('role') !== null) {
-                        if(old('role') == "admin") {
-                            $checked = 'checked';
-                        }
-                        else {
-                            $checked = '';
-                        }
-                    }
-                    
+                if($user_to_edit->role == "admin") {
+                $checked = 'checked';
+                }
+                else {
+                $checked = '';
+                }
+
+                if(old('role') !== null) {
+                if(old('role') == "admin") {
+                $checked = 'checked';
+                }
+                else {
+                $checked = '';
+                }
+                }
+
                 }
                 @endphp
                 <input type="radio" id="admin" name="role" value="admin" {{$checked}}>
@@ -286,7 +294,7 @@
 
 
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
-                    
+
 
                     @php
                     $form_id = "editForm".$value->id;
