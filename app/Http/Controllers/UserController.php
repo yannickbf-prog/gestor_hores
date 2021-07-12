@@ -144,6 +144,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(EditUserRequest $request, User $user, $lang) {
+        
         //$input = $request->except(['password']);
         if ($request->password == "") {
             $validated = $request->validated();
@@ -152,7 +153,7 @@ class UserController extends Controller {
         } else {
             $user->update($request->validated());
         }
-
+        
         return redirect()->route($lang . '_users.index')
                         ->with('success', __('message.user') . " " . $request->nickname . " " . __('message.updated'));
     }

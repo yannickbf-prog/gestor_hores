@@ -36,7 +36,7 @@
 <div class="pt-1 create_edit_container">
     <h3>{{ __('message.add_new')." ".__('message.user') }}</h3>
 
-    <div class="alert alert-info mt-2 mx-3">
+    <div class="alert alert-info mt-2 mx-2">
         <strong>{{__('message.fields_are_required')}}</strong>
         @if ($user_to_edit !== null)
         <hr>
