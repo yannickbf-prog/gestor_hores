@@ -36,52 +36,52 @@
 <div class="pt-1 create_edit_container">
     <h3>{{ __('message.add_new')." ".__('message.user') }}</h3>
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
-    <form action="{{  route('users.store',$lang)  }}" method="POST" class="px-3 pt-4">
+    <form action="{{ ($user_to_edit == null) ? route('users.store',$lang) : route('users.update',[$user_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-4">
         @csrf
 
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
                 <strong>*{{__('message.username')}}:</strong>
-                <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{old('nickname')}}">
+                <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{ ($user_to_edit == null) ? old('nickname') : old('nickname', $user_to_edit->nickname) }}">
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
                 <strong>*{{__('message.name')}}:</strong>
-                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
+                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{ ($user_to_edit == null) ? old('name') : old('name', $user_to_edit->name) }}">
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
                 <strong>*{{__('message.surname')}}:</strong>
-                <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{old('surname')}}">
+                <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{ ($user_to_edit == null) ? old('surname') : old('surname', $user_to_edit->surname) }}">
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
                 <strong>*{{__('message.email')}}:</strong>
-                <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{old('email')}}">
+                <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{ ($user_to_edit == null) ? old('email') : old('email', $user_to_edit->email) }}">
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
 
                 <strong>{{__('message.phone')}}:</strong>
-                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{old('phone')}}">
+                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{ ($user_to_edit == null) ? old('phone') : old('phone', $user_to_edit->phone) }}">
 
             </div>
             <div class="col-xs-12 col-sm-8 col-md-5 form-group form_group_new_edit">
 
                 <strong>{{__('message.observations')}}:</strong>
-                <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{old('description')}}</textarea>
+                <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ ($user_to_edit == null) ? old('description') : old('description', $user_to_edit->description) }}</textarea>
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
                 <strong>*{{__('message.password')}}:</strong>
-                <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password')}}">
+                <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ ($user_to_edit == null) ? old('password') : old('password', $user_to_edit->password) }}">
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
                 <strong>*{{__('message.password_confirm')}}:</strong>
-                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password_confirmation')}}">
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ ($user_to_edit == null) ? old('password_confirmation') : old('password_confirmation', $user_to_edit->surname) }}">
 
             </div>
 

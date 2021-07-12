@@ -15,10 +15,19 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        
+
         $lang = setGetLang();
 
-        if ($request->has('_token')) {
+        $user_to_edit = null;
+
+        if ($request->has('_token') && $request->has('user_id')) {
+            
+            $user_to_edit = User::where('id', $request['user_id'])->first();
+
+            
+        }
+
+        if ($request->has('_token') && $request->has('username')) {
             ($request['username'] == "") ? session(['user_username' => '%']) : session(['user_username' => $request['username']]);
             ($request['name'] == "") ? session(['user_name' => '%']) : session(['user_name' => $request['name']]);
             ($request['surname'] == "") ? session(['user_surname' => '%']) : session(['user_surname' => $request['surname']]);
@@ -41,12 +50,12 @@ class UserController extends Controller {
         $role = session('user_role', "%");
         $order = "desc";
         $num_records = session('users_num_records', 10);
-        
+
         if ($role == "all") {
             $role = "%";
         }
-        
-        if($num_records == 'all'){
+
+        if ($num_records == 'all') {
             $num_records = User::count();
         }
 
@@ -60,12 +69,12 @@ class UserController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
-        return view('users.index', compact(['lang', 'data']))
+        return view('users.index', compact(['lang', 'data', 'user_to_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
-    
+
     public function deleteFilters($lang) {
-        
+
         session(['user_username' => '%']);
         session(['user_name' => '%']);
         session(['user_surname' => '%']);
@@ -76,15 +85,14 @@ class UserController extends Controller {
         session(['user_date_to' => ""]);
         session(['user_num_records' => 10]);
 
-        return redirect()->route($lang.'_users.index');
-
+        return redirect()->route($lang . '_users.index');
     }
-    
+
     public function changeNumRecords(Request $request, $lang) {
-        
+
         session(['users_num_records' => $request['num_records']]);
-        
-        return redirect()->route($lang.'_users.index');
+
+        return redirect()->route($lang . '_users.index');
     }
 
     /**
@@ -124,7 +132,7 @@ class UserController extends Controller {
      */
     public function edit(User $user) {
         $lang = setGetLang();
-        
+
         return view('users.edit', compact('user'), compact('lang'));
     }
 
@@ -137,17 +145,16 @@ class UserController extends Controller {
      */
     public function update(EditUserRequest $request, User $user, $lang) {
         //$input = $request->except(['password']);
-        if($request->password == ""){
+        if ($request->password == "") {
             $validated = $request->validated();
-        
+
             $user->update(collect($validated)->except(['password'])->toArray());
-        }
-        else{
+        } else {
             $user->update($request->validated());
         }
-        
-        return redirect()->route($lang.'_users.index')
-                        ->with('success', __('message.user')." ".$request->nickname." ".__('message.updated'));
+
+        return redirect()->route($lang . '_users.index')
+                        ->with('success', __('message.user') . " " . $request->nickname . " " . __('message.updated'));
     }
 
     /**
@@ -158,11 +165,11 @@ class UserController extends Controller {
      */
     public function destroy(User $user, $lang) {
         App::setLocale($lang);
-        
+
         $user->delete();
 
-        return redirect()->route($lang.'_users.index')
-                        ->with('success', __('message.user')." ".__('message.deleted'));
+        return redirect()->route($lang . '_users.index')
+                        ->with('success', __('message.user') . " " . __('message.deleted'));
     }
 
 }

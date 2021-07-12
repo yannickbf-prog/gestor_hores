@@ -80,7 +80,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/informacio-empresa/editar", [CompanyController::class, 'edit'])->name('ca_company_info.edit');
 
     // Control panel - Users - Operations - Other routes in routes/auth.php
-    Route::put("control-panel/users/{user}/lang/{lang}", [UserController::class, 'update'])->name('users.update');
+    Route::post("control-panel/users/{user}/lang/{lang}", [UserController::class, 'update'])->name('users.update');
     Route::delete("control-panel/users/{user}/lang/{lang}", [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('control-panel/users/delete_filters/lang/{lang}', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
     Route::get('control-panel/users/change_num_records/lang/{lang}', [UserController::class, 'changeNumRecords'])->name('users.change_num_records');
