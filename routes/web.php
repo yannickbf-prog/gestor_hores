@@ -84,6 +84,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete("control-panel/users/{user}/lang/{lang}", [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('control-panel/users/delete_filters/lang/{lang}', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
     Route::get('control-panel/users/change_num_records/lang/{lang}', [UserController::class, 'changeNumRecords'])->name('users.change_num_records');
+    Route::get("control-panel/users/lang/{lang}", [UserController::class, 'cancelEdit'])->name('users.cancel_edit');
     
     // Control panel - Users - en
     Route::get("en/control-panel/users", [UserController::class, 'index'])->name('en_users.index');

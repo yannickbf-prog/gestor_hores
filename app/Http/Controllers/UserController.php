@@ -94,6 +94,10 @@ class UserController extends Controller {
 
         return redirect()->route($lang . '_users.index');
     }
+    
+    function cancelEdit($lang) {
+        return redirect()->route($lang . '_users.index');
+    }
 
     /**
      * Show the form for creating a new resource.

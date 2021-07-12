@@ -34,7 +34,7 @@
 @endif
 
 <div class="pt-1 create_edit_container">
-    <h3>{{ __('message.add_new')." ".__('message.user') }}</h3>
+    <h3>{{ ($user_to_edit == null) ? __('message.add_new')." ".__('message.user') : __('message.edit')." ".__('message.user') }}</h3>
 
     <div class="alert alert-info mt-2 mx-2">
         <strong>{{__('message.fields_are_required')}}</strong>
@@ -130,7 +130,10 @@
             </div>
 
             <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
-                <button type="submit" class="btn general_button">{{ __('message.save') }}</button>
+                @if ($user_to_edit !== null)
+                <a class="btn general_button mr-0" href="{{route('users.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
+                @endif
+                <button type="submit" class="btn general_button">{{ ($user_to_edit == null) ? __('message.save') : __('message.update')}}</button>
             </div>
         </div>
     </form>
@@ -260,37 +263,6 @@
             <td>{{ ($value->role=="user")? __('message.worker') : __('message.admin') }} </td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
             <td class="align-middle">
-                <form action="{{ route('users.destroy',[$value->id, $lang]) }}" method="POST"> 
-                    <a class="btn btn-primary" href="{{ route($lang.'_users.edit',$value->id) }}">{{ __('message.edit') }}</a>
-                    @csrf
-                    @method('DELETE')      
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                        {{ __('message.delete') }}
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} <b>{{ $value->name }}</b>?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                    <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-
-
 
 
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
@@ -309,7 +281,42 @@
                     <a style="text-decoration: none" class="text-dark">
                         <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
                     </a>
+                    
+                    
+                    @php
+                    $id = "exampleModal".$value->id;
+                    @endphp
 
+                    <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
+                        <i class="bi bi-trash-fill fa-lg"></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="{{ route('users.destroy',[$value->id, $lang]) }}" method="POST"> 
+                            @csrf
+                            @method('DELETE')  
+
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.hour_entry") }} <b>{{ $value->name }}</b>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                        <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>   
+                </div>
             </td>
         </tr>
         @empty
