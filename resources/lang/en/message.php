@@ -174,5 +174,7 @@ return [
     
     'user_list' => 'User list',
     'observations' => 'Observations',
-    'no_observations' => 'Without observations'
+    'no_observations' => 'Without observations',
+    'update' => 'UPDATE',
+    'cancel' => 'CANCEL'
 ];

@@ -36,71 +36,67 @@
 <div class="pt-1 create_edit_container">
     <h3>{{ __('message.add_new')." ".__('message.user') }}</h3>
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
-    <form action="{{  route('users.store',$lang)  }}" method="POST">
+    <form action="{{  route('users.store',$lang)  }}" method="POST" class="px-3 pt-4">
         @csrf
 
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
+                <strong>*{{__('message.username')}}:</strong>
+                <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{old('nickname')}}">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
+                <strong>*{{__('message.name')}}:</strong>
+                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
-                    <strong>*{{__('message.username')}}:</strong>
-                    <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{old('nickname')}}">
+                <strong>*{{__('message.surname')}}:</strong>
+                <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{old('surname')}}">
 
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-2">
-                <div class="form-group">
-                    <strong>*{{__('message.name')}}:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                <strong>*{{__('message.email')}}:</strong>
+                <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{old('email')}}">
+
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="form-group">
-                    <strong>*{{__('message.surname')}}:</strong>
-                    <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{old('surname')}}">
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
+
+                <strong>{{__('message.phone')}}:</strong>
+                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{old('phone')}}">
+
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="form-group">
-                    <strong>*{{__('message.email')}}:</strong>
-                    <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{old('email')}}">
-                </div>
+            <div class="col-xs-12 col-sm-8 col-md-5 form-group form_group_new_edit">
+
+                <strong>{{__('message.observations')}}:</strong>
+                <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{old('description')}}</textarea>
+
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-2">
-                <div class="form-group">
-                    <strong>{{__('message.phone')}}:</strong>
-                    <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{old('phone')}}">
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                <strong>*{{__('message.password')}}:</strong>
+                <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password')}}">
+
             </div>
-            <div class="col-xs-12 col-sm-8 col-md-5">
-                <div class="form-group">
-                    <strong>{{__('message.observations')}}:</strong>
-                    <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{old('description')}}</textarea>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="form-group">
-                    <strong>*{{__('message.password')}}:</strong>
-                    <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password')}}">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="form-group">
-                    <strong>*{{__('message.password_confirm')}}:</strong>
-                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password_confirmation')}}">
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                <strong>*{{__('message.password_confirm')}}:</strong>
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password_confirmation')}}">
+
             </div>
 
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="form-group">
-                    <strong>{{ __('message.role') }}:</strong><br>
-                    <input type="radio" id="user" name="role" value="user" checked>
-                    <label for="user">{{ __('message.worker') }}</label><br>
-                    <input type="radio" id="admin" name="role" value="admin">
-                    <label for="admin">{{ __('message.admin') }}</label><br>  
-                </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                <strong>{{ __('message.role') }}:</strong><br>
+                <input type="radio" id="user" name="role" value="user" checked>
+                <label for="user">{{ __('message.worker') }}</label><br>
+                <input type="radio" id="admin" name="role" value="admin">
+                <label for="admin">{{ __('message.admin') }}</label><br>  
+
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
+            <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
+                <button type="submit" class="btn general_button">{{ __('message.save') }}</button>
             </div>
         </div>
     </form>
@@ -205,14 +201,14 @@
         <tr class="thead-light">
             <th>Nº</th>
             <th>{{ __('message.username') }}</th>
-            <th>{{ __('message.name') }}</th>
             <th>{{ __('message.surname') }}</th>
+            <th>{{ __('message.name') }}</th>
             <th>{{ __('message.email') }}</th>
             <th>{{ __('message.phone') }}</th>
             <th>{{ __('message.observations') }}</th>
             <th>{{ __('message.role') }}</th>
             <th>{{ __('message.created_at') }}</th>
-            <th>{{ __('message.action') }}</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -229,7 +225,7 @@
             <td>@if ($value->description == ''){{ __('message.no_observations') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
             <td>{{ ($value->role=="user")? __('message.worker') : __('message.admin') }} </td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
-            <td>
+            <td class="align-middle">
                 <form action="{{ route('users.destroy',[$value->id, $lang]) }}" method="POST"> 
                     <a class="btn btn-primary" href="{{ route($lang.'_users.edit',$value->id) }}">{{ __('message.edit') }}</a>
                     @csrf
@@ -259,6 +255,27 @@
                     </div>
 
                 </form>
+
+
+
+
+                <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
+                    
+
+                    @php
+                    $form_id = "editForm".$value->id;
+                    $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
+                    @endphp
+
+                    <form action="{{ route($lang.'_users.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
+                        @csrf
+                        <input type="hidden" name="entry_hour_id" value="{{ $value->id }}">
+                    </form>
+
+                    <a style="text-decoration: none" class="text-dark">
+                        <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
+                    </a>
+
             </td>
         </tr>
         @empty

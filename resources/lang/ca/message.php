@@ -174,5 +174,7 @@ return [
     
     'user_list' => "Llistat d'usuaris",
     'observations' => 'Observacions',
-    'no_observations' => 'Sense observacions'
+    'no_observations' => 'Sense observacions',
+    'update' => 'ACTUALITZAR',
+    'cancel' => 'CANCELAR'
 ];

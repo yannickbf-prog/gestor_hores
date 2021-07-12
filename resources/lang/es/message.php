@@ -173,5 +173,7 @@ return [
     
     'user_list' => 'Lista de usuarios',
     'observations' => 'Observaciones',
-    'no_observations' => 'Sin observaciones'
+    'no_observations' => 'Sin observaciones',
+    'update' => 'ACTUALIZAR',
+    'cancel' => 'CANCELAR'
 ];
