@@ -175,5 +175,7 @@ return [
     'observations' => 'Observaciones',
     'no_observations' => 'Sin observaciones',
     'update' => 'ACTUALIZAR',
-    'cancel' => 'CANCELAR'
+    'cancel' => 'CANCELAR',
+    'hello' => 'Hola',
+    'welcome_entry_hours' => '. Bienvenido/a al sistema de fichaje de horas trabajadas'
 ];

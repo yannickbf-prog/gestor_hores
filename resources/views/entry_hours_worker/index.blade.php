@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Login - Home')
+@section('title', __('message.entry_hours_worked')." - ". $user_name . " " . $user_surname)
 
 @section('nav_and_content')
 
@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>{{ __('message.hello')." ".$user_name." ".__('message.welcome') }}</h2>
+            <h2>{{ __('message.hello')." ".$user_name.__('message.welcome_entry_hours') }}</h2>
         </div>
     </div>
 </div>
@@ -55,12 +55,11 @@ $load_old_hour_entries = true;
             <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
         </div>
     </div>
-    <div  class="collapse" id="collapseExample">
-
+    <div id="filtersContainer">
         <form action="{{ route($lang.'_entry_hours.index') }}" method="GET"> 
             @csrf
-            <div class="d-flex" id="inputsContainer">
-                <div class="form-group" id="formGroupFilterCustomer">
+            <div id="inputsContainer" class="row">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 pl-0" id="formGroupFilterCustomer">
                     <label for="selectFilterCustomers">{{__('message.customer')}}</label>
                     <select id="selectFilterCustomers" name="select_filter_customer" class="form-control" onchange="filterShowProjectsOfUserAndCustomer()">
                         @forelse ($user_customers_data as $value)
@@ -74,7 +73,7 @@ $load_old_hour_entries = true;
                 </div>
             </div>
 
-            <div class="form-group d-flex justify-content-end mb-0">
+            <div class="form-group d-flex justify-content-end mb-0 col-12">
                 <a href="{{ route('hours_entry.delete_filters', [$lang]) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
@@ -189,9 +188,9 @@ $load_old_hour_entries = true;
 
 <form action="{{ route('hours_entry.change_num_records', $lang) }}" method="GET"> 
     @csrf
-    <div class="form-group">
+    <div class="form-group d-flex align-items-center">
         <strong>{{ __('message.number_of_records') }}: </strong>
-        <select name="num_records" id="numRecords" onchange="this.form.submit()">
+        <select name="num_records" id="numRecords" onchange="this.form.submit()" class="form-control form-select ml-2">
             <option value="10">10</option>
             <option value="50" @if(session('hour_entry_worker_num_records') == 50){{'selected'}}@endif>50</option>
             <option value="100" @if(session('hour_entry_worker_num_records') == 100){{'selected'}}@endif>100</option>
@@ -663,7 +662,7 @@ $load_old_hour_entries = true;
     function filterShowProjectsOfUserAndCustomer() {
 
         let formGroup = document.createElement("div");
-        formGroup.setAttribute('class', 'form-group');
+        formGroup.setAttribute('class', 'form-group col-xs-12 col-sm-6 col-md-4');
         formGroup.setAttribute('id', 'formGroupFilterProjects');
 
         let labelProject = document.createElement("label");
@@ -726,6 +725,23 @@ $load_old_hour_entries = true;
     var users_projects_with_customer = @json($users_projects_with_customer);
 
     filterShowProjectsOfUserAndCustomer();
+
+
+    var filterCount = 1;
+    $("#filterTitleContainer").click(function () {
+
+        if (filterCount % 2 == 0)
+            $('.bi-chevron-down').css("transform", "rotate(0deg)");
+
+        else
+            $('.bi-chevron-down').css("transform", "rotate(180deg)");
+
+        filterCount++;
+
+        // show hide paragraph on button click
+        $("#filtersContainer").toggle(400);
+    });
+
 
 
 

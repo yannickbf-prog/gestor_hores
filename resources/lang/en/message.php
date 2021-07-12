@@ -176,5 +176,7 @@ return [
     'observations' => 'Observations',
     'no_observations' => 'Without observations',
     'update' => 'UPDATE',
-    'cancel' => 'CANCEL'
+    'cancel' => 'CANCEL',
+    'hello' => 'Hello',
+    'welcome_entry_hours' => '. Welcome to the cheking hours worked system'
 ];

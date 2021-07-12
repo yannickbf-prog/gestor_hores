@@ -189,8 +189,9 @@ class EntryHoursController extends Controller {
         }
         
         $user_name = Auth::user()->getUserName();
+        $user_surname = Auth::user()->getUserSurname();
         
-        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data', 'user_id', 'users_projects_with_customer', 'values_before_edit_json', 'user_name']));
+        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data', 'user_id', 'users_projects_with_customer', 'values_before_edit_json', 'user_name', 'user_surname']));
     }
     
     public function deleteFilters($lang) {

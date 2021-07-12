@@ -253,21 +253,6 @@ th {
     transition: transform .6s ease-in-out;
 }
 
-#formGroupFilterName {
-    width: 20% !important;
-    margin-right: 25px;
-}
-
-#formGroupFilterCustomers {
-    width: 20%;
-    margin-right: 25px;
-}
-
-#formGroupFilterProjects {
-    width: 20%;
-    
-}
-
 table {
     border: 1px solid #e8e8e8;
 }

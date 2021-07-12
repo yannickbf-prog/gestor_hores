@@ -63,6 +63,10 @@ class User extends Authenticatable
         return $this->name;
     }
     
+    public function getUserSurname() {
+        return $this->surname;
+    }
+    
     public function setPasswordAttribute($password)
     {   
         if ( $password !== null ) {

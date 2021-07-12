@@ -176,5 +176,7 @@ return [
     'observations' => 'Observacions',
     'no_observations' => 'Sense observacions',
     'update' => 'ACTUALITZAR',
-    'cancel' => 'CANCELAR'
+    'cancel' => 'CANCELAR',
+    'hello' => 'Hola',
+    'welcome_entry_hours' => ". Benvingut/da al sistema de fitxatge d'hores treballades",
 ];
