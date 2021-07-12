@@ -17,11 +17,93 @@
         <div class="pull-left">
             <h2>{{ __('message.users') }}</h2>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_users.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.user') }}</a>
-
-        </div>
     </div>
+</div>
+
+
+
+@if ($errors->any())
+<div class="alert alert-danger mt-3">
+    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ ucfirst($error) }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="pt-1 create_edit_container">
+    <h3>{{ __('message.add_new')." ".__('message.user') }}</h3>
+    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
+    <form action="{{  route('users.store',$lang)  }}" method="POST">
+        @csrf
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
+
+                    <strong>*{{__('message.username')}}:</strong>
+                    <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{old('nickname')}}">
+
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <div class="form-group">
+                    <strong>*{{__('message.name')}}:</strong>
+                    <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    <strong>*{{__('message.surname')}}:</strong>
+                    <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{old('surname')}}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    <strong>*{{__('message.email')}}:</strong>
+                    <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{old('email')}}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <div class="form-group">
+                    <strong>{{__('message.phone')}}:</strong>
+                    <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{old('phone')}}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-5">
+                <div class="form-group">
+                    <strong>{{__('message.observations')}}:</strong>
+                    <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{old('description')}}</textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    <strong>*{{__('message.password')}}:</strong>
+                    <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password')}}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    <strong>*{{__('message.password_confirm')}}:</strong>
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{old('password_confirmation')}}">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    <strong>{{ __('message.role') }}:</strong><br>
+                    <input type="radio" id="user" name="role" value="user" checked>
+                    <label for="user">{{ __('message.worker') }}</label><br>
+                    <input type="radio" id="admin" name="role" value="admin">
+                    <label for="admin">{{ __('message.admin') }}</label><br>  
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div id="filterDiv" class="p-4 my-3">
@@ -71,7 +153,7 @@
 
 
             <div class="col-xs-6 col-sm-6 col-md-6 form-group align-self-end">
-                
+
                 <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
 
                 <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -176px, 0px); top: 0px; left: 0px;" x-placement="top">
@@ -95,12 +177,12 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-group d-flex justify-content-end mb-0 col-12">
                 <a href="{{ route('users.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
-            
+
         </form>
     </div>
 </div>
@@ -109,10 +191,7 @@
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h3>{{ __('message.projects_list') }}</h3>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_users.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.user') }}</a>
+            <h3>{{ __('message.user_list') }}</h3>
         </div>
     </div>
 </div>
@@ -130,7 +209,7 @@
             <th>{{ __('message.surname') }}</th>
             <th>{{ __('message.email') }}</th>
             <th>{{ __('message.phone') }}</th>
-            <th>{{ __('message.description') }}</th>
+            <th>{{ __('message.observations') }}</th>
             <th>{{ __('message.role') }}</th>
             <th>{{ __('message.created_at') }}</th>
             <th>{{ __('message.action') }}</th>
@@ -147,7 +226,7 @@
             <td>{{ $value->surname }}</td>
             <td>{{ $value->email }}</td>
             <td>{{ $value->phone }}</td>
-            <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+            <td>@if ($value->description == ''){{ __('message.no_observations') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
             <td>{{ ($value->role=="user")? __('message.worker') : __('message.admin') }} </td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
             <td>
@@ -195,8 +274,8 @@
         <select name="num_records" id="numRecords" onchange="this.form.submit()" class="form-control form-select ml-2">
             <option value="10">10</option>
             <option value="50" @if(session('users_num_records') == 50){{'selected'}}@endif>50</option>
-            <option value="100" @if(session('users_entry_num_records') == 100){{'selected'}}@endif>100</option>
-            <option value="all" @if(session('users_entry_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
+            <option value="100" @if(session('users_num_records') == 100){{'selected'}}@endif>100</option>
+            <option value="all" @if(session('users_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
         </select>
     </div>
 </form>

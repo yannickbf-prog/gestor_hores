@@ -170,5 +170,9 @@ return [
     'bag_hour' => "Bossa d'hores",
     'dedicated_hours' => 'H. dedicades',
     'imputed_hours' => 'H. imputades',
-    'validate_all_hours' => 'VALIDAR TOTES LES HORES'
+    'validate_all_hours' => 'VALIDAR TOTES LES HORES',
+    
+    'user_list' => "Llistat d'usuaris",
+    'observations' => 'Observacions',
+    'no_observations' => 'Sense observacions'
 ];

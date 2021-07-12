@@ -38,7 +38,7 @@ $load_old_hour_entries = true;
         </div>
     </div>
 </div>
-<div class="pt-1" id="timeEntriesFormContainer">
+<div class="pt-1 create_edit_container" id="timeEntriesFormContainer">
     <h3>{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
     <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
     <form action="{{ ($values_before_edit_json == null) ? route('time_entries.store',$lang) : route('time_entries.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">

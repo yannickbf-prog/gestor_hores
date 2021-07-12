@@ -42,7 +42,7 @@ svg{
     max-height: 150px;
 }
 
-#timeEntriesFormContainer {
+.create_edit_container {
     background-color: #DBEFFA;
 }
 
@@ -292,4 +292,8 @@ table thead th {
 
 #numRecords {
     width: 70;
+}
+
+.form_group_new_edit {
+    padding: 0 7px !important;
 }
