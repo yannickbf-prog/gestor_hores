@@ -264,12 +264,12 @@
 
                     @php
                     $form_id = "editForm".$value->id;
-                    $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
+                    $form_dom = "document.getElementById('editForm".$value->id."').submit();";
                     @endphp
 
                     <form action="{{ route($lang.'_users.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
                         @csrf
-                        <input type="hidden" name="entry_hour_id" value="{{ $value->id }}">
+                        <input type="hidden" name="user_id" value="{{ $value->id }}">
                     </form>
 
                     <a style="text-decoration: none" class="text-dark">
