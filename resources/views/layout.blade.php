@@ -124,7 +124,29 @@ if (Auth::check()) {
 
     <script>
         function hideMenu() {
-            $('nav').hide( "fast", arguments.callee );
+        
+        
+//            $('nav').animate({width: 'toggle'});
+        
+        let dimensionDiv = document.getElementsByTagName('nav')[0].getBoundingClientRect();
+        
+        let width = dimensionDiv.width;
+        
+        let height = dimensionDiv.height;
+        
+        document.getElementsByTagName('nav')[0].style.width = width;
+        document.getElementsByTagName('nav')[0].style.height = height;
+        
+        document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column');
+        
+        $('nav').animate({width: 'hide'}, function() {
+               document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
+        });
+        
+//            $( "nav" ).fadeOut( "slow", function() {
+//                document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
+//            });
+            
         }
     </script>
      
