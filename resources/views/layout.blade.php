@@ -124,7 +124,7 @@ if (Auth::check()) {
 
     <script>
         function hideMenu() {
-            $('nav').animate({width: 'toggle'});
+            $('nav').hide( "fast", arguments.callee );
         }
     </script>
      
