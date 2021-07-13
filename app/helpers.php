@@ -4,7 +4,7 @@ use DateTime;
 use DateTimeZone;
 
 function setActive($routeName) {
-    return request()->routeIs($routeName) ? 'active' : '';
+    return request()->routeIs($routeName) ? 'font-weight-bold' : '';
 }
 
 function setActiveLang($lang) {

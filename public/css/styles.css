@@ -282,3 +282,22 @@ table thead th {
 .form_group_new_edit {
     padding: 0 7px !important;
 }
+
+nav {
+    transition: all 0.5s ease-in-out;
+}
+
+
+nav > a:nth-child(2) {
+    border-top: 1px solid #898989;
+}
+
+nav > a:last-child {
+    border-bottom: 1px solid #898989;
+}
+
+.bi-arrow-bar-left {
+    font-size: 2em;
+    margin-bottom: 7;
+    cursor: pointer;
+}

@@ -122,6 +122,11 @@ if (Auth::check()) {
         });
     </script>
 
+    <script>
+        function hideMenu() {
+            $('nav').animate({width: 'toggle'});
+        }
+    </script>
      
 
 
