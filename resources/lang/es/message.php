@@ -177,5 +177,6 @@ return [
     'update' => 'ACTUALIZAR',
     'cancel' => 'CANCELAR',
     'hello' => 'Hola',
-    'welcome_entry_hours' => '. Bienvenido/a al sistema de fichaje de horas trabajadas'
+    'welcome_entry_hours' => '. Bienvenido/a al sistema de fichaje de horas trabajadas',
+    'unvalidated_time_entries' => 'Entradas de horas sin validar'
 ];

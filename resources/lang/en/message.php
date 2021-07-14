@@ -178,5 +178,6 @@ return [
     'update' => 'UPDATE',
     'cancel' => 'CANCEL',
     'hello' => 'Hello',
-    'welcome_entry_hours' => '. Welcome to the cheking hours worked system'
+    'welcome_entry_hours' => '. Welcome to the cheking hours worked system',
+    'unvalidated_time_entries' => 'Unvalidated time entries'
 ];
