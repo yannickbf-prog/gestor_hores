@@ -79,7 +79,7 @@ if (Auth::check()) {
             </div>
 
             @section('nav_and_content')
-            <div class="row">
+            <div class="row" id="navAndContent">
                 @include('partials.nav')
                 <main class="col-10">
                     @yield('content')
@@ -155,7 +155,33 @@ if (Auth::check()) {
         }
         
         function showMenu() {
-            alert("hello")
+        
+            let dimensionDiv = document.getElementById('navAndContent').getBoundingClientRect();
+
+            let width = dimensionDiv.width;
+            let height = dimensionDiv.height;
+            
+            let calculatedWidth = (width/100)*16.666666666666;
+            
+            console.log(calculatedWidth)
+            
+            document.getElementsByTagName('nav')[0].style.width = calculatedWidth;
+            document.getElementsByTagName('nav')[0].style.height = height;
+            document.getElementsByTagName('nav')[0].style.paddingRight = "15px";
+        
+            $('nav').animate({width: 'show'}, function() {
+                   document.getElementsByTagName('main')[0].setAttribute('class', 'col-10');
+                   $('#showMenuBtnContainer').slideUp("slow");
+            });
+        
+            
+            
+            console.log(width);
+
+//            document.getElementsByTagName('nav')[0].style.width = width;
+//            document.getElementsByTagName('nav')[0].style.height = height;
+            
+            
         }
     </script>
      
