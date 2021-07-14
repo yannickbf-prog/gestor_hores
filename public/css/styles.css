@@ -295,8 +295,12 @@ nav > a:last-child {
     border-bottom: 1px solid #898989;
 }
 
-.bi-arrow-bar-left {
+.bi-arrow-bar-left, .bi-arrow-bar-right {
     font-size: 2em;
     margin-bottom: 7;
     cursor: pointer;
+}
+
+#showMenuBtnContainer {
+    display: none;
 }

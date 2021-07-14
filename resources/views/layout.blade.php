@@ -73,7 +73,9 @@ if (Auth::check()) {
                         </form>
                     </div>
                 </header>
-
+                <div class="col-12" id="showMenuBtnContainer">
+                    <i class="bi bi-arrow-bar-right" onclick="showMenu()"></i>
+                </div>
             </div>
 
             @section('nav_and_content')
@@ -127,26 +129,33 @@ if (Auth::check()) {
         
         
 //            $('nav').animate({width: 'toggle'});
-        
-        let dimensionDiv = document.getElementsByTagName('nav')[0].getBoundingClientRect();
-        
-        let width = dimensionDiv.width;
-        
-        let height = dimensionDiv.height;
-        
-        document.getElementsByTagName('nav')[0].style.width = width;
-        document.getElementsByTagName('nav')[0].style.height = height;
-        
-        document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column');
-        
-        $('nav').animate({width: 'hide'}, function() {
-               document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
-        });
-        
-//            $( "nav" ).fadeOut( "slow", function() {
-//                document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
-//            });
+
+            let dimensionDiv = document.getElementsByTagName('nav')[0].getBoundingClientRect();
+
+            let width = dimensionDiv.width;
+
+            let height = dimensionDiv.height;
+
+            document.getElementsByTagName('nav')[0].style.width = width;
+            document.getElementsByTagName('nav')[0].style.height = height;
+
+            document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column');
+
+            $('nav').animate({width: 'hide'}, function() {
+                   document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
+                   $('#showMenuBtnContainer').slideDown("slow");
+            });
             
+            
+            
+    //            $( "nav" ).fadeOut( "slow", function() {
+    //                document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
+    //            });
+            
+        }
+        
+        function showMenu() {
+            alert("hello")
         }
     </script>
      
