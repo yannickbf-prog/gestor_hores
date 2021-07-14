@@ -1,31 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\UsersProject;
 use DB;
 
-class HomeContoller extends Controller
-{
-    public function index()
-    {
+class HomeContoller extends Controller {
+
+    public function index() {
         $lang = setGetLang();
-        
+
         //Si no agafa el idioma amb setGetLang es que estem entrant per la arrel 
         //(/) del lloc, en aquest cas el idioma es el definit com idioma per defecte a la bd
-        if(!isset($lang)){
+        if (!isset($lang)) {
             $lang = $default_lang;
         }
-        
-        /*$data = HourEntryController::getBDInfo()
-                ->paginate(10);*/
-        
+
+        /* $data = HourEntryController::getBDInfo()
+          ->paginate(10); */
+
         $data = new HourEntryController();
         $info_for_table = $data->getBDInfo("%", "%")->validated()->orderBy('hour_entry_created_at', 'desc')->paginate(10);
 
-        return view('home', compact('lang','info_for_table'))
-                 ->with('i', (request()->input('page', 1) - 1) * 10);
+        return view('home', compact('lang', 'info_for_table'))
+                        ->with('i', (request()->input('page', 1) - 1) * 10);
     }
-    
+
     public function validateEntryHour($id, $lang) {
 
         DB::table('hours_entry')
@@ -33,6 +33,15 @@ class HomeContoller extends Controller
                 ->update(['validate' => 1]);
 
         return redirect()->route($lang . '_home.index')
-                ->with('success', __('message.time_entry')." ".__('message.validated') );
+                        ->with('success', __('message.time_entry') . " " . __('message.validated'));
     }
+
+    public function validateAllHours($lang) {
+
+        $entries_to_validate = DB::table('hours_entry')->where('validate', 0)->update(['validate' => 1]);
+
+        return redirect()->route($lang . '_home.index')
+                        ->with('success', __('message.time_entries') . " " . __('message.validated'));
+    }
+
 }

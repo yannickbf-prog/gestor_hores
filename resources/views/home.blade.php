@@ -72,6 +72,7 @@
     @endforelse
     </tbody>
 </table> 
+<a class="btn general_button" href="{{ route('home_entry_hours.validate_all', $lang) }}">{{ __('message.validate_all_hours') }}</a>
 <div id="paginationContainer">
     {!! $info_for_table->links() !!} 
 </div>

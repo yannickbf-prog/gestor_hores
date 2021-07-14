@@ -65,6 +65,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("es/panel-de-control/", [HomeContoller::class, 'index'])->name('es_home.index');
     Route::get("ca/panell-de-control/", [HomeContoller::class, 'index'])->name('ca_home.index');
     Route::get("control-panel/validate/id/{id}/lang/{lang}", [HomeContoller::class, 'validateEntryHour'])->name('home_entry_hours.validate');
+    Route::get("control-panel/validate-all/lang/{lang}", [HomeContoller::class, 'validateAllHours'])->name('home_entry_hours.validate_all');
 
     // Control panel - Company info - Operations
     Route::get("control-panel/company-info/destroyLogo/lang/{lang}", [CompanyController::class, 'destroyLogo'])->name('company-info.destroy_logo');
