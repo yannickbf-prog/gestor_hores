@@ -287,11 +287,11 @@ main {
     transition: all 0.5s ease-in-out;
 }
 
-nav > a:nth-child(2) {
+nav:first-child > a:nth-child(2) {
     border-top: 1px solid #898989;
 }
 
-nav > a:last-child {
+nav:first-child > a:last-child {
     border-bottom: 1px solid #898989;
 }
 

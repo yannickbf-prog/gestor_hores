@@ -34,6 +34,7 @@ if (Auth::check()) {
     />
         
         @yield('js_head')
+        
             
     </head>
 
@@ -81,7 +82,7 @@ if (Auth::check()) {
             @section('nav_and_content')
             <div class="row" id="navAndContent">
                 @include('partials.nav')
-                <main class="col-10">
+                <main class="col-12 col-md-10">
                     @yield('content')
                 </main>
             </div>
@@ -155,11 +156,11 @@ if (Auth::check()) {
             let calculatedWidth = (width/100)*16.666666666666;
             
             
-            document.getElementsByTagName('main')[0].setAttribute('class', 'col-10');
+            document.getElementsByTagName('main')[0].setAttribute('class', 'col-12 col-md-10');
             
             setTimeout(function () {
                 document.getElementsByTagName('nav')[0].style.width = calculatedWidth;
-                document.getElementsByTagName('nav')[0].style.height = height;
+
                 document.getElementsByTagName('nav')[0].style.paddingRight = "15px";
 
                 $('nav').animate({width: 'show'}, function() {
@@ -167,7 +168,7 @@ if (Auth::check()) {
                        $('#showMenuBtnContainer').slideUp("slow", function() {
                        
                             document.getElementsByTagName('nav')[0].removeAttribute("style")
-                            document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column col-2 pl-0 pr-3');
+                            document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column col-2 pl-0 pr-3 d-none d-md-block');
                        
                         });
                        
@@ -176,16 +177,6 @@ if (Auth::check()) {
                 
             }, 500);
                 
-
-        
-            
-            
-            console.log(width);
-
-//            document.getElementsByTagName('nav')[0].style.width = width;
-//            document.getElementsByTagName('nav')[0].style.height = height;
-            
-            
         }
     </script>
      
