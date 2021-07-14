@@ -163,9 +163,17 @@ if (Auth::check()) {
                 document.getElementsByTagName('nav')[0].style.paddingRight = "15px";
 
                 $('nav').animate({width: 'show'}, function() {
-                       document.getElementsByTagName('main')[0].setAttribute('class', 'col-10');
-                       $('#showMenuBtnContainer').slideUp("slow");
+                       
+                       $('#showMenuBtnContainer').slideUp("slow", function() {
+                       
+                            document.getElementsByTagName('nav')[0].removeAttribute("style")
+                            document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column col-2 pl-0 pr-3');
+                       
+                        });
+                       
                 });
+                
+                
             }, 500);
                 
 

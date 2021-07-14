@@ -1,4 +1,4 @@
-<nav class="nav flex-column col-2">
+<nav class="nav flex-column col-2 pl-0 pr-3">
     <div class="text-center">
         <i class="bi bi-arrow-bar-left" onclick="hideMenu()"></i>
     </div>
