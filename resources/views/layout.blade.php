@@ -151,7 +151,7 @@ if (Auth::check()) {
             let dimensionDiv = document.getElementById('navAndContent').getBoundingClientRect();
 
             let width = dimensionDiv.width;
-            let height = dimensionDiv.height;
+            //let height = dimensionDiv.height;
             
             let calculatedWidth = (width/100)*16.666666666666;
             
@@ -160,7 +160,7 @@ if (Auth::check()) {
             
             setTimeout(function () {
                 document.getElementsByTagName('nav')[0].style.width = calculatedWidth;
-
+                //document.getElementsByTagName('nav')[0].style.height = height;
                 document.getElementsByTagName('nav')[0].style.paddingRight = "15px";
 
                 $('nav').animate({width: 'show'}, function() {
