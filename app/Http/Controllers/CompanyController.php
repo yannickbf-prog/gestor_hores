@@ -16,7 +16,7 @@ class CompanyController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function indexDeprecated() {
 
         $lang = setGetLang();
 
@@ -37,7 +37,7 @@ class CompanyController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index2() {
+    public function index() {
 
         $lang = setGetLang();
 

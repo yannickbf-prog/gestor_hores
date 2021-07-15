@@ -72,7 +72,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put("control-panel/company-info/lang/{lang}", [CompanyController::class, 'update'])->name('company-info.update');
     // Control panel - Company info en
     Route::get("en/control-panel/company-info", [CompanyController::class, 'index'])->name('en_company_info.index');
-    Route::get("en/control-panel/company-info-2", [CompanyController::class, 'index2'])->name('company_info2.index');
     Route::get("en/control-panel/company-info/edit", [CompanyController::class, 'edit'])->name('en_company_info.edit');
     // Control panel - Company info es
     Route::get("es/panel-de-control/informacion-empresa", [CompanyController::class, 'index'])->name('es_company_info.index');
