@@ -38,7 +38,7 @@ return [
     'confirm_invalidate' => "Estas seguir que vols invalidar aquesta entrada d'hores?",
     
     'company' => 'Empresa',
-    'company_info_providing' => "Informació de l'empresa que presta els serveis",
+    'company_info_providing' => "Informació de l'empresa",
     'automotive_sector' => "Sector automovilistic",
     'computer_science' => "Informàtica",
     'construction' => "Construcció",

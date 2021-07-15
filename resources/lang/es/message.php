@@ -38,7 +38,7 @@ return [
     'confirm_validate' => "Estas seguro que quieres invalidar esta bolsa de horas?",
     
     'company' => 'Empresa',
-    'company_info_providing' => 'Información de la empresa que presta los servicios',
+    'company_info_providing' => 'Información de la empresa',
     'automotive_sector' => "Sector automovilístico",
     'computer_science' => "Informática",
     'construction' => "Construcción",

@@ -37,7 +37,7 @@ return [
     'confirm_invalidate' => 'Are you sure you want to invalidate this entry of hours?',
     
     'company' => 'Company',
-    'company_info_providing' => "Information on the company providing the services",
+    'company_info_providing' => "Information of the company",
     'automotive_sector' => "Automotive sector",
     'computer_science' => "Computer science",
     'construction' => "Construction sector",

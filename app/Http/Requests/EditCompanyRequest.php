@@ -35,11 +35,7 @@ class EditCompanyRequest extends FormRequest
         return [
             'name' => 'required|max:50',
             'img_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-            'work_sector' => 'required|max:70',
-            'description' => 'max:400',
             'email' => 'nullable|email|max:50',
-            'phone' => 'nullable|numeric|min:100000000|max:100000000000000',
-            'website' => 'nullable|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/|max:50',
             'default_lang' => 'required|min:2|max:2'
         ];
     }

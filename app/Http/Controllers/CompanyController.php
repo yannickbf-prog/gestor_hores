@@ -31,6 +31,27 @@ class CompanyController extends Controller {
 
         return view('company_info.index', compact(['company', 'lang']))->with($data_counts);
     }
+    
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index2() {
+
+        $lang = setGetLang();
+
+        $company = DB::table('company')->first();
+
+        $data_counts = [
+            'users_count' => DB::table('users')->count(),
+            'customers_count' => DB::table('customers')->count(),
+            'projects_count' => DB::table('projects')->count(),
+            'types_hour_bags_count' => DB::table('type_bag_hours')->count()
+        ];
+
+        return view('company_info.index2', compact('company'), compact('lang'))->with($data_counts);
+    }
 
     /**
      * Show the form for creating a new resource.
