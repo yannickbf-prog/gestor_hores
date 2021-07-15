@@ -304,3 +304,8 @@ nav:first-child > a:last-child {
 #showMenuBtnContainer {
     display: none;
 }
+
+#trashLogoIcon {
+    font-size: 2.5em;
+    cursor: pointer;
+}

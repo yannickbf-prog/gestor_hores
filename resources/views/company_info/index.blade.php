@@ -53,53 +53,52 @@
             </select>
         </div>
 
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{__('message.logo')}}:</strong>
-                @if($company->img_logo != null)
-                <br>
-                <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    {{ __('message.delete') }}
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ __("message.logo") }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                {{ __('message.confirm') }} <b>{{ __('message.delete') }}</b> {{ __('message.the') }} {{ __("message.logo") }} ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                <a href="{{ route('company-info.destroy_logo', $lang) }}" class="btn btn-success">{{__('message.delete')}}</a>
-                            </div>
+        <div class="form-group col-md-6">
+            <span>{{__('message.logo')}}</span>
+            @if($company->img_logo != null)
+            <br>
+            <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
+            
+            <i id="trashLogoIcon" class="bi bi-trash-fill fa-6x align-middle ml-1" data-toggle="modal" data-target="#exampleModal"></i>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ __("message.logo") }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ __('message.confirm') }} <b>{{ __('message.delete') }}</b> {{ __('message.the') }} {{ __("message.logo") }} ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">{{ __('message.close') }}</button>
+                            <a href="{{ route('company-info.destroy_logo', $lang) }}" class="btn btn-danger">{{__('message.delete')}}</a>
                         </div>
                     </div>
                 </div>
+            </div
 
-                <br>
-                <span><b>{{__('message.change')}} {{__('message.logo')}}</b></span>
-                @else
-                <span>{{__('message.no_logo_available')}}</span>
-                <br>
-                <span><b>{{__('message.add')}} {{__('message.logo')}}</b></span>
-                @endif
+            <br>
+            <label for="add-change-logo">{{__('message.change')}} {{__('message.logo')}}</label>
+            @else
+            <li>{{__('message.no_logo_available')}}</li>
+            <br>
+            <label for="add-change-logo">{{__('message.add')}} {{__('message.logo')}}</label>
+            @endif
 
-                <input type="file" name="img_logo" class="form-control">
-            </div>
+            
+            <label for="add-change-logo">Upload a file</label>
+            
+            <input id="add-change-logo" type="file" name="img_logo" class="hidden">
+            
+            
         </div>
 
-
-
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
+        <div class="col-12 text-right">
+            <button id="add-change-logo" type="submit" class="btn general_button">{{__('message.update')}}</button>
         </div>
     </div>
 
