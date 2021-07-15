@@ -178,5 +178,8 @@ return [
     'cancel' => 'CANCELAR',
     'hello' => 'Hola',
     'welcome_entry_hours' => '. Bienvenido/a al sistema de fichaje de horas trabajadas',
-    'unvalidated_time_entries' => 'Entradas de horas sin validar'
+    'unvalidated_time_entries' => 'Entradas de horas sin validar',
+    'company_name' => 'Nombre empresa',
+    'contact_email' => 'Email de contacto',
+    'language' => 'Idioma'
 ];

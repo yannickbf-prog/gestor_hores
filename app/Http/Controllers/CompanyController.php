@@ -50,7 +50,7 @@ class CompanyController extends Controller {
             'types_hour_bags_count' => DB::table('type_bag_hours')->count()
         ];
 
-        return view('company_info.index2', compact('company'), compact('lang'))->with($data_counts);
+        return view('company_info.index', compact('company'), compact('lang'))->with($data_counts);
     }
 
     /**

@@ -179,5 +179,8 @@ return [
     'cancel' => 'CANCEL',
     'hello' => 'Hello',
     'welcome_entry_hours' => '. Welcome to the cheking hours worked system',
-    'unvalidated_time_entries' => 'Unvalidated time entries'
+    'unvalidated_time_entries' => 'Unvalidated time entries',
+    'company_name' => 'Company name',
+    'contact_email' => 'Contact email',
+    'language' => 'Language'
 ];

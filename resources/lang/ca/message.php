@@ -179,5 +179,8 @@ return [
     'cancel' => 'CANCELAR',
     'hello' => 'Hola',
     'welcome_entry_hours' => ". Benvingut/da al sistema de fitxatge d'hores treballades",
-    'unvalidated_time_entries' => "Entrades d'hores sense validar"
+    'unvalidated_time_entries' => "Entrades d'hores sense validar",
+    'company_name' => 'Nom empresa',
+    'contact_email' => 'Email de contacte',
+    'language' => 'Idioma'
 ];

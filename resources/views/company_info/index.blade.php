@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', __('message.control_panel')." - ". __('message.company_info_providing'))
+@section('title', __('message.control_panel').' - '.__('message.company_info').' - '.$company->name)
 
 @section('content')
 @if ($message = Session::get('success'))
@@ -12,75 +12,98 @@
     </button>
 </div>
 @endif
-<a class="btn btn-primary" href="{{ route($lang.'_company_info.edit') }}">{{ __('message.edit') }}</a>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>{{ __('message.company_info_providing') }}</h2>
+
+@if ($errors->any())
+<div class="alert alert-danger mt-3">
+    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<form action="{{ route('company-info.update', $lang) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+
+    <h3>{{ __("message.company_info_providing") }}</h3>
+    <div class="row">
+
+        <div class="form-group col-md-3">
+            <label for="company-name">{{__('message.company_name')}}</label>
+            <input id="company-name" type="text" name="name" value="{{old('name', $company->name)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.name')}}">
+        </div>
+
+
+
+        <div class="form-group col-md-3">
+            <label for="contact-email">{{__('message.contact_email')}}</label>
+            <input id="contact-email" type="text" name="email" value="{{old('email', $company->email)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.email')}}">
+        </div>
+
+
+        <div class="form-group col-md-3 ml-auto">
+            <label for="defaultLang">{{__('message.language')}}</label>
+            <select class="form-control" id="defaultLang" name="default_lang">
+                <option value="en" {{ setActiveSelect('en', $company->default_lang) }}>{{__('message.english')}}</option>
+                <option value="es" {{ setActiveSelect('es', $company->default_lang) }}>{{__('message.spanish')}}</option>
+                <option value="ca" {{ setActiveSelect('ca', $company->default_lang) }}>{{__('message.catalan')}}</option>
+            </select>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>{{__('message.logo')}}:</strong>
+                @if($company->img_logo != null)
+                <br>
+                <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    {{ __('message.delete') }}
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ __("message.logo") }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ __('message.confirm') }} <b>{{ __('message.delete') }}</b> {{ __('message.the') }} {{ __("message.logo") }} ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                <a href="{{ route('company-info.destroy_logo', $lang) }}" class="btn btn-success">{{__('message.delete')}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <span><b>{{__('message.change')}} {{__('message.logo')}}</b></span>
+                @else
+                <span>{{__('message.no_logo_available')}}</span>
+                <br>
+                <span><b>{{__('message.add')}} {{__('message.logo')}}</b></span>
+                @endif
+
+                <input type="file" name="img_logo" class="form-control">
+            </div>
+        </div>
+
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
         </div>
     </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.name') }}:</strong><span> {{ $company->name }}</span>
-        </div>
-    </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.logo') }}:</strong><br>
-            @if($company->img_logo != null)
-            <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
-            @else
-            <span>{{ __('message.no_logo_available') }}</span>
-            @endif
-        </div>
-    </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.work_sector') }}:</strong><span> {{ __("message.".$company->work_sector) }}</span>
-        </div>
-    </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.description') }}:</strong><p> @if($company->description != null) {{ $company->description }} @else {{ __('message.no_description_available')}} @endif</p>
-        </div>
-    </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.email') }}:</strong><span> @if($company->email != null) {{ $company->email }} @else {{ __('message.no_email_available')}} @endif</span>
-        </div>
-    </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.phone') }}:</strong><span> @if($company->phone != null) {{ $company->phone }} @else {{__('message.no_phone_available')}} @endif</span>
-        </div>
-    </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.website') }}:</strong><span> @if($company->website != null) <a href="{{ "//".$company->website }}" target="_blank">{{ $company->website }}</a> @else {{__('message.no_website_available')}} @endif</span>
-        </div>
-    </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.default_lang') }}:</strong><span> {{ __('message.'.$company->default_lang) }}</span>
-        </div>
-    </div>
-</div>
+
+</form>
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -118,7 +141,6 @@
 </div>
 
 @endsection
-
 @section('js')
-    <script type="text/javascript" src="{{ URL::asset('js/company_info_index.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/company_info_edit.js') }}"></script>
 @endsection
