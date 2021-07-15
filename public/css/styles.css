@@ -309,3 +309,20 @@ nav:first-child > a:last-child {
     font-size: 2.5em;
     cursor: pointer;
 }
+
+#statistics > div {
+    padding: 20px 10px !important;
+    background-color: #0f93de;
+    border-right: 15px solid white;
+    text-align: center;
+}
+
+#statistics > div > span, #statistics > div > strong {
+    text-transform: uppercase;
+    color: white;
+    line-height: 2.2;
+}
+
+#statistics > div:last-child {
+    border-right: 0;
+}

@@ -58,7 +58,7 @@
             @if($company->img_logo != null)
             <br>
             <img src="/storage/{{ $company->img_logo }}" class="logo" alt="Logo {{ $company->name }}">
-            
+
             <i id="trashLogoIcon" class="bi bi-trash-fill fa-6x align-middle ml-1" data-toggle="modal" data-target="#exampleModal"></i>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,63 +83,49 @@
 
             <br>
             <label for="add-change-logo">{{__('message.change')}} {{__('message.logo')}}</label>
+            <br>
+            <br>
             @else
             <li>{{__('message.no_logo_available')}}</li>
             <br>
             <label for="add-change-logo">{{__('message.add')}} {{__('message.logo')}}</label>
-            @endif
+            @endif           
+            <input id="add-change-logo" type="file" name="img_logo">
 
-            
-            <label for="add-change-logo">Upload a file</label>
-            
-            <input id="add-change-logo" type="file" name="img_logo" class="hidden">
-            
-            
+
         </div>
 
         <div class="col-12 text-right">
             <button id="add-change-logo" type="submit" class="btn general_button">{{__('message.update')}}</button>
         </div>
+        
     </div>
 
 </form>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h3>{{ __('message.statistics') }}</h3>
-        </div>
+
+<div class="row py-2 px-3" id="statistics">
+
+    <div class="col-md-3">
+        <span>{{ __('message.users') }}:</span><br><strong> {{ $users_count }}</strong>
     </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.users') }}:</strong><span> {{ $users_count }}</span>
-        </div>
+
+    <div class="col-md-3">
+        <span>{{ __('message.customers') }}:</span><br><strong> {{ $customers_count }}</strong>
     </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.customers') }}:</strong><span> {{ $customers_count }}</span>
-        </div>
+
+    <div class="col-md-3">
+        <span>{{ __('message.projects') }}:</span><br><strong> {{ $projects_count }}</strong>
     </div>
-</div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.projects') }}:</strong><span> {{ $projects_count }}</span>
-        </div>
+
+    <div class="col-md-3">
+        <span>{{ __('message.bag_hours_types') }}:</span><br><strong> {{ $types_hour_bags_count }}</strong>
     </div>
+
 </div>
-<div class="row py-2">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <strong>{{ __('message.bag_hours_types') }}:</strong><span> {{ $types_hour_bags_count }}</span>
-        </div>
-    </div>
-</div>
+
 
 @endsection
 @section('js')
+
 <script type="text/javascript" src="{{ URL::asset('js/company_info_edit.js') }}"></script>
 @endsection

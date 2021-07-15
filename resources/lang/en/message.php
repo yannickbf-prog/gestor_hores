@@ -182,5 +182,6 @@ return [
     'unvalidated_time_entries' => 'Unvalidated time entries',
     'company_name' => 'Company name',
     'contact_email' => 'Contact email',
-    'language' => 'Language'
+    'language' => 'Language',
+    
 ];
