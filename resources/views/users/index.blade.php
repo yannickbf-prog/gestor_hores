@@ -396,8 +396,12 @@
     }
         
 
-    if (show_filters)
-        $('#filtersContainer').css('display', 'block');
+    if (show_filters){
+        $('#filterChevronDown').css("transform", "rotate(180deg)");
+        $('#filtersContainer').show(400);
+        filterCount = 2;
+    }
+        
 
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/users_index.js') }}"></script>
