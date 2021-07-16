@@ -313,7 +313,7 @@ nav:first-child > a:last-child {
 #statistics > div {
     padding: 20px 10px !important;
     background-color: #0f93de;
-    border-right: 15px solid white;
+    border-left: 15px solid white;
     text-align: center;
     border-top: 15px solid white;
 }

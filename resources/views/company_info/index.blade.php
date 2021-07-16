@@ -83,15 +83,16 @@
 
             <br>
             <br>
-            <br>
+
             @else
             <li>{{__('message.no_logo_available')}}</li>
             <br>
             @endif      
-            <label class="btn general_button" for="add-change-logo">{{__('message.browse')}}</label>
-            <input id="add-change-logo" onchange="browseChange()" type="file" name="img_logo" class="invisible">
-            <span id="img-info"></span>
-
+            <label class="btn general_button mt-1" for="add-change-logo">{{__('message.browse')}}</label>
+            <input id="add-change-logo" onchange="browseChange()" type="file" name="img_logo" class="d-none">
+            <div>
+                <span id="img-info"></span>
+            </div>
         </div>
 
         <div class="col-12 text-right">
@@ -102,7 +103,7 @@
 
 </form>
 
-<div class="row py-2 px-3" id="statistics">
+<div class="row" id="statistics">
 
     <div class="col-xs-12 col-sm-6 col-md-3">
         <span>{{ __('message.users') }}:</span><br><strong> {{ $users_count }}</strong>
