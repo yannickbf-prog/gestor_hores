@@ -249,6 +249,11 @@ th {
     display: none;
 }
 
+#addEditHeader {
+    cursor: pointer;
+    width: 250;
+}
+
 #addEditChevronDown, #filterChevronDown {
     transition: transform .6s ease-in-out;
 }
