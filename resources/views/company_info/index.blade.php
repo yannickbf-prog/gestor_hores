@@ -36,14 +36,11 @@
             <input id="company-name" type="text" name="name" value="{{old('name', $company->name)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.name')}}">
         </div>
 
-
-
         <div class="form-group col-xs-12 col-sm-6 col-md-3">
             <label for="contact-email">{{__('message.contact_email')}}</label>
             <input id="contact-email" type="text" name="email" value="{{old('email', $company->email)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.email')}}">
         </div>
-
-
+        
         <div class="form-group col-xs-12 col-sm-6 col-md-3 ml-auto">
             <label for="defaultLang">{{__('message.language')}}</label>
             <select class="form-control" id="defaultLang" name="default_lang">
