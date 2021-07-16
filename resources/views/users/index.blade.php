@@ -24,6 +24,9 @@
 
 @if ($errors->any())
 <div class="alert alert-danger mt-3">
+    @php
+    $show_create_edit = true
+    @endphp
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
@@ -350,15 +353,51 @@
 @endsection
 @section('js')
 <script>
+
+    var addEditCount = 1;
+    $("#addEditHeader").click(function () {
+
+        if (addEditCount % 2 == 0)
+            $('#addEditChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#addEditChevronDown').css("transform", "rotate(180deg)");
+
+        addEditCount++;
+
+        // show hide paragraph on button click
+        $("#addEditContainer").toggle(400);
+    });
+
+    var filterCount = 1;
+    $("#filterTitleContainer").click(function () {
+
+        if (filterCount % 2 == 0)
+            $('#filterChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#filterChevronDown').css("transform", "rotate(180deg)");
+
+        filterCount++;
+
+        // show hide paragraph on button click
+        $("#filtersContainer").toggle(400);
+    });
+
+
     //Code for show filters when filter
     var show_filters = @json($show_filters);
     var show_create_edit = @json($show_create_edit);
-    
-if(show_create_edit)
-$('#addEditContainer').css('display', 'block');
 
-if(show_filters)
-$('#filtersContainer').css('display', 'block');
+    if (show_create_edit){
+        $('#addEditChevronDown').css("transform", "rotate(180deg)");
+        $('#addEditContainer').show(400);
+        addEditCount = 2;
+    }
+        
+
+    if (show_filters)
+        $('#filtersContainer').css('display', 'block');
 
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/users_index.js') }}"></script>

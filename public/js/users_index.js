@@ -113,35 +113,6 @@ $.datepicker.regional["ca"] = {
     yearSuffix: "",
 };
 
-var addEditCount = 1;
-  $("#addEditHeader").click(function(){
-
-		if(addEditCount % 2 == 0) 
-			$('#addEditChevronDown').css("transform", "rotate(0deg)");
-
-		else
-        $('#addEditChevronDown').css("transform", "rotate(180deg)");
-        
-        addEditCount++;
-
-        // show hide paragraph on button click
-        $("#addEditContainer").toggle(400);
-    });
-
-var filterCount = 1;
-  $("#filterTitleContainer").click(function(){
-
-		if(filterCount % 2 == 0) 
-			$('#filterChevronDown').css("transform", "rotate(0deg)");
-
-		else
-        $('#filterChevronDown').css("transform", "rotate(180deg)");
-        
-        filterCount++;
-
-        // show hide paragraph on button click
-        $("#filtersContainer").toggle(400);
-    });
 
 
 
