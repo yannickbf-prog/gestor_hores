@@ -249,6 +249,10 @@ th {
     display: none;
 }
 
+#addEditContainer {
+    display: none;
+}
+
 #addEditHeader {
     cursor: pointer;
     width: 250;

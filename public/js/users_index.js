@@ -143,8 +143,9 @@ var filterCount = 1;
         $("#filtersContainer").toggle(400);
     });
 
-if(show_filters)
-$('#filtersContainer').css('display', 'block');
+
+
+
 
 window.onload = function () {
     //Load popover btn listeners

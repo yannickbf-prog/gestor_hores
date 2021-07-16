@@ -20,13 +20,14 @@ class UserController extends Controller {
 
         $user_to_edit = null;
         
+        $show_create_edit = false;
         $show_filters = false;
 
         if ($request->has('_token') && $request->has('user_id')) {
             
             $user_to_edit = User::where('id', $request['user_id'])->first();
 
-            
+            $show_create_edit = true;
         }
 
         if ($request->has('_token') && $request->has('username')) {
@@ -73,7 +74,7 @@ class UserController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
-        return view('users.index', compact(['lang', 'data', 'user_to_edit', 'show_filters']))
+        return view('users.index', compact(['lang', 'data', 'user_to_edit', 'show_filters', 'show_create_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
 

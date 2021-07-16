@@ -33,7 +33,7 @@
 </div>
 @endif
 
-<div class="px-2 pt-3 create_edit_container">
+<div class="px-2 py-3 create_edit_container">
     <div id="addEditHeader" class="d-flex align-content-stretch align-items-center ml-3">
         <h3 class="d-inline-block m-0">{{ ($user_to_edit == null) ? __('message.add_new')." ".__('message.user') : __('message.edit')." ".__('message.user') }}</h3>
         <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
@@ -137,7 +137,7 @@
                     @if ($user_to_edit !== null)
                     <a class="btn general_button mr-0" href="{{route('users.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
                     @endif
-                    <button type="submit" class="btn general_button  mr-2">{{ ($user_to_edit == null) ? __('message.save') : __('message.update')}}</button>
+                    <button type="submit" class="btn general_button mr-2">{{ ($user_to_edit == null) ? __('message.save') : __('message.update')}}</button>
                 </div>
             </div>
         </form>
@@ -351,8 +351,14 @@
 @section('js')
 <script>
     //Code for show filters when filter
-    let show_filters = @json($show_filters)
+    var show_filters = @json($show_filters);
+    var show_create_edit = @json($show_create_edit);
+    
+if(show_create_edit)
+$('#addEditContainer').css('display', 'block');
 
+if(show_filters)
+$('#filtersContainer').css('display', 'block');
 
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/users_index.js') }}"></script>
