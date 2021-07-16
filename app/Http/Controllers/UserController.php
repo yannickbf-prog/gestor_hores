@@ -19,6 +19,8 @@ class UserController extends Controller {
         $lang = setGetLang();
 
         $user_to_edit = null;
+        
+        $show_filters = false;
 
         if ($request->has('_token') && $request->has('user_id')) {
             
@@ -36,6 +38,8 @@ class UserController extends Controller {
 
             session(['user_role' => $request['role']]);
             session(['user_num_records' => $request['num_records']]);
+            
+            $show_filters = true;
         }
 
         $dates = getIntervalDates($request, 'user');
@@ -69,7 +73,7 @@ class UserController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
-        return view('users.index', compact(['lang', 'data', 'user_to_edit']))
+        return view('users.index', compact(['lang', 'data', 'user_to_edit', 'show_filters']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
 

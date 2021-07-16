@@ -34,115 +34,121 @@
 @endif
 
 <div class="pt-1 create_edit_container">
-    <h3>{{ ($user_to_edit == null) ? __('message.add_new')." ".__('message.user') : __('message.edit')." ".__('message.user') }}</h3>
-
-    <div class="alert alert-info mt-2 mx-2">
-        <strong>{{__('message.fields_are_required')}}</strong>
-        @if ($user_to_edit !== null)
-        <hr>
-        <strong>{{__('message.password_edit_info')}}</strong>
-        @endif
+    <div id="addEditHeader" class="d-flex">
+        <h3>{{ ($user_to_edit == null) ? __('message.add_new')." ".__('message.user') : __('message.edit')." ".__('message.user') }}</h3>
+        <i class="bi bi-chevron-down" id="addEditChevronDown"></i>
     </div>
-    <form action="{{ ($user_to_edit == null) ? route('users.store',$lang) : route('users.update',[$user_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-4">
-        @csrf
 
-        <div class="row">
-
-            <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
-                <strong>*{{__('message.username')}}:</strong>
-                <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{ ($user_to_edit == null) ? old('nickname') : old('nickname', $user_to_edit->nickname) }}">
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
-                <strong>*{{__('message.name')}}:</strong>
-                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{ ($user_to_edit == null) ? old('name') : old('name', $user_to_edit->name) }}">
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
-
-                <strong>*{{__('message.surname')}}:</strong>
-                <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{ ($user_to_edit == null) ? old('surname') : old('surname', $user_to_edit->surname) }}">
-
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
-
-                <strong>*{{__('message.email')}}:</strong>
-                <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{ ($user_to_edit == null) ? old('email') : old('email', $user_to_edit->email) }}">
-
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
-
-                <strong>{{__('message.phone')}}:</strong>
-                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{ ($user_to_edit == null) ? old('phone') : old('phone', $user_to_edit->phone) }}">
-
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-5 form-group form_group_new_edit">
-
-                <strong>{{__('message.observations')}}:</strong>
-                <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ ($user_to_edit == null) ? old('description') : old('description', $user_to_edit->description) }}</textarea>
-
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
-
-                <strong>*{{__('message.password')}}:</strong>
-                <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password') }}">
-
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
-
-                <strong>*{{__('message.password_confirm')}}:</strong>
-                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password_confirmation') }}">
-
-            </div>
-
-            <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
-
-                <strong>{{ __('message.role') }}:</strong><br>
-                <input type="radio" id="user" name="role" value="user" checked>
-                <label for="user">{{ __('message.worker') }}</label><br>
-                @php
-                $checked = "";
-                if($user_to_edit == null) {
-                if(old('role') == "admin") {
-                $checked = 'checked';
-                }
-                }
-                else {
-                if($user_to_edit->role == "admin") {
-                $checked = 'checked';
-                }
-                else {
-                $checked = '';
-                }
-
-                if(old('role') !== null) {
-                if(old('role') == "admin") {
-                $checked = 'checked';
-                }
-                else {
-                $checked = '';
-                }
-                }
-
-                }
-                @endphp
-                <input type="radio" id="admin" name="role" value="admin" {{$checked}}>
-                <label for="admin">{{ __('message.admin') }}</label><br>  
-
-            </div>
-
-            <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
-                @if ($user_to_edit !== null)
-                <a class="btn general_button mr-0" href="{{route('users.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
-                @endif
-                <button type="submit" class="btn general_button">{{ ($user_to_edit == null) ? __('message.save') : __('message.update')}}</button>
-            </div>
+    <div id="addEditContainer">
+        <div class="alert alert-info mt-2 mx-2">
+            <strong>{{__('message.fields_are_required')}}</strong>
+            @if ($user_to_edit !== null)
+            <hr>
+            <strong>{{__('message.password_edit_info')}}</strong>
+            @endif
         </div>
-    </form>
+        <form action="{{ ($user_to_edit == null) ? route('users.store',$lang) : route('users.update',[$user_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-4">
+            @csrf
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
+                    <strong>*{{__('message.username')}}:</strong>
+                    <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{ ($user_to_edit == null) ? old('nickname') : old('nickname', $user_to_edit->nickname) }}">
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
+                    <strong>*{{__('message.name')}}:</strong>
+                    <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{ ($user_to_edit == null) ? old('name') : old('name', $user_to_edit->name) }}">
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                    <strong>*{{__('message.surname')}}:</strong>
+                    <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{ ($user_to_edit == null) ? old('surname') : old('surname', $user_to_edit->surname) }}">
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                    <strong>*{{__('message.email')}}:</strong>
+                    <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{ ($user_to_edit == null) ? old('email') : old('email', $user_to_edit->email) }}">
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
+
+                    <strong>{{__('message.phone')}}:</strong>
+                    <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{ ($user_to_edit == null) ? old('phone') : old('phone', $user_to_edit->phone) }}">
+
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-5 form-group form_group_new_edit">
+
+                    <strong>{{__('message.observations')}}:</strong>
+                    <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ ($user_to_edit == null) ? old('description') : old('description', $user_to_edit->description) }}</textarea>
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                    <strong>*{{__('message.password')}}:</strong>
+                    <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password') }}">
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                    <strong>*{{__('message.password_confirm')}}:</strong>
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password_confirmation') }}">
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                    <strong>{{ __('message.role') }}:</strong><br>
+                    <input type="radio" id="user" name="role" value="user" checked>
+                    <label for="user">{{ __('message.worker') }}</label><br>
+                    @php
+                    $checked = "";
+                    if($user_to_edit == null) {
+                    if(old('role') == "admin") {
+                    $checked = 'checked';
+                    }
+                    }
+                    else {
+                    if($user_to_edit->role == "admin") {
+                    $checked = 'checked';
+                    }
+                    else {
+                    $checked = '';
+                    }
+
+                    if(old('role') !== null) {
+                    if(old('role') == "admin") {
+                    $checked = 'checked';
+                    }
+                    else {
+                    $checked = '';
+                    }
+                    }
+
+                    }
+                    @endphp
+                    <input type="radio" id="admin" name="role" value="admin" {{$checked}}>
+                    <label for="admin">{{ __('message.admin') }}</label><br>  
+
+                </div>
+
+                <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
+                    @if ($user_to_edit !== null)
+                    <a class="btn general_button mr-0" href="{{route('users.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
+                    @endif
+                    <button type="submit" class="btn general_button">{{ ($user_to_edit == null) ? __('message.save') : __('message.update')}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </div>
 
 <div id="filterDiv" class="p-4 my-3">
     <div class="mb-4" id="filterTitleContainer">
         <div class="d-flex align-content-stretch align-items-center">
-            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
+            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg" id="filterChevronDown"></i>
         </div>
     </div>
     <div id="filtersContainer">
@@ -281,8 +287,8 @@
                     <a style="text-decoration: none" class="text-dark">
                         <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
                     </a>
-                    
-                    
+
+
                     @php
                     $id = "exampleModal".$value->id;
                     @endphp
@@ -343,5 +349,11 @@
 </div>
 @endsection
 @section('js')
+<script>
+    //Code for show filters when filter
+    let show_filters = @json($show_filters)
+
+
+</script>
 <script type="text/javascript" src="{{ URL::asset('js/users_index.js') }}"></script>
 @endsection

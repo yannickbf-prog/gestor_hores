@@ -249,7 +249,7 @@ th {
     display: none;
 }
 
-.bi-chevron-down {
+#addEditChevronDown, #filterChevronDown {
     transition: transform .6s ease-in-out;
 }
 
