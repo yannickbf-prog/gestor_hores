@@ -31,20 +31,20 @@
     <h3>{{ __("message.company_info_providing") }}</h3>
     <div class="row">
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-xs-12 col-sm-6 col-md-3">
             <label for="company-name">{{__('message.company_name')}}</label>
             <input id="company-name" type="text" name="name" value="{{old('name', $company->name)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.name')}}">
         </div>
 
 
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-xs-12 col-sm-6 col-md-3">
             <label for="contact-email">{{__('message.contact_email')}}</label>
             <input id="contact-email" type="text" name="email" value="{{old('email', $company->email)}}" class="form-control" placeholder="{{__('message.enter')}} {{__('message.email')}}">
         </div>
 
 
-        <div class="form-group col-md-3 ml-auto">
+        <div class="form-group col-xs-12 col-sm-6 col-md-3 ml-auto">
             <label for="defaultLang">{{__('message.language')}}</label>
             <select class="form-control" id="defaultLang" name="default_lang">
                 <option value="en" {{ setActiveSelect('en', $company->default_lang) }}>{{__('message.english')}}</option>
@@ -82,16 +82,15 @@
             </div
 
             <br>
-            <label for="add-change-logo">{{__('message.change')}} {{__('message.logo')}}</label>
             <br>
             <br>
             @else
             <li>{{__('message.no_logo_available')}}</li>
             <br>
-            <label for="add-change-logo">{{__('message.add')}} {{__('message.logo')}}</label>
-            @endif           
-            <input id="add-change-logo" type="file" name="img_logo">
-
+            @endif      
+            <label class="btn general_button" for="add-change-logo">{{__('message.browse')}}</label>
+            <input id="add-change-logo" onchange="browseChange()" type="file" name="img_logo" class="invisible">
+            <span id="img-info"></span>
 
         </div>
 
@@ -105,19 +104,19 @@
 
 <div class="row py-2 px-3" id="statistics">
 
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <span>{{ __('message.users') }}:</span><br><strong> {{ $users_count }}</strong>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <span>{{ __('message.customers') }}:</span><br><strong> {{ $customers_count }}</strong>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <span>{{ __('message.projects') }}:</span><br><strong> {{ $projects_count }}</strong>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-6 col-md-3">
         <span>{{ __('message.bag_hours_types') }}:</span><br><strong> {{ $types_hour_bags_count }}</strong>
     </div>
 
@@ -126,6 +125,13 @@
 
 @endsection
 @section('js')
+
+<script>
+    function browseChange() {
+        var pdrs = document.getElementById('add-change-logo').files[0].name;
+        document.getElementById('img-info').innerHTML = '{{ __("message.new_logo") }}' + ": " + pdrs;
+    }
+</script>
 
 <script type="text/javascript" src="{{ URL::asset('js/company_info_edit.js') }}"></script>
 @endsection

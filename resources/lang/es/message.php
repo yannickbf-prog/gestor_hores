@@ -181,5 +181,7 @@ return [
     'unvalidated_time_entries' => 'Entradas de horas sin validar',
     'company_name' => 'Nombre empresa',
     'contact_email' => 'Email de contacto',
-    'language' => 'Idioma'
+    'language' => 'Idioma',
+    'browse' => 'EXAMINAR',
+    'new_logo' => 'Nuevo logotipo'
 ];

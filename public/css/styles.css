@@ -315,14 +315,11 @@ nav:first-child > a:last-child {
     background-color: #0f93de;
     border-right: 15px solid white;
     text-align: center;
+    border-top: 15px solid white;
 }
 
 #statistics > div > span, #statistics > div > strong {
     text-transform: uppercase;
     color: white;
     line-height: 2.2;
-}
-
-#statistics > div:last-child {
-    border-right: 0;
 }

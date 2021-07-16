@@ -182,5 +182,7 @@ return [
     'unvalidated_time_entries' => "Entrades d'hores sense validar",
     'company_name' => 'Nom empresa',
     'contact_email' => 'Email de contacte',
-    'language' => 'Idioma'
+    'language' => 'Idioma',
+    'browse' => 'EXAMINAR',
+    'new_logo' => 'Nou logotip'
 ];

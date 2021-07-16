@@ -183,5 +183,6 @@ return [
     'company_name' => 'Company name',
     'contact_email' => 'Contact email',
     'language' => 'Language',
-    
+    'browse' => 'BROWSE',
+    'new_logo' => 'New logo'
 ];
