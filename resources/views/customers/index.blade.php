@@ -31,96 +31,66 @@
         </div>
     </div>
     <div id="filtersContainer">
-        <form action="{{ route($lang.'_customers.index') }}" method="GET"> 
+        <form action="{{ route($lang.'_customers.index') }}" method="GET" class="row"> 
             @csrf
 
-            <div class="row py-2">
-                <div class="col-lg-12 margin-tb">
-                    <div class="pull-left">
-                        <h3>{{ __('message.filters') }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>{{ __('message.name') }}:</strong>
-                        <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>{{ __('message.email') }}:</strong>
-                        <input type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>{{ __('message.phone') }}:</strong>
-                        <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
-                    </div>
-                </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+                <label for="filterName">{{ __('message.name') }}:</label>
+                <input id="filterName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
             </div>
 
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <label for="filterEmail">{{ __('message.email') }}:</label>
+                <input id="filterEmail" type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
+            </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <label for="filterPhone">{{ __('message.phone') }}:</label>
+                <input id="filterPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
+            </div>
 
-                        <button type="button" class="btn btn-md btn-primary" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <label for="filterTaxNumber">{{__('message.tax_number')}}:</label>
+                <input id="filterTaxNumber" type="text" name="tax_number" class="form-control" placeholder="{{__('message.enter')}} {{__('message.tax_number')}}" value="@if(session('customer_tax_number') != '%'){{session('customer_tax_number')}}@endif">
+            </div>
 
-                        <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
-                            <div class="arrow" style="left: 114px;"></div>
-                            <div class="popover-body">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <button type="button" class="close" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <div class="form-group">
-                                            <strong>{{ __('message.from') }}:</strong>
-                                            <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('customer_date_from') != ''){{session('customer_date_from')}}@endif">
-                                        </div>
-                                        <div class="form-group">
-                                            <strong>{{ __('message.to') }}:</strong>
-                                            <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('customer_date_to') != ''){{session('customer_date_to')}}@endif">
-                                        </div>
-                                    </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <label for="filterContactPerson">{{ __('message.contact_person') }}:</label>
+                <input id="filterContactPerson" type="text" name="contact_person" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contact_person') }}" value="@if(session('customer_contact_person') != '%'){{session('customer_contact_person')}}@endif">
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 form-group align-self-end">
+
+                <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+                    <div class="arrow" style="left: 114px;"></div>
+                    <div class="popover-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="form-group mt-2">
+                                    <label for="filterDateFrom">{{ __('message.from') }}:</label>
+                                    <input id="filterDateFrom" autocomplete="off" name="date_from" type="text" class="datepicker form-control form-control-sm" value="@if(session('customer_date_from') != ''){{session('customer_date_from')}}@endif">
+                                </div>
+                                <div class="form-group">
+                                    <label for="filterDateTo">{{ __('message.to') }}:</label><br>
+                                    <input id="filterDateTo" autocomplete="off" type="text" name="date_to" class="datepicker form-control form-control-sm" value="@if(session('customer_date_to') != ''){{session('customer_date_to')}}@endif">
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>{{__('message.tax_number')}}:</strong>
-                        <input type="text" name="tax_number" class="form-control" placeholder="{{__('message.enter')}} {{__('message.tax_number')}}" value="@if(session('customer_tax_number') != '%'){{session('customer_tax_number')}}@endif">
-                    </div>
-                </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>{{ __('message.contact_person') }}:</strong>
-                        <input type="text" name="contact_person" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contact_person') }}" value="@if(session('customer_contact_person') != '%'){{session('customer_contact_person')}}@endif">
-                    </div>
-                </div>
-            </div>
-
 
             <div class="form-group d-flex justify-content-end mb-0 col-12">
                 <a href="{{ route('customers.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
-            
+
         </form>
     </div>
 </div>
@@ -221,7 +191,7 @@
 @endsection
 @section('js')
 <script>
-var filterCount = 1;
+    var filterCount = 1;
     $("#filterTitleContainer").click(function () {
 
         if (filterCount % 2 == 0)
@@ -234,7 +204,7 @@ var filterCount = 1;
 
         // show hide paragraph on button click
         $("#filtersContainer").toggle(400);
-    });    
+    });
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/customer_index.js') }}"></script>
 @endsection
