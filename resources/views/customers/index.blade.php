@@ -17,23 +17,12 @@
         <div class="pull-left">
             <h2>{{ __('message.customers') }}</h2>
         </div>
+        <div class="pull-right">
+            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
+
+        </div>
     </div>
 </div>
-
-
-@if ($errors->any())
-<div class="alert alert-danger mt-3">
-    @php
-    $show_create_edit = true
-    @endphp
-    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ ucfirst($error) }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 
 <div class="px-2 py-3 create_edit_container">
     <div id="addEditHeader" class="d-flex align-content-stretch align-items-center ml-3">
@@ -160,7 +149,6 @@
     </div>
 </div>
 
-
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -256,23 +244,7 @@
 @endsection
 @section('js')
 <script>
-
-    var addEditCount = 1;
-    $("#addEditHeader").click(function () {
-
-        if (addEditCount % 2 == 0)
-            $('#addEditChevronDown').css("transform", "rotate(0deg)");
-
-        else
-            $('#addEditChevronDown').css("transform", "rotate(180deg)");
-
-        addEditCount++;
-
-        // show hide paragraph on button click
-        $("#addEditContainer").toggle(400);
-    });
-
-    var filterCount = 1;
+var filterCount = 1;
     $("#filterTitleContainer").click(function () {
 
         if (filterCount % 2 == 0)
@@ -285,15 +257,7 @@
 
         // show hide paragraph on button click
         $("#filtersContainer").toggle(400);
-    });
-
-    //Code for show filters when filter
-    var show_filters = @json($show_filters);
-            if (show_filters) {
-        $('#filterChevronDown').css("transform", "rotate(180deg)");
-        $('#filtersContainer').show(400);
-        filterCount = 2;
-    }
+    });    
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/customer_index.js') }}"></script>
 @endsection

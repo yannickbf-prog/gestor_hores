@@ -21,11 +21,7 @@ class CustomerController extends Controller
         
         $lang = setGetLang();
         
-        $show_filters = false;
-        
-        if($request->has('_token') && $request->has('name')){
-            
-            $show_filters = true;
+        if($request->has('_token')){
             
             ($request['name'] == "") ? session(['customer_name' => '%']) : session(['customer_name' => $request['name']]);
             
@@ -63,13 +59,13 @@ class CustomerController extends Controller
                 where('name', 'like', "%".$name."%")
                 ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
-                ->where('nif', 'like', "%".$tax_number."%")
+                ->where('nif', 'like', $tax_number)
                 ->where('contact_person', 'like', "%".$contact_person."%")
                 ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
-        return view('customers.index', compact(['data', 'show_filters']))
+        return view('customers.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
