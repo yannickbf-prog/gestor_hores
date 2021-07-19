@@ -6,6 +6,9 @@
 @if ($message = Session::get('success'))
 
 <div class="alert alert-success alert-dismissible fade show" role="alert">
+    @php
+    $show_create_edit = true
+    @endphp
     <strong>{{ $message }}</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -205,6 +208,15 @@
         // show hide paragraph on button click
         $("#filtersContainer").toggle(400);
     });
+    
+    //Code for show filters when filter
+    var show_filters = @json($show_filters);
+
+    if (show_filters){
+        $('#filterChevronDown').css("transform", "rotate(180deg)");
+        $('#filtersContainer').show(400);
+        filterCount = 2;
+    }
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/customer_index.js') }}"></script>
 @endsection
