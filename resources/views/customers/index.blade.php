@@ -244,7 +244,7 @@
 @endsection
 @section('js')
 <script>
-var filterCount = 1;
+    var filterCount = 1;
     $("#filterTitleContainer").click(function () {
 
         if (filterCount % 2 == 0)
@@ -257,7 +257,16 @@ var filterCount = 1;
 
         // show hide paragraph on button click
         $("#filtersContainer").toggle(400);
-    });    
+    });
+
+
+    //Code for show filters when filter
+    var show_filters = @json($show_filters);
+            if (show_filters) {
+        $('#filterChevronDown').css("transform", "rotate(180deg)");
+        $('#filtersContainer').show(400);
+        filterCount = 2;
+    }
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/customer_index.js') }}"></script>
 @endsection

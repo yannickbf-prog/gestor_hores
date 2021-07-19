@@ -21,7 +21,11 @@ class CustomerController extends Controller
         
         $lang = setGetLang();
         
+        $show_filters = false;
+        
         if($request->has('_token')){
+            
+            $show_filters = true;
             
             ($request['name'] == "") ? session(['customer_name' => '%']) : session(['customer_name' => $request['name']]);
             
@@ -65,7 +69,7 @@ class CustomerController extends Controller
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
-        return view('customers.index', compact('data'))
+        return view('customers.index', compact(['data', 'show_filters']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
