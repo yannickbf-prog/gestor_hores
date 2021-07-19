@@ -23,7 +23,7 @@ class CustomerController extends Controller
         
         $show_filters = false;
         
-        if($request->has('_token')){
+        if($request->has('_token') && $request->has('name')){
             
             $show_filters = true;
             
