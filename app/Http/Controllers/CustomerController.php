@@ -59,7 +59,7 @@ class CustomerController extends Controller
                 where('name', 'like', "%".$name."%")
                 ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
-                ->where('nif', 'like', $tax_number)
+                ->where('nif', 'like', "%".$tax_number."%")
                 ->where('contact_person', 'like', "%".$contact_person."%")
                 ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
@@ -69,7 +69,7 @@ class CustomerController extends Controller
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
-    public function deleteFilters(Request $request) {
+    public function deleteFilters($lang) {
         
         session(['customer_name' => '%']);
         session(['customer_email' => '%']);
@@ -78,10 +78,6 @@ class CustomerController extends Controller
         session(['customer_contact_person' => '%']);
         session(['customer_date_from' => ""]);
         session(['customer_date_to' => ""]);
-        session(['customer_order' => 'desc']);
-        session(['customer_num_records' => 10]);
-        
-        $lang = $request->lang;
 
         return redirect()->route($lang.'_customers.index');
 

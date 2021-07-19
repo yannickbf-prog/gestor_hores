@@ -101,7 +101,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post("control-panel/customers/lang/{lang}", [CustomerController::class, 'store'])->name('customers.store');
     Route::put("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'update'])->name('customers.update');
     Route::delete("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'destroy'])->name('customers.destroy');
-    Route::post('control-panel/customers/delete_filters/', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
+    Route::get('control-panel/users/delete_filters/lang/{lang}', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
     Route::get('control-panel/customers/change_num_records/lang/{lang}', [CustomerController::class, 'changeNumRecords'])->name('customers.change_num_records');
 
     // Control panel - Customers en

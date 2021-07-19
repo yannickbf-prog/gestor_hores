@@ -117,19 +117,14 @@
 
 
             <div class="form-group d-flex justify-content-end mb-0 col-12">
-                <a href="{{ route('users.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
+                <a href="{{ route('customers.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
-            <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
+            
         </form>
     </div>
 </div>
 
-<form action="{{ route('customers.delete_filters') }}" method="POST"> 
-    @csrf
-    <input type="hidden" name="lang" value="{{ $lang }}">
-    <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
-</form>
 
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
