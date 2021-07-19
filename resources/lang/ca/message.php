@@ -54,7 +54,7 @@ return [
     
     'create_new_customer' => 'Crear Nou Client',
     'customer' => 'Client',
-    'filters' => 'Filtres',
+    'filters' => 'Filtre',
     'name' => 'Nom',
     'email' => 'Correu electrònic',
     'phone' => 'Telèfon',
@@ -184,5 +184,7 @@ return [
     'contact_email' => 'Email de contacte',
     'language' => 'Idioma',
     'browse' => 'EXAMINAR',
-    'new_logo' => 'Nou logotip'
+    'new_logo' => 'Nou logotip',
+    'contact_person' => 'Persona de contacte',
+    'tax_number' => 'NIF'
 ];

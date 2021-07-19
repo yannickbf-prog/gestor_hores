@@ -28,8 +28,10 @@ class CustomerController extends Controller
             ($request['email'] == "") ? session(['customer_email' => '%']) : session(['customer_email' => $request['email']]);
             
             ($request['phone'] == "") ? session(['customer_phone' => '%']) : session(['customer_phone' => $request['phone']]);
-
-            session(['customer_order' => $request['order']]);
+            
+            ($request['tax_number'] == "") ? session(['customer_tax_number' => '%']) : session(['customer_tax_number' => $request['tax_number']]);
+            
+            ($request['contact_person'] == "") ? session(['customer_contact_person' => '%']) : session(['customer_contact_person' => $request['contact_person']]);
             
             session(['customer_num_records' => $request['num_records']]);
                                                                     
@@ -42,8 +44,10 @@ class CustomerController extends Controller
         $name = session('customer_name', "%");
         $email = session('customer_email', "%");
         $phone = session('customer_phone', "%");
+        $tax_number = session('customer_tax_number', "%");
+        $contact_person = session('customer_contact_person', "%");
         
-        $order = session('customer_order', "desc");
+        $order = "desc";
         
         $num_records = session('customer_num_records', 10);
         
@@ -55,6 +59,8 @@ class CustomerController extends Controller
                 where('name', 'like', "%".$name."%")
                 ->where('email', 'like', "%".$email."%")
                 ->where('phone', 'like', "%".$phone."%")
+                ->where('nif', 'like', $tax_number)
+                ->where('contact_person', 'like', "%".$contact_person."%")
                 ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
@@ -68,6 +74,8 @@ class CustomerController extends Controller
         session(['customer_name' => '%']);
         session(['customer_email' => '%']);
         session(['customer_phone' => '%']);
+        session(['customer_tax_number' => '%']);
+        session(['customer_contact_person' => '%']);
         session(['customer_date_from' => ""]);
         session(['customer_date_to' => ""]);
         session(['customer_order' => 'desc']);
@@ -77,6 +85,13 @@ class CustomerController extends Controller
 
         return redirect()->route($lang.'_customers.index');
 
+    }
+    
+    public function changeNumRecords(Request $request, $lang) {
+
+        session(['customers_num_records' => $request['num_records']]);
+
+        return redirect()->route($lang . '_customers.index');
     }
 
     /**

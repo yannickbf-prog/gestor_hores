@@ -55,7 +55,7 @@ return [
     'user' => 'Usuario',
     'create_new_customer' => 'Crear Nuevo Cliente',
     'customer' => 'Cliente',
-    'filters' => 'Filtros',
+    'filters' => 'Filtro',
     'name' => 'Nombre',
     'email' => 'Correo electrónico',
     'phone' => 'Teléfono',
@@ -183,5 +183,7 @@ return [
     'contact_email' => 'Email de contacto',
     'language' => 'Idioma',
     'browse' => 'EXAMINAR',
-    'new_logo' => 'Nuevo logotipo'
+    'new_logo' => 'Nuevo logotipo',
+    'contact_person' => 'Persona de contacto',
+    'tax_number' => 'NIF'
 ];

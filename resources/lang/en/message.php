@@ -54,7 +54,7 @@ return [
     'user' => 'User',
     'create_new_customer' => 'Create New Customer',
     'customer' => 'Customer',
-    'filters' => 'Filters',
+    'filters' => 'Filter',
     'name' => 'Name',
     'email' => 'Email',
     'phone' => 'Phone',
@@ -184,5 +184,7 @@ return [
     'contact_email' => 'Contact email',
     'language' => 'Language',
     'browse' => 'BROWSE',
-    'new_logo' => 'New logo'
+    'new_logo' => 'New logo',
+    'contact_person' => 'Contact person',
+    'tax_number' => 'Tax number'
 ];

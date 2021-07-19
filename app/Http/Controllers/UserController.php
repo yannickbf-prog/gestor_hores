@@ -88,7 +88,6 @@ class UserController extends Controller {
         session(['user_role' => '%']);
         session(['user_date_from' => ""]);
         session(['user_date_to' => ""]);
-        session(['user_num_records' => 10]);
 
         return redirect()->route($lang . '_users.index');
     }

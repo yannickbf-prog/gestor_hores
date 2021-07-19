@@ -56,53 +56,53 @@
             <div class="row">
 
                 <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
-                    <strong>*{{__('message.username')}}:</strong>
-                    <input type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{ ($user_to_edit == null) ? old('nickname') : old('nickname', $user_to_edit->nickname) }}">
+                    <label for="newEditUsername">*{{__('message.username')}}:</label>
+                    <input id="newEditUsername" type="text" name="nickname" class="form-control" placeholder="{{__('message.enter')." ".__('message.username')}}" value="{{ ($user_to_edit == null) ? old('nickname') : old('nickname', $user_to_edit->nickname) }}">
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
-                    <strong>*{{__('message.name')}}:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{ ($user_to_edit == null) ? old('name') : old('name', $user_to_edit->name) }}">
+                    <label for="newEditName">*{{__('message.name')}}:</label>
+                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{ ($user_to_edit == null) ? old('name') : old('name', $user_to_edit->name) }}">
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
-                    <strong>*{{__('message.surname')}}:</strong>
-                    <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{ ($user_to_edit == null) ? old('surname') : old('surname', $user_to_edit->surname) }}">
+                    <label for="newEditSurname">*{{__('message.surname')}}:</label>
+                    <input id="newEditSurname" type="text" name="surname" class="form-control" placeholder="{{__('message.enter')." ".__('message.surname')}}" value="{{ ($user_to_edit == null) ? old('surname') : old('surname', $user_to_edit->surname) }}">
 
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
-                    <strong>*{{__('message.email')}}:</strong>
-                    <input type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{ ($user_to_edit == null) ? old('email') : old('email', $user_to_edit->email) }}">
+                    <label for="newEditEmail">*{{__('message.email')}}:</label>
+                    <input id="newEditEmail" type="email" name="email" class="form-control" placeholder="{{__('message.enter')." ".__('message.email')}}" value="{{ ($user_to_edit == null) ? old('email') : old('email', $user_to_edit->email) }}">
 
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2 form-group form_group_new_edit">
 
-                    <strong>{{__('message.phone')}}:</strong>
-                    <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{ ($user_to_edit == null) ? old('phone') : old('phone', $user_to_edit->phone) }}">
+                    <label for="newEditPhone">{{__('message.phone')}}:</label>
+                    <input id="newEditPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')." ".__('message.phone')}}" value="{{ ($user_to_edit == null) ? old('phone') : old('phone', $user_to_edit->phone) }}">
 
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-5 form-group form_group_new_edit">
 
-                    <strong>{{__('message.observations')}}:</strong>
-                    <textarea class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ ($user_to_edit == null) ? old('description') : old('description', $user_to_edit->description) }}</textarea>
+                    <label for="newEditObservations">{{__('message.observations')}}:</label>
+                    <textarea id="newEditObservations" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ ($user_to_edit == null) ? old('description') : old('description', $user_to_edit->description) }}</textarea>
 
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
-                    <strong>*{{__('message.password')}}:</strong>
-                    <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password') }}">
+                    <label for="newEditPassword">*{{__('message.password')}}:</label>
+                    <input type="password" id="newEditPassword" name="password" autocomplete="new-password" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password') }}">
 
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
-                    <strong>*{{__('message.password_confirm')}}:</strong>
-                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password_confirmation') }}">
+                    <label for="newEditPasswordConfirmation">*{{__('message.password_confirm')}}:</label>
+                    <input type="password" id="newEditPasswordConfirmation" name="password_confirmation" class="form-control" placeholder="{{__('message.enter')." ".__('message.password')}}" value="{{ old('password_confirmation') }}">
 
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
 
-                    <strong>{{ __('message.role') }}:</strong><br>
+                    <span>{{ __('message.role') }}:</span><br>
                     <input type="radio" id="user" name="role" value="user" checked>
                     <label for="user">{{ __('message.worker') }}</label><br>
                     @php
@@ -151,7 +151,7 @@
 <div id="filterDiv" class="p-4 my-3">
     <div class="mb-4" id="filterTitleContainer">
         <div class="d-flex align-content-stretch align-items-center">
-            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg" id="filterChevronDown"></i>
+            <h3 class="d-inline-block m-0">{{ __('message.filters') }}</h3><i class=" px-2 bi bi-chevron-down fa-lg" id="filterChevronDown"></i>
         </div>
     </div>
     <div id="filtersContainer">
@@ -159,35 +159,35 @@
             @csrf
 
             <div class="form-group col-xs-12 col-sm-6 col-md-3">
-                <strong>{{ __('message.surname') }}:</strong>
-                <input type="text" name="surname" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.surname') }}" value="@if(session('user_surname') != '%'){{session('user_surname')}}@endif">
+                <label for="filterSurname">{{ __('message.surname') }}:</label>
+                <input id="filterSurname" type="text" name="surname" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.surname') }}" value="@if(session('user_surname') != '%'){{session('user_surname')}}@endif">
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-3">
-                <strong>{{ __('message.name') }}:</strong>
-                <input type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('user_name') != '%'){{session('user_name')}}@endif">
+                <label for="filterName">{{ __('message.name') }}:</label>
+                <input id="filterName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('user_name') != '%'){{session('user_name')}}@endif">
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                <strong>{{ __('message.email') }}:</strong>
-                <input type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="@if(session('user_email') != '%'){{session('user_email')}}@endif">
+                <label for="filterEmail">{{ __('message.email') }}:</label>
+                <input id="filterEmail" type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="@if(session('user_email') != '%'){{session('user_email')}}@endif">
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                <strong>{{ __('message.username') }}:</strong>
-                <input type="text" name="username" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.username') }}" value="@if(session('user_username') != '%'){{session('user_username')}}@endif">
+                <label for="filterUsername">{{ __('message.username') }}:</label>
+                <input id="filterUsername" type="text" name="username" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.username') }}" value="@if(session('user_username') != '%'){{session('user_username')}}@endif">
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                <strong>{{ __('message.phone') }}:</strong>
-                <input type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="@if(session('user_phone') != '%'){{session('user_phone')}}@endif">
+                <label for="filterPhone">{{ __('message.phone') }}:</label>
+                <input id="filterPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="@if(session('user_phone') != '%'){{session('user_phone')}}@endif">
             </div>
 
 
             <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                <strong>{{ __('message.role') }}:</strong>
-                <select name="role" id="role" class="form-control form-select">
-                    <option value="all">{{ __('message.all') }}</option>
+                <label for="filterRole">{{ __('message.role') }}:</label>
+                <select name="role" id="filterRole" class="form-control form-select">
+                    <option value="all">{{ __('message.all_m') }}</option>
                     <option value="admin" @if(session('user_role') == 'admin'){{'selected'}}@endif >{{ __('message.admin') }}</option>
                     <option value="user" @if(session('user_role') == 'user'){{'selected'}}@endif >{{ __('message.worker') }}</option>
                 </select>
@@ -207,12 +207,12 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <div class="form-group mt-2">
-                                    <strong>{{ __('message.from') }}:</strong>
-                                    <input autocomplete="off" name="date_from" type="text" class="datepicker form-control form-control-sm" value="@if(session('user_date_from') != ''){{session('user_date_from')}}@endif">
+                                    <label for="filterDateFrom">{{ __('message.from') }}:</label>
+                                    <input id="filterDateFrom" autocomplete="off" name="date_from" type="text" class="datepicker form-control form-control-sm" value="@if(session('user_date_from') != ''){{session('user_date_from')}}@endif">
                                 </div>
                                 <div class="form-group">
-                                    <strong>{{ __('message.to') }}:</strong><br>
-                                    <input autocomplete="off" type="text" name="date_to" class="datepicker form-control form-control-sm" value="@if(session('user_date_to') != ''){{session('user_date_to')}}@endif">
+                                    <label for="filterDateTo">{{ __('message.to') }}:</label><br>
+                                    <input id="filterDateTo" autocomplete="off" type="text" name="date_to" class="datepicker form-control form-control-sm" value="@if(session('user_date_to') != ''){{session('user_date_to')}}@endif">
                                 </div>
                             </div>
                         </div>
@@ -238,7 +238,7 @@
     </div>
 </div>
 
-<table class="table table-striped">
+<table class="table">
     @if (count($data) > 0)
     <thead class="sticky-top table">
         <tr style="background-color: white;">
@@ -264,8 +264,8 @@
         <tr class="table-striped">
             <td>{{ ++$i }}</td>
             <td>{{ $value->nickname }}</td>
-            <td>{{ $value->name }}</td>
             <td>{{ $value->surname }}</td>
+            <td>{{ $value->name }}</td>
             <td>{{ $value->email }}</td>
             <td>{{ $value->phone }}</td>
             <td>@if ($value->description == ''){{ __('message.no_observations') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>

@@ -33,7 +33,7 @@
 <table class="table">
     @if (count($info_for_table) > 0)
     <thead>
-        <tr>
+        <tr class="thead-light">
             <th>Nº</th>
             <th>{{ __('message.user') }}</th>
             <th>{{ __('message.bag_hour_type') }}</th>
@@ -41,6 +41,7 @@
             <th>{{ __('message.customer_name') }}</th>
             <th>{{ __('message.hours') }}</th>
             <th>{{ __('message.creation_day') }}</th>
+            <th></th>
         </tr>
     </thead>
         @endif

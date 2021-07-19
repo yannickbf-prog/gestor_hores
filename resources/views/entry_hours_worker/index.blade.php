@@ -88,7 +88,7 @@ $load_old_hour_entries = true;
 <table class="table mt-3">
     @if (count($data) > 0)
     <thead>
-        <tr>   
+        <tr  class="thead-light">   
             <th>{{ __('message.date') }}</th>  
             <th>{{ __('message.project') }}</th>
             <th>{{ __('message.customer_name') }}</th>
