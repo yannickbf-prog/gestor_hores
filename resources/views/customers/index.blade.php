@@ -53,27 +53,27 @@
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">  
                     <label for="newEditName">{{ __('message.name') }}:</label>
-                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="@if(session('customer_name') != '%'){{session('customer_name')}}@endif">
+                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ old('name') }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditEmail">{{ __('message.email') }}:</label>
-                    <input id="newEditEmail" type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="@if(session('customer_email') != '%'){{session('customer_email')}}@endif">
+                    <input id="newEditEmail" type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="{{ old('email') }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditPhone">{{ __('message.phone') }}:</label>
-                    <input id="newEditPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="@if(session('customer_phone') != '%'){{session('customer_phone')}}@endif">
+                    <input id="newEditPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="{{ old('phone') }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditTaxNumber">{{__('message.tax_number')}}:</label>
-                    <input id="newEditTaxNumber" type="text" name="tax_number" class="form-control" placeholder="{{__('message.enter')}} {{__('message.tax_number')}}" value="@if(session('customer_tax_number') != '%'){{session('customer_tax_number')}}@endif">
+                    <input id="newEditTaxNumber" type="text" name="tax_number" class="form-control" placeholder="{{__('message.enter')}} {{__('message.tax_number')}}" value="{{ old('tax_number') }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditContactPerson">{{ __('message.contact_person') }}:</label>
-                    <input id="newEditContactPerson" type="text" name="contact_person" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contact_person') }}" value="@if(session('customer_contact_person') != '%'){{session('customer_contact_person')}}@endif">
+                    <input id="newEditContactPerson" type="text" name="contact_person" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contact_person') }}" value="{{ old('contact_person') }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-8 col-md-5">
