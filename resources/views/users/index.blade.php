@@ -315,7 +315,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.hour_entry") }} <b>{{ $value->name }}</b>?
+                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.user") }} <b>{{ $value->name }}</b>?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>

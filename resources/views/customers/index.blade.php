@@ -171,9 +171,6 @@
         <div class="pull-left">
             <h3>{{ __('message.customers_list') }}</h3>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
-        </div>
     </div>
 </div>
 
@@ -220,6 +217,41 @@
                     <a style="text-decoration: none" class="text-dark">
                         <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
                     </a>
+                    
+                    
+                    @php
+                    $id = "exampleModal".$value->id;
+                    @endphp
+
+                    <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
+                        <i class="bi bi-trash-fill fa-lg"></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="{{ route('customers.destroy',[$value->id, $lang]) }}" method="POST"> 
+                            @csrf
+                            @method('DELETE')  
+
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} <b>{{ $value->name }}</b>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                        <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>   
                     
                 </div>
                
