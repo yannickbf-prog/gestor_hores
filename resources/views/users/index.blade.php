@@ -37,7 +37,7 @@
 @endif
 
 <div class="px-2 py-3 create_edit_container">
-    <div id="addEditHeader" class="d-flex align-content-stretch align-items-center ml-3">
+    <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
         <h3 class="d-inline-block m-0">{{ ($user_to_edit == null) ? __('message.add_new')." ".__('message.user') : __('message.edit')." ".__('message.user') }}</h3>
         <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
     </div>

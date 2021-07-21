@@ -254,8 +254,7 @@ th {
 }
 
 #addEditHeader {
-    cursor: pointer;
-    width: 250;
+    cursor: pointer;   
 }
 
 #addEditChevronDown, #filterChevronDown {
