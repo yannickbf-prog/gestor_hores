@@ -18,11 +18,18 @@ class CustomerController extends Controller {
     public function index(Request $request) {
 
         $lang = setGetLang();
+        
+        $customer_to_edit = null;
 
         $show_filters = false;
-        
         $show_create_edit = false;
+        
+        if ($request->has('_token') && $request->has('customer_id')) {
+            
+            $customer_to_edit = Customer::where('id', $request['customer_id'])->first();
 
+            $show_create_edit = true;
+        }
   
         if ($request->has('_token')) {
 
@@ -69,7 +76,7 @@ class CustomerController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
-        return view('customers.index', compact(['data', 'show_filters', 'show_create_edit']))
+        return view('customers.index', compact(['data', 'show_filters', 'show_create_edit', 'customer_to_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 

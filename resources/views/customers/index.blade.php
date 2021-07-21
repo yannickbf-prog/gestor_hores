@@ -46,7 +46,7 @@
             <strong>{{__('message.fields_are_required')}}</strong>
         </div>
         
-        <form action="{{ route('customers.store',$lang) }}" method="POST" class="px-3 pt-2">
+        <form action="{{ ($customer_to_edit == null) ? route('customers.store',$lang) : route('customers.update',[$customer_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-2">
             @csrf
 
             <div class="row">
