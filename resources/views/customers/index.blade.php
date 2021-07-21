@@ -196,7 +196,7 @@
             <td>{{ $value->email }}</td>
             <td>{{ $value->phone }}</td>
             <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
-            <td>{{ $value->nif }}</td>
+            <td>{{ $value->tax_number }}</td>
             <td>{{ $value->contact_person }}</td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
             <td>

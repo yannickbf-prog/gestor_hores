@@ -63,7 +63,7 @@ class CustomerController extends Controller {
                 where('name', 'like', "%" . $name . "%")
                 ->where('email', 'like', "%" . $email . "%")
                 ->where('phone', 'like', "%" . $phone . "%")
-                ->where('nif', 'like', $tax_number)
+                ->where('tax_number', 'like', $tax_number)
                 ->where('contact_person', 'like', "%" . $contact_person . "%")
                 ->whereBetween('created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
