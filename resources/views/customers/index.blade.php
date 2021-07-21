@@ -289,8 +289,16 @@
 
 
     //Code for show filters when filter
+    var show_create_edit = @json($show_create_edit);
     var show_filters = @json($show_filters);
-            if (show_filters) {
+    
+    if (show_create_edit){
+        $('#addEditChevronDown').css("transform", "rotate(180deg)");
+        $('#addEditContainer').show(400);
+        addEditCount = 2;
+    }
+    
+    if (show_filters) {
         $('#filterChevronDown').css("transform", "rotate(180deg)");
         $('#filtersContainer').show(400);
         filterCount = 2;

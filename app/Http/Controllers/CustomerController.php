@@ -20,6 +20,8 @@ class CustomerController extends Controller {
         $lang = setGetLang();
 
         $show_filters = false;
+        
+        $show_create_edit = false;
 
   
         if ($request->has('_token')) {
@@ -67,7 +69,7 @@ class CustomerController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
-        return view('customers.index', compact(['data', 'show_filters']))
+        return view('customers.index', compact(['data', 'show_filters', 'show_create_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 
