@@ -17,12 +17,23 @@
         <div class="pull-left">
             <h2>{{ __('message.customers') }}</h2>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_customers.create') }}">{{ __('message.create_new_customer') }}</a>
-
-        </div>
     </div>
 </div>
+
+
+@if ($errors->any())
+<div class="alert alert-danger mt-3">
+    @php
+    $show_create_edit = true
+    @endphp
+    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ ucfirst($error) }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
 <div class="px-2 py-3 create_edit_container">
     <div id="addEditHeader" class="d-flex align-content-stretch align-items-center ml-3">
@@ -34,6 +45,7 @@
         <div class="alert alert-info m-2 mt-3">
             <strong>{{__('message.fields_are_required')}}</strong>
         </div>
+        
         <form action="{{ route('customers.store',$lang) }}" method="POST" class="px-3 pt-2">
             @csrf
 
@@ -66,7 +78,7 @@
 
                 <div class="form-group col-xs-12 col-sm-8 col-md-5">
                     <label for="newEditDesc">{{__('message.description')}}:</label>
-                    <textarea id="newEditDesc" class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
+                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
                 </div>
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
@@ -244,6 +256,22 @@
 @endsection
 @section('js')
 <script>
+    
+    var addEditCount = 1;
+    $("#addEditHeader").click(function () {
+
+        if (addEditCount % 2 == 0)
+            $('#addEditChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#addEditChevronDown').css("transform", "rotate(180deg)");
+
+        addEditCount++;
+
+        // show hide paragraph on button click
+        $("#addEditContainer").toggle(400);
+    });
+    
     var filterCount = 1;
     $("#filterTitleContainer").click(function () {
 
