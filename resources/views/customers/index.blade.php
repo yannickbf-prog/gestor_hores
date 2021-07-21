@@ -37,7 +37,8 @@
 
 <div class="px-2 py-3 create_edit_container">
     <div id="addEditHeader" class="d-flex align-content-stretch align-items-center ml-3">
-        <h3 class="d-inline-block m-0">{{ __('message.add_new')." ".__('message.customer') }}</h3>
+        
+        <h3 class="d-inline-block m-0">{{ ($customer_to_edit == null) ? __('message.add_new')." ".__('message.customer') : __('message.edit')." ".__('message.customer') }}</h3>
         <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
     </div>
 
@@ -82,7 +83,11 @@
                 </div>
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
-                    <button type="submit" class="btn general_button mr-2">{{ __('message.save') }}</button>
+                    @if ($customer_to_edit !== null)
+                    <a class="btn general_button mr-0" href="{{route('customers.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
+                    @endif
+                    <button type="submit" class="btn general_button mr-2">{{ ($customer_to_edit == null) ? __('message.save') : __('message.update')}}</button>
+
                 </div>
             </div>
         </form>
@@ -199,36 +204,25 @@
             <td>{{ $value->tax_number }}</td>
             <td>{{ $value->contact_person }}</td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
-            <td>
-                <form action="{{ route('customers.destroy',[$value->id, $lang]) }}" method="POST"> 
-                    <a class="btn btn-primary" href="{{ route($lang.'_customers.edit',$value->id) }}">{{ __('message.edit') }}</a>
-                    @csrf
-                    @method('DELETE')      
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                        {{ __('message.delete') }}
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.customer") }} <b>{{ $value->name }}</b>?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                    <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <td class="align-middle">
+                <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
+                    
+                    @php
+                    $form_id = "editForm".$value->id;
+                    $form_dom = "document.getElementById('editForm".$value->id."').submit();";
+                    @endphp
 
-                </form>
+                    <form action="{{ route($lang.'_customers.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
+                        @csrf
+                        <input type="hidden" name="customer_id" value="{{ $value->id }}">
+                    </form>
+
+                    <a style="text-decoration: none" class="text-dark">
+                        <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
+                    </a>
+                    
+                </div>
+               
             </td>
         </tr>
         @empty
