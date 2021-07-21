@@ -99,6 +99,10 @@ class CustomerController extends Controller {
 
         return redirect()->route($lang . '_customers.index');
     }
+    
+    function cancelEdit($lang) {
+        return redirect()->route($lang . '_customers.index');
+    }
 
     /**
      * Show the form for creating a new resource.

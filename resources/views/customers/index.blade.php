@@ -54,32 +54,32 @@
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">  
                     <label for="newEditName">{{ __('message.name') }}:</label>
-                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ old('name') }}">
+                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ ($customer_to_edit == null) ? old('name') : old('name', $customer_to_edit->name) }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditEmail">{{ __('message.email') }}:</label>
-                    <input id="newEditEmail" type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="{{ old('email') }}">
+                    <input id="newEditEmail" type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="{{ ($customer_to_edit == null) ? old('email') : old('email', $customer_to_edit->email) }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditPhone">{{ __('message.phone') }}:</label>
-                    <input id="newEditPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="{{ old('phone') }}">
+                    <input id="newEditPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="{{ ($customer_to_edit == null) ? old('phone') : old('phone', $customer_to_edit->phone) }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditTaxNumber">{{__('message.tax_number')}}:</label>
-                    <input id="newEditTaxNumber" type="text" name="tax_number" class="form-control" placeholder="{{__('message.enter')}} {{__('message.tax_number')}}" value="{{ old('tax_number') }}">
+                    <input id="newEditTaxNumber" type="text" name="tax_number" class="form-control" placeholder="{{__('message.enter')}} {{__('message.tax_number')}}" value="{{ ($customer_to_edit == null) ? old('tax_number') : old('tax_number', $customer_to_edit->tax_number) }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3">
                     <label for="newEditContactPerson">{{ __('message.contact_person') }}:</label>
-                    <input id="newEditContactPerson" type="text" name="contact_person" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contact_person') }}" value="{{ old('contact_person') }}">
+                    <input id="newEditContactPerson" type="text" name="contact_person" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contact_person') }}" value="{{ ($customer_to_edit == null) ? old('contact_person') : old('contact_person', $customer_to_edit->contact_person) }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-8 col-md-5">
                     <label for="newEditDesc">{{__('message.description')}}:</label>
-                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
+                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{ ($customer_to_edit == null) ? old('description') : old('description', $customer_to_edit->description) }}</textarea>
                 </div>
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
