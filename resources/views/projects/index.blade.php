@@ -137,6 +137,12 @@
     </div>
 </div>
 
+@php
+$worked_hours_count = 0;
+$contracted_hours_count = 0;
+$hours_left = 0;
+@endphp
+
 <table class="table table-bordered">
     @if (count($data) > 0)
     <tr>
@@ -153,6 +159,12 @@
     </tr>
     @endif
     @forelse ($data as $value)
+    @php
+    $worked_hours_count += $value->total_hours_project;
+    $contracted_hours_count += $value->contracted_hours;
+    if($value->contracted_hours - $value->total_hours_project > 0)
+    $hours_left += $value->contracted_hours - $value->total_hours_project;
+    @endphp
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $value->project_name }}</td>
@@ -215,9 +227,9 @@
         </thead>
         <tbody>
             <tr>
-                <td>1h</td>
-                <td>2h</td>
-                <td>3h</td>
+                <td>{{ $worked_hours_count }}h</td>
+                <td>{{ $contracted_hours_count }}h</td>
+                <td>{{ $hours_left }}h</td>
             </tr>
         </tbody>
     </table>
