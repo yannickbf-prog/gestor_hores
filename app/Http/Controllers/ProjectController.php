@@ -50,14 +50,14 @@ class ProjectController extends Controller {
             $num_records = Customer::count();
         }
 
-        $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
-                ->select("customers.name AS customer_name", "projects.*")
-                ->where('projects.name', 'like', "%" . $name . "%")
-                ->where('customers.name', 'like', "%" . $customer_name . "%")
-                ->where('projects.active', 'like', $state)
-                ->whereBetween('projects.created_at', [$date_from, $date_to])
-                ->orderBy('created_at', $order)
-                ->paginate($num_records);
+//        $data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
+//                ->select("customers.name AS customer_name", "projects.*")
+//                ->where('projects.name', 'like', "%" . $name . "%")
+//                ->where('customers.name', 'like', "%" . $customer_name . "%")
+//                ->where('projects.active', 'like', $state)
+//                ->whereBetween('projects.created_at', [$date_from, $date_to])
+//                ->orderBy('created_at', $order)
+//                ->paginate($num_records);
         
 //        $new_data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
 //                ->join('users_projects', 'users_projects.project_id', '=', 'projects.id')
@@ -70,13 +70,14 @@ class ProjectController extends Controller {
         
         //config()->set('database.connections.mysql.strict', false);
         
-        $new_data = DB::table('hours_entry')
+        $data = DB::table('hours_entry')
                 ->join('users_projects', 'users_projects.id', '=', 'hours_entry.user_project_id')
                 ->join('projects', 'projects.id', '=', 'users_projects.project_id')
                 ->join('customers', 'customers.id', '=', 'projects.customer_id')
                 ->leftJoin('bag_hours', 'bag_hours.project_id', '=', 'projects.id')
                 ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
-                        'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at')
+                        'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
+                        'projects.id as id')
                 ->groupBy('projects.id')                ->where('projects.name', 'like', "%" . $name . "%")
                 ->where('customers.name', 'like', "%" . $customer_name . "%")
                 ->where('projects.active', 'like', $state)
@@ -84,8 +85,6 @@ class ProjectController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
         
-        return $new_data;
-
         return view('projects.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }

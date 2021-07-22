@@ -152,11 +152,11 @@
     @forelse ($data as $value)
     <tr>
         <td>{{ ++$i }}</td>
-        <td>{{ $value->name }}</td>
+        <td>{{ $value->project_name }}</td>
         <td>{{ $value->customer_name }}</td>
-        <td>@if($value->active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
-        <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
-        <td>{{ $value->created_at->format('d/m/y') }}</td>
+        <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
+        <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+        <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
         <td>
             <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
                 <a class="btn btn-primary" href="{{ route($lang.'_projects.edit',$value->id) }}">{{ __('message.edit') }}</a>
@@ -171,13 +171,13 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->project_name }}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.project") }} <b>{{ $value->name }}</b>?
+                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.project") }} <b>{{ $value->project_name }}</b>?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>

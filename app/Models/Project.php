@@ -12,6 +12,9 @@ class Project extends Model
     protected $fillable = [     
         'name',
         'customer_id',
-        'active'
+        'active',
+        'created_at'
     ];
+    
+    protected $dates = ['created_at'];
 }
