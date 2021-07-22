@@ -85,6 +85,7 @@ class ProjectController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
         
+        
         return view('projects.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
