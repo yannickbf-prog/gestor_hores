@@ -58,6 +58,22 @@ class ProjectController extends Controller {
                 ->whereBetween('projects.created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
+        
+//        $new_data = Customer::join('projects', 'projects.customer_id', '=', 'customers.id')
+//                ->join('users_projects', 'users_projects.project_id', '=', 'projects.id')
+//                ->select("customers.name AS customer_name", "projects.*")
+//                ->paginate($num_records);
+        
+        $new_data = DB::table('hours_entry')
+            ->groupBy('user_project_id')
+            ->count();
+        
+        $new_data = DB::table('hours_entry')
+                ->select('user_project_id', DB::raw('SUM(hours_imputed) as total_hours_user_project'))
+                ->groupBy('user_project_id')
+                ->get();
+        
+        return $new_data;
 
         return view('projects.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
