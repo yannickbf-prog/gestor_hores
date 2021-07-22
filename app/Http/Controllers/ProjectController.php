@@ -68,7 +68,7 @@ class ProjectController extends Controller {
 //            ->groupBy('user_project_id')
 //            ->count();
         
-        config()->set('database.connections.mysql.strict', false);
+        //config()->set('database.connections.mysql.strict', false);
         
         $new_data = DB::table('hours_entry')
                 ->join('users_projects', 'users_projects.id', '=', 'hours_entry.user_project_id')
@@ -77,8 +77,12 @@ class ProjectController extends Controller {
                 ->leftJoin('bag_hours', 'bag_hours.project_id', '=', 'projects.id')
                 ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
                         'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at')
-                ->groupBy('projects.id')
-                ->get();
+                ->groupBy('projects.id')                ->where('projects.name', 'like', "%" . $name . "%")
+                ->where('customers.name', 'like', "%" . $customer_name . "%")
+                ->where('projects.active', 'like', $state)
+                ->whereBetween('projects.created_at', [$date_from, $date_to])
+                ->orderBy('created_at', $order)
+                ->paginate($num_records);
         
         return $new_data;
 
