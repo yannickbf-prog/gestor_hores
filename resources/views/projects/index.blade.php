@@ -144,6 +144,9 @@
         <th>{{ __('message.name') }}</th>
         <th>{{ __('message.customer_name') }}</th>
         <th>{{ __('message.state') }}</th>
+        <th>{{ __('message.hours_workedt') }}</th>
+        <th>{{ __('message.contracted_hours') }}</th>
+        <th>{{ __('message.available_hours') }}</th>
         <th>{{ __('message.description') }}</th>
         <th>{{ __('message.created_at') }}</th>
         <th>{{ __('message.action') }}</th>
@@ -155,6 +158,8 @@
         <td>{{ $value->project_name }}</td>
         <td>{{ $value->customer_name }}</td>
         <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
+        <td>{{ $value->total_hours_project }}</td>
+        
         <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
         <td>
