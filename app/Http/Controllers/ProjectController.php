@@ -64,13 +64,15 @@ class ProjectController extends Controller {
 //                ->select("customers.name AS customer_name", "projects.*")
 //                ->paginate($num_records);
         
-        $new_data = DB::table('hours_entry')
-            ->groupBy('user_project_id')
-            ->count();
+//        $new_data = DB::table('hours_entry')
+//            ->groupBy('user_project_id')
+//            ->count();
         
         $new_data = DB::table('hours_entry')
-                ->select('user_project_id', DB::raw('SUM(hours_imputed) as total_hours_user_project'))
-                ->groupBy('user_project_id')
+                ->join('users_projects', 'users_projects.id', '=', 'hours_entry.user_project_id')
+                ->join('projects', 'projects.id', '=', 'users_projects.project_id')
+                ->select('projects.name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'))
+                ->groupBy('projects.id')
                 ->get();
         
         return $new_data;
