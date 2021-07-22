@@ -140,7 +140,7 @@
 @php
 $worked_hours_count = 0;
 $contracted_hours_count = 0;
-$hours_left = 0;
+$hours_left_count = 0;
 @endphp
 
 <table class="table table-bordered">
@@ -162,8 +162,10 @@ $hours_left = 0;
     @php
     $worked_hours_count += $value->total_hours_project;
     $contracted_hours_count += $value->contracted_hours;
-    if($value->contracted_hours - $value->total_hours_project > 0)
-    $hours_left += $value->contracted_hours - $value->total_hours_project;
+    
+    $hours_left = $value->contracted_hours - $value->total_hours_project;
+    if($hours_left > 0)
+    $hours_left_count += $hours_left;
     @endphp
     <tr>
         <td>{{ ++$i }}</td>
@@ -172,7 +174,7 @@ $hours_left = 0;
         <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
         <td>{{ $value->total_hours_project }}</td>
         <td>{{ $value->contracted_hours }}</td>
-        <td>@if($value->contracted_hours != null){{ $value->contracted_hours - $value->total_hours_project }}@endif</td>
+        <td>@if($value->contracted_hours != null){{ $hours_left }}@endif</td>
 
         <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
@@ -229,7 +231,7 @@ $hours_left = 0;
             <tr>
                 <td>{{ $worked_hours_count }}h</td>
                 <td>{{ $contracted_hours_count }}h</td>
-                <td>{{ $hours_left }}h</td>
+                <td>{{ $hours_left_count }}h</td>
             </tr>
         </tbody>
     </table>
