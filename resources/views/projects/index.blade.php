@@ -25,7 +25,7 @@
 </div>
 <form action="{{ route($lang.'_projects.index') }}" method="GET"> 
     @csrf
-    
+
     <div class="row py-2">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -57,12 +57,12 @@
                     <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all_m') }}</option>
                     <option value="1" @if(session('project_state') == "1"){{'selected'}}@endif>{{ __('message.active') }}</option>
                     <option value="0" @if(session('project_state') == "0"){{'selected'}}@endif>{{ __('message.inactive') }}</option>
-                    
+
                 </select>
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -144,9 +144,9 @@
         <th>{{ __('message.name') }}</th>
         <th>{{ __('message.customer_name') }}</th>
         <th>{{ __('message.state') }}</th>
-        <th>{{ __('message.hours_workedt') }}</th>
+        <th>{{ __('message.hours_worked') }}</th>
         <th>{{ __('message.contracted_hours') }}</th>
-        <th>{{ __('message.available_hours') }}</th>
+        <th>{{ __('message.hours_left') }}</th>
         <th>{{ __('message.description') }}</th>
         <th>{{ __('message.created_at') }}</th>
         <th>{{ __('message.action') }}</th>
@@ -159,7 +159,9 @@
         <td>{{ $value->customer_name }}</td>
         <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
         <td>{{ $value->total_hours_project }}</td>
-        
+        <td>{{ $value->contracted_hours }}</td>
+        <td>@if($value->contracted_hours != null){{ $value->contracted_hours - $value->total_hours_project }}@endif</td>
+
         <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
         <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
         <td>
@@ -191,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </td>
     </tr>
@@ -200,10 +202,32 @@
     @endforelse
 
 </table> 
+@if (count($data) > 0)
+<div id="totalHourCount" class="row">
+    <h4 class="table col-12">{{__('message.total_hours_count')}}</h4>
+    <table class="table col-6 ml-3  text-center">
+        <thead>
+            <tr class="thead-light">
+                <th>{{ __('message.hours_worked') }}</th>
+                <th>{{ __('message.contracted_hours') }}</th>
+                <th>{{ __('message.hours_left') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1h</td>
+                <td>2h</td>
+                <td>3h</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@endif
 <div id="paginationContainer">
     {!! $data->links() !!} 
 </div>
 @endsection
 @section('js')
-    <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
 @endsection
