@@ -52,6 +52,22 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>{{ __('message.customer_name') }}:</strong>
+                <select name="customer_name2" id="customer" @if(count($customers) > 0) {{"disabled"}} @endif>
+                    @if(count($customers) > 0)
+                    <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all_m') }}</option>
+                    <option value="1" @if(session('project_state') == "1"){{'selected'}}@endif>{{ __('message.active') }}</option>
+                    <option value="0" @if(session('project_state') == "0"){{'selected'}}@endif>{{ __('message.inactive') }}</option>
+                    @else
+                    <option selected>No customers available</option>
+                    @endif
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>{{ __('message.state') }}: </strong>
                 <select name="state" id="state">
                     <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all_m') }}</option>
