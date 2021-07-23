@@ -23,7 +23,8 @@
         </div>
     </div>
 </div>
-<form action="{{ route($lang.'_projects.index') }}" method="GET"> 
+
+<form action="{{ route($lang.'_projects.index') }}" method="GET" id="filtersForm"> 
     @csrf
 
     <div class="row py-2">
@@ -51,11 +52,11 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+            <div class="form-group" id="customerContainer">
                 <strong>{{ __('message.customer_name') }}:</strong>
                 <select name="customer_name2" id="customer" onchange="loadProjectsOfCustomer()" @if(count($customers) < 0) {{"disabled"}} @endif>
                     @if(count($customers) > 0)
-                    <option value="">{{ __('message.all_m') }}</option>
+                    <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($customers as $key => $value)
                     <option value="{{$value->id}}">{{ $value->name }}</option>
                     @endforeach
@@ -136,6 +137,7 @@
     </div>
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
+
 
 <form action="{{ route('projects.delete_filters') }}" method="POST"> 
     @csrf
@@ -265,27 +267,80 @@ $hours_left_count = 0;
             function loadProjectsOfCustomer() {
 
                 let customerId = document.getElementById('customer').value;
-                if (customerId != "") {
+
+
+                if (customerId != "%") {
+
+                    let formGroup = document.createElement("div");
+                    formGroup.setAttribute('class', 'form-group');
+                    formGroup.setAttribute('id', 'projectContainer');
+
                     let projects = $.grep(projects_json, function (e) {
                         return e.customer_id == customerId;
                     });
 
-                    for (project of projects) {
-                        
-                        let projectSelectHtml = document.createElement("select");
-                        
-                        let option = document.createElement("option");
-                        option.value = project.id;
-                        option.innerText = project.name;
-                        
-                        projectSelectHtml.appendChild(option);
-
-                    }
-                } 
-                else {
+                    let projectSelectHtml = document.createElement("select");
                     
-                }
-            }
+                    for (project of projects) {
+
+                            let option = document.createElement("option");
+                            option.value = project.id;
+                            option.innerText = project.name;
+
+                            projectSelectHtml.appendChild(option);
+
+                        }
+                        
+                        formGroup.appendChild(projectSelectHtml);
+
+
+                        if (document.getElementById('projectContainer') != null) {
+                            document.getElementById('projectContainer').remove();
+                        }
+
+
+                        document.getElementById('customerContainer').after(formGroup);
+
+//                    if (projects.lenght > 0) {
+//                        let option = document.createElement("option");
+//                        option.value = "";
+//                        option.innerText = "{{__('message.all_m')}}";
+//                        projectSelectHtml.appendChild(option);
+//
+//                        for (project of projects) {
+//
+//                            let option = document.createElement("option");
+//                            option.value = project.id;
+//                            option.innerText = project.name;
+//
+//                            projectSelectHtml.appendChild(option);
+//
+//                        }
+//
+//                        formGroup.appendChild(projectSelectHtml);
+//
+//
+//                        if (document.getElementById('projectContainer') != null) {
+//                            document.getElementById('projectContainer').remove();
+//                        }
+//
+//
+//                        document.getElementById('customerContainer').after(formGroup);
+                    }
+//                    else {
+//                        
+////                        let option = <option selected>No customers available</option>
+////                        projectSelectHtml.appendChild(option);
+//                    }
+
+
+                    //Show al projects
+                } 
+//                else {
+//
+//                }
+            
+          
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
 @endsection
