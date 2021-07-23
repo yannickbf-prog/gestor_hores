@@ -263,11 +263,10 @@ $hours_left_count = 0;
 @endsection
 @section('js')
 <script>
-    var projects_json = @json($projects_json);
+    
             function loadProjectsOfCustomer() {
 
                 let customerId = document.getElementById('customer').value;
-
 
                 if (customerId != "%") {
 
@@ -280,6 +279,8 @@ $hours_left_count = 0;
                     });
 
                     let projectSelectHtml = document.createElement("select");
+                    projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+                    projectSelectHtml.setAttribute("id", "projectSelect");
 
                     if (projects.length > 0) {
 
@@ -287,6 +288,7 @@ $hours_left_count = 0;
                         option.value = "%";
                         option.innerText = "{{__('message.all_m')}}";
                         projectSelectHtml.appendChild(option);
+                        
 
                         for (project of projects) {
 
@@ -318,6 +320,8 @@ $hours_left_count = 0;
                         formGroup.setAttribute('id', 'projectContainer');
 
                         let projectSelectHtml = document.createElement("select");
+                        projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+                        projectSelectHtml.setAttribute("id", "projectSelect");
                         projectSelectHtml.disabled = true;
 
                         let option = document.createElement("option");
@@ -342,6 +346,8 @@ $hours_left_count = 0;
                     formGroup.setAttribute('id', 'projectContainer');
 
                     let projectSelectHtml = document.createElement("select");
+                    projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+                    projectSelectHtml.setAttribute("id", "projectSelect");
 
                     let option = document.createElement("option");
                     option.value = "%";
@@ -361,9 +367,41 @@ $hours_left_count = 0;
                     formGroup.appendChild(projectSelectHtml);
                     document.getElementById('customerContainer').after(formGroup);
                 }
+                
+                loadUsersOfProject()
+            }
+            
+            function loadUsersOfProject() {
+                let projectId = document.getElementById('projectSelect').value;
+                
+                let project = $.grep(projects_json, function (e) {
+                    return e.id == projectId;
+                });
+                
+                if(projectId == "%") {
+                    
+                }
+                else if (projectId == 'no_projects') {
+                    
+                }
+                else if (project.length > 0) {
+                    if (project[0].users.length > 0) {
+                        
+                    }
+                    else {
+                        
+                    }
+                }
+                
+                console.log(project)
+                
+//                let usersInProject = project[0].users;
             }
 
-
+var projects_json = @json($projects_json);
+    console.log(projects_json);
+    
+    loadProjectsOfCustomer();
 
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>

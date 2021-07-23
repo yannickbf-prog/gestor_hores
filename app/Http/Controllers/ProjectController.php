@@ -51,7 +51,7 @@ class ProjectController extends Controller {
         }
 
         //config()->set('database.connections.mysql.strict', false);
-        
+
         $data = DB::table('hours_entry')
                 ->join('users_projects', 'users_projects.id', '=', 'hours_entry.user_project_id')
                 ->join('projects', 'projects.id', '=', 'users_projects.project_id')
@@ -60,31 +60,37 @@ class ProjectController extends Controller {
                 ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
                         'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
                         'projects.id as id')
-                ->groupBy('projects.id')                ->where('projects.name', 'like', "%" . $name . "%")
+                ->groupBy('projects.id')->where('projects.name', 'like', "%" . $name . "%")
                 ->where('customers.name', 'like', "%" . $customer_name . "%")
                 ->where('projects.active', 'like', $state)
                 ->whereBetween('projects.created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
-        
+
         $customers = DB::table('customers')->select('id', 'name')->get();
-        
-        $projects =  DB::table('projects')
+
+        $projects = DB::table('projects')
                 ->select('projects.id', 'projects.name', 'projects.customer_id', 'projects.active')
                 ->get();
-        
+
         $projects_json = [];
-        
-        foreach($projects as $project) {
-            
+
+        foreach ($projects as $project) {
+
+            $users = DB::table('users_projects')
+                    ->select('user_id')
+                    ->where('project_id', '=', $project->id)
+                    ->get();
+
             $projects_json[] = [
                 'id' => $project->id,
                 'name' => $project->name,
                 'customer_id' => $project->customer_id,
-                'active' => $project->active
+                'active' => $project->active,
+                'users' => $users
             ];
         }
-        
+
         return view('projects.index', compact(['data', 'customers', 'projects_json']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
@@ -201,18 +207,18 @@ class ProjectController extends Controller {
                 ->get();
 
         $users_not_id_array = [];
-        
-        foreach ($users_in_project as $user){    
+
+        foreach ($users_in_project as $user) {
             array_push($users_not_id_array, $user->id);
         }
-                
-        $users_not_in_project = DB::table('users')                 
-            ->select('id AS id', 'nickname AS nickname', 'role AS role', 'name AS name', 'surname AS surname', 'email AS email', 'phone AS phone')
-            ->whereNotIn('id', $users_not_id_array)
-            ->get();
-                
 
-        return view('projects.add_remove', compact('project','lang','customer','users_in_project', 'users_not_in_project'));
+        $users_not_in_project = DB::table('users')
+                ->select('id AS id', 'nickname AS nickname', 'role AS role', 'name AS name', 'surname AS surname', 'email AS email', 'phone AS phone')
+                ->whereNotIn('id', $users_not_id_array)
+                ->get();
+
+
+        return view('projects.add_remove', compact('project', 'lang', 'customer', 'users_in_project', 'users_not_in_project'));
     }
 
     public function removeUser(Request $request, $project_id, $lang) {
@@ -225,16 +231,16 @@ class ProjectController extends Controller {
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
                         ->with('success', __('message.user') . " " . $request->user_id . " " . __('message.unseted'));
     }
-    
+
     public function addUser(Request $request, $project_id, $lang) {
-        
+
         $request_explode = explode('|', $request->user);
-        
+
         UsersProject::create([
             'user_id' => $request_explode[0],
             'project_id' => $project_id,
         ]);
-        
+
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
                         ->with('success', __('message.user') . " " . $request_explode[1] . " " . __('message.added'));
     }
