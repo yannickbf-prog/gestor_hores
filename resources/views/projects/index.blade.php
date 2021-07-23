@@ -266,8 +266,24 @@ $hours_left_count = 0;
 
                 let customerId = document.getElementById('customer').value;
                 if (customerId != "") {
-                    var result = $.grep(projects_json, function(e){ return e.customer_id == customerId; });
-                    console.log(result)
+                    let projects = $.grep(projects_json, function (e) {
+                        return e.customer_id == customerId;
+                    });
+
+                    for (project of projects) {
+                        
+                        let projectSelectHtml = document.createElement("select");
+                        
+                        let option = document.createElement("option");
+                        option.value = project.id;
+                        option.innerText = project.name;
+                        
+                        projectSelectHtml.appendChild(option);
+
+                    }
+                } 
+                else {
+                    
                 }
             }
 </script>
