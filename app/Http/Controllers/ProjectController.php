@@ -70,8 +70,9 @@ class ProjectController extends Controller {
         $customers = DB::table('customers')->select('id', 'name')->get();
         
         $projects_json =  DB::table('projects')
-                ->select('projects.id', 'projects.name', 'projects.customer_id')
+                ->select('projects.id', 'projects.name', 'projects.customer_id', 'projects.active')
                 ->get();
+        
         
         
         return view('projects.index', compact(['data', 'customers', 'projects_json']))

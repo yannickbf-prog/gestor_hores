@@ -282,7 +282,7 @@ $hours_left_count = 0;
                     let projectSelectHtml = document.createElement("select");
 
                     if (projects.length > 0) {
-                        
+
                         let option = document.createElement("option");
                         option.value = "%";
                         option.innerText = "{{__('message.all_m')}}";
@@ -308,26 +308,56 @@ $hours_left_count = 0;
 
 
                         document.getElementById('customerContainer').after(formGroup);
-                    }
-                    else {
+                    } else {
                         if (document.getElementById('projectContainer') != null) {
                             document.getElementById('projectContainer').remove();
                         }
+
+                        let formGroup = document.createElement("div");
+                        formGroup.setAttribute('class', 'form-group');
+                        formGroup.setAttribute('id', 'projectContainer');
+
+                        let projectSelectHtml = document.createElement("select");
+                        projectSelectHtml.disabled = true;
+
+                        let option = document.createElement("option");
+                        option.value = "no_projects";
+                        option.selected = true;
+                        option.innerText = "{{__('message.no_projects_available')}}";
+
+                        projectSelectHtml.appendChild(option);
+
+                        formGroup.appendChild(projectSelectHtml);
+                        document.getElementById('customerContainer').after(formGroup);
                     }
 
+                } else {
+                    
+                    if (document.getElementById('projectContainer') != null) {
+                        document.getElementById('projectContainer').remove();
+                    }
+                    
+                    let formGroup = document.createElement("div");
+                    formGroup.setAttribute('class', 'form-group');
+                    formGroup.setAttribute('id', 'projectContainer');
+
+                    let projectSelectHtml = document.createElement("select");
+
+                    for (project of projects_json) {
+
+                        let option = document.createElement("option");
+                        option.value = project.id;
+                        option.innerText = project.name;
+
+                        projectSelectHtml.appendChild(option);
+
+                    }
+                    
+                    formGroup.appendChild(projectSelectHtml);
+                    document.getElementById('customerContainer').after(formGroup);
                 }
-//                    else {
-//                        
-////                        let option = <option selected>No customers available</option>
-////                        projectSelectHtml.appendChild(option);
-//                    }
-
-
-                //Show al projects
             }
-//                else {
-//
-//                }
+
 
 
 </script>
