@@ -53,11 +53,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.customer_name') }}:</strong>
-                <select name="customer_name2" id="customer" @if(count($customers) > 0) {{"disabled"}} @endif>
+                <select name="customer_name2" id="customer" @if(count($customers) < 0) {{"disabled"}} @endif>
                     @if(count($customers) > 0)
-                    <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all_m') }}</option>
-                    <option value="1" @if(session('project_state') == "1"){{'selected'}}@endif>{{ __('message.active') }}</option>
-                    <option value="0" @if(session('project_state') == "0"){{'selected'}}@endif>{{ __('message.inactive') }}</option>
+                    @foreach($customers as $key => $value)
+                    <option value="{{$value->id}}">{{ $value->name }}</option>
+                    @endforeach
                     @else
                     <option selected>No customers available</option>
                     @endif
@@ -178,7 +178,7 @@ $hours_left_count = 0;
     @php
     $worked_hours_count += $value->total_hours_project;
     $contracted_hours_count += $value->contracted_hours;
-    
+
     $hours_left = $value->contracted_hours - $value->total_hours_project;
     if($hours_left > 0)
     $hours_left_count += $hours_left;
