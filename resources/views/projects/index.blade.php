@@ -332,16 +332,21 @@ $hours_left_count = 0;
                     }
 
                 } else {
-                    
+
                     if (document.getElementById('projectContainer') != null) {
                         document.getElementById('projectContainer').remove();
                     }
-                    
+
                     let formGroup = document.createElement("div");
                     formGroup.setAttribute('class', 'form-group');
                     formGroup.setAttribute('id', 'projectContainer');
 
                     let projectSelectHtml = document.createElement("select");
+
+                    let option = document.createElement("option");
+                    option.value = "%";
+                    option.innerText = "{{__('message.all_m')}}";
+                    projectSelectHtml.appendChild(option);
 
                     for (project of projects_json) {
 
@@ -352,7 +357,7 @@ $hours_left_count = 0;
                         projectSelectHtml.appendChild(option);
 
                     }
-                    
+
                     formGroup.appendChild(projectSelectHtml);
                     document.getElementById('customerContainer').after(formGroup);
                 }

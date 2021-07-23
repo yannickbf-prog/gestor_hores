@@ -69,11 +69,21 @@ class ProjectController extends Controller {
         
         $customers = DB::table('customers')->select('id', 'name')->get();
         
-        $projects_json =  DB::table('projects')
+        $projects =  DB::table('projects')
                 ->select('projects.id', 'projects.name', 'projects.customer_id', 'projects.active')
                 ->get();
         
+        $projects_json = [];
         
+        foreach($projects as $project) {
+            
+            $projects_json[] = [
+                'id' => $project->id,
+                'name' => $project->name,
+                'customer_id' => $project->customer_id,
+                'active' => $project->active
+            ];
+        }
         
         return view('projects.index', compact(['data', 'customers', 'projects_json']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
