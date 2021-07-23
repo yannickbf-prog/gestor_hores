@@ -53,8 +53,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.customer_name') }}:</strong>
-                <select name="customer_name2" id="customer" @if(count($customers) < 0) {{"disabled"}} @endif>
+                <select name="customer_name2" id="customer" onchange="loadProjectsOfCustomer()" @if(count($customers) < 0) {{"disabled"}} @endif>
                     @if(count($customers) > 0)
+                    <option value="">{{ __('message.all_m') }}</option>
                     @foreach($customers as $key => $value)
                     <option value="{{$value->id}}">{{ $value->name }}</option>
                     @endforeach
@@ -259,5 +260,16 @@ $hours_left_count = 0;
 </div>
 @endsection
 @section('js')
+<script>
+    var projects_json = @json($projects_json);
+            function loadProjectsOfCustomer() {
+
+                let customerId = document.getElementById('customer').value;
+                if (customerId != "") {
+                    var result = $.grep(projects_json, function(e){ return e.customer_id == customerId; });
+                    console.log(result)
+                }
+            }
+</script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
 @endsection

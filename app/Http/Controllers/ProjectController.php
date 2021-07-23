@@ -69,7 +69,12 @@ class ProjectController extends Controller {
         
         $customers = DB::table('customers')->select('id', 'name')->get();
         
-        return view('projects.index', compact(['data', 'customers']))
+        $projects_json =  DB::table('projects')
+                ->select('projects.id', 'projects.name', 'projects.customer_id')
+                ->get();
+        
+        
+        return view('projects.index', compact(['data', 'customers', 'projects_json']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 
