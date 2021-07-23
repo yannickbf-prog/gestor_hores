@@ -61,7 +61,7 @@
                     <option value="{{$value->id}}">{{ $value->name }}</option>
                     @endforeach
                     @else
-                    <option selected>No customers available</option>
+                    <option value="no_customers" selected>No customers available</option>
                     @endif
                 </select>
             </div>
@@ -280,8 +280,15 @@ $hours_left_count = 0;
                     });
 
                     let projectSelectHtml = document.createElement("select");
-                    
-                    for (project of projects) {
+
+                    if (projects.length > 0) {
+                        
+                        let option = document.createElement("option");
+                        option.value = "%";
+                        option.innerText = "{{__('message.all_m')}}";
+                        projectSelectHtml.appendChild(option);
+
+                        for (project of projects) {
 
                             let option = document.createElement("option");
                             option.value = project.id;
@@ -290,7 +297,7 @@ $hours_left_count = 0;
                             projectSelectHtml.appendChild(option);
 
                         }
-                        
+
                         formGroup.appendChild(projectSelectHtml);
 
 
@@ -299,34 +306,16 @@ $hours_left_count = 0;
                         }
 
 
-                        document.getElementById('customerContainer').after(formGroup);
 
-//                    if (projects.lenght > 0) {
-//                        let option = document.createElement("option");
-//                        option.value = "";
-//                        option.innerText = "{{__('message.all_m')}}";
-//                        projectSelectHtml.appendChild(option);
-//
-//                        for (project of projects) {
-//
-//                            let option = document.createElement("option");
-//                            option.value = project.id;
-//                            option.innerText = project.name;
-//
-//                            projectSelectHtml.appendChild(option);
-//
-//                        }
-//
-//                        formGroup.appendChild(projectSelectHtml);
-//
-//
-//                        if (document.getElementById('projectContainer') != null) {
-//                            document.getElementById('projectContainer').remove();
-//                        }
-//
-//
-//                        document.getElementById('customerContainer').after(formGroup);
+                        document.getElementById('customerContainer').after(formGroup);
                     }
+                    else {
+                        if (document.getElementById('projectContainer') != null) {
+                            document.getElementById('projectContainer').remove();
+                        }
+                    }
+
+                }
 //                    else {
 //                        
 ////                        let option = <option selected>No customers available</option>
@@ -334,13 +323,13 @@ $hours_left_count = 0;
 //                    }
 
 
-                    //Show al projects
-                } 
+                //Show al projects
+            }
 //                else {
 //
 //                }
-            
-          
+
+
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
 @endsection
