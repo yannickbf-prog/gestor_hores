@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', __('message.control_panel')." - ". __('message.customers'))
+@section('title', __('message.control_panel')." - ". __('message.projects'))
 
 @section('content')
 @if ($message = Session::get('success'))
