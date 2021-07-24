@@ -69,13 +69,7 @@ class ProjectController extends Controller {
 
         //Filter code
 
-//        $users = DB::table('users')
-//                ->whereIn('id', function($query) {
-//                    $query->select(DB::table('users_projects'))
-//                    ->from('orders')
-//                    ->whereRaw('orders.user_id = users.id');
-//                })
-//                ->get();
+        //Users json
 
         $users = DB::table('users')
                 ->whereExists(function ($query) {
@@ -86,20 +80,31 @@ class ProjectController extends Controller {
                 })
                 ->select("users.name", "users.surname", "users.id")
                 ->get();
-               
                 
-        $customers_in_user = DB::table('users_projects')
+        $users_json = [];
+        
+        foreach ($users as $user) {
+            $customers_in_user = DB::table('users_projects')
                     ->join('projects', 'users_projects.project_id', '=', 'projects.id')
                     ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
-                    ->where('users_projects.user_id', 6)
+                    ->where('users_projects.user_id', $user->id)
                     ->where('projects.active', 1)
-                    ->select('customers.id AS customer_id', 'customers.name AS customer_name')
+                    ->select('customers.id AS customer_id')
                     ->get();
-             
-        return $customers_in_user;
+            
+            $users_json[] = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'customers_id' => $customers_in_user
+            ];
+        }
+                
+        
+        //Customers json
 
         $customers = DB::table('customers')->select('id', 'name')->get();
 
+        //Projects json
         $projects = DB::table('projects')
                 ->select('projects.id', 'projects.name', 'projects.customer_id', 'projects.active')
                 ->get();
@@ -122,13 +127,13 @@ class ProjectController extends Controller {
             ];
         }
 
-        $users_json = DB::table('users')
-                ->select('id', 'name', 'surname')
-                ->get();
+        $filter_jsons = [
+            'users_json' => $users,
+            'customers' => $customers,
+            'projects_json' => $projects_json,
+        ];
 
-
-
-        return view('projects.index', compact(['data', 'customers', 'projects_json', 'users_json']))
+        return view('projects.index', compact('data'))->with($filter_jsons)
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 
