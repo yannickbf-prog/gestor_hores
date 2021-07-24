@@ -98,7 +98,6 @@ class ProjectController extends Controller {
                 'customers_id' => $customers_in_user
             ];
         }
-                
         
         //Customers json
 
@@ -128,7 +127,7 @@ class ProjectController extends Controller {
         }
 
         $filter_jsons = [
-            'users_json' => $users,
+            'users_json' => $users_json,
             'customers' => $customers,
             'projects_json' => $projects_json,
         ];
