@@ -35,21 +35,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+        <div class="form-group col-xs-12 col-sm-6 col-md-3" id="userGroup">  
             <label for="filterUser">{{ __('message.user') }}:</label>
-<!--            <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ ($customer_to_edit == null) ? old('name') : old('name', $customer_to_edit->name) }}">-->
         </div>
         <div class="form-group col-xs-12 col-sm-6 col-md-3">  
             <label for="filterCustomer">{{ __('message.customer') }}:</label>
-<!--            <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ ($customer_to_edit == null) ? old('name') : old('name', $customer_to_edit->name) }}">-->
         </div>
         <div class="form-group col-xs-12 col-sm-6 col-md-3">  
             <label for="filterProject">{{ __('message.project') }}:</label>
-<!--            <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ ($customer_to_edit == null) ? old('name') : old('name', $customer_to_edit->name) }}">-->
         </div>
         <div class="form-group col-xs-12 col-sm-6 col-md-3">  
             <label for="filterState">{{ __('message.state') }}:</label>
-<!--            <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ ($customer_to_edit == null) ? old('name') : old('name', $customer_to_edit->name) }}">-->
         </div>
     </div>
     <div class="row">
@@ -408,6 +404,30 @@ $hours_left_count = 0;
 //                let usersInProject = project[0].users;
     }
 
+    function loadUsers() {
+        
+        let userSelectHtml = document.createElement("select");
+        //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+        userSelectHtml.setAttribute("id", "userSelect");
+
+        let option = document.createElement("option");
+        option.value = "%";
+        option.innerText = "{{__('message.all_m')}}";
+        userSelectHtml.appendChild(option);
+
+        for (user of users_json) {
+
+            let option = document.createElement("option");
+            option.value = user.id;
+            option.innerText = user.name+' '+user.surname;
+
+            userSelectHtml.appendChild(option);
+
+        }
+
+        
+        document.getElementById('userGroup').appendChild(userSelectHtml);
+    }
 
     var users_json = @json($users_json);
             var customers_json = @json($customers);
@@ -417,7 +437,7 @@ $hours_left_count = 0;
     console.log(projects_json);
 
 
-    loadProjectsOfCustomer();
+    loadUsers();
 
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>

@@ -95,6 +95,7 @@ class ProjectController extends Controller {
             $users_json[] = [
                 'id' => $user->id,
                 'name' => $user->name,
+                'surname' => $user->surname,
                 'customers_id' => $customers_in_user
             ];
         }
