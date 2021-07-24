@@ -380,6 +380,35 @@ $hours_left_count = 0;
                 
                 if(projectId == "%") {
                     
+//                    if (document.getElementById('projectContainer') != null) {
+//                        document.getElementById('projectContainer').remove();
+//                    }
+
+                    let formGroup = document.createElement("div");
+                    formGroup.setAttribute('class', 'form-group');
+                    formGroup.setAttribute('id', 'userContainer');
+
+                    let userSelectHtml = document.createElement("select");
+                    //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+                    userSelectHtml.setAttribute("id", "userSelect");
+
+                    let option = document.createElement("option");
+                    option.value = "%";
+                    option.innerText = "{{__('message.all_m')}}";
+                    userSelectHtml.appendChild(option);
+
+                    for (user of users_json) {
+
+                        let option = document.createElement("option");
+                        option.value = user.id;
+                        option.innerText = user.name;
+
+                        userSelectHtml.appendChild(option);
+
+                    }
+
+                    formGroup.appendChild(userSelectHtml);
+                    document.getElementById('projectContainer').after(formGroup);
                 }
                 else if (projectId == 'no_projects') {
                     
@@ -399,7 +428,9 @@ $hours_left_count = 0;
             }
 
 var projects_json = @json($projects_json);
+var users_json = @json($users_json);
     console.log(projects_json);
+    console.log(users_json);
     
     loadProjectsOfCustomer();
 

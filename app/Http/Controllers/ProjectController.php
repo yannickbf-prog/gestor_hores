@@ -67,6 +67,27 @@ class ProjectController extends Controller {
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
 
+        //Filter code
+
+//        $users = DB::table('users')
+//                ->whereIn('id', function($query) {
+//                    $query->select(DB::table('users_projects'))
+//                    ->from('orders')
+//                    ->whereRaw('orders.user_id = users.id');
+//                })
+//                ->get();
+
+        $users = DB::table('users')
+                ->whereExists(function ($query) {
+
+                    $query->select("users_projects.id")
+                    ->from('users_projects')
+                    ->whereRaw('users_projects.user_id = users.id');
+                })
+                ->get();
+                
+        return $users;
+
         $customers = DB::table('customers')->select('id', 'name')->get();
 
         $projects = DB::table('projects')
@@ -91,7 +112,13 @@ class ProjectController extends Controller {
             ];
         }
 
-        return view('projects.index', compact(['data', 'customers', 'projects_json']))
+        $users_json = DB::table('users')
+                ->select('id', 'name', 'surname')
+                ->get();
+
+
+
+        return view('projects.index', compact(['data', 'customers', 'projects_json', 'users_json']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 
