@@ -84,9 +84,19 @@ class ProjectController extends Controller {
                     ->from('users_projects')
                     ->whereRaw('users_projects.user_id = users.id');
                 })
+                ->select("users.name", "users.surname", "users.id")
                 ->get();
+               
                 
-        return $users;
+        $customers_in_user = DB::table('users_projects')
+                    ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+                    ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
+                    ->where('users_projects.user_id', 6)
+                    ->where('projects.active', 1)
+                    ->select('customers.id AS customer_id', 'customers.name AS customer_name')
+                    ->get();
+             
+        return $customers_in_user;
 
         $customers = DB::table('customers')->select('id', 'name')->get();
 
