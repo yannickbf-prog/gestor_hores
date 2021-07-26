@@ -1,4 +1,4 @@
-<?php
+'<?php
 
 return [
     'login' => 'Login',
@@ -186,5 +186,12 @@ return [
     'browse' => 'BROWSE',
     'new_logo' => 'New logo',
     'contact_person' => 'Contact person',
-    'tax_number' => 'Tax number'
+    'tax_number' => 'Tax number',
+    
+    'add_remove_users' => 'Add / remove users',
+    'to_project' => 'to project',
+    'working_in_project' => 'working in project',
+    'no_users_assigned_to_project' => 'No users assigned to project',
+    'assign' => 'Assign',
+    'to_a' => 'to'
 ];

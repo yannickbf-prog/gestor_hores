@@ -185,5 +185,12 @@ return [
     'browse' => 'EXAMINAR',
     'new_logo' => 'Nuevo logotipo',
     'contact_person' => 'Persona de contacto',
-    'tax_number' => 'NIF'
+    'tax_number' => 'NIF',
+    
+    'add_remove_users' => 'Agregar / eliminar usuarios',
+    'to_project' => 'al proyecto',
+    'working_in_project' => 'trabajando en el proyecto',
+    'no_users_assigned_to_project' => 'No hay usuarios asignados al proyecto',
+    'assign' => 'Asignar',
+    'to_a' => 'a'
 ];

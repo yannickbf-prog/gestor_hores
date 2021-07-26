@@ -52,32 +52,32 @@
 
             <div class="row">
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">  
                     <label for="newEditName">{{ __('message.name') }}:</label>
                     <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.name') }}" value="{{ ($customer_to_edit == null) ? old('name') : old('name', $customer_to_edit->name) }}">
                 </div>
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
                     <label for="newEditEmail">{{ __('message.email') }}:</label>
                     <input id="newEditEmail" type="text" name="email" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.email') }}" value="{{ ($customer_to_edit == null) ? old('email') : old('email', $customer_to_edit->email) }}">
                 </div>
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
                     <label for="newEditPhone">{{ __('message.phone') }}:</label>
                     <input id="newEditPhone" type="text" name="phone" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.phone') }}" value="{{ ($customer_to_edit == null) ? old('phone') : old('phone', $customer_to_edit->phone) }}">
                 </div>
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
                     <label for="newEditTaxNumber">{{__('message.tax_number')}}:</label>
                     <input id="newEditTaxNumber" type="text" name="tax_number" class="form-control" placeholder="{{__('message.enter')}} {{__('message.tax_number')}}" value="{{ ($customer_to_edit == null) ? old('tax_number') : old('tax_number', $customer_to_edit->tax_number) }}">
                 </div>
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
                     <label for="newEditContactPerson">{{ __('message.contact_person') }}:</label>
                     <input id="newEditContactPerson" type="text" name="contact_person" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contact_person') }}" value="{{ ($customer_to_edit == null) ? old('contact_person') : old('contact_person', $customer_to_edit->contact_person) }}">
                 </div>
 
-                <div class="form-group col-xs-12 col-sm-8 col-md-5">
+                <div class="form-group col-xs-12 col-sm-8 col-md-5 form_group_new_edit">
                     <label for="newEditDesc">{{__('message.description')}}:</label>
                     <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{ ($customer_to_edit == null) ? old('description') : old('description', $customer_to_edit->description) }}</textarea>
                 </div>
@@ -134,7 +134,7 @@
 
                 <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
 
-                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-51px, -186px, 0px); top: 0px; left: 0px;" x-placement="top">
                     <div class="arrow" style="left: 114px;"></div>
                     <div class="popover-body">
                         <div class="row">
