@@ -41,24 +41,11 @@
         <div class="form-group col-xs-12 col-sm-6 col-md-3" id="projectGroup">  
             <label for="filterProject">{{ __('message.project') }}:</label>
         </div>
-        <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+        <div class="form-group col-xs-12 col-sm-6 col-md-3" id="stateGroup">  
             <label for="filterState">{{ __('message.state') }}:</label>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('message.state') }}: </strong>
-                <select name="state" id="state">
-                    <option value="%" @if(session('project_state') == '%'){{'selected'}}@endif>{{ __('message.all_m') }}</option>
-                    <option value="1" @if(session('project_state') == "1"){{'selected'}}@endif>{{ __('message.active') }}</option>
-                    <option value="0" @if(session('project_state') == "0"){{'selected'}}@endif>{{ __('message.inactive') }}</option>
-
-                </select>
-            </div>
-        </div>
-    </div>
-
+    
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -495,6 +482,31 @@ $hours_left_count = 0;
             }
             i++;
         }
+        
+        let stateSelectHtml = document.createElement("select");
+        //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+        stateSelectHtml.setAttribute("id", "stateSelect");
+        
+        if(projectActiveExists && projectNotActiveExists){
+            let option3 = document.createElement("option");
+            option3.value = "%";
+            option3.innerText = "{{__('message.all_m')}}";
+            stateSelectHtml.appendChild(option3);
+        }
+        else if(projectActiveExists) {
+            let option3 = document.createElement("option");
+            option3.value = "active";
+            option3.innerText = "{{__('message.active')}}";
+            stateSelectHtml.appendChild(option3);
+        }
+        else if(projectNotActiveExists) {
+            let option3 = document.createElement("option");
+            option3.value = "inactive";
+            option3.innerText = "{{__('message.inactive')}}";
+            stateSelectHtml.appendChild(option3);
+        }
+        
+        document.getElementById('stateGroup').appendChild(stateSelectHtml);
     }
 
     var users_json = @json($users_json);
