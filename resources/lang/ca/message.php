@@ -190,8 +190,11 @@ return [
     
     'add_remove_users' => 'Afegir / eliminar usuaris',
     'to_project' => 'al projecte',
-    'working_in_project' => 'treballant al projecte',
+    'working_in_project' => 'treballant a',
     'no_users_assigned_to_project' => 'No hi ha usuaris assignats al projecte',
     'assign' => 'Assignar',
-    'to_a' => 'a'
+    'to_a' => 'a',
+    'no_users_available' => 'No hi ha usuaris disponibles',
+    'unseted' => 'desvinculat' ,
+    'seted' => 'vinculat'
 ];

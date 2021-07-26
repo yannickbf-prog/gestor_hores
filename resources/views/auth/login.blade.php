@@ -4,7 +4,7 @@
     @section('title', 'Login - Home')
 
     @section('nav_and_content')
-    <div class="row">
+    <div class="row login_container">
         <main class="col-12">
             <x-auth-card>
 

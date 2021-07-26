@@ -269,9 +269,11 @@ class ProjectController extends Controller {
                 ->where('users_projects.user_id', $request->user_id)
                 ->where('users_projects.project_id', $project_id)
                 ->delete();
+        
+        $user = DB::table('users')->select('name', 'surname')->where('id', $request->user_id)->first();
 
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
-                        ->with('success', __('message.user') . " " . $request->user_id . " " . __('message.unseted'));
+                        ->with('success', __('message.user') . " " . $user->name . " " . $user->surname . " " . __('message.unseted'));
     }
 
     public function addUser(Request $request, $project_id, $lang) {
@@ -284,7 +286,7 @@ class ProjectController extends Controller {
         ]);
 
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
-                        ->with('success', __('message.user') . " " . $request_explode[1] . " " . __('message.added'));
+                        ->with('success', __('message.user') . " " . $request_explode[1] . " " . __('message.seted'));
     }
 
 }

@@ -189,8 +189,11 @@ return [
     
     'add_remove_users' => 'Agregar / eliminar usuarios',
     'to_project' => 'al proyecto',
-    'working_in_project' => 'trabajando en el proyecto',
+    'working_in_project' => 'trabajando en',
     'no_users_assigned_to_project' => 'No hay usuarios asignados al proyecto',
     'assign' => 'Asignar',
-    'to_a' => 'a'
+    'to_a' => 'a',
+    'no_users_available' => 'No hay usuarios disponibles',
+    'unseted' => 'desvinculado',
+    'seted' => 'vinculado'
 ];

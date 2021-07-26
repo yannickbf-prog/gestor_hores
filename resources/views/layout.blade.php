@@ -65,9 +65,12 @@ if (Auth::check()) {
                     </div>
                     <div class="col-md-4 form-group">
                         @auth
-                        <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__("Logout")}}</a>
-                        </li>
+                        <ul>
+                            <li>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__("Logout")}}</a>
+                            </li>
+                        </ul>
+                        
                         @endauth
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf

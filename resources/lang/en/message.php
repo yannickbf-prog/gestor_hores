@@ -190,8 +190,12 @@ return [
     
     'add_remove_users' => 'Add / remove users',
     'to_project' => 'to project',
-    'working_in_project' => 'working in project',
+    'working_in_project' => 'working in',
     'no_users_assigned_to_project' => 'No users assigned to project',
     'assign' => 'Assign',
-    'to_a' => 'to'
+    'to_a' => 'to',
+    'no_users_available' => 'No users available',
+    'unseted' => 'unseted',
+    'seted' => 'seted'
+
 ];

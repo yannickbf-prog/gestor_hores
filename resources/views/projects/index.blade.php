@@ -35,13 +35,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-xs-12 col-sm-6 col-md-3" id="userGroup">  
-            <label for="filterUser">{{ __('message.user') }}:</label>
-        </div>
-        <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+        <div class="form-group col-xs-12 col-sm-6 col-md-3" id="customerGroup">  
             <label for="filterCustomer">{{ __('message.customer') }}:</label>
         </div>
-        <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+        <div class="form-group col-xs-12 col-sm-6 col-md-3" id="projectGroup">  
             <label for="filterProject">{{ __('message.project') }}:</label>
         </div>
         <div class="form-group col-xs-12 col-sm-6 col-md-3">  
@@ -245,188 +242,259 @@ $hours_left_count = 0;
 @section('js')
 <script>
 
-    function loadProjectsOfCustomer() {
+    /*
+     function loadProjectsOfCustomer() {
+     
+     let customerId = document.getElementById('customer').value;
+     if (customerId != "%") {
+     
+     let formGroup = document.createElement("div");
+     formGroup.setAttribute('class', 'form-group');
+     formGroup.setAttribute('id', 'projectContainer');
+     
+     let projects = $.grep(projects_json, function (e) {
+     return e.customer_id == customerId;
+     });
+     
+     let projectSelectHtml = document.createElement("select");
+     projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+     projectSelectHtml.setAttribute("id", "projectSelect");
+     
+     if (projects.length > 0) {
+     
+     let option = document.createElement("option");
+     option.value = "%";
+     option.innerText = "{{__('message.all_m')}}";
+     projectSelectHtml.appendChild(option);
+     
+     
+     for (project of projects) {
+     
+     let option = document.createElement("option");
+     option.value = project.id;
+     option.innerText = project.name;
+     
+     projectSelectHtml.appendChild(option);
+     
+     }
+     
+     formGroup.appendChild(projectSelectHtml);
+     
+     
+     if (document.getElementById('projectContainer') != null) {
+     document.getElementById('projectContainer').remove();
+     }
+     
+     
+     
+     document.getElementById('customerContainer').after(formGroup);
+     } else {
+     if (document.getElementById('projectContainer') != null) {
+     document.getElementById('projectContainer').remove();
+     }
+     
+     let formGroup = document.createElement("div");
+     formGroup.setAttribute('class', 'form-group');
+     formGroup.setAttribute('id', 'projectContainer');
+     
+     let projectSelectHtml = document.createElement("select");
+     projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+     projectSelectHtml.setAttribute("id", "projectSelect");
+     projectSelectHtml.disabled = true;
+     
+     let option = document.createElement("option");
+     option.value = "no_projects";
+     option.selected = true;
+     option.innerText = "{{__('message.no_projects_available')}}";
+     
+     projectSelectHtml.appendChild(option);
+     
+     formGroup.appendChild(projectSelectHtml);
+     document.getElementById('customerContainer').after(formGroup);
+     }
+     
+     } else {
+     
+     if (document.getElementById('projectContainer') != null) {
+     document.getElementById('projectContainer').remove();
+     }
+     
+     let formGroup = document.createElement("div");
+     formGroup.setAttribute('class', 'form-group');
+     formGroup.setAttribute('id', 'projectContainer');
+     
+     let projectSelectHtml = document.createElement("select");
+     projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+     projectSelectHtml.setAttribute("id", "projectSelect");
+     
+     let option = document.createElement("option");
+     option.value = "%";
+     option.innerText = "{{__('message.all_m')}}";
+     projectSelectHtml.appendChild(option);
+     
+     for (project of projects_json) {
+     
+     let option = document.createElement("option");
+     option.value = project.id;
+     option.innerText = project.name;
+     
+     projectSelectHtml.appendChild(option);
+     
+     }
+     
+     formGroup.appendChild(projectSelectHtml);
+     document.getElementById('customerContainer').after(formGroup);
+     }
+     
+     loadUsersOfProject()
+     }
+     
+     function loadUsersOfProject() {
+     let projectId = document.getElementById('projectSelect').value;
+     
+     let project = $.grep(projects_json, function (e) {
+     return e.id == projectId;
+     });
+     
+     if (projectId == "%") {
+     
+     //                    if (document.getElementById('projectContainer') != null) {
+     //                        document.getElementById('projectContainer').remove();
+     //                    }
+     
+     let formGroup = document.createElement("div");
+     formGroup.setAttribute('class', 'form-group');
+     formGroup.setAttribute('id', 'userContainer');
+     
+     let userSelectHtml = document.createElement("select");
+     //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+     userSelectHtml.setAttribute("id", "userSelect");
+     
+     let option = document.createElement("option");
+     option.value = "%";
+     option.innerText = "{{__('message.all_m')}}";
+     userSelectHtml.appendChild(option);
+     
+     for (user of users_json) {
+     
+     let option = document.createElement("option");
+     option.value = user.id;
+     option.innerText = user.name;
+     
+     userSelectHtml.appendChild(option);
+     
+     }
+     
+     formGroup.appendChild(userSelectHtml);
+     document.getElementById('projectContainer').after(formGroup);
+     } else if (projectId == 'no_projects') {
+     
+     } else if (project.length > 0) {
+     if (project[0].users.length > 0) {
+     
+     } else {
+     
+     }
+     }
+     
+     console.log(project)
+     
+     //                let usersInProject = project[0].users;
+     }
+     
+     function loadUsers() {
+     
+     let userSelectHtml = document.createElement("select");
+     //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+     userSelectHtml.setAttribute("id", "userSelect");
+     
+     let option = document.createElement("option");
+     option.value = "%";
+     option.innerText = "{{__('message.all_m')}}";
+     userSelectHtml.appendChild(option);
+     
+     for (user of users_json) {
+     
+     let option = document.createElement("option");
+     option.value = user.id;
+     option.innerText = user.name+' '+user.surname;
+     
+     userSelectHtml.appendChild(option);
+     
+     }
+     
+     
+     document.getElementById('userGroup').appendChild(userSelectHtml);
+     }
+     
+     
+     */
+    function firstLoad() {
 
-        let customerId = document.getElementById('customer').value;
-        if (customerId != "%") {
-
-            let formGroup = document.createElement("div");
-            formGroup.setAttribute('class', 'form-group');
-            formGroup.setAttribute('id', 'projectContainer');
-
-            let projects = $.grep(projects_json, function (e) {
-                return e.customer_id == customerId;
-            });
-
-            let projectSelectHtml = document.createElement("select");
-            projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
-            projectSelectHtml.setAttribute("id", "projectSelect");
-
-            if (projects.length > 0) {
-
-                let option = document.createElement("option");
-                option.value = "%";
-                option.innerText = "{{__('message.all_m')}}";
-                projectSelectHtml.appendChild(option);
-
-
-                for (project of projects) {
-
-                    let option = document.createElement("option");
-                    option.value = project.id;
-                    option.innerText = project.name;
-
-                    projectSelectHtml.appendChild(option);
-
-                }
-
-                formGroup.appendChild(projectSelectHtml);
-
-
-                if (document.getElementById('projectContainer') != null) {
-                    document.getElementById('projectContainer').remove();
-                }
-
-
-
-                document.getElementById('customerContainer').after(formGroup);
-            } else {
-                if (document.getElementById('projectContainer') != null) {
-                    document.getElementById('projectContainer').remove();
-                }
-
-                let formGroup = document.createElement("div");
-                formGroup.setAttribute('class', 'form-group');
-                formGroup.setAttribute('id', 'projectContainer');
-
-                let projectSelectHtml = document.createElement("select");
-                projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
-                projectSelectHtml.setAttribute("id", "projectSelect");
-                projectSelectHtml.disabled = true;
-
-                let option = document.createElement("option");
-                option.value = "no_projects";
-                option.selected = true;
-                option.innerText = "{{__('message.no_projects_available')}}";
-
-                projectSelectHtml.appendChild(option);
-
-                formGroup.appendChild(projectSelectHtml);
-                document.getElementById('customerContainer').after(formGroup);
-            }
-
-        } else {
-
-            if (document.getElementById('projectContainer') != null) {
-                document.getElementById('projectContainer').remove();
-            }
-
-            let formGroup = document.createElement("div");
-            formGroup.setAttribute('class', 'form-group');
-            formGroup.setAttribute('id', 'projectContainer');
-
-            let projectSelectHtml = document.createElement("select");
-            projectSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
-            projectSelectHtml.setAttribute("id", "projectSelect");
-
-            let option = document.createElement("option");
-            option.value = "%";
-            option.innerText = "{{__('message.all_m')}}";
-            projectSelectHtml.appendChild(option);
-
-            for (project of projects_json) {
-
-                let option = document.createElement("option");
-                option.value = project.id;
-                option.innerText = project.name;
-
-                projectSelectHtml.appendChild(option);
-
-            }
-
-            formGroup.appendChild(projectSelectHtml);
-            document.getElementById('customerContainer').after(formGroup);
-        }
-
-        loadUsersOfProject()
-    }
-
-    function loadUsersOfProject() {
-        let projectId = document.getElementById('projectSelect').value;
-
-        let project = $.grep(projects_json, function (e) {
-            return e.id == projectId;
-        });
-
-        if (projectId == "%") {
-
-//                    if (document.getElementById('projectContainer') != null) {
-//                        document.getElementById('projectContainer').remove();
-//                    }
-
-            let formGroup = document.createElement("div");
-            formGroup.setAttribute('class', 'form-group');
-            formGroup.setAttribute('id', 'userContainer');
-
-            let userSelectHtml = document.createElement("select");
-            //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
-            userSelectHtml.setAttribute("id", "userSelect");
-
-            let option = document.createElement("option");
-            option.value = "%";
-            option.innerText = "{{__('message.all_m')}}";
-            userSelectHtml.appendChild(option);
-
-            for (user of users_json) {
-
-                let option = document.createElement("option");
-                option.value = user.id;
-                option.innerText = user.name;
-
-                userSelectHtml.appendChild(option);
-
-            }
-
-            formGroup.appendChild(userSelectHtml);
-            document.getElementById('projectContainer').after(formGroup);
-        } else if (projectId == 'no_projects') {
-
-        } else if (project.length > 0) {
-            if (project[0].users.length > 0) {
-
-            } else {
-
-            }
-        }
-
-        console.log(project)
-
-//                let usersInProject = project[0].users;
-    }
-
-    function loadUsers() {
-        
-        let userSelectHtml = document.createElement("select");
+        let customerSelectHtml = document.createElement("select");
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
-        userSelectHtml.setAttribute("id", "userSelect");
+        customerSelectHtml.setAttribute("id", "customerSelect");
 
-        let option = document.createElement("option");
-        option.value = "%";
-        option.innerText = "{{__('message.all_m')}}";
-        userSelectHtml.appendChild(option);
+        if(customers_json.length > 1){
+            let option = document.createElement("option");
+            option.value = "%";
+            option.innerText = "{{__('message.all_m')}}";
+            customerSelectHtml.appendChild(option);
+        }
 
-        for (user of users_json) {
+        for (customer of customers_json) {
 
             let option = document.createElement("option");
-            option.value = user.id;
-            option.innerText = user.name+' '+user.surname;
+            option.value = customer.id;
+            option.innerText = customer.name;
 
-            userSelectHtml.appendChild(option);
+            customerSelectHtml.appendChild(option);
 
         }
 
+        document.getElementById('customerGroup').appendChild(customerSelectHtml);
         
-        document.getElementById('userGroup').appendChild(userSelectHtml);
+
+        let projectSelectHtml = document.createElement("select");
+        //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+        projectSelectHtml.setAttribute("id", "projectSelect");
+
+        if(projects_json.length > 1){
+            let option2 = document.createElement("option");
+            option2.value = "%";
+            option2.innerText = "{{__('message.all_m')}}";
+            projectSelectHtml.appendChild(option2);
+        }
+
+        for (project of projects_json) {
+
+            let option2 = document.createElement("option");
+            option2.value = project.id;
+            option2.innerText = project.name;
+
+            projectSelectHtml.appendChild(option2);
+
+        }
+
+        document.getElementById('projectGroup').appendChild(projectSelectHtml);
+        
+        
+        let projectActiveExists = false;
+        let projectNotActiveExists = false;
+        let continueSearching = true;
+        let i = 0;
+        let y = projects_json.length;
+        while(continueSearching) {
+            if(projects_json[i].active == 1)
+                projectActiveExists = true;
+            else {
+                projectNotActiveExists = true;
+            }
+            if((projectActiveExists && projectNotActiveExists) || (i == y-1)) {
+                continueSearching = false;
+            }
+            i++;
+        }
     }
 
     var users_json = @json($users_json);
@@ -436,8 +504,7 @@ $hours_left_count = 0;
     console.log(customers_json);
     console.log(projects_json);
 
-
-    loadUsers();
+    firstLoad();
 
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
