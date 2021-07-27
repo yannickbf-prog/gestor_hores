@@ -416,6 +416,50 @@ $hours_left_count = 0;
      
      
      */
+    function checkAllProjectsStates() {
+        
+            let projectActiveExists = false;
+            let projectNotActiveExists = false;
+            let continueSearching = true;
+            let i = 0;
+            let y = projects_json.length;
+            while (continueSearching) {
+                if (projects_json[i].active == 1)
+                    projectActiveExists = true;
+                else {
+                    projectNotActiveExists = true;
+                }
+                if ((projectActiveExists && projectNotActiveExists) || (i == y - 1)) {
+                    continueSearching = false;
+                }
+                i++;
+            }
+
+            let stateSelectHtml = document.createElement("select");
+            //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+            stateSelectHtml.setAttribute("id", "stateSelect");
+
+            if (projectActiveExists && projectNotActiveExists) {
+                let option3 = document.createElement("option");
+                option3.value = "%";
+                option3.innerText = "{{__('message.all_m')}}";
+                stateSelectHtml.appendChild(option3);
+            }
+            if (projectActiveExists) {
+                let option3 = document.createElement("option");
+                option3.value = "active";
+                option3.innerText = "{{__('message.active')}}";
+                stateSelectHtml.appendChild(option3);
+            }
+            if (projectNotActiveExists) {
+                let option3 = document.createElement("option");
+                option3.value = "inactive";
+                option3.innerText = "{{__('message.inactive')}}";
+                stateSelectHtml.appendChild(option3);
+            }
+
+            document.getElementById('stateGroup').appendChild(stateSelectHtml);
+    }
 
     function changeProject() {
 
@@ -449,6 +493,10 @@ $hours_left_count = 0;
             document.getElementById('customerSelect').remove();
             document.getElementById('customerGroup').appendChild(customerSelectHtml);
 
+            //Active select
+            checkAllProjectsStates();
+            document.getElementById('stateSelect').remove();
+
         } else {
             let customerSelectHtml = document.createElement("select");
             //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
@@ -460,31 +508,30 @@ $hours_left_count = 0;
             });
             option.innerText = customerName[0].name;
             customerSelectHtml.appendChild(option);
-            
+
             document.getElementById('customerSelect').remove();
             document.getElementById('customerGroup').appendChild(customerSelectHtml);
-            
-            
-            
+
+
+
             //Active select
             let stateSelectHtml = document.createElement("select");
             stateSelectHtml.setAttribute("id", "stateSelect");
-            
-            let isActive = project[0].active == 1 ? true : false;          
+
+            let isActive = project[0].active == 1 ? true : false;
             console.log(isActive)
-            if(isActive) {
+            if (isActive) {
                 let option = document.createElement("option");
                 option.value = "active";
                 option.innerText = "{{__('message.active')}}";
                 stateSelectHtml.appendChild(option);
-            }
-            else {
+            } else {
                 let option = document.createElement("option");
                 option.value = "inactive";
                 option.innerText = "{{__('message.inactive')}}";
                 stateSelectHtml.appendChild(option);
             }
-            
+
             document.getElementById('stateSelect').remove();
             document.getElementById('stateGroup').appendChild(stateSelectHtml);
         }
@@ -541,47 +588,7 @@ $hours_left_count = 0;
         document.getElementById('projectGroup').appendChild(projectSelectHtml);
 
 
-        let projectActiveExists = false;
-        let projectNotActiveExists = false;
-        let continueSearching = true;
-        let i = 0;
-        let y = projects_json.length;
-        while (continueSearching) {
-            if (projects_json[i].active == 1)
-                projectActiveExists = true;
-            else {
-                projectNotActiveExists = true;
-            }
-            if ((projectActiveExists && projectNotActiveExists) || (i == y - 1)) {
-                continueSearching = false;
-            }
-            i++;
-        }
-
-        let stateSelectHtml = document.createElement("select");
-        //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
-        stateSelectHtml.setAttribute("id", "stateSelect");
-
-        if (projectActiveExists && projectNotActiveExists) {
-            let option3 = document.createElement("option");
-            option3.value = "%";
-            option3.innerText = "{{__('message.all_m')}}";
-            stateSelectHtml.appendChild(option3);
-        } 
-        if (projectActiveExists) {
-            let option3 = document.createElement("option");
-            option3.value = "active";
-            option3.innerText = "{{__('message.active')}}";
-            stateSelectHtml.appendChild(option3);
-        } 
-        if (projectNotActiveExists) {
-            let option3 = document.createElement("option");
-            option3.value = "inactive";
-            option3.innerText = "{{__('message.inactive')}}";
-            stateSelectHtml.appendChild(option3);
-        }
-
-        document.getElementById('stateGroup').appendChild(stateSelectHtml);
+        checkAllProjectsStates()
     }
 
 
