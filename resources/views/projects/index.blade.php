@@ -416,6 +416,22 @@ $hours_left_count = 0;
      
      
      */
+    
+    function changeProject() {
+        
+        if(document.getElementById('customerSelect').value == '%') {
+            
+            let projectId = document.getElementById('projectSelect');
+            
+            let customer = $.grep(projects_json, function(e){ return e.id == projectId; });
+            
+            console.log(customer)
+        }
+        else {
+            
+        }
+    }
+    
     function firstLoad() {
 
         let customerSelectHtml = document.createElement("select");
@@ -445,6 +461,7 @@ $hours_left_count = 0;
         let projectSelectHtml = document.createElement("select");
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
         projectSelectHtml.setAttribute("id", "projectSelect");
+        projectSelectHtml.setAttribute("onchange", "changeProject()");
 
         if(projects_json.length > 1){
             let option2 = document.createElement("option");
@@ -509,15 +526,15 @@ $hours_left_count = 0;
         document.getElementById('stateGroup').appendChild(stateSelectHtml);
     }
 
-    var users_json = @json($users_json);
-            var customers_json = @json($customers);
-            var projects_json = @json($projects_json);
-    console.log(users_json);
+
+    var customers_json = @json($customers);
+    var projects_json = @json($projects_json);
+
     console.log(customers_json);
     console.log(projects_json);
 
     firstLoad();
-
+    
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
 @endsection

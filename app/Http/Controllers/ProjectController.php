@@ -70,7 +70,7 @@ class ProjectController extends Controller {
         //Filter code
 
         //Users json
-
+        /*
         $users = DB::table('users')
                 ->whereExists(function ($query) {
 
@@ -99,7 +99,7 @@ class ProjectController extends Controller {
                 'customers_id' => $customers_in_user
             ];
         }
-        
+        */
         //Customers json
 
         $customers = DB::table('customers')->select('id', 'name')->get();
@@ -128,7 +128,7 @@ class ProjectController extends Controller {
         }
 
         $filter_jsons = [
-            'users_json' => $users_json,
+            //'users_json' => $users_json,
             'customers' => $customers,
             'projects_json' => $projects_json,
         ];
