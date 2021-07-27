@@ -460,6 +460,46 @@ $hours_left_count = 0;
 
             document.getElementById('stateGroup').appendChild(stateSelectHtml);
     }
+    
+    function changeCustomer() {
+        
+        let customerId = document.getElementById('customerSelect').value;
+        let projects = $.grep(projects_json, function (e) {
+            return e.customer_id == customerId;
+        });
+        
+        let projectSelectHtml = document.createElement("select");
+        //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+        projectSelectHtml.setAttribute("id", "projectSelect");
+        projectSelectHtml.setAttribute("onchange", "changeProject()");
+
+        if (projects.length > 1) {
+            let option = document.createElement("option");
+            option.value = "%";
+            option.innerText = "{{__('message.all_m')}}";
+            projectSelectHtml.appendChild(option);
+        }
+        
+//        if (projects.length == 0) {
+//            let option = document.createElement("option");
+//            option.value = "%";
+//            option.innerText = "{{__('message.all_m')}}";
+//            projectSelectHtml.appendChild(option);
+//        }
+
+        for (project of projects) {
+
+            let option = document.createElement("option");
+            option.value = project.id;
+            option.innerText = project.name;
+
+            projectSelectHtml.appendChild(option);
+
+        }
+
+        document.getElementById('projectSelect').remove();
+        document.getElementById('projectGroup').appendChild(projectSelectHtml);
+    }
 
     function changeProject() {
 
@@ -501,6 +541,7 @@ $hours_left_count = 0;
             let customerSelectHtml = document.createElement("select");
             //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
             customerSelectHtml.setAttribute("id", "customerSelect");
+            customerSelectHtml.setAttribute("onchange", "changeCustomer()");
             let option = document.createElement("option");
             option.value = project[0].customer_id;
             let customerName = $.grep(customers_json, function (e) {
@@ -519,7 +560,7 @@ $hours_left_count = 0;
             stateSelectHtml.setAttribute("id", "stateSelect");
 
             let isActive = project[0].active == 1 ? true : false;
-            console.log(isActive)
+            
             if (isActive) {
                 let option = document.createElement("option");
                 option.value = "active";
@@ -542,6 +583,7 @@ $hours_left_count = 0;
         let customerSelectHtml = document.createElement("select");
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
         customerSelectHtml.setAttribute("id", "customerSelect");
+        customerSelectHtml.setAttribute("onchange", "changeCustomer()");
 
         if (customers_json.length > 1) {
             let option = document.createElement("option");
@@ -549,6 +591,7 @@ $hours_left_count = 0;
             option.innerText = "{{__('message.all_m')}}";
             customerSelectHtml.appendChild(option);
         }
+        
 
         for (customer of customers_json) {
 

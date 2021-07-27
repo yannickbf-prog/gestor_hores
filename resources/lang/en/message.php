@@ -196,6 +196,8 @@ return [
     'to_a' => 'to',
     'no_users_available' => 'No users available',
     'unseted' => 'unseted',
-    'seted' => 'seted'
+    'seted' => 'seted',
+    'no_customers' => 'No customers available',
+    'no_projects' => 'No projects available'
 
 ];

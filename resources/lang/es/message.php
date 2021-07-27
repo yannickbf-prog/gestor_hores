@@ -195,5 +195,7 @@ return [
     'to_a' => 'a',
     'no_users_available' => 'No hay usuarios disponibles',
     'unseted' => 'desvinculado',
-    'seted' => 'vinculado'
+    'seted' => 'vinculado',
+    'no_customers' => 'No hay clientes disponibles',
+    'no_projects' => 'No hi han projectes disponibles'
 ];
