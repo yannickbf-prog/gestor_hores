@@ -543,12 +543,14 @@ $hours_left_count = 0;
             option3.value = "%";
             option3.innerText = "{{__('message.all_m')}}";
             stateSelectHtml.appendChild(option3);
-        } else if (projectActiveExists) {
+        } 
+        if (projectActiveExists) {
             let option3 = document.createElement("option");
             option3.value = "active";
             option3.innerText = "{{__('message.active')}}";
             stateSelectHtml.appendChild(option3);
-        } else if (projectNotActiveExists) {
+        } 
+        if (projectNotActiveExists) {
             let option3 = document.createElement("option");
             option3.value = "inactive";
             option3.innerText = "{{__('message.inactive')}}";
