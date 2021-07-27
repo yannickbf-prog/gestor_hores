@@ -45,7 +45,7 @@
             <label for="filterState">{{ __('message.state') }}:</label>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -416,29 +416,63 @@ $hours_left_count = 0;
      
      
      */
-    
+
     function changeProject() {
-        
-        if(document.getElementById('customerSelect').value == '%') {
+
+        let projectId = document.getElementById('projectSelect').value;
+        let project = $.grep(projects_json, function (e) {
+            return e.id == projectId;
+        });
+
+        if (project.length == 0) {
+            let customerSelectHtml = document.createElement("select");
+            //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+            customerSelectHtml.setAttribute("id", "customerSelect");
+
+            if (customers_json.length > 1) {
+                let option = document.createElement("option");
+                option.value = "%";
+                option.innerText = "{{__('message.all_m')}}";
+                customerSelectHtml.appendChild(option);
+            }
+
+            for (customer of customers_json) {
+
+                let option = document.createElement("option");
+                option.value = customer.id;
+                option.innerText = customer.name;
+
+                customerSelectHtml.appendChild(option);
+
+            }
+
+            document.getElementById('customerSelect').remove();
+            document.getElementById('customerGroup').appendChild(customerSelectHtml);
+
+        } else {
+            let customerSelectHtml = document.createElement("select");
+            //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+            customerSelectHtml.setAttribute("id", "customerSelect");
+            let option = document.createElement("option");
+            option.value = project[0].customer_id;
+            let customerName = $.grep(customers_json, function (e) {
+                return e.id == project[0].customer_id;
+            });
+            option.innerText = customerName[0].name;
+            customerSelectHtml.appendChild(option);
             
-            let projectId = document.getElementById('projectSelect');
-            
-            let customer = $.grep(projects_json, function(e){ return e.id == projectId; });
-            
-            console.log(customer)
-        }
-        else {
-            
+            document.getElementById('customerSelect').remove();
+            document.getElementById('customerGroup').appendChild(customerSelectHtml);
         }
     }
-    
+
     function firstLoad() {
 
         let customerSelectHtml = document.createElement("select");
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
         customerSelectHtml.setAttribute("id", "customerSelect");
 
-        if(customers_json.length > 1){
+        if (customers_json.length > 1) {
             let option = document.createElement("option");
             option.value = "%";
             option.innerText = "{{__('message.all_m')}}";
@@ -456,14 +490,14 @@ $hours_left_count = 0;
         }
 
         document.getElementById('customerGroup').appendChild(customerSelectHtml);
-        
+
 
         let projectSelectHtml = document.createElement("select");
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
         projectSelectHtml.setAttribute("id", "projectSelect");
         projectSelectHtml.setAttribute("onchange", "changeProject()");
 
-        if(projects_json.length > 1){
+        if (projects_json.length > 1) {
             let option2 = document.createElement("option");
             option2.value = "%";
             option2.innerText = "{{__('message.all_m')}}";
@@ -481,60 +515,58 @@ $hours_left_count = 0;
         }
 
         document.getElementById('projectGroup').appendChild(projectSelectHtml);
-        
-        
+
+
         let projectActiveExists = false;
         let projectNotActiveExists = false;
         let continueSearching = true;
         let i = 0;
         let y = projects_json.length;
-        while(continueSearching) {
-            if(projects_json[i].active == 1)
+        while (continueSearching) {
+            if (projects_json[i].active == 1)
                 projectActiveExists = true;
             else {
                 projectNotActiveExists = true;
             }
-            if((projectActiveExists && projectNotActiveExists) || (i == y-1)) {
+            if ((projectActiveExists && projectNotActiveExists) || (i == y - 1)) {
                 continueSearching = false;
             }
             i++;
         }
-        
+
         let stateSelectHtml = document.createElement("select");
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
         stateSelectHtml.setAttribute("id", "stateSelect");
-        
-        if(projectActiveExists && projectNotActiveExists){
+
+        if (projectActiveExists && projectNotActiveExists) {
             let option3 = document.createElement("option");
             option3.value = "%";
             option3.innerText = "{{__('message.all_m')}}";
             stateSelectHtml.appendChild(option3);
-        }
-        else if(projectActiveExists) {
+        } else if (projectActiveExists) {
             let option3 = document.createElement("option");
             option3.value = "active";
             option3.innerText = "{{__('message.active')}}";
             stateSelectHtml.appendChild(option3);
-        }
-        else if(projectNotActiveExists) {
+        } else if (projectNotActiveExists) {
             let option3 = document.createElement("option");
             option3.value = "inactive";
             option3.innerText = "{{__('message.inactive')}}";
             stateSelectHtml.appendChild(option3);
         }
-        
+
         document.getElementById('stateGroup').appendChild(stateSelectHtml);
     }
 
 
     var customers_json = @json($customers);
-    var projects_json = @json($projects_json);
+            var projects_json = @json($projects_json);
 
     console.log(customers_json);
     console.log(projects_json);
 
     firstLoad();
-    
+
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
 @endsection
