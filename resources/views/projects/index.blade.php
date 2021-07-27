@@ -592,6 +592,13 @@ $hours_left_count = 0;
             customerSelectHtml.appendChild(option);
         }
         
+        if (customers_json.length == 0) {
+            let option = document.createElement("option");
+            option.value = "no_active_available";
+            option.innerText = "{{__('message.no_customers')}}";
+            customerSelectHtml.disabled = true;
+            customerSelectHtml.appendChild(option);
+        }
 
         for (customer of customers_json) {
 
@@ -617,6 +624,14 @@ $hours_left_count = 0;
             option2.innerText = "{{__('message.all_m')}}";
             projectSelectHtml.appendChild(option2);
         }
+        
+        if (projects_json.length == 0) {
+            let option = document.createElement("option");
+            option.value = "no_projects";
+            option.innerText = "{{__('message.no_projects')}}";
+            projectSelectHtml.disabled = true;
+            projectSelectHtml.appendChild(option);
+        }
 
         for (project of projects_json) {
 
@@ -630,8 +645,10 @@ $hours_left_count = 0;
 
         document.getElementById('projectGroup').appendChild(projectSelectHtml);
 
-
-        checkAllProjectsStates()
+        if (projects_json.length != 0) {
+            checkAllProjectsStates();
+        }
+        
     }
 
 
