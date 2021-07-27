@@ -463,6 +463,30 @@ $hours_left_count = 0;
             
             document.getElementById('customerSelect').remove();
             document.getElementById('customerGroup').appendChild(customerSelectHtml);
+            
+            
+            
+            //Active select
+            let stateSelectHtml = document.createElement("select");
+            stateSelectHtml.setAttribute("id", "stateSelect");
+            
+            let isActive = project[0].active == 1 ? true : false;          
+            console.log(isActive)
+            if(isActive) {
+                let option = document.createElement("option");
+                option.value = "active";
+                option.innerText = "{{__('message.active')}}";
+                stateSelectHtml.appendChild(option);
+            }
+            else {
+                let option = document.createElement("option");
+                option.value = "inactive";
+                option.innerText = "{{__('message.inactive')}}";
+                stateSelectHtml.appendChild(option);
+            }
+            
+            document.getElementById('stateSelect').remove();
+            document.getElementById('stateGroup').appendChild(stateSelectHtml);
         }
     }
 
