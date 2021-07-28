@@ -480,12 +480,18 @@ $hours_left_count = 0;
             projectSelectHtml.appendChild(option);
         }
         
-//        if (projects.length == 0) {
-//            let option = document.createElement("option");
-//            option.value = "%";
-//            option.innerText = "{{__('message.all_m')}}";
-//            projectSelectHtml.appendChild(option);
-//        }
+        if (projects.length == 0 && customerId != "%") {
+            let option = document.createElement("option");
+            option.value = "no_projects_available";
+            option.innerText = "{{__('message.no_projects')}}";
+            projectSelectHtml.disabled = true;
+            projectSelectHtml.appendChild(option);
+            document.getElementById('stateGroup').remove();
+        }
+        
+        if (projects.length == 0 && customerId == "%") {
+            projects = projects_json;
+        }
 
         for (project of projects) {
 
@@ -594,7 +600,7 @@ $hours_left_count = 0;
         
         if (customers_json.length == 0) {
             let option = document.createElement("option");
-            option.value = "no_active_available";
+            option.value = "no_customers_available";
             option.innerText = "{{__('message.no_customers')}}";
             customerSelectHtml.disabled = true;
             customerSelectHtml.appendChild(option);
