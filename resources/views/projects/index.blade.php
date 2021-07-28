@@ -486,11 +486,20 @@ $hours_left_count = 0;
             option.innerText = "{{__('message.no_projects')}}";
             projectSelectHtml.disabled = true;
             projectSelectHtml.appendChild(option);
-            document.getElementById('stateGroup').remove();
+            document.getElementById('stateSelect').remove();
         }
         
         if (projects.length == 0 && customerId == "%") {
             projects = projects_json;
+           
+                let option = document.createElement("option");
+                option.value = "%";
+                option.innerText = "{{__('message.all_m')}}";
+                projectSelectHtml.appendChild(option);
+           
+           
+            
+            checkAllProjectsStates()
         }
 
         for (project of projects) {
