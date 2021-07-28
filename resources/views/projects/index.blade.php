@@ -566,7 +566,7 @@ $hours_left_count = 0;
             //customer un - projectes tots
             let newProject = document.getElementById('projectSelect').value;
             if((!isNaN(parseInt(customerId))) && newProject == "%") {
-                alert("hello")
+                console.log(projects)
             }
         }
         
