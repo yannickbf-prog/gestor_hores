@@ -486,7 +486,19 @@ $hours_left_count = 0;
             option.innerText = "{{__('message.no_projects')}}";
             projectSelectHtml.disabled = true;
             projectSelectHtml.appendChild(option);
+            
+            
+             
             document.getElementById('stateSelect').remove();
+            let stateSelectHtml = document.createElement("select");
+            stateSelectHtml.setAttribute("id", "stateSelect");
+            let option2 = document.createElement("option");
+            option2.value = "no_state";
+            option2.innerText = "{{__('message.no_state')}}";
+            stateSelectHtml.disabled = true;
+            stateSelectHtml.appendChild(option2);
+           
+            document.getElementById('stateGroup').appendChild(stateSelectHtml);
         }
         
         if (projects.length == 0 && customerId == "%") {
@@ -497,7 +509,9 @@ $hours_left_count = 0;
                 option.innerText = "{{__('message.all_m')}}";
                 projectSelectHtml.appendChild(option);
            
-           
+           //aqui
+               document.getElementById('stateSelect').remove();
+          
             
             checkAllProjectsStates()
         }
@@ -527,6 +541,7 @@ $hours_left_count = 0;
             let customerSelectHtml = document.createElement("select");
             //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
             customerSelectHtml.setAttribute("id", "customerSelect");
+            customerSelectHtml.setAttribute("onchange", "changeCustomer()");
 
             if (customers_json.length > 1) {
                 let option = document.createElement("option");
@@ -590,6 +605,8 @@ $hours_left_count = 0;
 
             document.getElementById('stateSelect').remove();
             document.getElementById('stateGroup').appendChild(stateSelectHtml);
+            
+           
         }
     }
 
