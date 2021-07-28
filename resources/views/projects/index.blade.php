@@ -536,7 +536,35 @@ $hours_left_count = 0;
         let project = $.grep(projects_json, function (e) {
             return e.id == projectId;
         });
-
+        
+//        let customerId = document.getElementById('customerSelect').value;
+//        if(projectId == "%" && customerId != "%") {
+//            
+//            let customer = $.grep(customers_json, function (e) {
+//                return e.id == customerId;
+//            });
+//            
+//            let customerSelectHtml = document.createElement("select");
+//            //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+//            customerSelectHtml.setAttribute("id", "customerSelect");
+//            customerSelectHtml.setAttribute("onchange", "changeCustomer()");
+//            
+//            let option = document.createElement("option");
+//            option.value = "%";
+//            option.innerText = "{{__('message.all_m')}}";
+//            customerSelectHtml.appendChild(option);
+//            
+//            let option2 = document.createElement("option");
+//            option2.value = customer[0].customer_id;
+//            option2.innerText = customer[0].name;
+//            customerSelectHtml.appendChild(option2);
+//
+//            document.getElementById('customerSelect').remove();
+//            document.getElementById('customerGroup').appendChild(customerSelectHtml);
+//            
+//        }
+//
+//        else if...
         if (project.length == 0) {
             let customerSelectHtml = document.createElement("select");
             //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
@@ -606,6 +634,7 @@ $hours_left_count = 0;
             document.getElementById('stateSelect').remove();
             document.getElementById('stateGroup').appendChild(stateSelectHtml);
             
+           
            
         }
     }
