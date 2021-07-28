@@ -515,6 +515,8 @@ $hours_left_count = 0;
             
             checkAllProjectsStates()
         }
+        
+        
 
         for (project of projects) {
 
@@ -528,6 +530,45 @@ $hours_left_count = 0;
 
         document.getElementById('projectSelect').remove();
         document.getElementById('projectGroup').appendChild(projectSelectHtml);
+        
+        
+        let newProjectIsNaN = parseInt(document.getElementById('projectSelect').value);
+        
+        if(!isNaN(newProjectIsNaN)) {
+            //Active select
+            let stateSelectHtml = document.createElement("select");
+            stateSelectHtml.setAttribute("id", "stateSelect");
+            
+            let project = $.grep(projects_json, function (e) {
+                return e.id == newProjectIsNaN;
+            });
+
+            let isActive = project[0].active == 1 ? true : false;
+            
+            if (isActive) {
+                let option = document.createElement("option");
+                option.value = "active";
+                option.innerText = "{{__('message.active')}}";
+                stateSelectHtml.appendChild(option);
+            } else {
+                let option = document.createElement("option");
+                option.value = "inactive";
+                option.innerText = "{{__('message.inactive')}}";
+                stateSelectHtml.appendChild(option);
+            }
+
+            document.getElementById('stateSelect').remove();
+            document.getElementById('stateGroup').appendChild(stateSelectHtml);
+        }
+        //tots
+        else {
+            //Si fas rollback segueix aqui
+            //tots tots
+            //if(newProject)
+            //customer tots
+        }
+        
+        
     }
 
     function changeProject() {
@@ -537,10 +578,7 @@ $hours_left_count = 0;
             return e.id == projectId;
         });
         
-        let customerId = document.getElementById('customerSelect').value;
-        if(projectId == "%" && customerId != "%") {
-            
-        }
+       
 
         if (project.length == 0) {
             let customerSelectHtml = document.createElement("select");
