@@ -416,15 +416,15 @@ $hours_left_count = 0;
      
      
      */
-    function checkAllProjectsStates() {
+    function checkAllProjectsStates(projects) {
         
             let projectActiveExists = false;
             let projectNotActiveExists = false;
             let continueSearching = true;
             let i = 0;
-            let y = projects_json.length;
+            let y = projects.length;
             while (continueSearching) {
-                if (projects_json[i].active == 1)
+                if (projects[i].active == 1)
                     projectActiveExists = true;
                 else {
                     projectNotActiveExists = true;
@@ -513,7 +513,7 @@ $hours_left_count = 0;
                document.getElementById('stateSelect').remove();
           
             
-            checkAllProjectsStates()
+            checkAllProjectsStates(projects_json)
         }
         
         
@@ -566,7 +566,8 @@ $hours_left_count = 0;
             //customer un - projectes tots
             let newProject = document.getElementById('projectSelect').value;
             if((!isNaN(parseInt(customerId))) && newProject == "%") {
-                console.log(projects)
+                document.getElementById('stateSelect').remove();
+                checkAllProjectsStates(projects);
             }
         }
         
@@ -609,7 +610,7 @@ $hours_left_count = 0;
             document.getElementById('customerGroup').appendChild(customerSelectHtml);
 
             //Active select
-            checkAllProjectsStates();
+            checkAllProjectsStates(projects_json);
             document.getElementById('stateSelect').remove();
 
         } else {
@@ -723,7 +724,7 @@ $hours_left_count = 0;
         document.getElementById('projectGroup').appendChild(projectSelectHtml);
 
         if (projects_json.length != 0) {
-            checkAllProjectsStates();
+            checkAllProjectsStates(projects_json);
         }
         
     }
