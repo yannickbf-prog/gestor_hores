@@ -534,6 +534,7 @@ $hours_left_count = 0;
         
         let newProjectIsNaN = parseInt(document.getElementById('projectSelect').value);
         
+        
         if(!isNaN(newProjectIsNaN)) {
             //Active select
             let stateSelectHtml = document.createElement("select");
@@ -562,10 +563,11 @@ $hours_left_count = 0;
         }
         //tots
         else {
-            //Si fas rollback segueix aqui
-            //tots tots
-            //if(newProject)
-            //customer tots
+            //customer un - projectes tots
+            let newProject = document.getElementById('projectSelect').value;
+            if((!isNaN(parseInt(customerId))) && newProject == "%") {
+                alert("hello")
+            }
         }
         
         
