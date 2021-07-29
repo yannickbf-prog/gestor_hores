@@ -198,6 +198,7 @@ return [
     'unseted' => 'unseted',
     'seted' => 'seted',
     'no_customers' => 'No customers available',
-    'no_projects' => 'No projects available'
+    'no_projects' => 'No projects available',
+    'no_state' => 'No states available',
 
 ];

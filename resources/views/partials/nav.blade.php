@@ -12,7 +12,7 @@
     <a class="nav-link text-dark {{ setActive('*time_entries.*') }}" href="{{ route($lang.'_time_entries.index') }}">{{ __('message.time_entries') }}</a>
 </nav>
 
-<div class="pos-f-t col-12 d-md-none">
+<div class="pos-f-t col-12 d-md-none px-0">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-light p-4">
       <h4 class="text-dark">Menu</h4>

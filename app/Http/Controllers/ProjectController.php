@@ -22,14 +22,12 @@ class ProjectController extends Controller {
         $lang = setGetLang();
 
         if ($request->has('_token')) {
-
-            ($request['name'] == "") ? session(['project_name' => '%']) : session(['project_name' => $request['name']]);
-
-            ($request['customer_name'] == "") ? session(['project_customer_name' => '%']) : session(['project_customer_name' => $request['customer_name']]);
-
+            
+            session(['project_customer_id' => $request['customer_id']]);
+            
+            session(['project_project_id' => $request['project_id']]);
+            
             session(['project_state' => $request['state']]);
-
-            session(['project_order' => $request['order']]);
 
             session(['project_num_records' => $request['num_records']]);
         }
@@ -38,11 +36,11 @@ class ProjectController extends Controller {
         $date_from = $dates[0];
         $date_to = $dates[1];
 
-        $name = session('project_name', "%");
-        $customer_name = session('project_customer_name', "%");
-        $state = session('project_state', '%');
+        $customer = session('project_customer_id');
+        $project = session('project_project_id');
+        $state = session('project_state');
 
-        $order = session('project_order', "desc");
+        $order = "desc";
 
         $num_records = session('project_num_records', 10);
 
@@ -60,9 +58,9 @@ class ProjectController extends Controller {
                 ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
                         'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
                         'projects.id as id')
-                ->groupBy('projects.id')->where('projects.name', 'like', "%" . $name . "%")
-                ->where('customers.name', 'like', "%" . $customer_name . "%")
-                ->where('projects.active', 'like', $state)
+                ->groupBy('projects.id')
+                ->where('projects.id', 'like', $project)
+
                 ->whereBetween('projects.created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
