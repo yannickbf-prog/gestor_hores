@@ -40,7 +40,7 @@ if (Auth::check()) {
 
     <body>
 
-        <div id="app" class="d-flex flex-column h-screen py-3">
+        <div id="app" class="d-flex flex-column h-screen pb-3">
 
 
 

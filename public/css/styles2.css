@@ -1,6 +1,8 @@
 #app{
+    /*width: 95%;*/
     width: 100%;
     margin: auto;
+    padding-top: 0 !important;
 }
 
 svg{
@@ -249,15 +251,7 @@ th {
     display: none;
 }
 
-#addEditContainer {
-    display: none;
-}
-
-#addEditHeader {
-    cursor: pointer;   
-}
-
-#addEditChevronDown, #filterChevronDown {
+.bi-chevron-down {
     transition: transform .6s ease-in-out;
 }
 
@@ -321,9 +315,10 @@ nav:first-child > a:last-child {
 #statistics > div {
     padding: 20px 10px !important;
     background-color: #0f93de;
-    border-left: 15px solid white;
+    border-right: 15px solid white;
     text-align: center;
-    border-top: 15px solid white;
+    font-size: 1.75em;
+    font-weight: 300;
 }
 
 #statistics > div > span, #statistics > div > strong {
@@ -332,7 +327,9 @@ nav:first-child > a:last-child {
     line-height: 2.2;
 }
 
-
+#statistics > div:last-child {
+    border-right: 0;
+}
 
 /* JORDI */
 /********************** HEADER **********************/
