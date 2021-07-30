@@ -76,7 +76,7 @@ class ProjectController extends Controller {
         
         $users_projects_ids = DB::table('users_projects')
                 ->select('users_projects.id')
-                ->where('users_projects.project_id', 'like', 2)
+                ->where('users_projects.project_id', 'like', 3)
                 ->get();
         
         $users_projects_ids_array = [];
@@ -85,9 +85,11 @@ class ProjectController extends Controller {
             array_push($users_projects_ids_array, $user_project->id);
         }
         
-        //$hours_entry = DB::table('hours_entry')->whereIn('id', );
+        $hours_entry = $users = DB::table('hours_entry')
+                    ->whereIn('user_project_id', $users_projects_ids_array)
+                    ->get();
         
-        return $users_projects_ids_array;
+        return $hours_entry;
 //        DB::table('users')
 //        ->whereIn('id', function($query)
 //        {
