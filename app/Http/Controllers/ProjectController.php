@@ -74,7 +74,6 @@ class ProjectController extends Controller {
                 ->where('customer_id', 'like', $customer)
                 ->get();
         
-        return $projects;
 
         $projects_with_info = [];
 
@@ -112,9 +111,9 @@ class ProjectController extends Controller {
                 //'contracted_hours' => $users
             ];
             
-            return $projects_with_info;
+            
         }
-        
+        return $projects_with_info;
 //        
 //        $projects_ids_array = [];
 //        
