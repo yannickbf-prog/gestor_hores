@@ -56,14 +56,62 @@ class ProjectController extends Controller {
                 ->join('customers', 'customers.id', '=', 'projects.customer_id')
                 ->leftJoin('bag_hours', 'bag_hours.project_id', '=', 'projects.id')
                 ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
-                        'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
+                        'customers.id as customer_id', 'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
                         'projects.id as id')
                 ->groupBy('projects.id')
+                ->where('customer_id', 'like', $customer)
                 ->where('projects.id', 'like', $project)
-
                 ->whereBetween('projects.created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
+        
+        
+        
+        $data2 = DB::table('projects')
+                ->select(DB::raw('projects.name'))
+                ->where('projects.id', 'like', $project)
+                ->where('projects.active', 'like', $state)
+                ->where('projects.customer_id', 'like', $customer)
+                ->get();
+        
+        $users_projects_ids = DB::table('users_projects')
+                ->select('users_projects.id')
+                ->where('users_projects.project_id', 'like', 2)
+                ->get();
+        
+        $users_projects_ids_array = [];
+        
+        foreach($users_projects_ids as $user_project) {
+            array_push($users_projects_ids_array, $user_project->id);
+        }
+        
+        //$hours_entry = DB::table('hours_entry')->whereIn('id', );
+        
+        return $users_projects_ids_array;
+//        DB::table('users')
+//        ->whereIn('id', function($query)
+//        {
+//            $query->select(DB::raw(1))
+//                  ->from('orders')
+//                  ->whereRaw('orders.user_id = users.id');
+//        })
+//        ->get();
+        
+          //        $results=DB::select(DB::raw("
+          //            select * from users_projects
+          //                INNER JOIN projects
+          //            ON `users_projects`.`project_id` = `projects`.`id`
+          //                WHERE `users_projects`.`user_id`=3"));
+        
+        
+//        $result = Customer::select([
+//            'customers.id',
+//            'customers.last_name',
+//        ])->with('invoice_sum')
+//          ->whereHas('customerInvoices', function(Builder $q) {
+//            $q->where('customer_invoices.status', 1);
+//        })->get();      
+
 
         //Filter code
 
