@@ -95,11 +95,13 @@ class ProjectController extends Controller {
                     ->whereIn('user_project_id', $users_projects_ids_array)
                     ->sum('hours_imputed');
             
+            $contracted_hours;
             if (DB::table('bag_hours')->where('project_id', '=', $project->id)->exists()) {
-                
+                $contracted_hours_query = DB::table('bag_hours')->select('contracted_hours')->where('project_id', '=', $project->id)->first();
+                $contracted_hours = $contracted_hours_query->contracted_hours;
             }
             else {
-                
+                $contracted_hours = null;
             }
             
             $projects_with_info[] = [
@@ -108,7 +110,7 @@ class ProjectController extends Controller {
                 'customer_name' => $project->customer_id,
                 'project_active' => $project->active,
                 'total_hours_project' => $hours_imputed_project,
-                //'contracted_hours' => $users
+                'contracted_hours' => $contracted_hours,
                 'project_description' => $project->description,
                 'created_at' => $project->created_at
             ];
