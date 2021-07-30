@@ -68,11 +68,13 @@ class ProjectController extends Controller {
 
 
         $projects = DB::table('projects')
-                ->select(DB::raw('projects.id'))
-                ->where('projects.id', 'like', $project)
-                ->where('projects.active', 'like', $state)
-                ->where('projects.customer_id', 'like', $customer)
+                ->select('id', 'name', 'customer_id', 'active')
+                ->where('id', 'like', $project)
+                ->where('active', 'like', $state)
+                ->where('customer_id', 'like', $customer)
                 ->get();
+        
+        return $projects;
 
         $projects_with_info = [];
 
@@ -89,7 +91,7 @@ class ProjectController extends Controller {
                 array_push($users_projects_ids_array, $user_project->id);
             }
 
-            $hours_entry = DB::table('hours_entry')
+            $hours_imputed_project = DB::table('hours_entry')
                     ->select('hours_imputed')
                     ->whereIn('user_project_id', $users_projects_ids_array)
                     ->sum('hours_imputed');
@@ -97,8 +99,20 @@ class ProjectController extends Controller {
             if (DB::table('bag_hours')->where('project_id', '=', $project->id)->exists()) {
                 
             }
+            else {
+                
+            }
             
-            return $hours_entry;
+            $projects_with_info[] = [
+                'id' => $project->id,
+                'project_name' => $project->name,
+                'customer_name' => $project->customer_id,
+                'project_active' => $project->active,
+                'total_hours_project' => $hours_imputed_project,
+                //'contracted_hours' => $users
+            ];
+            
+            return $projects_with_info;
         }
         
 //        
