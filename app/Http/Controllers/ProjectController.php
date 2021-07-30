@@ -48,9 +48,6 @@ class ProjectController extends Controller {
         else if(session('project_state') == '%') {
             $state = '%';
         }
-            
-        
-        echo $customer." ".$project." ".$state;
 
         $order = "desc";
 
@@ -241,14 +238,11 @@ class ProjectController extends Controller {
 
     public function deleteFilters(Request $request) {
 
-        session(['project_name' => '%']);
-        session(['project_customer_name' => '%']);
+        session(['project_customer_id' => '%']);
+        session(['project_project_id' => '%']);
         session(['project_state' => '%']);
         session(['project_date_from' => ""]);
         session(['project_date_to' => ""]);
-        session(['project_order' => 'desc']);
-        session(['project_num_records' => 10]);
-
         $lang = $request->lang;
 
         return redirect()->route($lang . '_projects.index');
