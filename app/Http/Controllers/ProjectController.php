@@ -22,11 +22,11 @@ class ProjectController extends Controller {
         $lang = setGetLang();
 
         if ($request->has('_token')) {
-            
+
             session(['project_customer_id' => $request['customer_id']]);
-            
+
             session(['project_project_id' => $request['project_id']]);
-            
+
             session(['project_state' => $request['state']]);
 
             session(['project_num_records' => $request['num_records']]);
@@ -64,32 +64,62 @@ class ProjectController extends Controller {
                 ->whereBetween('projects.created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
-        
-        
-        
-        $data2 = DB::table('projects')
-                ->select(DB::raw('projects.name'))
+
+
+
+        $projects = DB::table('projects')
+                ->select(DB::raw('projects.id'))
                 ->where('projects.id', 'like', $project)
                 ->where('projects.active', 'like', $state)
                 ->where('projects.customer_id', 'like', $customer)
                 ->get();
-        
-        $users_projects_ids = DB::table('users_projects')
-                ->select('users_projects.id')
-                ->where('users_projects.project_id', 'like', 3)
-                ->get();
-        
-        $users_projects_ids_array = [];
-        
-        foreach($users_projects_ids as $user_project) {
-            array_push($users_projects_ids_array, $user_project->id);
+
+        $projects_with_info = [];
+
+        foreach ($projects as $project) {
+
+            $users_projects_ids = DB::table('users_projects')
+                    ->select('users_projects.id')
+                    ->where('users_projects.project_id', 'like', $project->id)
+                    ->get();
+
+            $users_projects_ids_array = [];
+
+            foreach ($users_projects_ids as $user_project) {
+                array_push($users_projects_ids_array, $user_project->id);
+            }
+
+            $hours_entry = DB::table('hours_entry')
+                    ->select('hours_imputed')
+                    ->whereIn('user_project_id', $users_projects_ids_array)
+                    ->sum('hours_imputed');
+            
+            return $hours_entry;
         }
         
-        $hours_entry = $users = DB::table('hours_entry')
-                    ->whereIn('user_project_id', $users_projects_ids_array)
-                    ->get();
-        
-        return $hours_entry;
+//        
+//        $projects_ids_array = [];
+//        
+//        foreach($projects as $project) {
+//            array_push($users_projects_ids_array, $project->id);
+//        }
+//        
+//        $users_projects_ids = DB::table('users_projects')
+//                ->select('users_projects.id')
+//                ->where('users_projects.project_id', 'like', 3)
+//                ->get();
+//        
+//        $users_projects_ids_array = [];
+//        
+//        foreach($users_projects_ids as $user_project) {
+//            array_push($users_projects_ids_array, $user_project->id);
+//        }
+//        
+//        $hours_entry = $users = DB::table('hours_entry')
+//                    ->whereIn('user_project_id', $users_projects_ids_array)
+//                    ->get();
+//        
+//        return $hours_entry;
 //        DB::table('users')
 //        ->whereIn('id', function($query)
 //        {
@@ -98,14 +128,11 @@ class ProjectController extends Controller {
 //                  ->whereRaw('orders.user_id = users.id');
 //        })
 //        ->get();
-        
-          //        $results=DB::select(DB::raw("
-          //            select * from users_projects
-          //                INNER JOIN projects
-          //            ON `users_projects`.`project_id` = `projects`.`id`
-          //                WHERE `users_projects`.`user_id`=3"));
-        
-        
+        //        $results=DB::select(DB::raw("
+        //            select * from users_projects
+        //                INNER JOIN projects
+        //            ON `users_projects`.`project_id` = `projects`.`id`
+        //                WHERE `users_projects`.`user_id`=3"));
 //        $result = Customer::select([
 //            'customers.id',
 //            'customers.last_name',
@@ -113,41 +140,38 @@ class ProjectController extends Controller {
 //          ->whereHas('customerInvoices', function(Builder $q) {
 //            $q->where('customer_invoices.status', 1);
 //        })->get();      
-
-
         //Filter code
-
         //Users json
         /*
-        $users = DB::table('users')
-                ->whereExists(function ($query) {
+          $users = DB::table('users')
+          ->whereExists(function ($query) {
 
-                    $query->select("users_projects.id")
-                    ->from('users_projects')
-                    ->whereRaw('users_projects.user_id = users.id');
-                })
-                ->select("users.name", "users.surname", "users.id")
-                ->get();
-                
-        $users_json = [];
-        
-        foreach ($users as $user) {
-            $customers_in_user = DB::table('users_projects')
-                    ->join('projects', 'users_projects.project_id', '=', 'projects.id')
-                    ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
-                    ->where('users_projects.user_id', $user->id)
-                    ->where('projects.active', 1)
-                    ->select('customers.id AS customer_id')
-                    ->get();
-            
-            $users_json[] = [
-                'id' => $user->id,
-                'name' => $user->name,
-                'surname' => $user->surname,
-                'customers_id' => $customers_in_user
-            ];
-        }
-        */
+          $query->select("users_projects.id")
+          ->from('users_projects')
+          ->whereRaw('users_projects.user_id = users.id');
+          })
+          ->select("users.name", "users.surname", "users.id")
+          ->get();
+
+          $users_json = [];
+
+          foreach ($users as $user) {
+          $customers_in_user = DB::table('users_projects')
+          ->join('projects', 'users_projects.project_id', '=', 'projects.id')
+          ->join('customers', 'projects.customer_id', '=', 'customers.id')->distinct()
+          ->where('users_projects.user_id', $user->id)
+          ->where('projects.active', 1)
+          ->select('customers.id AS customer_id')
+          ->get();
+
+          $users_json[] = [
+          'id' => $user->id,
+          'name' => $user->name,
+          'surname' => $user->surname,
+          'customers_id' => $customers_in_user
+          ];
+          }
+         */
         //Customers json
 
         $customers = DB::table('customers')->select('id', 'name')->get();
@@ -317,7 +341,7 @@ class ProjectController extends Controller {
                 ->where('users_projects.user_id', $request->user_id)
                 ->where('users_projects.project_id', $project_id)
                 ->delete();
-        
+
         $user = DB::table('users')->select('name', 'surname')->where('id', $request->user_id)->first();
 
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
