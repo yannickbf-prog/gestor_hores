@@ -50,35 +50,38 @@ class ProjectController extends Controller {
 
         //config()->set('database.connections.mysql.strict', false);
 
-        $data = DB::table('hours_entry')
-                ->join('users_projects', 'users_projects.id', '=', 'hours_entry.user_project_id')
-                ->join('projects', 'projects.id', '=', 'users_projects.project_id')
-                ->join('customers', 'customers.id', '=', 'projects.customer_id')
-                ->leftJoin('bag_hours', 'bag_hours.project_id', '=', 'projects.id')
-                ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
-                        'customers.id as customer_id', 'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
-                        'projects.id as id')
-                ->groupBy('projects.id')
-                ->where('customer_id', 'like', $customer)
-                ->where('projects.id', 'like', $project)
-                ->whereBetween('projects.created_at', [$date_from, $date_to])
-                ->orderBy('created_at', $order)
-                ->paginate($num_records);
+//        $data = DB::table('hours_entry')
+//                ->join('users_projects', 'users_projects.id', '=', 'hours_entry.user_project_id')
+//                ->join('projects', 'projects.id', '=', 'users_projects.project_id')
+//                ->join('customers', 'customers.id', '=', 'projects.customer_id')
+//                ->leftJoin('bag_hours', 'bag_hours.project_id', '=', 'projects.id')
+//                ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
+//                        'customers.id as customer_id', 'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
+//                        'projects.id as id')
+//                ->groupBy('projects.id')
+//                ->where('customer_id', 'like', $customer)
+//                ->where('projects.id', 'like', $project)
+//                ->whereBetween('projects.created_at', [$date_from, $date_to])
+//                ->orderBy('created_at', $order)
+//                ->paginate($num_records);
 
 
 
         $projects = DB::table('projects')
-                ->select('id', 'name', 'customer_id', 'active', 'description', 'created_at')
+                ->select('id', 'projects.name as project_name', 'projects.customer_id as customer_id', 'projects.active as project_active', 'projects.description as project_description', 'created_at')
                 ->where('id', 'like', $project)
                 ->where('active', 'like', $state)
                 ->where('customer_id', 'like', $customer)
-                ->get();
+                ->whereBetween('projects.created_at', [$date_from, $date_to])
+                ->orderBy('created_at', $order)
+                ->paginate($num_records);
         
-
-        $projects_with_info = [];
 
         foreach ($projects as $project) {
 
+            $customer_name_query = DB::table('customers')->select('name')->where('id', '=', $project->customer_id)->first();
+            $customer_name = $customer_name_query->name;
+            
             $users_projects_ids = DB::table('users_projects')
                     ->select('users_projects.id')
                     ->where('users_projects.project_id', 'like', $project->id)
@@ -104,20 +107,14 @@ class ProjectController extends Controller {
                 $contracted_hours = null;
             }
             
-            $projects_with_info[] = [
-                'id' => $project->id,
-                'project_name' => $project->name,
-                'customer_name' => $project->customer_id,
-                'project_active' => $project->active,
-                'total_hours_project' => $hours_imputed_project,
-                'contracted_hours' => $contracted_hours,
-                'project_description' => $project->description,
-                'created_at' => $project->created_at
-            ];
+            $project->total_hours_project = $hours_imputed_project;
+            $project->contracted_hours = $contracted_hours;
+            $project->customer_name = $customer_name;    
             
             
         }
-        return $projects_with_info;
+        
+        $data = $projects;
 //        
 //        $projects_ids_array = [];
 //        
