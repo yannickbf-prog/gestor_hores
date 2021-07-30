@@ -94,6 +94,10 @@ class ProjectController extends Controller {
                     ->whereIn('user_project_id', $users_projects_ids_array)
                     ->sum('hours_imputed');
             
+            if (DB::table('bag_hours')->where('project_id', '=', $project->id)->exists()) {
+                
+            }
+            
             return $hours_entry;
         }
         
