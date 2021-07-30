@@ -38,7 +38,19 @@ class ProjectController extends Controller {
 
         $customer = session('project_customer_id');
         $project = session('project_project_id');
-        $state = session('project_state');
+        $state; 
+        if(session('project_state') == 'active') {
+            $state = 1;
+        }
+        else if(session('project_state') == 'inactive') {
+            $state = 0;
+        }
+        else if(session('project_state') == '%') {
+            $state = '%';
+        }
+            
+        
+        echo $customer." ".$project." ".$state;
 
         $order = "desc";
 
