@@ -68,7 +68,7 @@ class ProjectController extends Controller {
 
 
         $projects = DB::table('projects')
-                ->select('id', 'name', 'customer_id', 'active')
+                ->select('id', 'name', 'customer_id', 'active', 'description', 'created_at')
                 ->where('id', 'like', $project)
                 ->where('active', 'like', $state)
                 ->where('customer_id', 'like', $customer)
@@ -109,6 +109,8 @@ class ProjectController extends Controller {
                 'project_active' => $project->active,
                 'total_hours_project' => $hours_imputed_project,
                 //'contracted_hours' => $users
+                'project_description' => $project->description,
+                'created_at' => $project->created_at
             ];
             
             
