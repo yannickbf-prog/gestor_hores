@@ -37,8 +37,6 @@ class ProjectController extends Controller {
             session(['project_project_id' => $request['project_id']]);
 
             session(['project_state' => $request['state']]);
-
-            session(['project_num_records' => $request['num_records']]);
         }
 
         $dates = getIntervalDates($request, 'project');
@@ -63,7 +61,7 @@ class ProjectController extends Controller {
         $num_records = session('project_num_records', 10);
 
         if ($num_records == 'all') {
-            $num_records = Customer::count();
+            $num_records = Project::count();
         }
 
         //config()->set('database.connections.mysql.strict', false);

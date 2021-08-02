@@ -134,6 +134,7 @@
 </div>
 
 
+
 <form action="{{ route($lang.'_projects.index') }}" method="GET" id="filtersForm"> 
     @csrf
 
@@ -186,30 +187,8 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('message.order') }}:</strong>
-                <select name="order" id="order">
-                    <option value="desc">{{ __('message.new_first') }}</option>
-                    <option value="asc" @if(session('project_order') == 'asc'){{'selected'}}@endif >{{ __('message.old_first') }}</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('message.number_of_records') }}: </strong>
-                <select name="num_records" id="numRecords">
-                    <option value="10">10</option>
-                    <option value="50" @if(session('project_num_records') == 50){{'selected'}}@endif>50</option>
-                    <option value="100" @if(session('project_num_records') == 100){{'selected'}}@endif>100</option>
-                    <option value="all" @if(session('project_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
-                </select>
-            </div>
-        </div>
-    </div>
+
+
     <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
 </form>
 
@@ -901,6 +880,21 @@ $hours_left_count = 0;
 
         // show hide paragraph on button click
         $("#addEditContainer").toggle(400);
+    });
+    
+    var filterCount = 1;
+    $("#filterTitleContainer").click(function () {
+
+        if (filterCount % 2 == 0)
+            $('#filterChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#filterChevronDown').css("transform", "rotate(180deg)");
+
+        filterCount++;
+
+        // show hide paragraph on button click
+        $("#filtersContainer").toggle(400);
     });
 
     var show_create_edit = @json($show_create_edit);
