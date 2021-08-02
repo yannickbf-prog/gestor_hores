@@ -260,7 +260,7 @@ $hours_left_count = 0;
 
                     <form action="{{ route($lang.'_projects.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
                         @csrf
-                        <input type="hidden" name="customer_id" value="{{ $value->id }}">
+                        <input type="hidden" name="edit_project_id" value="{{ $value->id }}">
                     </form>
 
                     <a style="text-decoration: none" class="text-dark">

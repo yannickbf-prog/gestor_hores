@@ -23,11 +23,11 @@ class ProjectController extends Controller {
         
         $show_create_edit = false;
         
-        if ($request->has('_token') && $request->has('project_id')) {
+        if ($request->has('_token') && $request->has('edit_project_id')) {
             $show_create_edit = true;
         }
 
-        if ($request->has('_token')) {
+        if ($request->has('_token') && $request->has('customer_id')) {
 
             session(['project_customer_id' => $request['customer_id']]);
 
