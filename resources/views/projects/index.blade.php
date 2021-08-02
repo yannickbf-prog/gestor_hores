@@ -74,7 +74,7 @@
 
                 <div class="form-group col-xs-12 col-sm-8 col-md-5 form_group_new_edit">
                     <label for="newEditDesc">{{__('message.observations')}}:</label>
-                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ old('description') }}</textarea>
+                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ ($project_to_edit == null) ? old('description') : old('description', $project_to_edit->description) }}</textarea>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
@@ -248,7 +248,7 @@ $hours_left_count = 0;
             <td>{{ $value->contracted_hours }}</td>
             <td>@if($value->contracted_hours != null){{ $hours_left }}@endif</td>
 
-            <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+            <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->project_description, 100) }} @endif</td>
             <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
             <td class="align-middle">
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">

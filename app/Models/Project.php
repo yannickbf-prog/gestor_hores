@@ -13,7 +13,8 @@ class Project extends Model
         'name',
         'customer_id',
         'active',
-        'created_at'
+        'created_at',
+        'description'
     ];
     
     protected $dates = ['created_at'];
