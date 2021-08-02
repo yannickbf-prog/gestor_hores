@@ -251,36 +251,59 @@ $hours_left_count = 0;
             <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
             <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
             <td class="align-middle">
-                <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
-                    <a class="btn btn-primary" href="{{ route($lang.'_projects.edit',$value->id) }}">{{ __('message.edit') }}</a>
-                    @csrf
-                    @method('DELETE')      
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                        {{ __('message.delete') }}
-                    </button>
+                <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
                     
+                    @php
+                    $form_id = "editForm".$value->id;
+                    $form_dom = "document.getElementById('editForm".$value->id."').submit();";
+                    @endphp
+
+                    <form action="{{ route($lang.'_projects.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
+                        @csrf
+                        <input type="hidden" name="customer_id" value="{{ $value->id }}">
+                    </form>
+
+                    <a style="text-decoration: none" class="text-dark">
+                        <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
+                    </a>
+                    
+                    
+                    @php
+                    $id = "exampleModal".$value->id;
+                    @endphp
+
+                    <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
+                        <i class="bi bi-trash-fill fa-lg"></i>
+                    </a>
+
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->project_name }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.project") }} <b>{{ $value->project_name }}</b>?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                    <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                    <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
+                            @csrf
+                            @method('DELETE')  
+
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->project_name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.project") }} <b>{{ $value->project_name }}</b>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                        <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <a class="text-dark" href="{{ route($lang.'_projects.add_remove_users',$value->id) }}"><i class="bi bi-person-fill fa-lg"></i></a>
-                </form>
+                    
+                </div>
             </td>
         </tr>
         @empty
