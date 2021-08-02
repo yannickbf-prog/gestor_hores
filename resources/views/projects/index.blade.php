@@ -72,30 +72,30 @@
                     <a href="{{ route($lang."_customers.index") }}" type="button" class="btn btn-sm general_button text-uppercase">{{ __('message.create') }} {{ __('message.customer') }}</a>
                 </div>             
 
-                 <div class="form-group col-xs-12 col-sm-8 col-md-5 form_group_new_edit">
+                <div class="form-group col-xs-12 col-sm-8 col-md-5 form_group_new_edit">
                     <label for="newEditDesc">{{__('message.observations')}}:</label>
                     <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ old('description') }}</textarea>
                 </div>
-                
-                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
-                    
-                        <label>*{{ __('message.state') }}:</label><br>
-                        <input type="radio" id="active" name="active" value="1" checked>
-                        <label for="active">{{__('message.active')}}</label><br>
-                        @php
-                        $checked = "";
-                        
-                        if(old('active') == "0") {
-                        $checked = 'checked';
-                        }
-                        
-                        
-                        @endphp
-                        <input type="radio" id="inactive" name="active" value="0" {{$checked}}>
-                        <label for="inactive">{{__('message.inactive')}}</label><br>  
+
+                <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+
+                    <label>*{{ __('message.state') }}:</label><br>
+                    <input type="radio" id="active" name="active" value="1" checked>
+                    <label for="active">{{__('message.active')}}</label><br>
+                    @php
+                    $checked = "";
+
+                    if(old('active') == "0") {
+                    $checked = 'checked';
+                    }
+
+
+                    @endphp
+                    <input type="radio" id="inactive" name="active" value="0" {{$checked}}>
+                    <label for="inactive">{{__('message.inactive')}}</label><br>  
 
                 </div> 
-                
+
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
 
@@ -212,78 +212,81 @@ $contracted_hours_count = 0;
 $hours_left_count = 0;
 @endphp
 
-<table class="table table-bordered">
+<table class="table">
     @if (count($data) > 0)
-    <tr>
-        <th>Nº</th>
-        <th>{{ __('message.name') }}</th>
-        <th>{{ __('message.customer_name') }}</th>
-        <th>{{ __('message.state') }}</th>
-        <th>{{ __('message.hours_worked') }}</th>
-        <th>{{ __('message.contracted_hours') }}</th>
-        <th>{{ __('message.hours_left') }}</th>
-        <th>{{ __('message.description') }}</th>
-        <th>{{ __('message.created_at') }}</th>
-        <th>{{ __('message.action') }}</th>
-    </tr>
+    <thead>
+        <tr class="thead-light">
+            <th>Nº</th>
+            <th>{{ __('message.name') }}</th>
+            <th>{{ __('message.customer_name') }}</th>
+            <th>{{ __('message.state') }}</th>
+            <th>{{ __('message.hours_worked') }}</th>
+            <th>{{ __('message.contracted_hours') }}</th>
+            <th>{{ __('message.hours_left') }}</th>
+            <th>{{ __('message.description') }}</th>
+            <th>{{ __('message.created_at') }}</th>
+            <th></th>
+        </tr>
+    </thead>
     @endif
-    @forelse ($data as $value)
-    @php
-    $worked_hours_count += $value->total_hours_project;
-    $contracted_hours_count += $value->contracted_hours;
+    <tbody>
+        @forelse ($data as $value)
+        @php
+        $worked_hours_count += $value->total_hours_project;
+        $contracted_hours_count += $value->contracted_hours;
 
-    $hours_left = $value->contracted_hours - $value->total_hours_project;
-    if($hours_left > 0)
-    $hours_left_count += $hours_left;
-    @endphp
-    <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $value->project_name }}</td>
-        <td>{{ $value->customer_name }}</td>
-        <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
-        <td>{{ $value->total_hours_project }}</td>
-        <td>{{ $value->contracted_hours }}</td>
-        <td>@if($value->contracted_hours != null){{ $hours_left }}@endif</td>
+        $hours_left = $value->contracted_hours - $value->total_hours_project;
+        if($hours_left > 0)
+        $hours_left_count += $hours_left;
+        @endphp
+        <tr>
+            <td>{{ ++$i }}</td>
+            <td>{{ $value->project_name }}</td>
+            <td>{{ $value->customer_name }}</td>
+            <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
+            <td>{{ $value->total_hours_project }}</td>
+            <td>{{ $value->contracted_hours }}</td>
+            <td>@if($value->contracted_hours != null){{ $hours_left }}@endif</td>
 
-        <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
-        <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
-        <td>
-            <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
-                <a class="btn btn-primary" href="{{ route($lang.'_projects.edit',$value->id) }}">{{ __('message.edit') }}</a>
-                @csrf
-                @method('DELETE')      
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                    {{ __('message.delete') }}
-                </button>
-                <a class="btn btn-primary" href="{{ route($lang.'_projects.add_remove_users',$value->id) }}">{{ __('message.add_remove_users') }}</a>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->project_name }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.project") }} <b>{{ $value->project_name }}</b>?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+            <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+            <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
+            <td class="align-middle">
+                <form action="{{ route('projects.destroy',[$value->id, $lang]) }}" method="POST"> 
+                    <a class="btn btn-primary" href="{{ route($lang.'_projects.edit',$value->id) }}">{{ __('message.edit') }}</a>
+                    @csrf
+                    @method('DELETE')      
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                        {{ __('message.delete') }}
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->project_name }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.project") }} <b>{{ $value->project_name }}</b>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                    <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </form>
-        </td>
-    </tr>
-    @empty
+                    <a class="text-dark" href="{{ route($lang.'_projects.add_remove_users',$value->id) }}"><i class="bi bi-person-fill fa-lg"></i></a>
+                </form>
+            </td>
+        </tr>
+        @empty
     <li>{{__('message.no')}} {{__('message.projects')}} {{__('message.to_show')}}</li>
     @endforelse
-
+</tbody>
 </table> 
 @if (count($data) > 0)
 <div id="totalHourCount" class="row">
@@ -852,8 +855,8 @@ $hours_left_count = 0;
         $("#addEditContainer").toggle(400);
     });
 
-var show_create_edit = @json($show_create_edit);
-if (show_create_edit){
+    var show_create_edit = @json($show_create_edit);
+    if (show_create_edit) {
         $('#addEditChevronDown').css("transform", "rotate(180deg)");
         $('#addEditContainer').show(400);
         addEditCount = 2;
