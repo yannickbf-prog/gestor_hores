@@ -82,14 +82,33 @@
                     <label>*{{ __('message.state') }}:</label><br>
                     <input type="radio" id="active" name="active" value="1" checked>
                     <label for="active">{{__('message.active')}}</label><br>
+
+                    
                     @php
                     $checked = "";
-
+                    if($project_to_edit == null) {
                     if(old('active') == "0") {
                     $checked = 'checked';
                     }
+                    }
+                    else {
+                    if($project_to_edit->active == "0") {
+                    $checked = 'checked';
+                    }
+                    else {
+                    $checked = '';
+                    }
 
+                    if(old('active') !== null) {
+                    if(old('active') == "0") {
+                    $checked = 'checked';
+                    }
+                    else {
+                    $checked = '';
+                    }
+                    }
 
+                    }
                     @endphp
                     <input type="radio" id="inactive" name="active" value="0" {{$checked}}>
                     <label for="inactive">{{__('message.inactive')}}</label><br>  
