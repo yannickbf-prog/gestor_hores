@@ -20,15 +20,14 @@ class ProjectController extends Controller {
      */
     public function index(Request $request) {
         $lang = setGetLang();
-        
+
         $project_to_edit = null;
-                
+
         $show_create_edit = false;
-        
+
         if ($request->has('_token') && $request->has('edit_project_id')) {
             $project_to_edit = Project::where('id', $request['edit_project_id'])->first();
             $show_create_edit = true;
-
         }
 
         if ($request->has('_token') && $request->has('customer_id')) {
@@ -48,17 +47,14 @@ class ProjectController extends Controller {
 
         $customer = session('project_customer_id', '%');
         $project = session('project_project_id', '%');
-        $state; 
-        if(session('project_state') == 'active') {
+        $state;
+        if (session('project_state') == 'active') {
             $state = 1;
-        }
-        else if(session('project_state') == 'inactive') {
+        } else if (session('project_state') == 'inactive') {
             $state = 0;
-        }
-        else if(session('project_state') == '%') {
+        } else if (session('project_state') == '%') {
             $state = '%';
-        }
-        else {
+        } else {
             $state = '%';
         }
 
@@ -71,7 +67,6 @@ class ProjectController extends Controller {
         }
 
         //config()->set('database.connections.mysql.strict', false);
-
 //        $data = DB::table('hours_entry')
 //                ->join('users_projects', 'users_projects.id', '=', 'hours_entry.user_project_id')
 //                ->join('projects', 'projects.id', '=', 'users_projects.project_id')
@@ -97,13 +92,13 @@ class ProjectController extends Controller {
                 ->whereBetween('projects.created_at', [$date_from, $date_to])
                 ->orderBy('created_at', $order)
                 ->paginate($num_records);
-        
+
 
         foreach ($projects as $project) {
 
             $customer_name_query = DB::table('customers')->select('name')->where('id', '=', $project->customer_id)->first();
             $customer_name = $customer_name_query->name;
-            
+
             $users_projects_ids = DB::table('users_projects')
                     ->select('users_projects.id')
                     ->where('users_projects.project_id', 'like', $project->id)
@@ -119,23 +114,20 @@ class ProjectController extends Controller {
                     ->select('hours_imputed')
                     ->whereIn('user_project_id', $users_projects_ids_array)
                     ->sum('hours_imputed');
-            
+
             $contracted_hours;
             if (DB::table('bag_hours')->where('project_id', '=', $project->id)->exists()) {
                 $contracted_hours_query = DB::table('bag_hours')->select('contracted_hours')->where('project_id', '=', $project->id)->first();
                 $contracted_hours = $contracted_hours_query->contracted_hours;
-            }
-            else {
+            } else {
                 $contracted_hours = null;
             }
-            
+
             $project->total_hours_project = $hours_imputed_project;
             $project->contracted_hours = $contracted_hours;
-            $project->customer_name = $customer_name;    
-            
-            
+            $project->customer_name = $customer_name;
         }
-        
+
         $data = $projects;
 //        
 //        $projects_ids_array = [];
@@ -258,6 +250,10 @@ class ProjectController extends Controller {
         session(['project_date_to' => ""]);
         $lang = $request->lang;
 
+        return redirect()->route($lang . '_projects.index');
+    }
+
+    function cancelEdit($lang) {
         return redirect()->route($lang . '_projects.index');
     }
 

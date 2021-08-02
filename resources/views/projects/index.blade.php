@@ -83,7 +83,7 @@
                     <input type="radio" id="active" name="active" value="1" checked>
                     <label for="active">{{__('message.active')}}</label><br>
 
-                    
+
                     @php
                     $checked = "";
                     if($project_to_edit == null) {
@@ -117,10 +117,16 @@
 
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
+                    
+                    @if ($project_to_edit !== null)
+                    <a class="btn general_button mr-0" href="{{route('projects.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
+                    @endif
 
-                    <button type="submit" class="btn general_button mr-2">{{ __('message.save') }}</button>
+                    <button type="submit" class="btn general_button mr-2">{{ ($project_to_edit == null) ? __('message.save') : __('message.update')}}</button>
 
                 </div>
+
+               
             </div>
         </form>
     </div>
@@ -271,7 +277,7 @@ $hours_left_count = 0;
             <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
             <td class="align-middle">
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
-                    
+
                     @php
                     $form_id = "editForm".$value->id;
                     $form_dom = "document.getElementById('editForm".$value->id."').submit();";
@@ -285,8 +291,8 @@ $hours_left_count = 0;
                     <a style="text-decoration: none" class="text-dark">
                         <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
                     </a>
-                    
-                    
+
+
                     @php
                     $id = "exampleModal".$value->id;
                     @endphp
@@ -321,7 +327,7 @@ $hours_left_count = 0;
                         </form>
                     </div>
                     <a class="text-dark" href="{{ route($lang.'_projects.add_remove_users',$value->id) }}"><i class="bi bi-person-fill fa-lg"></i></a>
-                    
+
                 </div>
             </td>
         </tr>
