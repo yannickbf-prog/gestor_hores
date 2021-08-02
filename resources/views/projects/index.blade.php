@@ -46,14 +46,14 @@
             <strong>{{__('message.fields_are_required')}}</strong>
         </div>
 
-        <form action="{{ route('projects.store',$lang) }}" method="POST" class="px-3 pt-2">
+        <form action="{{ ($project_to_edit == null) ? route('projects.store',$lang) : route('projects.update',[$project_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-2">
             @csrf
 
             <div class="row">
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
                     <label for="newEditName">*{{__('message.name')}}:</label>
-                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
+                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{ ($project_to_edit == null) ? old('name') : old('name', $project_to_edit->name) }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
@@ -61,7 +61,7 @@
                     @if (count($customers) > 0)
                     <select name="customer_id" id="newEditCustomer" class="form-control">
                         @foreach($customers as $customer)
-                        <option value="{{ $customer->id }}" @if(old('customer_id') == $customer->id){{ "selected" }}@endif>{{$customer->name}}</option>
+                        <option value="{{ $customer->id }}" @if($project_to_edit == null) @if(old('customer_id') == $customer->id){{ "selected" }} @endif @else @if(old('customer_id', $project_to_edit->customer_id) == $customer->id) {{ "selected" }} @endif @endif >{{$customer->name}} </option>
                         @endforeach
                     </select>
                     @else

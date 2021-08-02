@@ -21,10 +21,14 @@ class ProjectController extends Controller {
     public function index(Request $request) {
         $lang = setGetLang();
         
+        $project_to_edit = null;
+                
         $show_create_edit = false;
         
         if ($request->has('_token') && $request->has('edit_project_id')) {
+            $project_to_edit = Project::where('id', $request['edit_project_id'])->first();
             $show_create_edit = true;
+
         }
 
         if ($request->has('_token') && $request->has('customer_id')) {
@@ -241,7 +245,7 @@ class ProjectController extends Controller {
             'projects_json' => $projects_json,
         ];
 
-        return view('projects.index', compact(['data', 'show_create_edit']))->with($filter_jsons)
+        return view('projects.index', compact(['data', 'show_create_edit', 'project_to_edit']))->with($filter_jsons)
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 
