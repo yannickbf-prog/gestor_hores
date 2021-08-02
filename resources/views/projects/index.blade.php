@@ -56,21 +56,18 @@
                     <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>*{{ __('message.customer') }}: </strong>
-                        @if (count($customers) > 0)
-                        <select name="customer_id" id="numRecords">
-                            @foreach($customers as $customer)
-                            <option value="{{ $customer->id }}">{{$customer->name}}</option>
-                            @endforeach
-                        </select>
-                        @else
-                        <li>{{ __('message.no') }} {{ __('message.customers') }} {{ __('message.avalible') }} {{ __('message.create customer') }}</li>
-                        @endif
-                        <a href="{{ route($lang."_customers.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.customer') }}</a>
-                    </div>
-
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
+                    <label for="newEditCustomer">*{{ __('message.customer') }}: </label>
+                    @if (count($customers) > 0)
+                    <select name="customer_id" id="newEditCustomer" class="form-control">
+                        @foreach($customers as $customer)
+                        <option value="{{ $customer->id }}">{{$customer->name}}</option>
+                        @endforeach
+                    </select>
+                    @else
+                    <li>{{ __('message.no') }} {{ __('message.customers') }} {{ __('message.avalible') }} {{ __('message.create customer') }}</li>
+                    @endif
+                    <a href="{{ route($lang."_customers.index") }}" type="button" class="btn btn-sm general_button text-uppercase">{{ __('message.create') }} {{ __('message.customer') }}</a>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -828,6 +825,28 @@ $hours_left_count = 0;
     console.log(projects_json);
 
     firstLoad();
+
+
+
+    //Slide efects
+
+    var addEditCount = 1;
+    $("#addEditHeader").click(function () {
+
+        if (addEditCount % 2 == 0)
+            $('#addEditChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#addEditChevronDown').css("transform", "rotate(180deg)");
+
+        addEditCount++;
+
+        // show hide paragraph on button click
+        $("#addEditContainer").toggle(400);
+    });
+
+
+
 
 </script>
 <script type="text/javascript" src="{{ URL::asset('js/projects_index.js') }}"></script>
