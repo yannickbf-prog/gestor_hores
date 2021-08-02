@@ -51,7 +51,7 @@
 
             <div class="row">
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
                     <label for="newEditName">*{{__('message.name')}}:</label>
                     <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
                 </div>
@@ -61,34 +61,32 @@
                     @if (count($customers) > 0)
                     <select name="customer_id" id="newEditCustomer" class="form-control">
                         @foreach($customers as $customer)
-                        <option value="{{ $customer->id }}">{{$customer->name}}</option>
+                        <option value="{{ $customer->id }}" @if(old('customer_id') == $customer->id){{ "selected" }}@endif>{{$customer->name}}</option>
                         @endforeach
                     </select>
                     @else
-                    <li>{{ __('message.no') }} {{ __('message.customers') }} {{ __('message.avalible') }} {{ __('message.create customer') }}</li>
+                    <ul>
+                        <li>{{ __('message.no') }} {{ __('message.customers') }} {{ __('message.avalible') }} {{ __('message.create customer') }}</li>
+                    </ul>
                     @endif
                     <a href="{{ route($lang."_customers.index") }}" type="button" class="btn btn-sm general_button text-uppercase">{{ __('message.create') }} {{ __('message.customer') }}</a>
-                </div>
+                </div>             
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>*{{ __('message.state') }}:</strong><br>
+                 <div class="form-group col-xs-12 col-sm-8 col-md-5 form_group_new_edit">
+                    <label for="newEditDesc">{{__('message.observations')}}:</label>
+                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ old('description') }}</textarea>
+                </div>
+                
+                 <div class="col-xs-12 col-sm-6 col-md-3 form-group form_group_new_edit">
+                    
+                        <label>*{{ __('message.state') }}:</label><br>
                         <input type="radio" id="active" name="active" value="1" checked>
                         <label for="active">{{__('message.active')}}</label><br>
                         <input type="radio" id="inactive" name="active" value="0">
                         <label for="inactive">{{__('message.inactive')}}</label><br>  
-                    </div>
 
                 </div> 
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>{{__('message.description')}}:</strong>
-                        <textarea class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
-                    </div>
-                </div>
-
-
+                
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
 
@@ -845,7 +843,12 @@ $hours_left_count = 0;
         $("#addEditContainer").toggle(400);
     });
 
-
+var show_create_edit = @json($show_create_edit);
+if (show_create_edit){
+        $('#addEditChevronDown').css("transform", "rotate(180deg)");
+        $('#addEditContainer').show(400);
+        addEditCount = 2;
+    }
 
 
 </script>
