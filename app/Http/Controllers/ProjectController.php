@@ -36,8 +36,8 @@ class ProjectController extends Controller {
         $date_from = $dates[0];
         $date_to = $dates[1];
 
-        $customer = session('project_customer_id');
-        $project = session('project_project_id');
+        $customer = session('project_customer_id', '%');
+        $project = session('project_project_id', '%');
         $state; 
         if(session('project_state') == 'active') {
             $state = 1;
@@ -46,6 +46,9 @@ class ProjectController extends Controller {
             $state = 0;
         }
         else if(session('project_state') == '%') {
+            $state = '%';
+        }
+        else {
             $state = '%';
         }
 

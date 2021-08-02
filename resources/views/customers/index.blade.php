@@ -78,8 +78,8 @@
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-8 col-md-5 form_group_new_edit">
-                    <label for="newEditDesc">{{__('message.description')}}:</label>
-                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{ ($customer_to_edit == null) ? old('description') : old('description', $customer_to_edit->description) }}</textarea>
+                    <label for="newEditDesc">{{__('message.observations')}}:</label>
+                    <textarea id="newEditDesc" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.observations')}}">{{ ($customer_to_edit == null) ? old('description') : old('description', $customer_to_edit->description) }}</textarea>
                 </div>
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">

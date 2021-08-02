@@ -17,12 +17,93 @@
         <div class="pull-left">
             <h2>{{ __('message.projects') }}</h2>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_projects.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.project') }}</a>
-
-        </div>
     </div>
 </div>
+
+@if ($errors->any())
+<div class="alert alert-danger mt-3">
+    @php
+    $show_create_edit = true
+    @endphp
+    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ ucfirst($error) }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="px-2 py-3 create_edit_container">
+    <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
+
+        <h3 class="d-inline-block m-0">{{ __('message.add_new')." ".__('message.project') }}</h3>
+        <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
+    </div>
+
+    <div id="addEditContainer">
+        <div class="alert alert-info m-2 mt-3">
+            <strong>{{__('message.fields_are_required')}}</strong>
+        </div>
+
+        <form action="{{ route('projects.store',$lang) }}" method="POST" class="px-3 pt-2">
+            @csrf
+
+            <div class="row">
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit">
+                    <label for="newEditName">*{{__('message.name')}}:</label>
+                    <input id="newEditName" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>*{{ __('message.customer') }}: </strong>
+                        @if (count($customers) > 0)
+                        <select name="customer_id" id="numRecords">
+                            @foreach($customers as $customer)
+                            <option value="{{ $customer->id }}">{{$customer->name}}</option>
+                            @endforeach
+                        </select>
+                        @else
+                        <li>{{ __('message.no') }} {{ __('message.customers') }} {{ __('message.avalible') }} {{ __('message.create customer') }}</li>
+                        @endif
+                        <a href="{{ route($lang."_customers.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.customer') }}</a>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>*{{ __('message.state') }}:</strong><br>
+                        <input type="radio" id="active" name="active" value="1" checked>
+                        <label for="active">{{__('message.active')}}</label><br>
+                        <input type="radio" id="inactive" name="active" value="0">
+                        <label for="inactive">{{__('message.inactive')}}</label><br>  
+                    </div>
+
+                </div> 
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>{{__('message.description')}}:</strong>
+                        <textarea class="form-control" style="height:150px" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0">
+
+                    <button type="submit" class="btn general_button mr-2">{{ __('message.save') }}</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
 
 <form action="{{ route($lang.'_projects.index') }}" method="GET" id="filtersForm"> 
     @csrf
@@ -417,64 +498,64 @@ $hours_left_count = 0;
      
      */
     function checkAllProjectsStates(projects) {
-        
-            let projectActiveExists = false;
-            let projectNotActiveExists = false;
-            let continueSearching = true;
-            let i = 0;
-            let y = projects.length;
-            while (continueSearching) {
-                if (projects[i].active == 1)
-                    projectActiveExists = true;
-                else {
-                    projectNotActiveExists = true;
-                }
-                if ((projectActiveExists && projectNotActiveExists) || (i == y - 1)) {
-                    continueSearching = false;
-                }
-                i++;
-            }
 
-            let stateSelectHtml = document.createElement("select");
-            //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
-            stateSelectHtml.setAttribute("id", "stateSelect");
-            stateSelectHtml.setAttribute("name", "state");
+        let projectActiveExists = false;
+        let projectNotActiveExists = false;
+        let continueSearching = true;
+        let i = 0;
+        let y = projects.length;
+        while (continueSearching) {
+            if (projects[i].active == 1)
+                projectActiveExists = true;
+            else {
+                projectNotActiveExists = true;
+            }
+            if ((projectActiveExists && projectNotActiveExists) || (i == y - 1)) {
+                continueSearching = false;
+            }
+            i++;
+        }
 
-            if (projectActiveExists && projectNotActiveExists) {
-                let option3 = document.createElement("option");
-                option3.value = "%";
-                option3.innerText = "{{__('message.all_m')}}";
-                stateSelectHtml.appendChild(option3);
-            }
-            if (projectActiveExists) {
-                let option3 = document.createElement("option");
-                option3.value = "active";
-                option3.innerText = "{{__('message.active')}}";
-                stateSelectHtml.appendChild(option3);
-            }
-            if (projectNotActiveExists) {
-                let option3 = document.createElement("option");
-                option3.value = "inactive";
-                option3.innerText = "{{__('message.inactive')}}";
-                stateSelectHtml.appendChild(option3);
-            }
+        let stateSelectHtml = document.createElement("select");
+        //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
+        stateSelectHtml.setAttribute("id", "stateSelect");
+        stateSelectHtml.setAttribute("name", "state");
 
-            document.getElementById('stateGroup').appendChild(stateSelectHtml);
+        if (projectActiveExists && projectNotActiveExists) {
+            let option3 = document.createElement("option");
+            option3.value = "%";
+            option3.innerText = "{{__('message.all_m')}}";
+            stateSelectHtml.appendChild(option3);
+        }
+        if (projectActiveExists) {
+            let option3 = document.createElement("option");
+            option3.value = "active";
+            option3.innerText = "{{__('message.active')}}";
+            stateSelectHtml.appendChild(option3);
+        }
+        if (projectNotActiveExists) {
+            let option3 = document.createElement("option");
+            option3.value = "inactive";
+            option3.innerText = "{{__('message.inactive')}}";
+            stateSelectHtml.appendChild(option3);
+        }
+
+        document.getElementById('stateGroup').appendChild(stateSelectHtml);
     }
-    
+
     function changeCustomer() {
-        
+
         let customerId = document.getElementById('customerSelect').value;
         let projects = $.grep(projects_json, function (e) {
             return e.customer_id == customerId;
         });
-        
+
         let projectSelectHtml = document.createElement("select");
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
         projectSelectHtml.setAttribute("id", "projectSelect");
         projectSelectHtml.setAttribute("onchange", "changeProject()");
         projectSelectHtml.setAttribute("name", "project_id");
-        
+
 
         if (projects.length > 1) {
             let option = document.createElement("option");
@@ -482,16 +563,16 @@ $hours_left_count = 0;
             option.innerText = "{{__('message.all_m')}}";
             projectSelectHtml.appendChild(option);
         }
-        
+
         if (projects.length == 0 && customerId != "%") {
             let option = document.createElement("option");
             option.value = "no_projects_available";
             option.innerText = "{{__('message.no_projects')}}";
             projectSelectHtml.disabled = true;
             projectSelectHtml.appendChild(option);
-            
-            
-             
+
+
+
             document.getElementById('stateSelect').remove();
             let stateSelectHtml = document.createElement("select");
             stateSelectHtml.setAttribute("id", "stateSelect");
@@ -501,26 +582,26 @@ $hours_left_count = 0;
             option2.innerText = "{{__('message.no_state')}}";
             stateSelectHtml.disabled = true;
             stateSelectHtml.appendChild(option2);
-           
+
             document.getElementById('stateGroup').appendChild(stateSelectHtml);
         }
-        
+
         if (projects.length == 0 && customerId == "%") {
             projects = projects_json;
-           
-                let option = document.createElement("option");
-                option.value = "%";
-                option.innerText = "{{__('message.all_m')}}";
-                projectSelectHtml.appendChild(option);
-           
-           //aqui
-               document.getElementById('stateSelect').remove();
-          
-            
+
+            let option = document.createElement("option");
+            option.value = "%";
+            option.innerText = "{{__('message.all_m')}}";
+            projectSelectHtml.appendChild(option);
+
+            //aqui
+            document.getElementById('stateSelect').remove();
+
+
             checkAllProjectsStates(projects_json)
         }
-        
-        
+
+
 
         for (project of projects) {
 
@@ -534,23 +615,23 @@ $hours_left_count = 0;
 
         document.getElementById('projectSelect').remove();
         document.getElementById('projectGroup').appendChild(projectSelectHtml);
-        
-        
+
+
         let newProjectIsNaN = parseInt(document.getElementById('projectSelect').value);
-        
-        
-        if(!isNaN(newProjectIsNaN)) {
+
+
+        if (!isNaN(newProjectIsNaN)) {
             //Active select
             let stateSelectHtml = document.createElement("select");
             stateSelectHtml.setAttribute("id", "stateSelect");
             stateSelectHtml.setAttribute("name", "state");
-            
+
             let project = $.grep(projects_json, function (e) {
                 return e.id == newProjectIsNaN;
             });
 
             let isActive = project[0].active == 1 ? true : false;
-            
+
             if (isActive) {
                 let option = document.createElement("option");
                 option.value = "active";
@@ -570,13 +651,13 @@ $hours_left_count = 0;
         else {
             //customer un - projectes tots
             let newProject = document.getElementById('projectSelect').value;
-            if((!isNaN(parseInt(customerId))) && newProject == "%") {
+            if ((!isNaN(parseInt(customerId))) && newProject == "%") {
                 document.getElementById('stateSelect').remove();
                 checkAllProjectsStates(projects);
             }
         }
-        
-        
+
+
     }
 
     function changeProject() {
@@ -585,8 +666,8 @@ $hours_left_count = 0;
         let project = $.grep(projects_json, function (e) {
             return e.id == projectId;
         });
-        
-       
+
+
 
         if (project.length == 0) {
             let customerSelectHtml = document.createElement("select");
@@ -644,7 +725,7 @@ $hours_left_count = 0;
             stateSelectHtml.setAttribute("name", "state");
 
             let isActive = project[0].active == 1 ? true : false;
-            
+
             if (isActive) {
                 let option = document.createElement("option");
                 option.value = "active";
@@ -659,8 +740,8 @@ $hours_left_count = 0;
 
             document.getElementById('stateSelect').remove();
             document.getElementById('stateGroup').appendChild(stateSelectHtml);
-            
-           
+
+
         }
     }
 
@@ -678,7 +759,7 @@ $hours_left_count = 0;
             option.innerText = "{{__('message.all_m')}}";
             customerSelectHtml.appendChild(option);
         }
-        
+
         if (customers_json.length == 0) {
             let option = document.createElement("option");
             option.value = "no_customers_available";
@@ -712,7 +793,7 @@ $hours_left_count = 0;
             option2.innerText = "{{__('message.all_m')}}";
             projectSelectHtml.appendChild(option2);
         }
-        
+
         if (projects_json.length == 0) {
             let option = document.createElement("option");
             option.value = "no_projects";
@@ -736,7 +817,7 @@ $hours_left_count = 0;
         if (projects_json.length != 0) {
             checkAllProjectsStates(projects_json);
         }
-        
+
     }
 
 
