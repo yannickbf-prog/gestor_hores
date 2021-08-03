@@ -69,7 +69,27 @@ class BagHourController extends Controller
             ->whereBetween('bag_hours.created_at', $dates)
             ->orderBy('created_at', $order)
             ->paginate($num_records);
-                
+        
+        foreach ($data as $bag_hour) {
+            
+            $users_projects_ids = DB::table('users_projects')
+                    ->select('users_projects.id')
+                    ->where('users_projects.project_id', '=', $bag_hour->project_id)
+                    ->get();
+            
+            $users_projects_ids_array = [];
+            
+            foreach ($users_projects_ids as $user_project) {
+                array_push($users_projects_ids_array, $user_project->id);
+            }
+
+            $hours_imputed_project = DB::table('hours_entry')
+                    ->select('hours_imputed')
+                    ->whereIn('user_project_id', $users_projects_ids_array)
+                    ->sum('hours_imputed');
+            
+            $bag_hour->total_hours_project = $hours_imputed_project;
+        }
         
         return view('bag_hours.index', compact('data'))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);

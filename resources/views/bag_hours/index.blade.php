@@ -177,7 +177,7 @@
         <td>{{ $value->customer_name }}</td>
         <td>{{ $value->type_name }}</td>
         <td>{{ $value->contracted_hours }}h</td>
-        <td>put hour available h</td>
+        <td>{{ $value->contracted_hours - $value->total_hours_project }}h</td>
         <td>{{ number_format($value->type_hour_price, 2, ',', '.') }}€</td>
         <td style="width:100px">{{ number_format($value->total_price, 2, ',', '.') }}€</td>
         <td>{{ $value->created_at->format('d/m/y') }}</td>
