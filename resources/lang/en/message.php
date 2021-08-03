@@ -200,5 +200,7 @@ return [
     'no_customers' => 'No customers available',
     'no_projects' => 'No projects available',
     'no_state' => 'No states available',
+    'hours_left' => 'Hours left',
+    'total_hours_count' => 'Total hours count'
 
 ];

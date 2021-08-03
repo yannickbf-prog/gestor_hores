@@ -199,4 +199,6 @@ return [
     'no_customers' => 'No hay clientes disponibles',
     'no_projects' => 'No hi han projectes disponibles',
     'no_state' => 'No hay estados disponibles',
+    'hours_left' => 'Horas restantes',
+    'total_hours_count' => 'Suma total de horas'
 ];
