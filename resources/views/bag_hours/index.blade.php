@@ -145,7 +145,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.contracted_hours') }}:</strong>
-                <input type="text" name="contracted_hours" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contracted_hours') }}" value="@if(session('bag_hour_contracted_hours') != '%'){{session('bag_hour_contracted_hours')}}@endif">
+                <input type="text" name="contracted_hours_filter" class="form-control" placeholder="{{__('message.enter')}} {{ __('message.contracted_hours') }}" value="@if(session('bag_hour_contracted_hours') != '%'){{session('bag_hour_contracted_hours')}}@endif">
             </div>
         </div>
     </div>
@@ -319,4 +319,12 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ URL::asset('js/hour_bags_index.js') }}"></script>
+<script>
+var show_create_edit = @json($show_create_edit);
+if (show_create_edit) {
+    $('#addEditChevronDown').css("transform", "rotate(180deg)");
+    $('#addEditContainer').show(400);
+    addEditCount = 2;
+}
+</script>
 @endsection

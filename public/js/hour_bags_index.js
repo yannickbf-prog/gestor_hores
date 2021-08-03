@@ -181,6 +181,7 @@ function selectChange(){
         document.getElementById("calculatePrice").classList.remove("disabled");
     }
 
+    
 window.onload = function () {
     //Load popover btn listeners
     document.getElementById("datePopoverBtn").addEventListener("click", togglePopover);
