@@ -17,12 +17,50 @@
         <div class="pull-left">
             <h2>{{ __('message.bags_of_hours') }}</h2>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bag_hours.create') }}">{{ __('message.create') }} {{ __('message.new_f') }} {{ __('message.bag_of_hours') }}</a>
-
-        </div>
     </div>
 </div>
+@if ($errors->any())
+<div class="alert alert-danger mt-3">
+    @php
+    $show_create_edit = true
+    @endphp
+    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ ucfirst($error) }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="px-2 py-3 create_edit_container">
+    <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
+
+        <h3 class="d-inline-block m-0">{{ ($bag_hour_to_edit == null) ? __('message.add_new')." ".__('message.bag_hour') : __('message.edit')." ".__('message.bag_hour') }}</h3>
+        <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
+    </div>
+
+    <div id="addEditContainer">
+        <div class="alert alert-info m-2 mt-3">
+            <strong>{{__('message.fields_are_required')}}</strong>
+        </div>
+
+        <form action="{{ ($bag_hour_to_edit == null) ? route('bag_hours.store',$lang) : route('bag_hours.update',[$bag_hour_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-2">
+            @csrf
+
+            <div class="row">
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
+                   
+                </div>
+              
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
 <form action="{{ route($lang.'_bag_hours.index') }}" method="GET">
     @csrf
 

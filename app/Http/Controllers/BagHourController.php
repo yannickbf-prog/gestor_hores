@@ -19,6 +19,8 @@ class BagHourController extends Controller
     {
         $lang = setGetLang();
         
+        $bag_hour_to_edit = null;
+        
         if ($request->has('_token')) {
             ($request['type'] == "") ? session(['bag_hour_type' => '%']) : session(['bag_hour_type' => $request['type']]);
             ($request['project'] == "") ? session(['bag_hour_project' => '%']) : session(['bag_hour_project' => $request['project']]);
@@ -91,7 +93,7 @@ class BagHourController extends Controller
             $bag_hour->total_hours_project = $hours_imputed_project;
         }
         
-        return view('bag_hours.index', compact('data'))
+        return view('bag_hours.index', compact(['data' ,'bag_hour_to_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
