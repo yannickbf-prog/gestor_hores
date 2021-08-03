@@ -51,7 +51,7 @@
             <div class="row">
 
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit mb-0">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit mb-md-0">
                     <label for="typeSelect">*{{ __('message.bag_hour_type') }}: </label>
                     @if (count($bags_hours_types) > 0)
                     <select name="type_id" id="typeSelect" class="form-control mb-">
@@ -59,7 +59,7 @@
                         <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
                         @endforeach
                     </select>
-                    <span>{{ __('message.hour_price') }}: </span><strong id="hourPrice"></strong><strong> €</strong>
+                    <span>{{ __('message.hour_price') }}: </span><strong id="hourPrice"></strong><strong>€</strong>
                     @else
                     <li>{{ __('message.no') }} {{ __('message.bag_hour_type') }} {{ __('message.avalible') }} </li>
                     @endif
@@ -67,7 +67,7 @@
                 </div>
 
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit mb-0">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit mb-md-0">
                     <label for="projectSelect">*{{ __('message.project') }}: </label>
                     @if (count($bags_hours_types) > 0)
                     <select name="project_id" id="projectSelect" class="form-control mb-1">
@@ -78,18 +78,18 @@
                     @else
                     <li>{{ __('message.no') }} {{ __('message.project') }} {{ __('message.avalible') }} </li>
                     @endif
-                    <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-sm general_button text-uppercase m-2">{{ __('message.create') }} {{ __('message.project') }}</a>
+                    <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-sm general_button text-uppercase m-1">{{ __('message.create') }} {{ __('message.project') }}</a>
 
                 </div>
 
 
-                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-0">
+                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-md-0">
                     <label for="contractedHours">*{{__('message.contracted_hours')}}:</label>
                     <input type="text" name="contracted_hours" class="form-control" id="contractedHours" placeholder="{{__('message.enter')." ".__('message.contracted_hours')}}" value="{{old('contracted_hours')}}">
                 </div>
 
 
-                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-0">
+                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-md-0">
                     <label for="totalPrice">*{{__('message.total_price')}}:</label>
                     <input type="text" name="total_price" class="form-control" id="totalPrice" placeholder="{{__('message.enter')." ".__('message.total_price')}}" value="{{old('total_price')}}">
                 </div>
@@ -260,7 +260,7 @@
             <th>{{ __('message.hour_price') }}</th>
             <th>{{ __('message.total_price') }}</th>
             <th>{{ __('message.created_at') }}</th>
-            <th>{{ __('message.action') }}</th>
+            <th></th>
         </tr>
     </thead>
     @endif

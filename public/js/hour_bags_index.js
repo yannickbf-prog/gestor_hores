@@ -168,7 +168,7 @@ function selectChange(){
         let contractedHours = /^[0-9]*$/g.exec(document.getElementById("contractedHours").value);
         console.log(contractedHours)
         console.log(typeof contractedHours)
-    	if(contractedHours == null){
+    	if(contractedHours == null || contractedHours == ""){
             document.getElementById("calculatePrice").classList.add("disabled");
     	}
     	else{
@@ -177,7 +177,9 @@ function selectChange(){
     }
 
     let contractedHours = /^[0-9]*$/g.exec(document.getElementById("contractedHours").value);
-    if(contractedHours)
+    if(contractedHours != null && contractedHours != "") {
+        document.getElementById("calculatePrice").classList.remove("disabled");
+    }
 
 window.onload = function () {
     //Load popover btn listeners
