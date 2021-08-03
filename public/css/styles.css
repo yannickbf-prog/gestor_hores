@@ -384,3 +384,7 @@ header.py-2 {    margin-bottom: 0 !important;}
 .create_edit_container {
     border: 1px solid deepskyblue;
 }
+
+#calculatePrice {
+    color: #2da0e2;
+}

@@ -51,60 +51,57 @@
             <div class="row">
 
 
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
-                        <label for="typeSelect">*{{ __('message.bag_hour_type') }}: </label>
-                        @if (count($bags_hours_types) > 0)
-                        <select name="type_id" id="typeSelect" class="form-control mb-1">
-                            @foreach($bags_hours_types as $key => $bag_hours_type)
-                            <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
-                            @endforeach
-                        </select>
-                        <span>{{ __('message.hour_price') }}: </span><strong id="hourPrice"></strong><strong> €</strong>
-                        @else
-                        <li>{{ __('message.no') }} {{ __('message.bag_hour_type') }} {{ __('message.avalible') }} </li>
-                        @endif
-                        <a href="{{ route($lang."_bag_hours_types.index") }}" type="button" class="btn btn-sm general_button text-uppercase m-0 mt-1">{{ __('message.create') }} {{ __('message.bag_hour_type') }}</a>
-                    </div>
-         
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>*{{ __('message.project') }}: </strong>
-                        @if (count($bags_hours_types) > 0)
-                        <select name="project_id">
-                            @foreach($projects as $key => $project)
-                            <option value="{{ $project->id }}">{{$project->name}}</option>
-                            @endforeach
-                        </select>
-                        @else
-                        <li>{{ __('message.no') }} {{ __('message.project') }} {{ __('message.avalible') }} </li>
-                        @endif
-                        <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.project') }}</a>
-                    </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
+                    <label for="typeSelect">*{{ __('message.bag_hour_type') }}: </label>
+                    @if (count($bags_hours_types) > 0)
+                    <select name="type_id" id="typeSelect" class="form-control mb-1">
+                        @foreach($bags_hours_types as $key => $bag_hours_type)
+                        <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
+                        @endforeach
+                    </select>
+                    <span>{{ __('message.hour_price') }}: </span><strong id="hourPrice"></strong><strong> €</strong>
+                    @else
+                    <li>{{ __('message.no') }} {{ __('message.bag_hour_type') }} {{ __('message.avalible') }} </li>
+                    @endif
+                    <a href="{{ route($lang."_bag_hours_types.index") }}" type="button" class="btn btn-sm general_button text-uppercase m-2">{{ __('message.create') }} {{ __('message.bag_hour_type') }}</a>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>*{{__('message.contracted_hours')}}:</strong>
-                        <input type="text" name="contracted_hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.contracted_hours')}}" value="{{old('contracted_hours')}}">
-                    </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
+                    <label for="projectSelect">*{{ __('message.project') }}: </label>
+                    @if (count($bags_hours_types) > 0)
+                    <select name="project_id" id="projectSelect" class="form-control">
+                        @foreach($projects as $key => $project)
+                        <option value="{{ $project->id }}">{{$project->name}}</option>
+                        @endforeach
+                    </select>
+                    @else
+                    <li>{{ __('message.no') }} {{ __('message.project') }} {{ __('message.avalible') }} </li>
+                    @endif
+                    <a href="{{ route($lang."_projects.create") }}" type="button" class="btn btn-sm general_button text-uppercase m-2">{{ __('message.create') }} {{ __('message.project') }}</a>
+
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>*{{__('message.total_price')}}:</strong>
-                        <input type="text" name="total_price" class="form-control" placeholder="{{__('message.enter')." ".__('message.total_price')}}" value="{{old('total_price')}}">
-                    </div>
+
+                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit">
+                    <label for="contractedHours">*{{__('message.contracted_hours')}}:</label>
+                    <input type="text" name="contracted_hours" class="form-control" id="contractedHours" placeholder="{{__('message.enter')." ".__('message.contracted_hours')}}" value="{{old('contracted_hours')}}">
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="alert alert-info mt-2 d-none" id="alertCalculatedPrice">
+
+                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit">
+                    <label for="totalPrice">*{{__('message.total_price')}}:</label>
+                    <input type="text" name="total_price" class="form-control" id="totalPrice" placeholder="{{__('message.enter')." ".__('message.total_price')}}" value="{{old('total_price')}}">
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="alert alert-primary mt-2 d-none" id="alertCalculatedPrice">
                         <strong></strong>
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <a class="btn btn-primary" id="calculatePrice">{{__('message.calculate_price')}}</a>
+                    <a class="btn general_button text-uppercase" id="calculatePrice">{{__('message.calculate_price')}}</a>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">

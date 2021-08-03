@@ -201,5 +201,6 @@ return [
     'no_state' => 'No hay estados disponibles',
     'hours_left' => 'Horas restantes',
     'total_hours_count' => 'Suma total de horas',
-    'type' => 'Tipo'
+    'type' => 'Tipo',
+    'calculate_price' => 'Calcular precio'
 ];

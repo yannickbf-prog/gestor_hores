@@ -202,6 +202,8 @@ return [
     'no_state' => 'No states available',
     'hours_left' => 'Hours left',
     'total_hours_count' => 'Total hours count',
-    'type' => 'Type'
+    'type' => 'Type',
+    
+    'calculate_price' => 'Calculate price'
 
 ];

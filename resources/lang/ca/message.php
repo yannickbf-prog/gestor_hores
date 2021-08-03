@@ -202,5 +202,7 @@ return [
     'no_state' => 'No hi han estats disponibles',
     'hours_left' => 'Hores restants',
     'total_hours_count' => "Suma total d'hores",
-    'type' => 'Tipus'
+    'type' => 'Tipus',
+    
+    'calculate_price' => 'Calcular preu'
 ];
