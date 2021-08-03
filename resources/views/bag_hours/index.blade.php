@@ -50,22 +50,22 @@
 
             <div class="row">
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>*{{ __('message.bag_hour_type') }}: </strong>
+
+                    <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
+                        <label for="typeSelect">*{{ __('message.bag_hour_type') }}: </label>
                         @if (count($bags_hours_types) > 0)
-                        <select name="type_id">
+                        <select name="type_id" id="typeSelect" class="form-control mb-1">
                             @foreach($bags_hours_types as $key => $bag_hours_type)
                             <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
                             @endforeach
                         </select>
-                        <strong>*{{ __('message.hour_price') }}: </strong><span id="hourPrice"></span><strong> €</strong>
+                        <span>{{ __('message.hour_price') }}: </span><strong id="hourPrice"></strong><strong> €</strong>
                         @else
                         <li>{{ __('message.no') }} {{ __('message.bag_hour_type') }} {{ __('message.avalible') }} </li>
                         @endif
-                        <a href="{{ route($lang."_bag_hours_types.create") }}" type="button" class="btn btn-primary btn-sm">{{ __('message.create') }} {{ __('message.bag_hour_type') }}</a>
+                        <a href="{{ route($lang."_bag_hours_types.index") }}" type="button" class="btn btn-sm general_button text-uppercase m-0 mt-1">{{ __('message.create') }} {{ __('message.bag_hour_type') }}</a>
                     </div>
-                </div>
+         
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
