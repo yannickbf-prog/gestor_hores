@@ -51,10 +51,10 @@
             <div class="row">
 
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit mb-0">
                     <label for="typeSelect">*{{ __('message.bag_hour_type') }}: </label>
                     @if (count($bags_hours_types) > 0)
-                    <select name="type_id" id="typeSelect" class="form-control mb-1">
+                    <select name="type_id" id="typeSelect" class="form-control mb-">
                         @foreach($bags_hours_types as $key => $bag_hours_type)
                         <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
                         @endforeach
@@ -67,7 +67,7 @@
                 </div>
 
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit mb-0">
                     <label for="projectSelect">*{{ __('message.project') }}: </label>
                     @if (count($bags_hours_types) > 0)
                     <select name="project_id" id="projectSelect" class="form-control mb-1">
@@ -83,29 +83,29 @@
                 </div>
 
 
-                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit">
+                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-0">
                     <label for="contractedHours">*{{__('message.contracted_hours')}}:</label>
                     <input type="text" name="contracted_hours" class="form-control" id="contractedHours" placeholder="{{__('message.enter')." ".__('message.contracted_hours')}}" value="{{old('contracted_hours')}}">
                 </div>
 
 
-                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit">
+                <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-0">
                     <label for="totalPrice">*{{__('message.total_price')}}:</label>
                     <input type="text" name="total_price" class="form-control" id="totalPrice" placeholder="{{__('message.enter')." ".__('message.total_price')}}" value="{{old('total_price')}}">
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-9">
-                    <div class="alert alert-primary mt-2 d-none" id="alertCalculatedPrice">
+                    <div class="alert alert-primary mt-2 mb-0 d-none" id="alertCalculatedPrice">
                         <strong></strong>
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-3 d-flex justify-content-end align-items-center">
-                    <a class="btn general_button text-uppercase disabled" id="calculatePrice">{{__('message.calculate_price')}}</a>
+                <div class="col-xs-12 col-sm-12 col-md-3 d-flex justify-content-end align-items-start pr-1 pt-3 pt-sm-0">
+                    <a class="btn general_button text-uppercase disabled m-0" id="calculatePrice">{{__('message.calculate_price')}}</a>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">{{__('message.submit')}}</button>
+                <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0 pt-4">
+                    <button type="submit" class="btn general_button mr-2">{{__('message.save')}}</button>
                 </div>
 
             </div>
