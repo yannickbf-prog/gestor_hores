@@ -257,6 +257,13 @@ class ProjectController extends Controller {
     function cancelEdit($lang) {
         return redirect()->route($lang . '_projects.index');
     }
+    
+    public function changeNumRecords(Request $request, $lang) {
+
+        session(['project_num_records' => $request['num_records']]);
+
+        return redirect()->route($lang . '_projects.index');
+    }
 
     /**
      * Show the form for creating a new resource.

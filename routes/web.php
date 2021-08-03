@@ -126,6 +126,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('control-panel/projects/remove_user/{project_id}/{lang}', [ProjectController::class, 'removeUser'])->name('projects.remove_user');
     Route::post('control-panel/projects/add_user/{project_id}/{lang}', [ProjectController::class, 'addUser'])->name('projects.add_user');
     Route::get("control-panel/projects/lang/{lang}", [ProjectController::class, 'cancelEdit'])->name('projects.cancel_edit');
+    Route::get('control-panel/projects/change_num_records/lang/{lang}', [ProjectController::class, 'changeNumRecords'])->name('projects.change_num_records');
 
     //Control panel - Projects - en 
     Route::get("en/control-panel/projects", [ProjectController::class, 'index'])->name('en_projects.index');
