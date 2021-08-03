@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <a class="btn general_button text-uppercase" id="calculatePrice">{{__('message.calculate_price')}}</a>
+                    <a class="btn general_button text-uppercase disabled" id="calculatePrice">{{__('message.calculate_price')}}</a>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">

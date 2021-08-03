@@ -163,6 +163,18 @@ function selectChange(){
         // show hide paragraph on button click
         $("#addEditContainer").toggle(400);
     });
+    
+    function onOffCalculateBtn() {
+        let contractedHours = /^[0-9]*$/g.exec(document.getElementById("contractedHours").value);
+        console.log(contractedHours)
+        console.log(typeof contractedHours)
+    	if(contractedHours == null){
+            document.getElementById("calculatePrice").classList.add("disabled");
+    	}
+    	else{
+            document.getElementById("calculatePrice").classList.remove("disabled");
+    	}
+    }
 
 window.onload = function () {
     //Load popover btn listeners
@@ -183,6 +195,9 @@ window.onload = function () {
 
     //On change select we change hour price
     document.getElementsByName("type_id")[0].addEventListener("change",selectChange);
+    
+    //On change contracted hours active / disable calculate button
+    document.getElementById("contractedHours").addEventListener("input",onOffCalculateBtn);
 };
 
 
