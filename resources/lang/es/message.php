@@ -122,6 +122,8 @@ return [
     
     'confirm' => 'Estas seguro que quieres',
     'the' => 'el',
+    'the_f' => 'la',
+    'in_the' => 'en el proyecto',
     
     'add_new' => 'Añadir nuevo',
     'back' => 'Volver',

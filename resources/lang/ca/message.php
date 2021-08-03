@@ -123,6 +123,8 @@ return [
     
     'confirm' => 'Estas segur que vols',
     'the' => 'el',
+    'the_f' => 'la',
+    'in_the' => 'al',
     
     'add_new' => 'Afegir nou',
     'back' => 'Tornar',

@@ -123,6 +123,8 @@ return [
     
     'confirm' => 'Are you sure you want to',
     'the' => 'the',
+    'the_f' => 'the',
+    'in_the' => 'in the',
     
     'add_new' => 'Add New',
     'back' => 'Back',
