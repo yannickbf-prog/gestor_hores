@@ -93,7 +93,11 @@ class BagHourController extends Controller
             $bag_hour->total_hours_project = $hours_imputed_project;
         }
         
-        return view('bag_hours.index', compact(['data' ,'bag_hour_to_edit']))
+        //For create / edit
+        $bags_hours_types = DB::table('type_bag_hours')->select("id", "name", "hour_price")->get();
+        $projects = DB::table('projects')->select("id", "name")->get();
+        
+        return view('bag_hours.index', compact(['data' ,'bag_hour_to_edit', 'bags_hours_types', 'projects']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
