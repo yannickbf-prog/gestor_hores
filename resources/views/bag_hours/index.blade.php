@@ -70,7 +70,7 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit">
                     <label for="projectSelect">*{{ __('message.project') }}: </label>
                     @if (count($bags_hours_types) > 0)
-                    <select name="project_id" id="projectSelect" class="form-control">
+                    <select name="project_id" id="projectSelect" class="form-control mb-1">
                         @foreach($projects as $key => $project)
                         <option value="{{ $project->id }}">{{$project->name}}</option>
                         @endforeach
@@ -94,13 +94,13 @@
                     <input type="text" name="total_price" class="form-control" id="totalPrice" placeholder="{{__('message.enter')." ".__('message.total_price')}}" value="{{old('total_price')}}">
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 col-sm-6 col-md-9">
                     <div class="alert alert-primary mt-2 d-none" id="alertCalculatedPrice">
                         <strong></strong>
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-3 d-flex justify-content-end align-items-center">
                     <a class="btn general_button text-uppercase disabled" id="calculatePrice">{{__('message.calculate_price')}}</a>
                 </div>
 

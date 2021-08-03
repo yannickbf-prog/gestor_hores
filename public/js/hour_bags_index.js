@@ -176,6 +176,9 @@ function selectChange(){
     	}
     }
 
+    let contractedHours = /^[0-9]*$/g.exec(document.getElementById("contractedHours").value);
+    if(contractedHours)
+
 window.onload = function () {
     //Load popover btn listeners
     document.getElementById("datePopoverBtn").addEventListener("click", togglePopover);
