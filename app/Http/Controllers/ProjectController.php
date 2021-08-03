@@ -23,6 +23,7 @@ class ProjectController extends Controller {
 
         $project_to_edit = null;
 
+        $show_filters = false;
         $show_create_edit = false;
 
         if ($request->has('_token') && $request->has('edit_project_id')) {
@@ -31,6 +32,8 @@ class ProjectController extends Controller {
         }
 
         if ($request->has('_token') && $request->has('customer_id')) {
+            
+            $show_filters = true;
 
             session(['project_customer_id' => $request['customer_id']]);
 
@@ -235,7 +238,7 @@ class ProjectController extends Controller {
             'projects_json' => $projects_json,
         ];
 
-        return view('projects.index', compact(['data', 'show_create_edit', 'project_to_edit']))->with($filter_jsons)
+        return view('projects.index', compact(['data', 'show_create_edit', 'project_to_edit', 'show_filters']))->with($filter_jsons)
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
 
