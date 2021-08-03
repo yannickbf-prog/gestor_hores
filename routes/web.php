@@ -122,7 +122,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post("control-panel/projects/lang/{lang}", [ProjectController::class, 'store'])->name('projects.store');
     Route::post("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'update'])->name('projects.update');
     Route::delete("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'destroy'])->name('projects.destroy');
-    Route::post('control-panel/projects/delete_filters/', [ProjectController::class, 'deleteFilters'])->name('projects.delete_filters');
+    Route::get('control-panel/projects/delete_filters/lang/{lang}', [ProjectController::class, 'deleteFilters'])->name('projects.delete_filters');
     Route::post('control-panel/projects/remove_user/{project_id}/{lang}', [ProjectController::class, 'removeUser'])->name('projects.remove_user');
     Route::post('control-panel/projects/add_user/{project_id}/{lang}', [ProjectController::class, 'addUser'])->name('projects.add_user');
     Route::get("control-panel/projects/lang/{lang}", [ProjectController::class, 'cancelEdit'])->name('projects.cancel_edit');
