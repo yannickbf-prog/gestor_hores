@@ -159,9 +159,9 @@
     @if (count($data) > 0)
     <tr>
         <th>Nº</th>
-        <th>{{ __('message.bag_of_hours_type') }}</th>
         <th>{{ __('message.project') }}</th>
-        <th>{{ __('message.bag_of_hours_type_description') }}</th>
+        <th>{{ __('message.customer_name') }}</th>
+        <th>{{ __('message.type') }}</th>
         <th>{{ __('message.contracted_hours') }}</th>
         <th>{{ __('message.hours_available') }}</th>
         <th>{{ __('message.hour_price') }}</th>
@@ -173,9 +173,9 @@
     @forelse ($data as $key => $value)
     <tr>
         <td>{{ ++$i }}</td>
-        <td>{{ $value->type_name }}</td>
         <td>{{ $value->project_name }}</td>
-        <td>@if ($value->description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
+        <td>{{ $value->customer_name }}</td>
+        <td>{{ $value->type_name }}</td>
         <td>{{ $value->contracted_hours }}h</td>
         <td>put hour available h</td>
         <td>{{ number_format($value->type_hour_price, 2, ',', '.') }}€</td>

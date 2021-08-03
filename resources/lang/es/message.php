@@ -101,7 +101,7 @@ return [
     'no_website_available' => 'Sitio web no disponible',
     
     'create_new_type_hour_bag' => "Crear Nuevo Tipo de bolsa de horas",
-    'hour_price' => 'Precio por hora',
+    'hour_price' => 'Precio hora',
     'hour_format' => "El precio debe tener el siguiente formato: 20, 2000, 20.25 o 20,25 (valores de ejemplo).",
     
     'create' => 'Crear',
@@ -139,8 +139,8 @@ return [
     "bags_of_hours_list" => "Lista de bolsas de horas",
     "bag_of_hours_type" => "Tipo de bolsa de hores",
     "bag_of_hours_type_description" => "Descripción de tipo de bolsa de horas",
-    "contracted_hours" => "Horas contractadas",
-    "hours_available" => "Horas disponibles",
+    "contracted_hours" => "H. contractadas",
+    "hours_available" => "H. disponibles",
     "total_price" => "Precio total",
     
     'entry_hours_worked' => 'Entrar horas trabajadas',
@@ -200,5 +200,6 @@ return [
     'no_projects' => 'No hi han projectes disponibles',
     'no_state' => 'No hay estados disponibles',
     'hours_left' => 'Horas restantes',
-    'total_hours_count' => 'Suma total de horas'
+    'total_hours_count' => 'Suma total de horas',
+    'type' => 'Tipo'
 ];

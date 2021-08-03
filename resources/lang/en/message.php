@@ -140,8 +140,8 @@ return [
     "bags_of_hours_list" => "Bags of hours list",
     "bag_of_hours_type" => "Bag of hours type",
     "bag_of_hours_type_description" => "Bag of hours type description",
-    "contracted_hours" => "Contracted hours",
-    "hours_available" => "Hours available",
+    "contracted_hours" => "H. contracted",
+    "hours_available" => "H. available",
     "total_price" => "Total price",
     
     'entry_hours_worked' => 'Entry hours worked',
@@ -201,6 +201,7 @@ return [
     'no_projects' => 'No projects available',
     'no_state' => 'No states available',
     'hours_left' => 'Hours left',
-    'total_hours_count' => 'Total hours count'
+    'total_hours_count' => 'Total hours count',
+    'type' => 'Type'
 
 ];

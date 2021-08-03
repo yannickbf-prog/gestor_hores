@@ -101,7 +101,7 @@ return [
     
     
     'create_new_type_hour_bag' => "Crear Nou Tipus de bossa d'hores",
-    'hour_price' => 'Preu per hora',
+    'hour_price' => 'Preu hora',
     'hour_format' => "El preu ha de tenir el següent format: 20, 2000, 20.25 o 20,25 (valors d'exemple).",
 
 
@@ -140,8 +140,8 @@ return [
     "bags_of_hours_list" => "Llista de bosses d'hores",
     "bag_of_hours_type" => "Tipus de bossa d'hores",
     "bag_of_hours_type_description" => "Descripció de tipus de bossa d'hores",
-    "contracted_hours" => "Hores contractades",
-    "hours_available" => "Hores disponibles",
+    "contracted_hours" => "H. contractades",
+    "hours_available" => "H. disponibles",
     "total_price" => "Preu total",
     
     'entry_hours_worked' => 'Entrar hores treballades',
@@ -201,5 +201,6 @@ return [
     'no_projects' => 'No hi ha projectes disponibles',
     'no_state' => 'No hi han estats disponibles',
     'hours_left' => 'Hores restants',
-    'total_hours_count' => "Suma total d'hores"
+    'total_hours_count' => "Suma total d'hores",
+    'type' => 'Tipus'
 ];
