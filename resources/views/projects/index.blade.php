@@ -144,11 +144,11 @@
         <form action="{{ route($lang.'_projects.index') }}" method="GET" class="row"> 
             @csrf
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-3" id="customerGroup">  
+            <div class="form-group col-xs-12 col-sm-6 col-md-4" id="customerGroup">  
                 <label for="filterCustomer">{{ __('message.customer') }}:</label>
             </div>
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-3" id="projectGroup">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4" id="projectGroup">
                <label for="filterProject">{{ __('message.project') }}:</label>
             </div>
 
@@ -197,9 +197,6 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h3>{{ __('message.projects_list') }}</h3>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_projects.create') }}">{{ __('message.create') }} {{ __('message.new') }} {{ __('message.project') }}</a>
         </div>
     </div>
 </div>
@@ -548,6 +545,7 @@ $hours_left_count = 0;
         //userSelectHtml.setAttribute("onchange", "loadUsersOfProject()");
         stateSelectHtml.setAttribute("id", "stateSelect");
         stateSelectHtml.setAttribute("name", "state");
+        stateSelectHtml.setAttribute("class", "form-control");
 
         if (projectActiveExists && projectNotActiveExists) {
             let option3 = document.createElement("option");
@@ -583,6 +581,7 @@ $hours_left_count = 0;
         projectSelectHtml.setAttribute("id", "projectSelect");
         projectSelectHtml.setAttribute("onchange", "changeProject()");
         projectSelectHtml.setAttribute("name", "project_id");
+        projectSelectHtml.setAttribute("class", "form-control");
 
 
         if (projects.length > 1) {
@@ -605,6 +604,7 @@ $hours_left_count = 0;
             let stateSelectHtml = document.createElement("select");
             stateSelectHtml.setAttribute("id", "stateSelect");
             stateSelectHtml.setAttribute("name", "state");
+            stateSelectHtml.setAttribute("class", "form-control");
             let option2 = document.createElement("option");
             option2.value = "no_state";
             option2.innerText = "{{__('message.no_state')}}";
@@ -653,6 +653,7 @@ $hours_left_count = 0;
             let stateSelectHtml = document.createElement("select");
             stateSelectHtml.setAttribute("id", "stateSelect");
             stateSelectHtml.setAttribute("name", "state");
+            stateSelectHtml.setAttribute("class", "form-control");
 
             let project = $.grep(projects_json, function (e) {
                 return e.id == newProjectIsNaN;
@@ -703,6 +704,7 @@ $hours_left_count = 0;
             customerSelectHtml.setAttribute("id", "customerSelect");
             customerSelectHtml.setAttribute("onchange", "changeCustomer()");
             customerSelectHtml.setAttribute("name", "customer_id");
+            customerSelectHtml.setAttribute("class", "form-control");
 
             if (customers_json.length > 1) {
                 let option = document.createElement("option");
@@ -734,6 +736,7 @@ $hours_left_count = 0;
             customerSelectHtml.setAttribute("id", "customerSelect");
             customerSelectHtml.setAttribute("onchange", "changeCustomer()");
             customerSelectHtml.setAttribute("name", "customer_id");
+            customerSelectHtml.setAttribute("class", "form-control");
             let option = document.createElement("option");
             option.value = project[0].customer_id;
             let customerName = $.grep(customers_json, function (e) {
@@ -751,6 +754,7 @@ $hours_left_count = 0;
             let stateSelectHtml = document.createElement("select");
             stateSelectHtml.setAttribute("id", "stateSelect");
             stateSelectHtml.setAttribute("name", "state");
+            stateSelectHtml.setAttribute("class", "form-control");
 
             let isActive = project[0].active == 1 ? true : false;
 
@@ -780,6 +784,7 @@ $hours_left_count = 0;
         customerSelectHtml.setAttribute("id", "customerSelect");
         customerSelectHtml.setAttribute("onchange", "changeCustomer()");
         customerSelectHtml.setAttribute("name", "customer_id");
+        customerSelectHtml.setAttribute("class", "form-control");
 
         if (customers_json.length > 1) {
             let option = document.createElement("option");
@@ -814,6 +819,7 @@ $hours_left_count = 0;
         projectSelectHtml.setAttribute("id", "projectSelect");
         projectSelectHtml.setAttribute("onchange", "changeProject()");
         projectSelectHtml.setAttribute("name", "project_id");
+        projectSelectHtml.setAttribute("class", "form-control");
 
         if (projects_json.length > 1) {
             let option2 = document.createElement("option");
