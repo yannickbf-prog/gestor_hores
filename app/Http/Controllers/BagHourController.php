@@ -23,7 +23,7 @@ class BagHourController extends Controller
         
         $show_create_edit = false;
         
-        if ($request->has('_token') && $request->has('contracted_hours')) {
+        if ($request->has('_token') && $request->has('edit_bag_hour_id')) {
             
             $show_create_edit = true;
             
