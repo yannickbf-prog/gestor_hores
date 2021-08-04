@@ -203,9 +203,20 @@ class BagHourController extends Controller
     public function update(EditBagHourRequest $request, BagHour $bagHour, $lang)
     {
         
-        App::setLocale($lang);
+        BagHour::where('id', $bagHour->id)
+        ->update([
+            'project_id' => $request->get("project_id"),
+            'type_id' => $request->get("type_id"),
+            'contracted_hours' => $request->get("contracted_hours"),
+            'total_price' => $request->get("total_price"),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         
-        return $request;
+       
+        
+        return redirect()->route($lang . '_bag_hours.index')
+                        ->with('success', __('message.bag_hour') . " " . $bagHour->name . " " . __('message.updated'));
     }
 
     /**

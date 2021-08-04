@@ -112,7 +112,7 @@
                 <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-md-0">
                     <label for="totalPrice">*{{__('message.total_price')}}:</label>
                     <input type="text" name="total_price" class="form-control" id="totalPrice" placeholder="{{__('message.enter')." ".__('message.total_price')}}" 
-                           value="{{ ($bag_hour_to_edit == null) ? old('total_price') : old('total_price', $bag_hour_to_edit->total_price) }}">
+                           value="{{ ($bag_hour_to_edit == null) ? old('total_price') : old('total_price', str_replace(".", ",", $bag_hour_to_edit->total_price)) }}">
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-9">
