@@ -63,13 +63,16 @@
                     <select name="type_id" id="typeSelect" class="form-control mb-">
                         @foreach($bags_hours_types as $key => $bag_hours_type)
                         <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}' 
-                                @if($bag_hour_to_edit === null && $json_value !== null) 
-                                    @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
-                                @elseif($bag_hour_to_edit !== null && $json_value !== null)
-                                    @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
-                                @elseif($bag_hour_to_edit != null && $json_value == null)
-                                    @if($bag_hour_to_edit->id == $bag_hours_type->id) {{ "selected" }} @endif 
+                                @if($bag_hour_to_edit == null)
+                                    @if($json_value != null)
+                                        @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
+                                    @endif
+                                @else
+                                    @if($json_value === null)
+                                        @if($bag_hour_to_edit->type_id == $bag_hours_type->id){{ "selected" }} @endif 
+                                    @endif
                                 @endif
+                                
                             >{{$bag_hours_type->name}}</option>
                         @endforeach
                     </select>
