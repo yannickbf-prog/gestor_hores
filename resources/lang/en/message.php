@@ -206,6 +206,7 @@ return [
     'total_hours_count' => 'Total hours count',
     'type' => 'Type',
     
-    'calculate_price' => 'Calculate price'
+    'calculate_price' => 'Calculate price',
+    'in' => 'in'
 
 ];

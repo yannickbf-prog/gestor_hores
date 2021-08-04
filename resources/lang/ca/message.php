@@ -206,5 +206,6 @@ return [
     'total_hours_count' => "Suma total d'hores",
     'type' => 'Tipus',
     
-    'calculate_price' => 'Calcular preu'
+    'calculate_price' => 'Calcular preu',
+    'in' => 'al'
 ];

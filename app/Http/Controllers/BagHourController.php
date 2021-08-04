@@ -166,9 +166,13 @@ class BagHourController extends Controller
             'updated_at' => now(),
             
         ]);
+        
+        $project_name = DB::table('projects')->where("id", '=', $request->get("project_id"))->select('name')->first();
+        $bag_hour_name = DB::table('type_bag_hours')->where("id", '=', $request->get("type_id"))->select('name')->first();
+        
+        return redirect()->route($lang . '_bag_hours.index')
+                        ->with('success', __('message.bag_hour') . " " . $bag_hour_name->name . " " .__('message.in') . " " . __('message.project') . " " . $project_name->name . " " . __('message.created_f'));
 
-        return redirect()->route($lang.'_bag_hours.index')
-                        ->with('success', __('message.bag_of_hours')." ".__('message.created_f'));
     }
 
     /**
@@ -213,10 +217,11 @@ class BagHourController extends Controller
             'updated_at' => now(),
         ]);
         
-       
+        $project_name = DB::table('projects')->where("id", '=', $request->get("project_id"))->select('name')->first();
+        $bag_hour_name = DB::table('type_bag_hours')->where("id", '=', $request->get("type_id"))->select('name')->first();
         
         return redirect()->route($lang . '_bag_hours.index')
-                        ->with('success', __('message.bag_hour') . " " . $bagHour->name . " " . __('message.updated'));
+                        ->with('success', __('message.bag_hour') . " " . $bag_hour_name->name . " " .__('message.in') . " " . __('message.project') . " " . $project_name->name . " " . __('message.updated'));
     }
 
     /**
