@@ -65,12 +65,10 @@
                         <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}' 
                                 @if($bag_hour_to_edit === null && $json_value !== null) 
                                     @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
-                                @else 
-                                    @if(old('type_id') && $bag_hour_to_edit !==  null) 
-                                        @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
-                                    @else
-                                        @if($bag_hour_to_edit->id == $bag_hours_type->id){{ "selected" }} @endif 
-                                    @endif  
+                                @elseif($bag_hour_to_edit !== null && $json_value !== null)
+                                    @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
+                                @elseif($bag_hour_to_edit != null && $json_value == null)
+                                    @if($bag_hour_to_edit->id == $bag_hours_type->id) {{ "selected" }} @endif 
                                 @endif
                             >{{$bag_hours_type->name}}</option>
                         @endforeach
