@@ -199,9 +199,12 @@ class BagHourController extends Controller
      * @param  \App\Models\BagHour  $bagHour
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BagHour $bagHour)
+    public function update(EditBagHourRequest $request, BagHour $bagHour, $lang)
     {
-        //
+        $bagHour->update($request->validated());
+
+        return redirect()->route($lang . '_bag_hours.index')
+                        ->with('success', __('message.bag_hour') . " " . $request->name . " " . __('message.updated'));
     }
 
     /**
