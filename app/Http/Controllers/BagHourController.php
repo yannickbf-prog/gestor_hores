@@ -200,7 +200,7 @@ class BagHourController extends Controller
      * @param  \App\Models\BagHour  $bagHour
      * @return \Illuminate\Http\Response
      */
-    public function update(EditBagHourRequest $request, $bagHour, $lang)
+    public function update(EditBagHourRequest $request, BagHour $bagHour, $lang)
     {
         
         App::setLocale($lang);
