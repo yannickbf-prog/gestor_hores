@@ -66,7 +66,11 @@
                                 @if($bag_hour_to_edit === null && $json_value !== null) 
                                     @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
                                 @else 
-                                    @if(old('type_id')) {{ "selected" }} @endif  
+                                    @if(old('type_id') && $bag_hour_to_edit !==  null) 
+                                        @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
+                                    @else
+                                        @if($bag_hour_to_edit->id == $bag_hours_type->id){{ "selected" }} @endif 
+                                    @endif  
                                 @endif
                             >{{$bag_hours_type->name}}</option>
                         @endforeach
