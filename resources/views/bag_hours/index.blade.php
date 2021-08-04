@@ -49,14 +49,21 @@
             @csrf
 
             <div class="row">
-
-
+                @php
+                $json = old('type_id');
+                if($json != null){
+                $old_value_to_php = json_decode($json, true);
+                $new = $old_value_to_php['bht_id'];
+                echo $new;
+                }
+                
+                @endphp
                 <div class="form-group col-xs-12 col-sm-6 col-md-4 form_group_new_edit mb-md-0">
                     <label for="typeSelect">*{{ __('message.bag_hour_type') }}: </label>
                     @if (count($bags_hours_types) > 0)
                     <select name="type_id" id="typeSelect" class="form-control mb-">
                         @foreach($bags_hours_types as $key => $bag_hours_type)
-                        <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}'>{{$bag_hours_type->name}}</option>
+                        <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}' @if($bag_hour_to_edit == null) @if(old('type_id.bht_id') == $bag_hours_type->id){{ "selected" }} @endif  @endif>{{$bag_hours_type->name}}</option>
                         @endforeach
                     </select>
                     <span>{{ __('message.hour_price') }}: </span><strong id="hourPrice"></strong><strong>€</strong>
@@ -349,5 +356,7 @@ if (show_create_edit) {
     $('#addEditContainer').show(400);
     addEditCount = 2;
 }
+
+
 </script>
 @endsection

@@ -6,6 +6,7 @@ use App\Models\BagHour;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests\CreateBagHourRequest;
+use App\Http\Requests\EditBagHourRequest;
 use Illuminate\Support\Facades\App;
 
 class BagHourController extends Controller
