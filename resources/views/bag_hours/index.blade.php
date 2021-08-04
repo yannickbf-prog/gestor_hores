@@ -70,6 +70,8 @@
                                 @else
                                     @if($json_value === null)
                                         @if($bag_hour_to_edit->type_id == $bag_hours_type->id){{ "selected" }} @endif 
+                                    @else
+                                        @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
                                     @endif
                                 @endif
                                 
@@ -89,7 +91,7 @@
                     @if (count($bags_hours_types) > 0)
                     <select name="project_id" id="projectSelect" class="form-control mb-1">
                         @foreach($projects as $key => $project)
-                        <option value="{{ $project->id }}">{{$project->name}}</option>
+                        <option value="{{ $project->id }}" @if($bag_hour_to_edit == null) @if(old('project_id') == $project->id){{ "selected" }} @endif @else @if(old('project_id', $bag_hour_to_edit->project_id) == $project->id) {{ "selected" }} @endif @endif >{{$project->name}}</option>
                         @endforeach
                     </select>
                     @else
@@ -102,13 +104,15 @@
 
                 <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-md-0">
                     <label for="contractedHours">*{{__('message.contracted_hours')}}:</label>
-                    <input type="text" name="contracted_hours" class="form-control" id="contractedHours" placeholder="{{__('message.enter')." ".__('message.contracted_hours')}}" value="{{old('contracted_hours')}}">
+                    <input type="text" name="contracted_hours" class="form-control" id="contractedHours" placeholder="{{__('message.enter')." ".__('message.contracted_hours')}}" 
+                           value="{{ ($bag_hour_to_edit == null) ? old('contracted_hours') : old('contracted_hours', $bag_hour_to_edit->contracted_hours) }}">
                 </div>
 
 
                 <div class="form-group col-xs-6 col-sm-3 col-md-2 form_group_new_edit mb-md-0">
                     <label for="totalPrice">*{{__('message.total_price')}}:</label>
-                    <input type="text" name="total_price" class="form-control" id="totalPrice" placeholder="{{__('message.enter')." ".__('message.total_price')}}" value="{{old('total_price')}}">
+                    <input type="text" name="total_price" class="form-control" id="totalPrice" placeholder="{{__('message.enter')." ".__('message.total_price')}}" 
+                           value="{{ ($bag_hour_to_edit == null) ? old('total_price') : old('total_price', $bag_hour_to_edit->total_price) }}">
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-9">
