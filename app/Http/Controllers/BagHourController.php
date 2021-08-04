@@ -24,7 +24,7 @@ class BagHourController extends Controller
         $show_create_edit = false;
         
         if ($request->has('_token') && $request->has('edit_bag_hour_id')) {
-            
+            $bag_hour_to_edit = BagHour::where('id', $request['edit_bag_hour_id'])->first();
             $show_create_edit = true;
             
         }
