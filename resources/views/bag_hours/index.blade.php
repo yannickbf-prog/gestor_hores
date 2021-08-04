@@ -50,11 +50,10 @@
 
             <div class="row">
                 @php
-                $json = old('type_id');
-                if($json != null){
-                $old_value_to_php = json_decode($json, true);
-                $new = $old_value_to_php['bht_id'];
-                echo $new;
+                $json_value = old('type_id');
+                if($json_value != null){
+                $old_value_to_php = json_decode($json_value, true);
+                $old_bag_id = $old_value_to_php['bht_id'];
                 }
                 
                 @endphp
@@ -63,7 +62,13 @@
                     @if (count($bags_hours_types) > 0)
                     <select name="type_id" id="typeSelect" class="form-control mb-">
                         @foreach($bags_hours_types as $key => $bag_hours_type)
-                        <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}' @if($bag_hour_to_edit == null) @if(old('type_id.bht_id') == $bag_hours_type->id){{ "selected" }} @endif  @endif>{{$bag_hours_type->name}}</option>
+                        <option value='{"bht_id":{{$bag_hours_type->id}} , "bht_hp":{{$bag_hours_type->hour_price}}}' 
+                                @if($bag_hour_to_edit === null && $json_value !== null) 
+                                    @if($old_bag_id == $bag_hours_type->id){{ "selected" }} @endif 
+                                @else 
+                                    @if(old('type_id')) {{ "selected" }} @endif  
+                                @endif
+                            >{{$bag_hours_type->name}}</option>
                         @endforeach
                     </select>
                     <span>{{ __('message.hour_price') }}: </span><strong id="hourPrice"></strong><strong>€</strong>
