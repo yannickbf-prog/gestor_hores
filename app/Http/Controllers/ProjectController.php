@@ -377,6 +377,8 @@ class ProjectController extends Controller {
     }
 
     public function removeUser(Request $request, $project_id, $lang) {
+        
+        App::setLocale($lang);
 
         DB::table('users_projects')
                 ->where('users_projects.user_id', $request->user_id)
@@ -390,6 +392,8 @@ class ProjectController extends Controller {
     }
 
     public function addUser(Request $request, $project_id, $lang) {
+        
+        App::setLocale($lang);
 
         $request_explode = explode('|', $request->user);
 
@@ -397,9 +401,11 @@ class ProjectController extends Controller {
             'user_id' => $request_explode[0],
             'project_id' => $project_id,
         ]);
+        
+        $user = DB::table('users')->select('name', 'surname')->where('id', $request_explode[0])->first();
 
         return redirect()->route($lang . '_projects.add_remove_users', $project_id)
-                        ->with('success', __('message.user') . " " . $request_explode[1] . " " . __('message.seted'));
+                        ->with('success', __('message.user') . " " . $user->name . " " . $user->surname . " " . __('message.seted'));
     }
 
 }

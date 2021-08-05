@@ -35,7 +35,7 @@
         @foreach($users_in_project as $user)
 
         <li name="user_id" class="list-group-item list-group-item-info">
-            <form action="{{ route('projects.remove_user', [$project->id, $lang]) }}" method="POST" class="d-flex justify-content-between"> 
+            <form action="{{ route('projects.remove_user', [$project->id, $lang]) }}" method="POST" class="d-flex justify-content-between mb-0"> 
                 @csrf
                 <input type="hidden" name="user_id" value="{{$user->id}}">
                 {{$user->nickname}} -> @if ($user->role == 'admin'){{__('message.admin')}} @else{{__('message.worker')}} @endif -> {{__('message.name')}}: {{ $user->name }} {{ $user->surname }}. {{__('message.email')}}: {{$user->email}}. @if (isset($user->phone)) {{__('message.phone')}}: {{$user->phone}}@endif

@@ -207,5 +207,5 @@ return [
     'type' => 'Tipus',
     
     'calculate_price' => 'Calcular preu',
-    'in' => 'al'
+    'in' => 'al',
 ];
