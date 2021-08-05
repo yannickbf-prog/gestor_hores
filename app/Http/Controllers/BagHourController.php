@@ -31,14 +31,17 @@ class BagHourController extends Controller
             
         }
         
+        $old = null;
         if ($request->has('_token') && $request->has('type')) {
             $show_filters = true;
-            echo $request->old('type');
+            
             session(['bag_hour_type_id' => $request['type']]);
 
             session(['bag_hour_project_id' => $request['project']]);
 
             session(['bag_hour_customer_id' => $request['customer']]);
+            
+            $old = $request;
         }
         
         $dates = getIntervalDates($request, 'bag_hour');
@@ -107,7 +110,7 @@ class BagHourController extends Controller
         
         $customers = DB::table('customers')->select("id", "name")->get();
         
-        return view('bag_hours.index', compact(['data' ,'bag_hour_to_edit', 'bags_hours_types', 'projects', 'show_create_edit', 'customers', 'show_filters']))
+        return view('bag_hours.index', compact(['data' ,'bag_hour_to_edit', 'bags_hours_types', 'projects', 'show_create_edit', 'customers', 'show_filters', 'old']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     

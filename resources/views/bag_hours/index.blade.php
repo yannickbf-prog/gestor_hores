@@ -146,12 +146,13 @@
         <form action="{{ route($lang.'_bag_hours.index') }}" method="GET" class="row"> 
             @csrf
 
+            {{old('type')}}
             <div class="form-group col-xs-12 col-sm-6 col-md-3">  
                 <label for="filterType">{{ __('message.type') }}:</label>
                 <select id="filterType" name="type" class="form-control">
-                    <option value="%">{{ __('message.all') }}</option>
+                    <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($bags_hours_types as $type)
-                    <option value="{{ $type->id }}" {{ (old("type") == $type->id ? "selected":"") }}>{{$type->name}}</option>
+                    <option value="{{ $type->id }}" {{ ($old->type == $type->id ? "selected":"") }}>{{$type->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -159,9 +160,9 @@
             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="filterProject">{{ __('message.project') }}:</label>
                 <select id="filterProject" name="project" class="form-control">
-                    <option value="%">{{ __('message.all') }}</option>
+                    <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($projects as $project)
-                    <option value="{{ $project->id }}">{{$project->name}}</option>
+                    <option value="{{ $project->id }}" {{ ($old->project == $project->id ? "selected":"") }}>{{$project->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -169,9 +170,9 @@
             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="filterCustomer">{{ __('message.customer') }}:</label>
                 <select id="filterCustomer" name="customer" class="form-control">
-                    <option value="%">{{ __('message.all') }}</option>
+                    <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($customers as $customer)
-                    <option value="{{ $customer->id }}">{{$customer->name}}</option>
+                    <option value="{{ $customer->id }}" {{ ($old->customer == $customer->id ? "selected":"") }}>{{$customer->name}}</option>
                     @endforeach
                 </select>
             </div>
