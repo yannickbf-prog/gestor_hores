@@ -221,6 +221,12 @@
     </div>
 </div>
 
+@php
+$total_price = 0;
+$contracted_hours_count = 0;
+$hours_left_count = 0;
+@endphp
+
 <table class="table">
     @if (count($data) > 0)
     <thead>
@@ -240,6 +246,13 @@
     @endif
     <tbody>
         @forelse ($data as $key => $value)
+        @php
+        $total_price += $value->total_price;
+        $contracted_hours_count += $value->contracted_hours;
+
+        $hours_left = $value->contracted_hours - $value->total_hours_project;
+        $hours_left_count += $hours_left;
+        @endphp
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $value->project_name }}</td>
@@ -310,6 +323,7 @@
     @endforelse
 </tbody>
 </table> 
+
 <div id="paginationContainer">
     {!! $data->links() !!} 
 </div>
