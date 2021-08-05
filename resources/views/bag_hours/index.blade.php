@@ -126,7 +126,11 @@
                 </div>
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0 pt-4">
-                    <button type="submit" class="btn general_button mr-2">{{__('message.save')}}</button>
+                     @if ($bag_hour_to_edit !== null)
+                    <a class="btn general_button mr-0" href="{{route('bag_hours.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
+                    @endif
+
+                    <button type="submit" class="btn general_button mr-2">{{ ($bag_hour_to_edit == null) ? __('message.save') : __('message.update')}}</button>
                 </div>
 
             </div>
@@ -152,7 +156,7 @@
                 <select id="filterType" name="type" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($bags_hours_types as $type)
-                    <option value="{{ $type->id }}" {{ ($old->type == $type->id ? "selected":"") }}>{{$type->name}}</option>
+                    <option value="{{ $type->id }}" @if($old != null) {{ ($old->type == $type->id ? "selected":"") }} @endif>{{$type->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -162,7 +166,7 @@
                 <select id="filterProject" name="project" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($projects as $project)
-                    <option value="{{ $project->id }}" {{ ($old->project == $project->id ? "selected":"") }}>{{$project->name}}</option>
+                    <option value="{{ $project->id }}" @if($old != null) {{ ($old->project == $project->id ? "selected":"") }} @endif>{{$project->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -172,7 +176,7 @@
                 <select id="filterCustomer" name="customer" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($customers as $customer)
-                    <option value="{{ $customer->id }}" {{ ($old->customer == $customer->id ? "selected":"") }}>{{$customer->name}}</option>
+                    <option value="{{ $customer->id }}" @if($old != null) {{ ($old->customer == $customer->id ? "selected":"") }} @endif>{{$customer->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -344,6 +348,18 @@ $hours_left_count = 0;
         </tbody>
     </table>
 </div>
+<form action="{{ route('bag_hours.change_num_records', $lang) }}" method="GET"> 
+    @csrf
+    <div class="form-group d-flex align-items-center">
+        <strong>{{ __('message.number_of_records') }}:</strong>
+        <select name="num_records" id="numRecords" onchange="this.form.submit()" class="form-control form-select ml-2">
+            <option value="10">10</option>
+            <option value="50" @if(session('bag_hours_num_records') == 50){{'selected'}}@endif>50</option>
+            <option value="100" @if(session('bag_hours_num_records') == 100){{'selected'}}@endif>100</option>
+            <option value="all" @if(session('bag_hours_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
+        </select>
+    </div>
+</form>
 @endif
 <div id="paginationContainer">
     {!! $data->links() !!} 

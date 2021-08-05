@@ -114,6 +114,17 @@ class BagHourController extends Controller
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     
+    public function changeNumRecords(Request $request, $lang) {
+
+        session(['bag_hours_num_records' => $request['num_records']]);
+
+        return redirect()->route($lang . '_bag_hours.index');
+    }
+    
+    function cancelEdit($lang) {
+        return redirect()->route($lang . '_projects.index');
+    }
+    
     public function deleteFilters(Request $request) {
         
         session(['bag_hour_type_id' => '%']);
