@@ -148,9 +148,10 @@ Route::group(['middleware' => 'admin'], function () {
 
     //Control panel - Bag hours - Operations 
     Route::post("control-panel/hour-bags/lang/{lang}", [BagHourController::class, 'store'])->name('bag_hours.store');
-    Route::post('control-panel/hour-bags/delete_filters', [BagHourController::class, 'deleteFilters'])->name('bag_hours.delete_filters');
+    Route::get('control-panel/hour-bags/delete_filters/lang/{lang}', [BagHourController::class, 'deleteFilters'])->name('bag_hours.delete_filters');
     Route::delete("control-panel/hour-bags/{bagHour}/lang/{lang}", [BagHourController::class, 'destroy'])->name('bag_hours.destroy');
     Route::post("control-panel/hour-bags/{bagHour}/lang/{lang}", [BagHourController::class, 'update'])->name('bag_hours.update');
+    
 
     //Control panel - Bag hours - en
     Route::get("en/control-panel/hour-bags", [BagHourController::class, 'index'])->name('en_bag_hours.index');

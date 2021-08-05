@@ -146,20 +146,20 @@
         <form action="{{ route($lang.'_bag_hours.index') }}" method="GET" class="row"> 
             @csrf
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">  
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">  
                 <label for="filterType">{{ __('message.type') }}:</label>
                 <select id="filterType" name="type_id" class="form-control">
-                    <option value="%">Tots</option>
+                    <option value="%">{{ __('message.all') }}</option>
                     @foreach($bags_hours_types as $type)
                     <option value="{{ $type->id }}">{{$type->name}}</option>
                     @endforeach
                 </select>
             </div>
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="filterProject">{{ __('message.project') }}:</label>
                 <select id="filterProject" name="project_id" class="form-control">
-                    <option value="%">Tots</option>
+                    <option value="%">{{ __('message.all') }}</option>
                     @foreach($projects as $project)
                     <option value="{{ $project->id }}">{{$project->name}}</option>
                     @endforeach
@@ -169,14 +169,14 @@
             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="filterCustomer">{{ __('message.customer') }}:</label>
                 <select id="filterCustomer" name="customer_id" class="form-control">
-                    <option value="%">Tots</option>
+                    <option value="%">{{ __('message.all') }}</option>
                     @foreach($customers as $customer)
                     <option value="{{ $customer->id }}">{{$customer->name}}</option>
                     @endforeach
                 </select>
             </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-6 form-group align-self-end">
+            <div class="col-xs-6 col-sm-6 col-md-3 form-group align-self-end">
 
                 <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
 
@@ -204,7 +204,7 @@
             </div>
 
             <div class="form-group d-flex justify-content-end mb-0 col-12">
-                <a href="{{ route('projects.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
+                <a href="{{ route('bag_hours.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
 
@@ -318,11 +318,18 @@
 <script type="text/javascript" src="{{ URL::asset('js/hour_bags_index.js') }}"></script>
 <script>
                     var show_create_edit = @json($show_create_edit);
+                    var show_filters = @json($show_filters);
                             if (show_create_edit) {
                         $('#addEditChevronDown').css("transform", "rotate(180deg)");
                         $('#addEditContainer').show(400);
                         addEditCount = 2;
                     }
+                    
+                    if (show_filters) {
+        $('#filterChevronDown').css("transform", "rotate(180deg)");
+        $('#filtersContainer').show(400);
+        filterCount = 2;
+    }
 
 
 </script>

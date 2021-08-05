@@ -239,9 +239,9 @@ $hours_left_count = 0;
             <td>{{ $value->project_name }}</td>
             <td>{{ $value->customer_name }}</td>
             <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
-            <td>{{ $value->total_hours_project }}</td>
-            <td>{{ $value->contracted_hours }}</td>
-            <td>@if($value->contracted_hours != null){{ $hours_left }}@endif</td>
+            <td>{{ $value->total_hours_project }}h</td>
+            <td>@if($value->contracted_hours != null){{ $value->contracted_hours }}h @endif</td>
+            <td>@if($value->contracted_hours != null){{ $hours_left }}h @endif</td>
 
             <td>@if ($value->project_description == ''){{ __('message.no_description') }} @else {{ \Str::limit($value->project_description, 100) }} @endif</td>
             <td>{{ date('d/m/y', strtotime($value->created_at)) }}</td>
