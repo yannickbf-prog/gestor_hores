@@ -31,40 +31,38 @@ class BagHourController extends Controller
             
         }
         
-        if ($request->has('_token') && $request->has('type')) {
+        if ($request->has('_token') && $request->has('type_id')) {
             $show_filters = true;
             
-            ($request['type'] == "") ? session(['bag_hour_type' => '%']) : session(['bag_hour_type' => $request['type']]);
-            ($request['project'] == "") ? session(['bag_hour_project' => '%']) : session(['bag_hour_project' => $request['project']]);
-            ($request['contracted_hours'] == "") ? session(['bag_hour_contracted_hours' => '%']) : session(['bag_hour_contracted_hours' => $request['contracted_hours']]);
-            
-            ($request['hour_price'] == "") ? session(['bag_hour_hour_price' => '%']) : session(['bag_hour_hour_price' => str_replace(",", ".", $request['hour_price'])]);        
-            ($request['total_price'] == "") ? session(['bag_hour_total_price' => '%']) : session(['bag_hour_total_price' => str_replace(",", ".", $request['total_price'])]);        
-        
-            session(['bag_hour_order' => $request['order']]);
-            session(['bag_hour_num_records' => $request['num_records']]);
+            session(['bag_hour_type_id' => $request['type_id']]);
+
+            session(['bag_hour_project_id' => $request['project_id']]);
+
+            session(['bag_hour_customer_id' => $request['customer_id']]);
         }
         
         $dates = getIntervalDates($request, 'bag_hour');
         
-        $type = session('bag_hour_type', "%");
-        $project = session('bag_hour_project', "%");
-        $contracted_hours = session('bag_hour_contracted_hours', "%");
+        $type = session('bag_hour_type_id', "%");
+        $project = session('bag_hour_project_id', "%");
+        $customer = session('bag_hour_customer_id', "%");
         
         
-        $hour_price = session('bag_hour_hour_price', "%");
+//        $hour_price = session('bag_hour_hour_price', "%");
+//        
+//        if($hour_price != "%"){
+//            $hour_price = number_format($hour_price, 2, '.', '');
+//        }
+//        
+//        $total_price = session('bag_hour_total_price', "%");
+//        
+//        if($total_price != "%"){
+//            $total_price = number_format($total_price, 2, '.', '');
+//        }
         
-        if($hour_price != "%"){
-            $hour_price = number_format($hour_price, 2, '.', '');
-        }
+        $order = "desc";
         
-        $total_price = session('bag_hour_total_price', "%");
         
-        if($total_price != "%"){
-            $total_price = number_format($total_price, 2, '.', '');
-        }
-        
-        $order = session('bag_hour_order', "desc");
         $num_records = session('bag_hour_num_records', 10);
         
         if($num_records == 'all'){
@@ -75,11 +73,9 @@ class BagHourController extends Controller
             ->join('type_bag_hours', 'bag_hours.type_id', '=', 'type_bag_hours.id')
             ->join('customers', 'projects.customer_id', '=', 'customers.id')
             ->select('bag_hours.*', 'bag_hours.id as bag_hour_id', 'projects.id AS project_id', 'projects.name AS project_name', 'type_bag_hours.id AS type_id', 'type_bag_hours.name AS type_name', 'type_bag_hours.hour_price AS type_hour_price', 'customers.name as customer_name')
-            ->where('type_bag_hours.name', 'like', "%".$type."%")
-            ->where('projects.name', 'like', "%".$project."%")
-            ->where('contracted_hours', 'like', $contracted_hours)
-            ->where('hour_price', 'like', $hour_price)
-            ->where('total_price', 'like', $total_price)
+            ->where('type_bag_hours.id', 'like', $type)
+            ->where('projects.id', 'like', $project)
+            ->where('customers.id', 'like', $customer)
             ->whereBetween('bag_hours.created_at', $dates)
             ->orderBy('created_at', $order)
             ->paginate($num_records);
@@ -117,19 +113,15 @@ class BagHourController extends Controller
     
     public function deleteFilters(Request $request) {
         
-        session(['bag_hour_type' => '%']);
-        session(['bag_hour_type_project' => '%']);
-        session(['bag_hour_contracted_hours' => '%']);
-        session(['bag_hour_hour_price' => "%"]);
-        session(['bag_hour_total_price' => "%"]);
+        session(['bag_hour_type_id' => '%']);
+        session(['bag_hour_project_id' => '%']);
+        session(['bag_hour_customer_id' => '%']);
         session(['bag_hour_date_from' => ""]);
         session(['bag_hour_date_to' => ""]);
-        session(['bag_hour_order' => 'desc']);
-        session(['bag_hour_num_records' => 10]);
         
         $lang = $request->lang;
 
-        return redirect()->route($lang.'_projects.index');
+        return redirect()->route($lang.'_bag_hours.index');
 
     }
 
