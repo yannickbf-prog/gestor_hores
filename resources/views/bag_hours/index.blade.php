@@ -148,17 +148,17 @@
 
             <div class="form-group col-xs-12 col-sm-6 col-md-3">  
                 <label for="filterType">{{ __('message.type') }}:</label>
-                <select id="filterType" name="type_id" class="form-control">
+                <select id="filterType" name="type" class="form-control">
                     <option value="%">{{ __('message.all') }}</option>
                     @foreach($bags_hours_types as $type)
-                    <option value="{{ $type->id }}">{{$type->name}}</option>
+                    <option value="{{ $type->id }}" {{ (old("type") == $type->id ? "selected":"") }}>{{$type->name}}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="filterProject">{{ __('message.project') }}:</label>
-                <select id="filterProject" name="project_id" class="form-control">
+                <select id="filterProject" name="project" class="form-control">
                     <option value="%">{{ __('message.all') }}</option>
                     @foreach($projects as $project)
                     <option value="{{ $project->id }}">{{$project->name}}</option>
@@ -168,7 +168,7 @@
 
             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                 <label for="filterCustomer">{{ __('message.customer') }}:</label>
-                <select id="filterCustomer" name="customer_id" class="form-control">
+                <select id="filterCustomer" name="customer" class="form-control">
                     <option value="%">{{ __('message.all') }}</option>
                     @foreach($customers as $customer)
                     <option value="{{ $customer->id }}">{{$customer->name}}</option>
@@ -323,7 +323,27 @@ $hours_left_count = 0;
     @endforelse
 </tbody>
 </table> 
-
+@if (count($data) > 0)
+<div id="totalHourCount" class="row">
+    <h4 class="table col-12">{{__('message.total_hours_count')}}</h4>
+    <table class="table col-6 ml-3  text-center">
+        <thead>
+            <tr class="thead-light">
+                <th>{{ __('message.total_price') }}</th>
+                <th>{{ __('message.contracted_hours') }}</th>
+                <th>{{ __('message.hours_left') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ number_format($total_price, 2, ',', '.') }}€</td>
+                <td>{{ $contracted_hours_count }}h</td>
+                <td>{{ $hours_left_count }}h</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+@endif
 <div id="paginationContainer">
     {!! $data->links() !!} 
 </div>

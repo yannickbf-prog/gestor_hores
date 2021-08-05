@@ -31,14 +31,14 @@ class BagHourController extends Controller
             
         }
         
-        if ($request->has('_token') && $request->has('type_id')) {
+        if ($request->has('_token') && $request->has('type')) {
             $show_filters = true;
-            
-            session(['bag_hour_type_id' => $request['type_id']]);
+            echo $request->old('type');
+            session(['bag_hour_type_id' => $request['type']]);
 
-            session(['bag_hour_project_id' => $request['project_id']]);
+            session(['bag_hour_project_id' => $request['project']]);
 
-            session(['bag_hour_customer_id' => $request['customer_id']]);
+            session(['bag_hour_customer_id' => $request['customer']]);
         }
         
         $dates = getIntervalDates($request, 'bag_hour');
