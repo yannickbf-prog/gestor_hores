@@ -164,6 +164,21 @@ function selectChange(){
         $("#addEditContainer").toggle(400);
     });
     
+        var filterCount = 1;
+    $("#filterTitleContainer").click(function () {
+
+        if (filterCount % 2 == 0)
+            $('#filterChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#filterChevronDown').css("transform", "rotate(180deg)");
+
+        filterCount++;
+
+        // show hide paragraph on button click
+        $("#filtersContainer").toggle(400);
+    });
+    
     function onOffCalculateBtn() {
         let contractedHours = /^[0-9]*$/g.exec(document.getElementById("contractedHours").value);
         console.log(contractedHours)

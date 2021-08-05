@@ -22,6 +22,7 @@ class BagHourController extends Controller
         
         $bag_hour_to_edit = null;
         
+        $show_filters = false;
         $show_create_edit = false;
         
         if ($request->has('_token') && $request->has('edit_bag_hour_id')) {
@@ -31,6 +32,8 @@ class BagHourController extends Controller
         }
         
         if ($request->has('_token') && $request->has('type')) {
+            $show_filters = true;
+            
             ($request['type'] == "") ? session(['bag_hour_type' => '%']) : session(['bag_hour_type' => $request['type']]);
             ($request['project'] == "") ? session(['bag_hour_project' => '%']) : session(['bag_hour_project' => $request['project']]);
             ($request['contracted_hours'] == "") ? session(['bag_hour_contracted_hours' => '%']) : session(['bag_hour_contracted_hours' => $request['contracted_hours']]);
@@ -102,11 +105,13 @@ class BagHourController extends Controller
             $bag_hour->total_hours_project = $hours_imputed_project;
         }
         
-        //For create / edit
+        //For create / edit & filters
         $bags_hours_types = DB::table('type_bag_hours')->select("id", "name", "hour_price")->get();
         $projects = DB::table('projects')->select("id", "name")->get();
         
-        return view('bag_hours.index', compact(['data' ,'bag_hour_to_edit', 'bags_hours_types', 'projects', 'show_create_edit']))
+        $customers = DB::table('customers')->select("id", "name")->get();
+        
+        return view('bag_hours.index', compact(['data' ,'bag_hour_to_edit', 'bags_hours_types', 'projects', 'show_create_edit', 'customers', 'show_filters']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records)->with('lang', $lang);
     }
     

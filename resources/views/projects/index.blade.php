@@ -145,15 +145,15 @@
             @csrf
 
             <div class="form-group col-xs-12 col-sm-6 col-md-4" id="customerGroup">  
-                <label for="filterCustomer">{{ __('message.customer') }}:</label>
+                <label for="customerSelect">{{ __('message.customer') }}:</label>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-4" id="projectGroup">
-               <label for="filterProject">{{ __('message.project') }}:</label>
+               <label for="projectSelect">{{ __('message.project') }}:</label>
             </div>
 
             <div class="form-group col-xs-12 col-sm-6 col-md-3" id="stateGroup">
-                <label for="filterState">{{ __('message.state') }}:</label>
+                <label for="stateSelect">{{ __('message.state') }}:</label>
             </div>
 
             <div class="col-xs-6 col-sm-6 col-md-6 form-group align-self-end">
