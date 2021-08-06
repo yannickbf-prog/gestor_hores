@@ -51,18 +51,17 @@
 
                 <div class="form-group col-xs-12 col-sm-7 col-md-3 form_group_new_edit mb-md-0">
                     <label for="nameInput">*{{__('message.name')}}:</label>
-                    <input id="nameInput" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
+                    <input id="nameInput" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{ ($type_bag_hour_to_edit == null) ? old('name') : old('name', $type_bag_hour_to_edit->name) }}">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-5 col-md-2 form_group_new_edit mb-md-0">
                     <label for="hourPriceInput">*{{__('message.hour_price')}}:</label>
-                    <input id="hourPriceInput" type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')." ".__('message.hour_price')}}"  value="{{old('hour_price')}}">
-
+                    <input id="hourPriceInput" type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')." ".__('message.hour_price')}}"  value="{{ ($type_bag_hour_to_edit == null) ? old('hour_price') : old('hour_price', str_replace(".", ",", $type_bag_hour_to_edit->hour_price)) }}">
                 </div>
 
                 <div class="form-group col-xs-6 col-sm-12 col-md-5 form_group_new_edit mb-md-0">
                     <label for="descriptionInput">{{__('message.description')}}:</label>
-                    <textarea id="descriptionInput" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
+                    <textarea id="descriptionInput" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{ ($type_bag_hour_to_edit == null) ? old('description') : old('description', $type_bag_hour_to_edit->description) }}</textarea>
                 </div>
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0 pt-4">
