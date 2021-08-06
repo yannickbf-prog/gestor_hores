@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateTypeBagHourRequest;
 use App\Http\Requests\EditTypeBagHourRequest;
 use Illuminate\Support\Facades\App;
-
+use DB;
 
 class TypeBagHourController extends Controller {
 
@@ -37,7 +37,7 @@ class TypeBagHourController extends Controller {
                 
         $name = session('type_bag_hour_name', "%");
         $hour_price = session('type_bag_hour_price', "%");
-        
+//        
         if($hour_price != "%"){
             $hour_price = number_format($hour_price, 2, '.', '');
         }
@@ -50,12 +50,21 @@ class TypeBagHourController extends Controller {
             $num_records = TypeBagHour::count();
         }
         
-        $data = TypeBagHour::
-                where('name', 'like', "%{$name}%")
-                ->where('hour_price', 'like', $hour_price)
-                ->whereBetween('created_at', [$date_from, $date_to])
-                ->orderBy('created_at', $order)
-                ->paginate($num_records);
+        $data = TypeBagHour::join('bag_hours', 'type_bag_hours.id', '=', 'bag_hours.type_id')
+                ->select('type_bag_hours.name', DB::raw('SUM(bag_hours.contracted_hours) as total_hours_bag_type'))
+                ->where('type_bag_hours.name', 'like', "%{$name}%")
+                ->where('type_bag_hours.hour_price', 'like', $hour_price)
+                ->whereBetween('type_bag_hours.created_at', [$date_from, $date_to])
+                ->orderBy('type_bag_hours.created_at', $order)
+                ->groupBy('bag_hours.type_id')
+                ->get();
+               
+//                ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
+//                        'customers.id as customer_id', 'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
+//                        'projects.id as id')
+//                ->groupBy('projects.id')
+                
+       return $data;
 
         return view('type_bag_hours.index', compact('data'), compact('lang'))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
