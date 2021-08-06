@@ -49,18 +49,18 @@
 
             <div class="row">
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit mb-md-0">
+                <div class="form-group col-xs-12 col-sm-7 col-md-3 form_group_new_edit mb-md-0">
                     <label for="nameInput">*{{__('message.name')}}:</label>
                     <input id="nameInput" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
                 </div>
 
-                <div class="form-group col-xs-12 col-sm-6 col-md-2 form_group_new_edit mb-md-0">
+                <div class="form-group col-xs-12 col-sm-5 col-md-2 form_group_new_edit mb-md-0">
                     <label for="hourPriceInput">*{{__('message.hour_price')}}:</label>
                     <input id="hourPriceInput" type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')." ".__('message.hour_price')}}"  value="{{old('hour_price')}}">
 
                 </div>
 
-                <div class="form-group col-xs-6 col-sm-3 col-md-5 form_group_new_edit mb-md-0">
+                <div class="form-group col-xs-6 col-sm-12 col-md-5 form_group_new_edit mb-md-0">
                     <label for="descriptionInput">{{__('message.description')}}:</label>
                     <textarea id="descriptionInput" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
                 </div>
@@ -203,35 +203,58 @@
             <td>{{ number_format($value->total_price_bag_type, 2, ',', '.')}}€</td>
             <td>{{ ($value->total_hours_bag_type == null) ? 0 : $value->total_hours_bag_type }}h</td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
-            <td>
-                <form action="{{ route('bag_hours_types.destroy',[$value->id, $lang]) }}" method="POST"> 
-                    <a class="btn btn-primary" href="{{ route($lang.'_bag_hours_types.edit',$value->id) }}">{{ __('message.edit') }}</a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                        {{ __('message.delete') }}
-                    </button>
+            <td class="align-middle">
+                <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
+
+                    @php
+                    $form_id = "editForm".$value->id;
+                    $form_dom = "document.getElementById('editForm".$value->id."').submit();";
+                    @endphp
+
+                    <form action="{{ route($lang.'_bag_hours_types.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
+                        @csrf
+                        <input type="hidden" name="edit_bag_hour_type_id" value="{{ $value->id }}">
+                    </form>
+
+                    <a style="text-decoration: none" class="text-dark">
+                        <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
+                    </a>
+
+                    
+                    @php
+                    $id = "exampleModal".$value->id;
+                    @endphp
+
+                    <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
+                        <i class="bi bi-trash-fill fa-lg"></i>
+                    </a>
+
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->name }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.bag_hour_type") }} <b>{{ $value->name }}</b>?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
-                                    <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                    <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="{{ route('bag_hours_types.destroy',[$value->id, $lang]) }}" method="POST"> 
+                            @csrf
+                            @method('DELETE')  
+
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ __('message.delete') }} {{ $value->type_name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the_f') }} {{ __("message.bag_hour") }} <b>{{ $value->type_name }}</b> {{ __("message.in_the") }} {{ __("message.project") }} <b>{{ $value->project_name }}</b>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
+                                        <button type="submit" class="btn btn-success">{{ __('message.delete') }}</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </td>
         </tr>
         @empty
@@ -247,7 +270,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/hour_bag_types_index.js') }}"></script>
 <script>
 var show_create_edit = @json($show_create_edit);
-if (show_create_edit) {
+        if (show_create_edit) {
     $('#addEditChevronDown').css("transform", "rotate(180deg)");
     $('#addEditContainer').show(400);
     addEditCount = 2;

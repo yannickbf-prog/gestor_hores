@@ -271,8 +271,8 @@ $hours_left_count = 0;
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
 
                     @php
-                    $form_id = "editForm".$value->id;
-                    $form_dom = "document.getElementById('editForm".$value->id."').submit();";
+                    $form_id = "editForm".$value->bag_hour_id;
+                    $form_dom = "document.getElementById('editForm".$value->bag_hour_id."').submit();";
                     @endphp
 
                     <form action="{{ route($lang.'_bag_hours.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
@@ -286,7 +286,7 @@ $hours_left_count = 0;
 
 
                     @php
-                    $id = "exampleModal".$value->id;
+                    $id = "exampleModal".$value->bag_hour_id;
                     @endphp
 
                     <a href="#{{$id}}" data-toggle="modal" data-target="#{{$id}}" style="text-decoration: none" class="text-dark">
