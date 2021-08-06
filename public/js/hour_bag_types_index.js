@@ -113,6 +113,30 @@ $.datepicker.regional["ca"] = {
     yearSuffix: "",
 };
 
+ //Slide efects
+
+    var addEditCount = 1;
+    $("#addEditHeader").click(function () {
+
+        if (addEditCount % 2 == 0)
+            $('#addEditChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#addEditChevronDown').css("transform", "rotate(180deg)");
+
+        addEditCount++;
+
+        // show hide paragraph on button click
+        $("#addEditContainer").toggle(400);
+    });
+
+window.onload = function () {
+    //Load popover btn listeners
+    document.getElementById("datePopoverBtn").addEventListener("click", togglePopover);
+    document.getElementsByClassName("close")[0].addEventListener("click", closePopover);
+};
+
+
 window.onload = function () {
     //Load popover btn listeners
     document.getElementById("datePopoverBtn").addEventListener("click", togglePopover);

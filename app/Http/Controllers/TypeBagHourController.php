@@ -20,6 +20,16 @@ class TypeBagHourController extends Controller {
         
         $lang = setGetLang();
         
+        $type_bag_hour_to_edit = null;
+        
+        $show_filters = false;
+        $show_create_edit = false;
+        
+//        if ($request->has('_token') && $request->has('edit_bag_hour_id')) {
+//            $type_bag_hour_to_edit = BagHour::where('id', $request['edit_bag_hour_id'])->first();
+//            $show_create_edit = true;
+//        }
+        
         if($request->has('_token')){
             
             ($request['name'] == "") ? session(['type_bag_hour_name' => '%']) : session(['type_bag_hour_name' => $request['name']]);
@@ -50,23 +60,19 @@ class TypeBagHourController extends Controller {
             $num_records = TypeBagHour::count();
         }
         
-        $data = TypeBagHour::join('bag_hours', 'type_bag_hours.id', '=', 'bag_hours.type_id')
-                ->select('type_bag_hours.name', DB::raw('SUM(bag_hours.contracted_hours) as total_hours_bag_type'))
+        $data = TypeBagHour::leftJoin('bag_hours', 'type_bag_hours.id', '=', 'bag_hours.type_id')
+                ->select('type_bag_hours.id', 'type_bag_hours.name', 'type_bag_hours.description', 'type_bag_hours.hour_price', 
+                        'type_bag_hours.created_at', DB::raw('SUM(bag_hours.contracted_hours) as total_hours_bag_type'), 
+                        DB::raw('SUM(bag_hours.total_price) as total_price_bag_type'))
                 ->where('type_bag_hours.name', 'like', "%{$name}%")
                 ->where('type_bag_hours.hour_price', 'like', $hour_price)
                 ->whereBetween('type_bag_hours.created_at', [$date_from, $date_to])
                 ->orderBy('type_bag_hours.created_at', $order)
-                ->groupBy('bag_hours.type_id')
-                ->get();
+                ->groupBy('type_bag_hours.id')
+                ->paginate();
                
-//                ->select('projects.name as project_name', DB::raw('SUM(hours_entry.hours_imputed) as total_hours_project'), 'bag_hours.contracted_hours',
-//                        'customers.id as customer_id', 'customers.name as customer_name', 'projects.active as project_active', 'projects.description as project_description', 'projects.created_at',
-//                        'projects.id as id')
-//                ->groupBy('projects.id')
-                
-       return $data;
 
-        return view('type_bag_hours.index', compact('data'), compact('lang'))
+        return view('type_bag_hours.index', compact(['data', 'lang', 'show_create_edit', 'show_filters', 'type_bag_hour_to_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
     

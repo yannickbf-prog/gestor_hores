@@ -205,5 +205,6 @@ return [
     'total_hours_count' => 'Suma total de horas',
     'type' => 'Tipo',
     'calculate_price' => 'Calcular precio',
-    'in' => 'en el'
+    'in' => 'en el',
+    'number_of_hours' => "Número de horas"
 ];

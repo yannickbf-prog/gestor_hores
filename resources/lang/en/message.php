@@ -207,6 +207,7 @@ return [
     'type' => 'Type',
     
     'calculate_price' => 'Calculate price',
-    'in' => 'in'
+    'in' => 'in',
+    'number_of_hours' => "Number of hours"
 
 ];

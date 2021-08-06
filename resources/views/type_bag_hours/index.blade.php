@@ -16,10 +16,67 @@
         <div class="pull-left">
             <h2>{{ __('message.bag_hours_types') }}</h2>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bag_hours_types.create') }}">{{ __('message.create_new_type_hour_bag') }} </a>
-        </div>
     </div>
+</div>
+@if ($errors->any())
+<div class="alert alert-danger mt-3">
+    @php
+    $show_create_edit = true
+    @endphp
+    <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ ucfirst($error) }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="px-2 py-3 create_edit_container">
+    <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
+
+        <h3 class="d-inline-block m-0">{{ ($type_bag_hour_to_edit == null) ? __('message.add_new')." ".__('message.bag_hours_types') : __('message.edit')." ".__('message.bag_hours_types') }}</h3>
+        <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
+    </div>
+
+    <div id="addEditContainer">
+        <div class="alert alert-info m-2 mt-3">
+            <strong>{{__('message.fields_are_required')}}</strong>
+        </div>
+
+        <form action="{{ ($type_bag_hour_to_edit == null) ? route('bag_hours_types.store',$lang) : route('bag_hours_types.update',[$type_bag_hour_to_edit->id, $lang]) }}" method="POST" class="px-3 pt-2">
+            @csrf
+
+            <div class="row">
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-3 form_group_new_edit mb-md-0">
+                    <label for="nameInput">*{{__('message.name')}}:</label>
+                    <input id="nameInput" type="text" name="name" class="form-control" placeholder="{{__('message.enter')." ".__('message.name')}}" value="{{old('name')}}">
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-2 form_group_new_edit mb-md-0">
+                    <label for="hourPriceInput">*{{__('message.hour_price')}}:</label>
+                    <input id="hourPriceInput" type="text" name="hour_price" class="form-control" placeholder="{{__('message.enter')." ".__('message.hour_price')}}"  value="{{old('hour_price')}}">
+
+                </div>
+
+                <div class="form-group col-xs-6 col-sm-3 col-md-5 form_group_new_edit mb-md-0">
+                    <label for="descriptionInput">{{__('message.description')}}:</label>
+                    <textarea id="descriptionInput" class="form-control" name="description" placeholder="{{__('message.enter')." ".__('message.description')}}">{{old('description')}}</textarea>
+                </div>
+
+                <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0 pt-4">
+                    @if ($type_bag_hour_to_edit !== null)
+                    <a class="btn general_button mr-0" href="{{route('bag_hours.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
+                    @endif
+
+                    <button type="submit" class="btn general_button mr-2">{{ ($type_bag_hour_to_edit == null) ? __('message.save') : __('message.update')}}</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
 </div>
 <form action="{{ route($lang.'_bag_hours_types.index') }}" method="GET"> 
     @csrf
@@ -35,7 +92,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>{{ __('message.name') }}:</strong>
-                <input type="text" name="name" class="form-control" placeholder="{{ __('message.enter')." ".__('message.name') }}" value="@if(session('type_bag_hour_name') != '%'){{session('type_bag_hour_name')}}@endif">
+                <input type="text" name="name_id" class="form-control" placeholder="{{ __('message.enter')." ".__('message.name') }}" value="@if(session('type_bag_hour_name') != '%'){{session('type_bag_hour_name')}}@endif">
             </div>
         </div>
     </div>
@@ -129,8 +186,10 @@
             <th>{{ __('message.name') }}</th>
             <th>{{ __('message.description') }}</th>
             <th>{{ __('message.hour_price') }}</th>
+            <th>{{ __('message.total_price') }}</th>
+            <th>{{ __('message.number_of_hours') }}</th>
             <th>{{ __('message.created_at') }}</th>
-            <th width="280px">{{ __('message.action') }}</th>
+            <th></th>
         </tr>
     </thead>
     @endif
@@ -141,6 +200,8 @@
             <td>{{ $value->name }}</td>
             <td>@if ($value->description == "") {{ __('message.no_description') }} @else {{ \Str::limit($value->description, 100) }} @endif</td>
             <td>{{ number_format($value->hour_price, 2, ',', '.') }}€</td>
+            <td>{{ number_format($value->total_price_bag_type, 2, ',', '.')}}€</td>
+            <td>{{ ($value->total_hours_bag_type == null) ? 0 : $value->total_hours_bag_type }}h</td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
             <td>
                 <form action="{{ route('bag_hours_types.destroy',[$value->id, $lang]) }}" method="POST"> 
@@ -184,4 +245,12 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ URL::asset('js/hour_bag_types_index.js') }}"></script>
+<script>
+var show_create_edit = @json($show_create_edit);
+if (show_create_edit) {
+    $('#addEditChevronDown').css("transform", "rotate(180deg)");
+    $('#addEditContainer').show(400);
+    addEditCount = 2;
+}
+</script>
 @endsection
