@@ -33,7 +33,7 @@ class TypeBagHourController extends Controller {
         //edit_bag_hour_type_id
         
         if ($request->has('_token') && $request->has('edit_bag_hour_type_id')) {
-            $bag_hour_to_edit = TypeBagHour::where('id', $request['edit_bag_hour_type_id'])->first();
+            $type_bag_hour_to_edit = TypeBagHour::where('id', $request['edit_bag_hour_type_id'])->first();
             $show_create_edit = true;
         }
         
