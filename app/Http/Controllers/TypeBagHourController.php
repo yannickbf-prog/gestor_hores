@@ -30,7 +30,14 @@ class TypeBagHourController extends Controller {
 //            $show_create_edit = true;
 //        }
         
-        if($request->has('_token')){
+        //edit_bag_hour_type_id
+        
+        if ($request->has('_token') && $request->has('edit_bag_hour_type_id')) {
+            $bag_hour_to_edit = TypeBagHour::where('id', $request['edit_bag_hour_type_id'])->first();
+            $show_create_edit = true;
+        }
+        
+        if($request->has('_token')  && $request->has('name_id')){
             
             ($request['name'] == "") ? session(['type_bag_hour_name' => '%']) : session(['type_bag_hour_name' => $request['name']]);
             
