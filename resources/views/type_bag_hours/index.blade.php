@@ -66,7 +66,7 @@
 
                 <div class="form-group d-flex justify-content-end col-12 pr-0 mb-0 pt-4">
                     @if ($type_bag_hour_to_edit !== null)
-                    <a class="btn general_button mr-0" href="{{route('bag_hours.cancel_edit',$lang)}}">{{__('message.cancel')}}</a>
+                    <a class="btn general_button mr-0" href="{{route($lang.'_bag_hours_types.index')}}">{{__('message.cancel')}}</a>
                     @endif
 
                     <button type="submit" class="btn general_button mr-2">{{ ($type_bag_hour_to_edit == null) ? __('message.save') : __('message.update')}}</button>

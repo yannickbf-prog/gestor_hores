@@ -83,6 +83,10 @@ class TypeBagHourController extends Controller {
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
     
+    function cancelEdit($lang) {
+        return redirect()->route("es" . '_bag_hours_types.index');
+    }
+    
     public function deleteFilters(Request $request) {
         
         session(['type_bag_hour_name' => '%']);
