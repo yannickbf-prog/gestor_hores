@@ -131,10 +131,10 @@
             </div>
 
             <div class="form-group d-flex justify-content-end mb-0 col-12">
-                <a href="{{ route('type_bag_hours.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
+                
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
-
+<a href="{{ route('type_bag_hours.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
         </form>
     </div>
 </div>

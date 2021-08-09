@@ -83,21 +83,14 @@ class TypeBagHourController extends Controller {
         return view('type_bag_hours.index', compact(['data', 'lang', 'show_create_edit', 'show_filters', 'type_bag_hour_to_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
+  
     
-    function cancelEdit($lang) {
-        return redirect()->route("es" . '_bag_hours_types.index');
-    }
-    
-    public function deleteFilters(Request $request) {
+    public function deleteFilters($lang) {
         
-        session(['type_bag_hour_name' => '%']);
-        session(['type_bag_hour_price' => '%']);
-        session(['type_bag_hour_date_from' => ""]);
-        session(['type_bag_hour_date_to' => ""]);
-        session(['type_bag_hour_order' => 'asc']);
-        session(['type_bag_hour_num_records' => 10]);
-
-        $lang = $request->lang;
+        session(['type_bag_hour_name_id' => '%']);
+        session(['type_bag_hour_hours' => '%']);
+        session(['bag_hour_date_from' => ""]);
+        session(['bag_hour_date_to' => ""]);
         
         return redirect()->route($lang.'_bag_hours_types.index');
 
