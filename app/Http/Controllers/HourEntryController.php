@@ -22,6 +22,8 @@ class HourEntryController extends Controller {
     public function index(Request $request) {
 
         $values_before_edit_json = null;
+        
+        $show_filters = false;
 
         if ($request->has('_token') && $request->has('entry_hour_id')) {
             $show_edit = true;
@@ -65,6 +67,7 @@ class HourEntryController extends Controller {
 
 
         if ($request->has('_token') && $request->has('select_filter_name')) {
+            $show_filters = true;
             session(['hour_entry_user' => $request['select_filter_name']]);
             session(['hour_entry_project' => $request['select_filter_projects']]);
         }
@@ -225,7 +228,7 @@ class HourEntryController extends Controller {
             ];
         }
 
-        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'users_with_projects', 'values_before_edit_json']))
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'users_with_projects', 'values_before_edit_json', 'show_filters']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 

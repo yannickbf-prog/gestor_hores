@@ -50,7 +50,7 @@ $load_old_hour_entries = true;
 <div id="filterDiv" class="p-4 mb-2">
     <div class="mb-4" id="filterTitleContainer">
         <div class="d-flex align-content-stretch align-items-center" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
+            <h3 class="d-inline-block m-0">Filtre</h3><i class="px-2 bi bi-chevron-down fa-lg"  id="filterChevronDown"></i>
         </div>
     </div>
     <div  class="collapse" id="collapseExample">
@@ -860,10 +860,16 @@ $load_old_hour_entries = true;
             }
 
 //Filters principal program
-            filterShowCustomersOfUser();
-            
-            //Edit principal program
-            
+
+
+    
+    var show_filters = @json($show_filters);
+     if (show_filters) {
+       
+        $('#collapseExample').collapse('show');
+        
+    }
+    
 </script>
 @endsection
 
