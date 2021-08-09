@@ -88,8 +88,9 @@ class TypeBagHourController extends Controller {
             }
         }
 
+        $type_bag_hours = TypeBagHour::select('id', 'name')->get();
         
-        return view('type_bag_hours.index', compact(['data', 'lang', 'show_create_edit', 'show_filters', 'type_bag_hour_to_edit']))
+        return view('type_bag_hours.index', compact(['data', 'lang', 'show_create_edit', 'show_filters', 'type_bag_hour_to_edit', 'type_bag_hours']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
     }
   

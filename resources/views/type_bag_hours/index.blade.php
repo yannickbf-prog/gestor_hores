@@ -91,7 +91,7 @@
                 <label for="filterName">{{ __('message.name') }}:</label>
                 <select id="filterName" name="name_id" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
-                    @foreach($data as $bag_hour_type)
+                    @foreach($type_bag_hours as $bag_hour_type)
                     <option value="{{ $bag_hour_type->id }}" {{(old('name_id') == $bag_hour_type->id) ? "selected" : ""}}>{{ $bag_hour_type->name }}</option>
                     @endforeach
                 </select>
