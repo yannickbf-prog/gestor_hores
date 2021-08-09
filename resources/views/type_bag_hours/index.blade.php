@@ -88,7 +88,7 @@
         <form action="{{ route($lang.'_bag_hours_types.index') }}" method="GET" class="row"> 
             @csrf
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+            <div class="form-group col-xs-12 col-sm-7 col-md-3">  
                 <label for="filterName">{{ __('message.name') }}:</label>
                 <select id="filterName" name="name_id" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
@@ -98,7 +98,7 @@
                 </select>
             </div>
             
-            <div class="form-group col-xs-12 col-sm-6 col-md-2">  
+            <div class="form-group col-xs-12 col-sm-5 col-md-2">  
                 <label for="filterHours">{{ __('message.number_of_hours') }}:</label>
                 <input type="text" name="hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.number_of_hours')}}">
             </div>         
@@ -131,10 +131,9 @@
             </div>
 
             <div class="form-group d-flex justify-content-end mb-0 col-12">
-                
+                <a href="{{ route('type_bag_hours.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
                 <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
             </div>
-<a href="{{ route('type_bag_hours.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
         </form>
     </div>
 </div>
