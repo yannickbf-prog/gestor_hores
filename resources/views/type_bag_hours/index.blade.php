@@ -87,13 +87,12 @@
     <div id="filtersContainer">
         <form action="{{ route($lang.'_bag_hours_types.index') }}" method="GET" class="row"> 
             @csrf
-
             <div class="form-group col-xs-12 col-sm-7 col-md-3">  
                 <label for="filterName">{{ __('message.name') }}:</label>
                 <select id="filterName" name="name_id" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
                     @foreach($data as $bag_hour_type)
-                    <option value="{{ $bag_hour_type->id }}">{{ $bag_hour_type->name }}</option>
+                    <option value="{{ $bag_hour_type->id }}" {{(old('name_id') == $bag_hour_type->id) ? "selected" : ""}}>{{ $bag_hour_type->name }}</option>
                     @endforeach
                 </select>
             </div>
