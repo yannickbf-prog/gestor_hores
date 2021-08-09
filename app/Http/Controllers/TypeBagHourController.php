@@ -68,28 +68,26 @@ class TypeBagHourController extends Controller {
             $num_records = TypeBagHour::count();
         }
         
-        $data2 = TypeBagHour::leftJoin('bag_hours', 'type_bag_hours.id', '=', 'bag_hours.type_id')
+        $data = TypeBagHour::leftJoin('bag_hours', 'type_bag_hours.id', '=', 'bag_hours.type_id')
                 ->select('type_bag_hours.id', 'type_bag_hours.name', 'type_bag_hours.description', 'type_bag_hours.hour_price', 
                         'type_bag_hours.created_at',  DB::raw('SUM(bag_hours.contracted_hours) as total_hours_bag_type'), 
                         DB::raw('SUM(bag_hours.total_price) as total_price_bag_type'))
-                ->where('type_bag_hours.id', 'like', '%')
-                
+                ->where('type_bag_hours.id', 'like', $id)
                 ->whereBetween('type_bag_hours.created_at', [$date_from, $date_to])
                 ->orderBy('type_bag_hours.created_at', $order)
                 ->groupBy('type_bag_hours.id')
                 ->paginate();
 
-        foreach ($data2 as $key => $item){
+        foreach ($data as $key => $item){
             if($item->total_hours_bag_type === null)
                 $item->total_hours_bag_type = 0;
             if($num_hours != '%'){
                 if($item->total_hours_bag_type != $num_hours){
-                    unset($data2[$key]);
+                    unset($data[$key]);
                 }
             }
         }
 
-        $data = $data2;
         
         return view('type_bag_hours.index', compact(['data', 'lang', 'show_create_edit', 'show_filters', 'type_bag_hour_to_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);

@@ -99,7 +99,7 @@
             
             <div class="form-group col-xs-12 col-sm-5 col-md-2">  
                 <label for="filterHours">{{ __('message.number_of_hours') }}:</label>
-                <input type="text" name="hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.number_of_hours')}}">
+                <input value="{{old('hours')}}" type="text" name="hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.number_of_hours')}}">
             </div>         
 
             <div class="col-xs-6 col-sm-6 col-md-3 form-group align-self-end">
