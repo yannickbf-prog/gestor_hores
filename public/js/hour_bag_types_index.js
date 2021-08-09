@@ -129,7 +129,22 @@ $.datepicker.regional["ca"] = {
         // show hide paragraph on button click
         $("#addEditContainer").toggle(400);
     });
+    
+        var filterCount = 1;
+    $("#filterTitleContainer").click(function () {
 
+        if (filterCount % 2 == 0)
+            $('#filterChevronDown').css("transform", "rotate(0deg)");
+
+        else
+            $('#filterChevronDown').css("transform", "rotate(180deg)");
+
+        filterCount++;
+
+        // show hide paragraph on button click
+        $("#filtersContainer").toggle(400);
+    });
+    
 window.onload = function () {
     //Load popover btn listeners
     document.getElementById("datePopoverBtn").addEventListener("click", togglePopover);

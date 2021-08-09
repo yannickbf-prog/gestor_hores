@@ -77,53 +77,51 @@
     </div>
 
 </div>
-<form action="{{ route($lang.'_bag_hours_types.index') }}" method="GET"> 
-    @csrf
 
-    <div class="row py-2">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h3>{{ __('message.filters') }}</h3>
-            </div>
+<div id="filterDiv" class="p-4 my-3">
+    <div class="mb-4" id="filterTitleContainer">
+        <div class="d-flex align-content-stretch align-items-center">
+            <h3 class="d-inline-block m-0">{{ __('message.filters') }}</h3><i class=" px-2 bi bi-chevron-down fa-lg" id="filterChevronDown"></i>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('message.name') }}:</strong>
-                <input type="text" name="name_id" class="form-control" placeholder="{{ __('message.enter')." ".__('message.name') }}" value="@if(session('type_bag_hour_name') != '%'){{session('type_bag_hour_name')}}@endif">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('message.hour_price') }}:</strong>
-                <input type="text" name="hour_price" class="form-control" placeholder="{{ __('message.enter')." ".__('message.hour_price') }}" value="@if(session('type_bag_hour_price') != '%'){{ session('type_bag_hour_price') }}@endif">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+    <div id="filtersContainer">
+        <form action="{{ route($lang.'_bag_hours_types.index') }}" method="GET" class="row"> 
+            @csrf
 
-                <button type="button" class="btn btn-md btn-primary" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+            <div class="form-group col-xs-12 col-sm-6 col-md-3">  
+                <label for="filterName">{{ __('message.name') }}:</label>
+                <select id="filterName" name="name_id" class="form-control">
+                    <option value="%">{{ __('message.all_m') }}</option>
+                    @foreach($data as $bag_hour_type)
+                    <option value="{{ $bag_hour_type->id }}">{{ $bag_hour_type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <div class="form-group col-xs-12 col-sm-6 col-md-2">  
+                <label for="filterHours">{{ __('message.number_of_hours') }}:</label>
+                <input type="text" name="hours" class="form-control" placeholder="{{__('message.enter')." ".__('message.number_of_hours')}}">
+            </div>         
 
-                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-31px, -146px, 0px); top: 0px; left: 0px;" x-placement="top">
+            <div class="col-xs-6 col-sm-6 col-md-3 form-group align-self-end">
+
+                <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-51px, -186px, 0px); top: 0px; left: 0px;" x-placement="top">
                     <div class="arrow" style="left: 114px;"></div>
                     <div class="popover-body">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-12">
                                 <button type="button" class="close" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <div class="form-group">
-                                    <strong>{{ __('message.from') }}:</strong>
-                                    <input autocomplete="off" name="date_from" type="text" class="datepicker" value="@if(session('type_bag_hour_date_from') != ''){{session('type_bag_hour_date_from')}}@endif">
+                                <div class="form-group mt-2">
+                                    <label for="filterDateFrom">{{ __('message.from') }}:</label>
+                                    <input id="filterDateFrom" autocomplete="off" name="date_from" type="text" class="datepicker form-control form-control-sm" value="@if(session('customer_date_from') != ''){{session('customer_date_from')}}@endif">
                                 </div>
                                 <div class="form-group">
-                                    <strong>{{ __('message.to') }}:</strong>
-                                    <input autocomplete="off" type="text" name="date_to" class="datepicker" value="@if(session('type_bag_hour_date_to') != ''){{session('type_bag_hour_date_to')}}@endif">
+                                    <label for="filterDateTo">{{ __('message.to') }}:</label><br>
+                                    <input id="filterDateTo" autocomplete="off" type="text" name="date_to" class="datepicker form-control form-control-sm" value="@if(session('customer_date_to') != ''){{session('customer_date_to')}}@endif">
                                 </div>
                             </div>
                         </div>
@@ -131,48 +129,20 @@
                 </div>
 
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('message.order') }}:</strong>
-                <select name="order" id="order">
-                    <option value="asc">{{ __('message.old_first') }}</option>
-                    <option value="desc" @if(session('type_bag_hour_order') == 'desc'){{'selected'}}@endif>{{ __('message.new_first') }}</option>
-                </select>
-            </div>
-        </div>
-    </div> 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>{{ __('message.number_of_records') }}: </strong>
-                <select name="num_records" id="numRecords">
-                    <option value="10">10</option>
-                    <option value="50" @if(session('type_bag_hour_num_records') == 50){{'selected'}}@endif>50</option>
-                    <option value="100" @if(session('type_bag_hour_num_records') == 100){{'selected'}}@endif>100</option>
-                    <option value="all" @if(session('type_bag_hour_num_records') == 'all'){{'selected'}}@endif>{{ __('message.all') }}</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-success">{{ __('message.filter') }}</button>
-</form>
 
-<form action="{{ route('type_bag_hours.delete_filters') }}" method="POST"> 
-    @csrf
-    <input type="hidden" name="lang" value="{{ $lang }}">
-    <button type="submit" class="btn btn-success">{{ __('message.delete_all_filters') }}</button>
-</form>
+            <div class="form-group d-flex justify-content-end mb-0 col-12">
+                <a href="{{ route('type_bag_hours.delete_filters', $lang) }}" class="btn general_button mr-0 mb-2">{{ __('message.delete_all_filters') }}</a>
+                <button type="submit" class="btn general_button mr-0 mb-2">{{ __('message.filter') }}</button>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 <div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h3>{{ __("message.bag_hour_type_list") }}</h3>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route($lang.'_bag_hours_types.create') }}">{{ __('message.create_new_type_hour_bag') }}</a>
         </div>
     </div>
 </div>
@@ -269,10 +239,16 @@
 <script type="text/javascript" src="{{ URL::asset('js/hour_bag_types_index.js') }}"></script>
 <script>
 var show_create_edit = @json($show_create_edit);
+var show_filters = @json($show_filters);
         if (show_create_edit) {
     $('#addEditChevronDown').css("transform", "rotate(180deg)");
     $('#addEditContainer').show(400);
     addEditCount = 2;
 }
+                    if (show_filters) {
+        $('#filterChevronDown').css("transform", "rotate(180deg)");
+        $('#filtersContainer').show(400);
+        filterCount = 2;
+    }
 </script>
 @endsection

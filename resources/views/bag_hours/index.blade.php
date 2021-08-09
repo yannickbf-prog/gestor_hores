@@ -149,7 +149,6 @@
         <form action="{{ route($lang.'_bag_hours.index') }}" method="GET" class="row"> 
             @csrf
 
-            {{old('type')}}
             <div class="form-group col-xs-12 col-sm-6 col-md-3">  
                 <label for="filterType">{{ __('message.type') }}:</label>
                 <select id="filterType" name="type" class="form-control">

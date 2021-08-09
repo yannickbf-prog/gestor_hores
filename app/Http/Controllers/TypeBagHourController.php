@@ -39,27 +39,26 @@ class TypeBagHourController extends Controller {
         
         if($request->has('_token')  && $request->has('name_id')){
             
-            ($request['name'] == "") ? session(['type_bag_hour_name' => '%']) : session(['type_bag_hour_name' => $request['name']]);
+            $show_filters = true;
             
-            ($request['hour_price'] == "") ? session(['type_bag_hour_price' => '%']) : session(['type_bag_hour_price' => str_replace(",", ".", $request['hour_price'])]);
+            session(['type_bag_hour_name_id' => $request['name_id']]);
             
-            session(['type_bag_hour_order' => $request['order']]);
+            ($request['hours'] == "") ? session(['type_bag_hour_hours' => '%']) : session(['type_bag_hour_hours' => $request['hours']]);
             
-            session(['type_bag_hour_num_records' => $request['num_records']]);
         }
         
         $dates = getIntervalDates($request, 'type_bag_hour');
         $date_from = $dates[0];
         $date_to = $dates[1];
                 
-        $name = session('type_bag_hour_name', "%");
-        $hour_price = session('type_bag_hour_price', "%");
+        $id = session('type_bag_hour_name_id', "%");
+        $num_hours = session('type_bag_hour_hours', "%");
 //        
-        if($hour_price != "%"){
-            $hour_price = number_format($hour_price, 2, '.', '');
-        }
+//        if($hour_price != "%"){
+//            $hour_price = number_format($hour_price, 2, '.', '');
+//        }
         
-        $order = session('type_bag_hour_order', "asc");
+        $order = "asc";
         
         $num_records = session('type_bag_hour_num_records', 10);
         
@@ -69,14 +68,16 @@ class TypeBagHourController extends Controller {
         
         $data = TypeBagHour::leftJoin('bag_hours', 'type_bag_hours.id', '=', 'bag_hours.type_id')
                 ->select('type_bag_hours.id', 'type_bag_hours.name', 'type_bag_hours.description', 'type_bag_hours.hour_price', 
-                        'type_bag_hours.created_at', DB::raw('SUM(bag_hours.contracted_hours) as total_hours_bag_type'), 
+                        'type_bag_hours.created_at',  DB::raw('SUM(bag_hours.contracted_hours) as total_hours_bag_type'), 
                         DB::raw('SUM(bag_hours.total_price) as total_price_bag_type'))
-                ->where('type_bag_hours.name', 'like', "%{$name}%")
-                ->where('type_bag_hours.hour_price', 'like', $hour_price)
+                ->where('type_bag_hours.id', 'like', $id)
                 ->whereBetween('type_bag_hours.created_at', [$date_from, $date_to])
                 ->orderBy('type_bag_hours.created_at', $order)
                 ->groupBy('type_bag_hours.id')
+                ->havingRaw('SUM(bag_hours.contracted_hours) like ?', [$num_hours])
                 ->paginate();
+        
+
                
 
         return view('type_bag_hours.index', compact(['data', 'lang', 'show_create_edit', 'show_filters', 'type_bag_hour_to_edit']))
