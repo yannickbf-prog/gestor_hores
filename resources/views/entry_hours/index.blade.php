@@ -39,14 +39,20 @@ $load_old_hour_entries = true;
     </div>
 </div>
 <div class="pt-1 create_edit_container" id="timeEntriesFormContainer">
-    <h3>{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
-    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
-    <form action="{{ ($values_before_edit_json == null) ? route('time_entries.store',$lang) : route('time_entries.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">
-        @csrf
+    <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
+        <h3 class="d-inline-block m-0">{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
+        <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
+    </div>
+    <div id="addEditContainer">
+        <div class="alert alert-info m-2 mt-3">
+            <strong>{{__('message.fields_are_required')}}</strong>
+        </div>
+        <form action="{{ ($values_before_edit_json == null) ? route('time_entries.store',$lang) : route('time_entries.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">
+            @csrf
 
-    </form>
+        </form>
+    </div>
 </div>
-
 <div id="filterDiv" class="p-4 mb-2">
     <div class="mb-4" id="filterTitleContainer">
         <div class="d-flex align-content-stretch align-items-center" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -119,7 +125,7 @@ $load_old_hour_entries = true;
 
             <td class="align-middle">
 
-                
+
 
                 <div class="validate_btns_container d-flex align-items-stretch justify-content-around">
                     @if($value->hour_entry_validate == '0')
@@ -127,17 +133,17 @@ $load_old_hour_entries = true;
                         <i class="bi bi-check-square-fill fa-lg"></i>
                     </a>
                     @endif
-                    
+
                     @php
-                        $form_id = "editForm".$value->hours_entry_id;
-                        $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
+                    $form_id = "editForm".$value->hours_entry_id;
+                    $form_dom = "document.getElementById('editForm".$value->hours_entry_id."').submit();";
                     @endphp
 
                     <form action="{{ route($lang.'_time_entries.index') }}" method="GET" class="invisible" id="{{ $form_id }}"> 
                         @csrf
                         <input type="hidden" name="entry_hour_id" value="{{ $value->hours_entry_id }}">
                     </form>
-                    
+
                     <a style="text-decoration: none" class="text-dark">
                         <i onclick="{{ $form_dom }}" class="bi bi-pencil-fill fa-lg"></i>
                     </a>
@@ -294,7 +300,7 @@ $load_old_hour_entries = true;
             };
 
 
-//Get the object from json
+            //Get the object from json
             var users_info = @json($users_info);
                     var users_customers = @json($users_customers);
 
@@ -335,14 +341,14 @@ $load_old_hour_entries = true;
                     document.getElementById('submitContainer').before(totalCountHtml);
                 }
             }
-            
-            function showValidateInvalidateButton(){
-                if(values_before_edit !== null && document.getElementById("inputedHours1") !== null ){
-                    
+
+            function showValidateInvalidateButton() {
+                if (values_before_edit !== null && document.getElementById("inputedHours1") !== null) {
+
                     let formGroup8 = document.createElement("div");
                     formGroup8.setAttribute('class', 'form-group');
                     formGroup8.setAttribute('id', 'validateInvalidate');
-                    
+
                     //<input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="sm">
 
                     let inputValidated = document.createElement("input");
@@ -356,15 +362,15 @@ $load_old_hour_entries = true;
                     inputValidated.setAttribute('data-width', "120");
                     inputValidated.setAttribute('class', 'form-check-input');
                     inputValidated.setAttribute('name', 'validate');
-                    
-                    if(values_before_edit.isValidated == 1)
+
+                    if (values_before_edit.isValidated == 1)
                         inputValidated.checked = true;
-                                       
+
                     formGroup8.appendChild(inputValidated);
 
-                    document.getElementById('timeEntryContainer1').appendChild(formGroup8);                
-                    
-                }    
+                    document.getElementById('timeEntryContainer1').appendChild(formGroup8);
+
+                }
             }
 
             function showDescription(containerId) {
@@ -387,8 +393,7 @@ $load_old_hour_entries = true;
 
                 if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
                     inputDesc.innerText = old_data.old_desc[old_data_index];
-                }
-                else if (values_before_edit !== null) {
+                } else if (values_before_edit !== null) {
                     inputDesc.innerText = values_before_edit.description;
                     //Delete add/remove users if edit
                     document.getElementById("addRemoveEntryContainer").style.display = "none";
@@ -400,11 +405,11 @@ $load_old_hour_entries = true;
 
                 //Delete add/remove users if edit
                 if (values_before_edit !== null)
-                    inputDesc.innerHTML = values_before_edit.description;             
+                    inputDesc.innerHTML = values_before_edit.description;
 
-                
+
                 showValidateInvalidateButton();
-                
+
                 //Create total count of hours
                 createCountOfHours();
             }
@@ -449,10 +454,9 @@ $load_old_hour_entries = true;
 
                     if (old_data.length != 0 && !loadFinish && old_data.old_inputed_hours[old_inputed_hours_index] != null) {
                         imputedHoursHtml.setAttribute('value', old_data.old_inputed_hours[old_inputed_hours_index]);
-                    }
-                    else if (values_before_edit !== null)
+                    } else if (values_before_edit !== null)
                         imputedHoursHtml.setAttribute('value', values_before_edit.hours_imputed);
-                
+
                     old_inputed_hours_index++;
 
                     if (document.getElementById('inputedHoursContainer' + containerId) != null) {
@@ -547,7 +551,7 @@ $load_old_hour_entries = true;
                     if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
                         option.selected = true;
                     else if (values_before_edit !== null && customer.customer_id == values_before_edit.customer_id)
-                            option.selected = true;
+                        option.selected = true;
                     customerSelectHtml.appendChild(option);
                 }
 
@@ -619,19 +623,16 @@ $load_old_hour_entries = true;
 
                 if (old_data.length != 0 && !loadFinish && old_data.old_days[old_data_index] != null) {
                     inputDay.setAttribute('value', old_data.old_days[old_data_index]);
-                }
-                else if (values_before_edit !== null){
-                    
-                    if("{{old('days.0')}}" == ""){
+                } else if (values_before_edit !== null) {
+
+                    if ("{{old('days.0')}}" == "") {
                         inputDay.setAttribute('value', values_before_edit.day);
-                    }
-                    else{
+                    } else {
                         inputDay.setAttribute('value', "{{old('days.0')}}");
                     }
-                    
-                    
-                }
-                else {
+
+
+                } else {
                     inputDay.setAttribute('value', "{{ now()->format('d/m/Y') }}");
                 }
 
@@ -655,17 +656,14 @@ $load_old_hour_entries = true;
 
                 if (old_data.length != 0 && !loadFinish && old_data.old_hours[old_data_index] != null) {
                     inputHours.setAttribute('value', old_data.old_hours[old_data_index]);
-                }
-                else if (values_before_edit !== null){
-                    if("{{old('hours.0')}}" == ""){
+                } else if (values_before_edit !== null) {
+                    if ("{{old('hours.0')}}" == "") {
                         inputHours.setAttribute('value', values_before_edit.hours);
-                    }
-                    else{
+                    } else {
                         inputHours.setAttribute('value', "{{old('hours.0')}}");
                     }
-                    
-                }
-                else {
+
+                } else {
                     inputHours.setAttribute('value', 8)
                 }
 
@@ -720,16 +718,16 @@ $load_old_hour_entries = true;
                 let buttonContainer = document.createElement("div");
                 buttonContainer.setAttribute('class', 'form-group d-flex justify-content-end');
                 buttonContainer.setAttribute('id', 'submitContainer');
-                
+
                 if (values_before_edit !== null) {
                     let cancelHtml = document.createElement("a");
                     cancelHtml.innerText = "{{ __('message.cancel') }}";
                     cancelHtml.setAttribute('class', 'btn general_button mr-0');
                     cancelHtml.setAttribute('href', '{{ route("time_entries.cancel_edit", $lang) }}');
                     buttonContainer.appendChild(cancelHtml);
-                    
+
                 }
-                                        
+
                 let submitHtml = document.createElement("button");
                 submitHtml.innerText = (values_before_edit === null) ? "{{ __('message.save') }}" : "{{ __('message.update') }}";
                 submitHtml.setAttribute('type', 'submit');
@@ -745,7 +743,7 @@ $load_old_hour_entries = true;
                 }
             }
 
-//Filter section functions
+            //Filter section functions
 
             function filterShowProjectsOfUserAndCustomer() {
 
@@ -836,7 +834,7 @@ $load_old_hour_entries = true;
 
                 filterShowProjectsOfUserAndCustomer();
             }
-            
+
 
             var old_data = @json($old_data);
 
@@ -844,7 +842,7 @@ $load_old_hour_entries = true;
             var old_inputed_hours_index = 0;
 
             var loadFinish = false;
-            
+
             var values_before_edit = @json($values_before_edit_json);
 
             if ("{{ $load_old_hour_entries }}") {
@@ -859,17 +857,30 @@ $load_old_hour_entries = true;
                 addEntry(1);
             }
 
-//Filters principal program
+            //Filters principal program
 
+            var addEditCount = 1;
+            $("#addEditHeader").click(function () {
 
-    
-    var show_filters = @json($show_filters);
-     if (show_filters) {
-       
-        $('#collapseExample').collapse('show');
-        
-    }
-    
+                if (addEditCount % 2 == 0)
+                    $('#addEditChevronDown').css("transform", "rotate(0deg)");
+
+                else
+                    $('#addEditChevronDown').css("transform", "rotate(180deg)");
+
+                addEditCount++;
+
+                // show hide paragraph on button click
+                $("#addEditContainer").toggle(400);
+            });
+
+            var show_filters = @json($show_filters);
+            if (show_filters) {
+
+                $('#collapseExample').collapse('show');
+
+            }
+
 </script>
 @endsection
 
