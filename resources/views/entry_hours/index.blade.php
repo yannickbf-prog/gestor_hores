@@ -19,6 +19,9 @@ $load_old_hour_entries = false;
 
 @if ($errors->any())
 <div class="alert alert-danger mt-3">
+    @php
+    $show_create_edit = true
+    @endphp
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
@@ -38,7 +41,7 @@ $load_old_hour_entries = true;
         </div>
     </div>
 </div>
-<div class="pt-1 create_edit_container" id="timeEntriesFormContainer">
+<div class="px-2 py-3 create_edit_container" id="timeEntriesFormContainer">
     <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
         <h3 class="d-inline-block m-0">{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
         <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
@@ -874,6 +877,12 @@ $load_old_hour_entries = true;
                 $("#addEditContainer").toggle(400);
             });
 
+            var show_create_edit = @json($show_create_edit);
+             if (show_create_edit) {
+                $('#addEditChevronDown').css("transform", "rotate(180deg)");
+                $('#addEditContainer').show(400);
+                addEditCount = 2;
+            }
             var show_filters = @json($show_filters);
             if (show_filters) {
 

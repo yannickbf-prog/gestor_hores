@@ -24,9 +24,10 @@ class HourEntryController extends Controller {
         $values_before_edit_json = null;
         
         $show_filters = false;
+        $show_create_edit = false;
 
         if ($request->has('_token') && $request->has('entry_hour_id')) {
-            $show_edit = true;
+            $show_create_edit = true;
 
             $hour_entry = HourEntry::find($request['entry_hour_id']);
 
@@ -228,7 +229,7 @@ class HourEntryController extends Controller {
             ];
         }
 
-        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'users_with_projects', 'values_before_edit_json', 'show_filters']))
+        return view('entry_hours.index', compact(['lang', 'data', 'users_data', 'users_info', 'users_customers', 'old_data', 'users_with_projects', 'values_before_edit_json', 'show_filters', 'show_create_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
