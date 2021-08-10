@@ -76,7 +76,7 @@ class TypeBagHourController extends Controller {
                 ->whereBetween('type_bag_hours.created_at', [$date_from, $date_to])
                 ->orderBy('type_bag_hours.created_at', $order)
                 ->groupBy('type_bag_hours.id')
-                ->paginate();
+                ->paginate($num_records);
 
         foreach ($data as $key => $item){
             if($item->total_hours_bag_type === null)
@@ -104,6 +104,13 @@ class TypeBagHourController extends Controller {
         
         return redirect()->route($lang.'_bag_hours_types.index');
 
+    }
+    
+    public function changeNumRecords(Request $request, $lang) {
+
+        session(['type_bag_hour_num_records' => $request['num_records']]);
+
+        return redirect()->route($lang . '_bag_hours_types.index');
     }
 
     /**
