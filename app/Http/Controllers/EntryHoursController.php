@@ -29,7 +29,11 @@ class EntryHoursController extends Controller {
         
         $values_before_edit_json = null;
         
+        $show_create_edit = false;
+        $show_filters = false;
+        
         if ($request->has('_token') && $request->has('entry_hour_id')) {
+            $show_create_edit = true;
             $hour_entry = HourEntry::find($request['entry_hour_id']);
 
             $day = $hour_entry->day;
@@ -56,6 +60,7 @@ class EntryHoursController extends Controller {
         }
         
         if ($request->has('_token') && $request->has('select_filter_customer')) {
+            $show_filters = true;
             session(['entry_hour_project' => $request['select_filter_projects']]);
         }
         
@@ -191,7 +196,7 @@ class EntryHoursController extends Controller {
         $user_name = Auth::user()->getUserName();
         $user_surname = Auth::user()->getUserSurname();
         
-        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data', 'user_id', 'users_projects_with_customer', 'values_before_edit_json', 'user_name', 'user_surname']));
+        return view('entry_hours_worker.index', compact(['lang', 'json_data', 'old_data', 'last_customer_and_project', 'data', 'user_customers_data', 'user_id', 'users_projects_with_customer', 'values_before_edit_json', 'user_name', 'user_surname', 'show_create_edit', 'show_filters']));
     }
     
     public function deleteFilters($lang) {

@@ -28,6 +28,9 @@ $load_old_hour_entries = false;
 
 @if ($errors->any())
 <div class="alert alert-danger mt-3">
+     @php
+    $show_create_edit = true
+    @endphp
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
@@ -42,7 +45,7 @@ $load_old_hour_entries = true;
 
 <div class="px-2 py-3 create_edit_container" id="timeEntriesFormContainer">
     <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
-        <h3 class="d-inline-block m-0">{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
+        <h3 class="d-inline-block m-0">{{ ($values_before_edit_json == null) ? __('message.add_new_f')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
         <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
     </div>
    
@@ -60,7 +63,7 @@ $load_old_hour_entries = true;
 <div id="filterDiv" class="p-4 my-3">
     <div class="mb-4" id="filterTitleContainer">
         <div class="d-flex align-content-stretch align-items-center" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"></i>
+            <h3 class="d-inline-block m-0">Filtre</h3><i class=" px-2 bi bi-chevron-down fa-lg"  id="filterChevronDown"></i>
         </div>
     </div>
     <div id="filtersContainer">
@@ -92,8 +95,14 @@ $load_old_hour_entries = true;
 
 </div>
 
-<h3 class="mt-5">Llistat d'hores</h3>
-<table class="table mt-3">
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>{{ __("message.hours_list") }}</h3>
+        </div>
+    </div>
+</div>
+<table class="table">
     @if (count($data) > 0)
     <thead>
         <tr  class="thead-light">   
@@ -765,6 +774,37 @@ var addEditCount = 1;
                 // show hide paragraph on button click
                 $("#addEditContainer").toggle(400);
             });
+            
+            var filterCount = 1;
+            $("#filterTitleContainer").click(function () {
+
+                if (filterCount % 2 == 0)
+                    $('#filterChevronDown').css("transform", "rotate(0deg)");
+
+                else
+                    $('#filterChevronDown').css("transform", "rotate(180deg)");
+
+                filterCount++;
+
+                // show hide paragraph on button click
+                $("#filtersContainer").toggle(400);
+            });
+            
+            
+              var show_create_edit = @json($show_create_edit);
+             var show_filters = @json($show_filters);
+             
+               if (show_create_edit) {
+                $('#addEditChevronDown').css("transform", "rotate(180deg)");
+                $('#addEditContainer').show(400);
+                addEditCount = 2;
+            }
+            
+             if (show_filters) {
+                $('#filterChevronDown').css("transform", "rotate(180deg)");
+                $('#filtersContainer').show(400);
+                filterCount = 2;
+             }
 
 
 
