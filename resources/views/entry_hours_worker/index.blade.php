@@ -3,7 +3,7 @@
 @section('title', __('message.entry_hours_worked')." - ". $user_name . " " . $user_surname)
 
 @section('nav_and_content')
-
+<main class="col-12">
 @if ($message = Session::get('success'))
 
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -204,6 +204,7 @@ $load_old_hour_entries = true;
 <div id="paginationContainer">
     {!! $data->links() !!} 
 </div>
+</main>
 @stop
 
 @section('js')
