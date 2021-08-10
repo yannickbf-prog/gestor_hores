@@ -208,6 +208,7 @@ return [
     
     'calculate_price' => 'Calculate price',
     'in' => 'in',
-    'number_of_hours' => "Number of hours"
-
+    'number_of_hours' => "Number of hours",
+    'add_new_f' => 'Add new',
+    'hours_list' => "Hours list"
 ];

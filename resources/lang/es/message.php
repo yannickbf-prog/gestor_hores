@@ -206,5 +206,7 @@ return [
     'type' => 'Tipo',
     'calculate_price' => 'Calcular precio',
     'in' => 'en el',
-    'number_of_hours' => "Número de horas"
+    'number_of_hours' => "Número de horas",
+    'add_new_f' => 'Añadir nueva',
+    'hours_list' => "Lista de horas"
 ];

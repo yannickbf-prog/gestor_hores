@@ -388,3 +388,7 @@ header.py-2 {    margin-bottom: 0 !important;}
 #calculatePrice {
     color: #2da0e2;
 }
+
+#collapseExample{
+    display: none;
+}

@@ -208,5 +208,7 @@ return [
     
     'calculate_price' => 'Calcular preu',
     'in' => 'al',
-    'number_of_hours' => "Número d'hores"
+    'number_of_hours' => "Número d'hores",
+    'add_new_f' => 'Afegir nova',
+    'hours_list' => "Llistat d'hores"
 ];

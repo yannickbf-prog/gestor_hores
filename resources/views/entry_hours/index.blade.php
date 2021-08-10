@@ -34,16 +34,17 @@ $load_old_hour_entries = true;
 @endphp
 @endif
 
-<div class="row pt-2">
+<div class="row py-2">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>{{ __('message.time_entries') }}</h2>
         </div>
     </div>
 </div>
+
 <div class="px-2 py-3 create_edit_container" id="timeEntriesFormContainer">
     <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
-        <h3 class="d-inline-block m-0">{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
+        <h3 class="d-inline-block m-0">{{ ($values_before_edit_json == null) ? __('message.add_new_f')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
         <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
     </div>
     <div id="addEditContainer">
@@ -56,13 +57,13 @@ $load_old_hour_entries = true;
         </form>
     </div>
 </div>
-<div id="filterDiv" class="p-4 mb-2">
+<div id="filterDiv" class="p-4 my-3">
     <div class="mb-4" id="filterTitleContainer">
-        <div class="d-flex align-content-stretch align-items-center" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <div class="d-flex align-content-stretch align-items-center">
             <h3 class="d-inline-block m-0">Filtre</h3><i class="px-2 bi bi-chevron-down fa-lg"  id="filterChevronDown"></i>
         </div>
     </div>
-    <div  class="collapse" id="collapseExample">
+    <div id="collapseExample" id="filtersContainer">
 
         <form action="{{ route($lang.'_time_entries.index') }}" method="GET"> 
             @csrf
@@ -93,7 +94,14 @@ $load_old_hour_entries = true;
 
 </div>
 
-<h3 class="mt-5">Llistat d'hores</h3>
+<div class="row py-2">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h3>{{ __("message.hours_list") }}</h3>
+        </div>
+    </div>
+</div>
+
 <table class="table">
     @if (count($data) > 0)
     <thead>
@@ -877,18 +885,40 @@ $load_old_hour_entries = true;
                 $("#addEditContainer").toggle(400);
             });
 
-            var show_create_edit = @json($show_create_edit);
-             if (show_create_edit) {
+           
+           
+            
+            var filterCount = 1;
+            $("#filterTitleContainer").click(function () {
+
+                if (filterCount % 2 == 0)
+                    $('#filterChevronDown').css("transform", "rotate(0deg)");
+
+                else
+                    $('#filterChevronDown').css("transform", "rotate(180deg)");
+
+                filterCount++;
+
+                // show hide paragraph on button click
+                $("#collapseExample").toggle(400);
+            });
+            
+            
+
+             
+              var show_create_edit = @json($show_create_edit);
+             var show_filters = @json($show_filters);
+             
+               if (show_create_edit) {
                 $('#addEditChevronDown').css("transform", "rotate(180deg)");
                 $('#addEditContainer').show(400);
                 addEditCount = 2;
             }
-            var show_filters = @json($show_filters);
             if (show_filters) {
-
-                $('#collapseExample').collapse('show');
-
-            }
+                $('#filterChevronDown').css("transform", "rotate(180deg)");
+                $('#collapseExample').show(400);
+                filterCount = 2;
+             }
 
 </script>
 @endsection
