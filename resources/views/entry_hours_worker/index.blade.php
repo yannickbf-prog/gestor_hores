@@ -14,7 +14,7 @@
 </div>
 @endif
 
-<div class="row">
+<div class="row pt-4">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>{{ __('message.hello')." ".$user_name.__('message.welcome_entry_hours') }}</h2>
@@ -40,13 +40,21 @@ $load_old_hour_entries = true;
 @endphp
 @endif
 
-<div class="mt-2 pt-1 create_edit_container" id="timeEntriesFormContainer">
-    <h3>{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
-    <strong class="ml-2">{{__('message.fields_are_required')}}</strong>
-    <form action="{{ ($values_before_edit_json == null) ? route('entry_hours.store', $lang) : route('hours_entry.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">
-        @csrf
+<div class="px-2 py-3 create_edit_container" id="timeEntriesFormContainer">
+    <div id="addEditHeader" class="d-inline-flex align-content-stretch align-items-center ml-3">
+        <h3 class="d-inline-block m-0">{{ ($values_before_edit_json == null) ? __('message.add_new')." ".__('message.time_entry') : __('message.edit')." ".__('message.time_entry') }}</h3>
+        <i class="bi bi-chevron-down px-2 bi bi-chevron-down fa-lg" id="addEditChevronDown"></i>
+    </div>
+   
+    <div id="addEditContainer">
+        <div class="alert alert-info m-2 mt-3">
+            <strong>{{__('message.fields_are_required')}}</strong>
+        </div>
+        <form action="{{ ($values_before_edit_json == null) ? route('entry_hours.store', $lang) : route('hours_entry.update',[$values_before_edit_json['hour_entry_id'], $lang]) }}" method="POST" id="timeEntriesForm">
+            @csrf
 
-    </form>
+        </form>
+    </div>
 </div>
 
 <div id="filterDiv" class="p-4 my-3">
@@ -728,20 +736,35 @@ $load_old_hour_entries = true;
     filterShowProjectsOfUserAndCustomer();
 
 
-    var filterCount = 1;
-    $("#filterTitleContainer").click(function () {
+//    var filterCount = 1;
+//    $("#filterTitleContainer").click(function () {
+//
+//        if (filterCount % 2 == 0)
+//            $('.bi-chevron-down').css("transform", "rotate(0deg)");
+//
+//        else
+//            $('.bi-chevron-down').css("transform", "rotate(180deg)");
+//
+//        filterCount++;
+//
+//        // show hide paragraph on button click
+//        $("#filtersContainer").toggle(400);
+//    });
 
-        if (filterCount % 2 == 0)
-            $('.bi-chevron-down').css("transform", "rotate(0deg)");
+var addEditCount = 1;
+            $("#addEditHeader").click(function () {
 
-        else
-            $('.bi-chevron-down').css("transform", "rotate(180deg)");
+                if (addEditCount % 2 == 0)
+                    $('#addEditChevronDown').css("transform", "rotate(0deg)");
 
-        filterCount++;
+                else
+                    $('#addEditChevronDown').css("transform", "rotate(180deg)");
 
-        // show hide paragraph on button click
-        $("#filtersContainer").toggle(400);
-    });
+                addEditCount++;
+
+                // show hide paragraph on button click
+                $("#addEditContainer").toggle(400);
+            });
 
 
 
