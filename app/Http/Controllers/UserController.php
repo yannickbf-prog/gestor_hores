@@ -63,16 +63,20 @@ class UserController extends Controller {
         if ($num_records == 'all') {
             $num_records = User::count();
         }
-
-        $data = User::where('nickname', 'like', "%" . $username . "%")
+        
+        $query = User::where('nickname', 'like', "%" . $username . "%")
                 ->where('name', 'like', "%" . $name . "%")
                 ->where('surname', 'like', "%" . $surname . "%")
                 ->where('email', 'like', "%" . $email . "%")
                 ->where('phone', 'like', "%" . $phone . "%")
                 ->where('role', 'like', "%" . $role . "%")
                 ->whereBetween('created_at', [$date_from, $date_to])
-                ->orderBy('created_at', $order)
-                ->paginate($num_records);
+                ->orderBy('created_at', $order);
+
+        if ($phone == "%")
+            $query->orWhere('phone', NULL);
+
+        $data = $query->paginate($num_records);
 
         return view('users.index', compact(['lang', 'data', 'user_to_edit', 'show_filters', 'show_create_edit']))
                         ->with('i', (request()->input('page', 1) - 1) * $num_records);
