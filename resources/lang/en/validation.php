@@ -154,7 +154,9 @@ return [
         'hour_price' => 'hour price',
         'img_logo' => 'Logo',
         'nickname' => 'username',
-        'surname' => 'surnames'
+        'surname' => 'surnames',
+        'project_id' => 'project',
+        
     ],
 
 ];

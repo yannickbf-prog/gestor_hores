@@ -169,6 +169,9 @@ return [
         'img_logo'              => 'El logo',
         'website'               => 'sitio web',
         'nickname'              => 'nombre de usuario',
-        'surname'               => 'apellidos'
+        'surname'               => 'apellidos',
+        'project_id'            => 'proyecto',
+        'contracted_hours'      => 'horas contratadas',
+        'total_price'           => 'precio total',
     ],
 ];

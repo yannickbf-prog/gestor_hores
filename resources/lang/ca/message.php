@@ -134,7 +134,7 @@ return [
     'submit' => 'Enviar',
     
     'phone_numeric' => 'El telèfon només pot contenir dígits sense espais ni altres caràcters',
-    'phone_min' => 'El telèfon ha de tenir 9 dijits com a mínim',
+    'phone_min' => 'El telèfon ha de tenir 9 díjits com a mínim',
     'phone_max' => 'El telèfon no pot tindre mes de 15 dígits',
     
     'bags_of_hours' => "Bosses d'hores",
@@ -210,5 +210,8 @@ return [
     'in' => 'al',
     'number_of_hours' => "Número d'hores",
     'add_new_f' => 'Afegir nova',
-    'hours_list' => "Llistat d'hores"
+    'hours_list' => "Llistat d'hores",
+    
+    'bag_hour_project_assignated' => "El projecte seleccionat ja té assignada una bossa d'hores",
+    'type_of_hour_bag' => "Tipus de bossa d'hores"
 ];

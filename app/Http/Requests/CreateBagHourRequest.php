@@ -52,5 +52,12 @@ class CreateBagHourRequest extends FormRequest {
             'total_price' => 'required|numeric|max:9999999',
         ];
     }
+    
+    public function messages() 
+    {
+        return [
+            'project_id.unique' => __('message.bag_hour_project_assignated'),
+        ];
+    }
 
 }

@@ -208,5 +208,8 @@ return [
     'in' => 'en el',
     'number_of_hours' => "Número de horas",
     'add_new_f' => 'Añadir nueva',
-    'hours_list' => "Lista de horas"
+    'hours_list' => "Lista de horas",
+    'type_of_hour_bag' => 'Tipo de bolsa de horas',
+    
+    'bag_hour_project_assignated' => "El proyecto seleccionado ya tiene asignada una bolsa de horas"
 ];

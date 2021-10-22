@@ -236,7 +236,7 @@ class EntryHoursController extends Controller {
         session(['count_hours_entries_user' => $count_hours_entries]);
 
         if (!$request->validated()) {
-
+            
             return back()->withInput();
         } else {
 

@@ -37,7 +37,7 @@ class CreateCustomerRequest extends FormRequest
             'name' => 'unique:customers||required||max:50',
             'email' => 'unique:customers||required||email||max:50',
             'phone' => 'unique:customers||required||numeric||min:100000000||max:100000000000000',
-            'tax_number' => 'unique:customers||required||regex:/^\d{8}[a-zA-Z]{1}$/',
+            'tax_number' => 'unique:customers||required',
             'contact_person' => 'max:150',
             'description' => 'max:400'
         

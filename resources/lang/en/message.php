@@ -210,5 +210,7 @@ return [
     'in' => 'in',
     'number_of_hours' => "Number of hours",
     'add_new_f' => 'Add new',
-    'hours_list' => "Hours list"
+    'hours_list' => "Hours list",
+    
+    'bag_hour_project_assignated' => "The project you have selected has already a bag hour assigned"
 ];

@@ -167,6 +167,10 @@ return [
         'img_logo'              => 'El logotip',
         'website'               => 'pàgina web',
         'nickname'              => "nom d'usuari",
-        'surname'               => 'cognoms'
+        'surname'               => 'cognoms',
+        'tax_number'            => 'NIF',
+        'project_id'            => 'projecte',
+        'contracted_hours'      => 'hores contractades',
+        'total_price'           => 'preu total',
     ],
 ];
