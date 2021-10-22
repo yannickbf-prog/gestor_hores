@@ -211,5 +211,6 @@ return [
     'hours_list' => "Lista de horas",
     'type_of_hour_bag' => 'Tipo de bolsa de horas',
     
-    'bag_hour_project_assignated' => "El proyecto seleccionado ya tiene asignada una bolsa de horas"
+    'bag_hour_project_assignated' => "El proyecto seleccionado ya tiene asignada una bolsa de horas",
+    'entry_hours_days_required' => 'El campo día es obligatorio'
 ];

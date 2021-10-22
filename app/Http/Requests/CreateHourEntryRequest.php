@@ -51,7 +51,7 @@ class CreateHourEntryRequest extends FormRequest {
         return [
             'days.*.required' => 'days_required',
             'days.*.string' => 'days_string',
-            'days.*.date_format' => 'date_format',
+            'days.*.date_format' => 'days_date_format',
             'days.*.before_or_equal' => 'days_before_or_equal',
             'hours.*.required' => 'hours_required',
             'hours.*.int' => 'hours_int',

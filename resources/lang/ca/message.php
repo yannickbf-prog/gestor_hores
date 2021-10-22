@@ -213,5 +213,7 @@ return [
     'hours_list' => "Llistat d'hores",
     
     'bag_hour_project_assignated' => "El projecte seleccionat ja té assignada una bossa d'hores",
-    'type_of_hour_bag' => "Tipus de bossa d'hores"
+    'type_of_hour_bag' => "Tipus de bossa d'hores",
+    
+    'entry_hours_days_required' => 'El camp dia és obligatori'
 ];

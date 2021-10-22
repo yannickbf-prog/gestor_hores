@@ -212,5 +212,8 @@ return [
     'add_new_f' => 'Add new',
     'hours_list' => "Hours list",
     
-    'bag_hour_project_assignated' => "The project you have selected has already a bag hour assigned"
+    'bag_hour_project_assignated' => "The project you have selected has already a bag hour assigned",
+    'type_of_hour_bag' => "Type of hour bag",
+    
+    'entry_hours_days_required' => 'The day field is required'
 ];
