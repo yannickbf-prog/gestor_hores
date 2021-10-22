@@ -24,7 +24,7 @@ $load_old_hour_entries = false;
     @endphp
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
     <ul>
-        @foreach ($errors->all() as $error)
+        @foreach ($errors->all() as $key => $error)
         <li>{{ $error }}</li>
         @endforeach
     </ul>
