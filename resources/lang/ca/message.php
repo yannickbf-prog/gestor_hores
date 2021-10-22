@@ -216,4 +216,5 @@ return [
     'type_of_hour_bag' => "Tipus de bossa d'hores",
     
     'entry_hours_days_required' => 'El camp dia és obligatori'
+    
 ];
