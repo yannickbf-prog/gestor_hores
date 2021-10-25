@@ -212,5 +212,18 @@ return [
     'type_of_hour_bag' => 'Tipo de bolsa de horas',
     
     'bag_hour_project_assignated' => "El proyecto seleccionado ya tiene asignada una bolsa de horas",
-    'entry_hours_days_required' => 'El campo día es obligatorio'
+    
+    'entry_hours_days_required' => 'El campo día es obligatorio',
+    'entry_hours_days_string' => 'El campo día no tiene el formato adecuado',
+    'entry_hours_days_date_format' => 'El campo día no tiene el formato adecuado',
+    'entry_hours_days_before_or_equal' => 'El campo día no puede ser un día futuro',
+    
+    'entry_hours_hours_int' => 'El campo nº horas tiene que ser un número entero',
+    'entry_hours_hours_min' => 'El campo nº horas tiene que ser mayor o igual a 1',
+    'entry_hours_hours_max' => 'El campo nº horas tiene que ser menor o igual a 24',
+    
+    'entry_hours_desc_required' => 'El campo descripción tarea es obligatorio',
+    'entry_hours_desc_string' => 'El campo descripción tarea no tiene el formato adecuado',
+    'entry_hours_desc_min' => 'El campo descripción tarea tiene que tener 5 caracteres como mínimo',
+    'entry_hours_desc_max' => 'El campo descripción tarea tiene que tener 1000 caracteres como máximo',
 ];

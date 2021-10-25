@@ -215,6 +215,18 @@ return [
     'bag_hour_project_assignated' => "El projecte seleccionat ja té assignada una bossa d'hores",
     'type_of_hour_bag' => "Tipus de bossa d'hores",
     
-    'entry_hours_days_required' => 'El camp dia és obligatori'
+    'entry_hours_days_required' => 'El camp dia és obligatori',
+    'entry_hours_days_string' => 'El camp dia no té el format adequat',
+    'entry_hours_days_date_format' => 'El camp dia no té el format adequat',
+    'entry_hours_days_before_or_equal' => 'El camp dia no pot ser un dia futur',
+    
+    'entry_hours_hours_int' => 'El camp nº hores ha de ser un nombre sencer',
+    'entry_hours_hours_min' => 'El camp nº hores ha de ser major o igual a 1',
+    'entry_hours_hours_max' => 'El camp nº hores ha de ser menor o igual a 24',
+    
+    'entry_hours_desc_required' => 'El camp descripció tasca és obligatori',
+    'entry_hours_desc_string' => 'El camp descripció tasca no té el format adequat',
+    'entry_hours_desc_min' => 'El camp descripció tasca ha de tindre 5 caràcters com a mínim',
+    'entry_hours_desc_max' => 'El camp descripció tasca ha de tindre 1000 caràcters com a màxim',
     
 ];

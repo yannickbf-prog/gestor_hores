@@ -62,6 +62,72 @@ $load_old_hour_entries = false;
                 <li>{{ __('message.time_entry')." ".($key+1).": ".__('message.'.$message) }}</li>
             @endforeach
         @endif
+        @if ($errors->has('hours.'.$key))
+            @foreach ($errors->get('hours.'.$key) as $error)
+                @php
+                $message;
+                @endphp
+                @switch($error)
+                    @case('hours_int')
+                        @php
+                        $message = 'entry_hours_hours_int';
+                        @endphp
+                        @break
+
+                    @case('hours_min')
+                        @php
+                        $message = 'entry_hours_hours_min';
+                        @endphp
+                        @break
+                    
+                    @case('hours_max')
+                        @php
+                        $message = 'entry_hours_hours_max';
+                        @endphp
+                        @break
+
+                    @default
+                        $message = 'default'
+                @endswitch
+                <li>{{ __('message.time_entry')." ".($key+1).": ".__('message.'.$message) }}</li>
+            @endforeach
+        @endif
+        @if ($errors->has('desc.'.$key))
+            @foreach ($errors->get('desc.'.$key) as $error)
+                @php
+                $message;
+                @endphp
+                @switch($error)
+                    @case('desc_required')
+                        @php
+                        $message = 'entry_hours_desc_required';
+                        @endphp
+                        @break
+
+                    @case('desc_string')
+                        @php
+                        $message = 'entry_hours_desc_string';
+                        @endphp
+                        @break
+                    
+                    @case('desc_min')
+                        @php
+                        $message = 'entry_hours_desc_min';
+                        @endphp
+                        @break
+                    
+                    @case('desc_max')
+                        @php
+                        $message = 'entry_hours_desc_max';
+                        @endphp
+                        @break
+
+                    @default
+                        $message = 'default'
+                @endswitch
+                <li>{{ __('message.time_entry')." ".($key+1).": ".__('message.'.$message) }}</li>
+            @endforeach
+        @endif
         @endforeach
         
     </ul>
