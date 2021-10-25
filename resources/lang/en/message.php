@@ -220,9 +220,10 @@ return [
     'entry_hours_days_date_format' => 'The day field is not in the correct format',
     'entry_hours_days_before_or_equal' => 'The day field cannot be a future day',
     
-    'entry_hours_hours_int' => 'The field nº of hours must be an integer',
-    'entry_hours_hours_min' => 'The field nº of hours must be greater than or equal to 1',
-    'entry_hours_hours_max' => 'The field nº of hours must be less than or equal to 24',
+    'entry_hours_hours_required' => 'The nº of hours field is required',
+    'entry_hours_hours_int' => 'The nº of hours field must be an integer',
+    'entry_hours_hours_min' => 'The nº of hours field must be greater than or equal to 1',
+    'entry_hours_hours_max' => 'The nº of hours field must be less than or equal to 24',
     
     'entry_hours_desc_required' => 'The task description field is required',
     'entry_hours_desc_string' => 'The task description field is not in the proper format',

@@ -218,6 +218,7 @@ return [
     'entry_hours_days_date_format' => 'El campo día no tiene el formato adecuado',
     'entry_hours_days_before_or_equal' => 'El campo día no puede ser un día futuro',
     
+    'entry_hours_hours_required' => 'El campo nº horas es obligatorio',
     'entry_hours_hours_int' => 'El campo nº horas tiene que ser un número entero',
     'entry_hours_hours_min' => 'El campo nº horas tiene que ser mayor o igual a 1',
     'entry_hours_hours_max' => 'El campo nº horas tiene que ser menor o igual a 24',

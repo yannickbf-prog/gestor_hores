@@ -68,6 +68,12 @@ $load_old_hour_entries = false;
                 $message;
                 @endphp
                 @switch($error)
+                    @case('hours_required')
+                        @php
+                        $message = 'entry_hours_hours_required';
+                        @endphp
+                        @break
+                        
                     @case('hours_int')
                         @php
                         $message = 'entry_hours_hours_int';

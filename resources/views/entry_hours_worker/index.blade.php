@@ -28,14 +28,122 @@ $load_old_hour_entries = false;
 
 @if ($errors->any())
 <div class="alert alert-danger mt-3">
-     @php
+    @php
     $show_create_edit = true
     @endphp
     <strong>{{__('message.woops!')}}</strong> {{__('message.input_problems')}}<br><br>
     <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
+        @foreach ($errors->all() as $key => $error)
+        @if ($errors->has('days.'.$key))
+            @foreach ($errors->get('days.'.$key) as $error)
+                @php
+                $message;
+                @endphp
+                @switch($error)
+                    @case('days_required')
+                        @php
+                        $message = 'entry_hours_days_required';
+                        @endphp
+                        @break
+
+                    @case('days_string')
+                        @php
+                        $message = 'entry_hours_days_string';
+                        @endphp
+                        @break
+                    
+                    @case('days_date_format')
+                        @php
+                        $message = 'entry_hours_days_date_format';
+                        @endphp
+                        @break
+                    
+                    @case('days_before_or_equal')
+                        @php
+                        $message = 'entry_hours_days_before_or_equal';
+                        @endphp
+                        @break
+
+                    @default
+                        $message = 'default'
+                @endswitch
+                <li>{{ __('message.time_entry')." ".($key+1).": ".__('message.'.$message) }}</li>
+            @endforeach
+        @endif
+        @if ($errors->has('hours.'.$key))
+            @foreach ($errors->get('hours.'.$key) as $error)
+                @php
+                $message;
+                @endphp
+                @switch($error)
+                    @case('hours_required')
+                        @php
+                        $message = 'entry_hours_hours_required';
+                        @endphp
+                        @break
+                        
+                    @case('hours_int')
+                        @php
+                        $message = 'entry_hours_hours_int';
+                        @endphp
+                        @break
+
+                    @case('hours_min')
+                        @php
+                        $message = 'entry_hours_hours_min';
+                        @endphp
+                        @break
+                    
+                    @case('hours_max')
+                        @php
+                        $message = 'entry_hours_hours_max';
+                        @endphp
+                        @break
+
+                    @default
+                        $message = 'default'
+                @endswitch
+                <li>{{ __('message.time_entry')." ".($key+1).": ".__('message.'.$message) }}</li>
+            @endforeach
+        @endif
+        @if ($errors->has('desc.'.$key))
+            @foreach ($errors->get('desc.'.$key) as $error)
+                @php
+                $message;
+                @endphp
+                @switch($error)
+                    @case('desc_required')
+                        @php
+                        $message = 'entry_hours_desc_required';
+                        @endphp
+                        @break
+
+                    @case('desc_string')
+                        @php
+                        $message = 'entry_hours_desc_string';
+                        @endphp
+                        @break
+                    
+                    @case('desc_min')
+                        @php
+                        $message = 'entry_hours_desc_min';
+                        @endphp
+                        @break
+                    
+                    @case('desc_max')
+                        @php
+                        $message = 'entry_hours_desc_max';
+                        @endphp
+                        @break
+
+                    @default
+                        $message = 'default'
+                @endswitch
+                <li>{{ __('message.time_entry')." ".($key+1).": ".__('message.'.$message) }}</li>
+            @endforeach
+        @endif
         @endforeach
+        
     </ul>
 </div>
 @php
