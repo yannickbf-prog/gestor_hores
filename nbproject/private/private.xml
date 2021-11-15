@@ -13,11 +13,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/gestor_hores/app/Http/Requests/CreateHourEntryRequest.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/EditUserHourEntryRequest.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateCustomerRequest.php</file>
             <file>file:/var/www/gestor_hores/resources/lang/es/message.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/CreateHourEntryRequestUser.php</file>
             <file>file:/var/www/gestor_hores/resources/views/entry_hours/index.blade.php</file>
             <file>file:/var/www/gestor_hores/resources/lang/en/message.php</file>
             <file>file:/var/www/gestor_hores/resources/lang/ca/message.php</file>
+            <file>file:/var/www/gestor_hores/resources/views/entry_hours_worker/index.blade.php</file>
             <file>file:/var/www/gestor_hores/app/Http/Requests/CreateTypeBagHourRequest.php</file>
+            <file>file:/var/www/gestor_hores/app/Http/Requests/EditHourEntryRequest.php</file>
         </group>
     </open-files>
 </project-private>
