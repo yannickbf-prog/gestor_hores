@@ -212,14 +212,14 @@ $hours_left_count = 0;
     <thead>
         <tr class="thead-light">
             <th>Nº</th>
-            <th>{{ __('message.name') }}</th>
-            <th>{{ __('message.customer_name') }}</th>
-            <th>{{ __('message.state') }}</th>
-            <th>{{ __('message.hours_worked') }}</th>
-            <th>{{ __('message.contracted_hours') }}</th>
-            <th>{{ __('message.hours_left') }}</th>
-            <th>{{ __('message.description') }}</th>
-            <th>{{ __('message.created_at') }}</th>
+            <th><a href="{{ route('projects.orderby', ['project_name',$lang]) }}">{{ __('message.name') }}</a></th>
+            <th><a href="{{ route('projects.orderby', ['project_active',$lang]) }}">{{ __('message.customer_name') }}</a></th>
+            <th><a href="{{ route('projects.orderby', ['total_hours_project',$lang]) }}">{{ __('message.state') }}</a></th>
+            <th><a href="{{ route('projects.orderby', ['project_name',$lang]) }}">{{ __('message.hours_worked') }}</a></th>
+            <th><a href="{{ route('projects.orderby', ['contracted_hours',$lang]) }}">{{ __('message.contracted_hours') }}</a></th>
+            <th><a href="{{ route('projects.orderby', ['hours_left',$lang]) }}">{{ __('message.hours_left') }}</a></th>
+            <th><a href="{{ route('projects.orderby', ['project_description',$lang]) }}">{{ __('message.description') }}</a></th>
+            <th><a href="{{ route('projects.orderby', ['created_at',$lang]) }}">{{ __('message.created_at') }}</a></th>
             <th></th>
         </tr>
     </thead>
@@ -236,7 +236,7 @@ $hours_left_count = 0;
         @endphp
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $value->project_name }}</td>
+            <td><a href="{{ route('entry_hours.filterproject', [$value->id,$lang]) }}" class="text-dark" >{{ $value->project_name }}</a></td>
             <td>{{ $value->customer_name }}</td>
             <td>@if($value->project_active){{__('message.active')}} @else{{__('message.inactive')}} @endif</td>
             <td>{{ $value->total_hours_project }}h</td>

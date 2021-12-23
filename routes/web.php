@@ -11,6 +11,7 @@ use App\Http\Controllers\TypeBagHourController;
 use App\Http\Controllers\HourEntryController;
 use App\Http\Controllers\EntryHoursController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\ProviderController;
 //use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\DB;
 
@@ -85,6 +86,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete("control-panel/users/{user}/lang/{lang}", [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('control-panel/users/delete_filters/lang/{lang}', [UserController::class, 'deleteFilters'])->name('users.delete_filters');
     Route::get('control-panel/users/change_num_records/lang/{lang}', [UserController::class, 'changeNumRecords'])->name('users.change_num_records');
+    Route::get("control-panel/users/orderby/{camp}/lang/{lang}", [UserController::class, 'orderBy'])->name('users.orderby');
     Route::get("control-panel/users/lang/{lang}", [UserController::class, 'cancelEdit'])->name('users.cancel_edit');
     
     // Control panel - Users - en
@@ -101,6 +103,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post("control-panel/customers/lang/{lang}", [CustomerController::class, 'store'])->name('customers.store');
     Route::post("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'update'])->name('customers.update');
     Route::delete("control-panel/customers/{customer}/lang/{lang}", [CustomerController::class, 'destroy'])->name('customers.destroy');
+    Route::get("control-panel/customers/orderby/{camp}/lang/{lang}", [CustomerController::class, 'orderBy'])->name('customers.orderby');
     Route::get('control-panel/customers/delete_filters/lang/{lang}', [CustomerController::class, 'deleteFilters'])->name('customers.delete_filters');
     Route::get('control-panel/customers/change_num_records/lang/{lang}', [CustomerController::class, 'changeNumRecords'])->name('customers.change_num_records');
     Route::get("control-panel/customers/lang/{lang}", [CustomerController::class, 'cancelEdit'])->name('customers.cancel_edit');
@@ -118,14 +121,38 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("ca/panell-de-control/clients/crear", [CustomerController::class, 'create'])->name('ca_customers.create');
     Route::get("ca/panell-de-control/clients/{customer}/editar", [CustomerController::class, 'edit'])->name('ca_customers.edit');
 
+    // Control panel - Providers - Operations
+    Route::post("control-panel/providers/lang/{lang}", [ProviderController::class, 'store'])->name('providers.store');
+    Route::post("control-panel/providers/{provider}/lang/{lang}", [ProviderController::class, 'update'])->name('providers.update');
+    Route::delete("control-panel/providers/{provider}/lang/{lang}", [ProviderController::class, 'destroy'])->name('providers.destroy');
+    Route::get("control-panel/providers/orderby/{camp}/lang/{lang}", [ProviderController::class, 'orderBy'])->name('providers.orderby');
+    Route::get('control-panel/providers/delete_filters/lang/{lang}', [ProviderController::class, 'deleteFilters'])->name('providers.delete_filters');
+    Route::get('control-panel/providers/change_num_records/lang/{lang}', [ProviderController::class, 'changeNumRecords'])->name('providers.change_num_records');
+    Route::get("control-panel/providers/lang/{lang}", [ProviderController::class, 'cancelEdit'])->name('providers.cancel_edit');
+    
+    // Control panel - Providers en
+    Route::get("en/control-panel/providers", [ProviderController::class, 'index'])->name('en_providers.index');
+    Route::get("en/control-panel/providers/create", [ProviderController::class, 'create'])->name('en_providers.create');
+    Route::get("en/control-panel/providers/{provider}/edit", [ProviderController::class, 'edit'])->name('en_providers.edit');
+    // Control panel - Providers es
+    Route::get("es/panel-de-control/proveedores", [ProviderController::class, 'index'])->name('es_providers.index');
+    Route::get("es/panel-de-control/proveedores/crear", [ProviderController::class, 'create'])->name('es_providers.create');
+    Route::get("es/panel-de-control/proveedores/{provider}/editar", [ProviderController::class, 'edit'])->name('es_providers.edit');
+    // Control panel - Providers ca
+    Route::get("ca/panell-de-control/proveidors", [ProviderController::class, 'index'])->name('ca_providers.index');
+    Route::get("ca/panell-de-control/proveidors/crear", [ProviderController::class, 'create'])->name('ca_providers.create');
+    Route::get("ca/panell-de-control/proveidors/{provider}/editar", [ProviderController::class, 'edit'])->name('ca_providers.edit');
+
     //Control panel - Projects - Operations 
     Route::post("control-panel/projects/lang/{lang}", [ProjectController::class, 'store'])->name('projects.store');
     Route::post("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'update'])->name('projects.update');
     Route::delete("control-panel/projects/{project}/lang/{lang}", [ProjectController::class, 'destroy'])->name('projects.destroy');
+    Route::get('control-panel/projects/filterproject/{project_id}/lang/{lang}', [ProjectController::class, 'filterProject'])->name('projects.filterproject');
     Route::get('control-panel/projects/delete_filters/lang/{lang}', [ProjectController::class, 'deleteFilters'])->name('projects.delete_filters');
     Route::post('control-panel/projects/remove_user/{project_id}/{lang}', [ProjectController::class, 'removeUser'])->name('projects.remove_user');
     Route::post('control-panel/projects/add_user/{project_id}/{lang}', [ProjectController::class, 'addUser'])->name('projects.add_user');
     Route::get("control-panel/projects/lang/{lang}", [ProjectController::class, 'cancelEdit'])->name('projects.cancel_edit');
+    Route::get("control-panel/projects/orderby/{camp}/lang/{lang}", [ProjectController::class, 'orderBy'])->name('projects.orderby');
     Route::get('control-panel/projects/change_num_records/lang/{lang}', [ProjectController::class, 'changeNumRecords'])->name('projects.change_num_records');
 
     //Control panel - Projects - en 
@@ -151,8 +178,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('control-panel/hour-bags/delete_filters/lang/{lang}', [BagHourController::class, 'deleteFilters'])->name('bag_hours.delete_filters');
     Route::delete("control-panel/hour-bags/{bagHour}/lang/{lang}", [BagHourController::class, 'destroy'])->name('bag_hours.destroy');
     Route::post("control-panel/hour-bags/{bagHour}/lang/{lang}", [BagHourController::class, 'update'])->name('bag_hours.update');
+    Route::get("control-panel/hour-bags/orderby/{camp}/lang/{lang}", [BagHourController::class, 'orderBy'])->name('bag_hours.orderby');
     Route::get('control-panel/hour-bags/change_num_records/lang/{lang}', [BagHourController::class, 'changeNumRecords'])->name('bag_hours.change_num_records');
     Route::get("control-panel/hour-bags/lang/{lang}", [BagHourController::class, 'cancelEdit'])->name('bag_hours.cancel_edit');
+    Route::get('control-panel/hour-bags/export/', [BagHourController::class, 'export'])->name('bag_hours.export');
     
     //Control panel - Bag hours - en
     Route::get("en/control-panel/hour-bags", [BagHourController::class, 'index'])->name('en_bag_hours.index');
@@ -194,11 +223,16 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get("control-panel/time-entries/validate/id/{id}/lang/{lang}", [HourEntryController::class, 'validateEntryHour'])->name('entry_hours.validate');
     //Route::get("control-panel/time-entries/invalidate/id/{id}/lang/{lang}", [HourEntryController::class, 'invalidateEntryHour'])->name('entry_hours.invalidate');
     Route::get("control-panel/time-entries/validate-all/lang/{lang}", [HourEntryController::class, 'validateAllHours'])->name('entry_hours.validate_all');
+    Route::get('control-panel/time-entries/filteruser/{user_id}/lang/{lang}', [HourEntryController::class, 'filterUser'])->name('entry_hours.filteruser');
+    Route::get('control-panel/time-entries/filterproject/{project_id}/lang/{lang}', [HourEntryController::class, 'filterProject'])->name('entry_hours.filterproject');
+    Route::get('control-panel/time-entries/filtercustomer/{customer_id}/lang/{lang}', [HourEntryController::class, 'filterCustomer'])->name('entry_hours.filtercustomer');
+    Route::get("control-panel/time-entries/orderby/{camp}/lang/{lang}", [HourEntryController::class, 'orderBy'])->name('entry_hours.orderby');
     Route::get('control-panel/time-entries/delete_filters/lang/{lang}', [HourEntryController::class, 'deleteFilters'])->name('entry_hours.delete_filters');
     Route::get('control-panel/time-entries/change_num_records/lang/{lang}', [HourEntryController::class, 'changeNumRecords'])->name('time_entries.change_num_records');
     Route::delete("control-panel/time-entries/destroy/{hourEntry}/lang/{lang}", [HourEntryController::class, 'destroy'])->name('time_entries.destroy');
     Route::post("control-panel/time-entries/{hourEntry}/lang/{lang}", [HourEntryController::class, 'update'])->name('time_entries.update');
     Route::get("control-panel/time-entries/lang/{lang}", [HourEntryController::class, 'cancelEdit'])->name('time_entries.cancel_edit');
+    Route::get('control-panel/time-entries/export/', [HourEntryController::class, 'export'])->name('time_entries.export');
 
     // Control panel - Time entries - en
     Route::get("en/control-panel/time-entries", [HourEntryController::class, 'index'])->name('en_time_entries.index');

@@ -159,7 +159,7 @@
                 </select>
             </div>
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
                 <label for="filterProject">{{ __('message.project') }}:</label>
                 <select id="filterProject" name="project" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
@@ -169,7 +169,7 @@
                 </select>
             </div>
 
-            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
                 <label for="filterCustomer">{{ __('message.customer') }}:</label>
                 <select id="filterCustomer" name="customer" class="form-control">
                     <option value="%">{{ __('message.all_m') }}</option>
@@ -235,14 +235,14 @@ $hours_left_count = 0;
     <thead>
         <tr class="thead-light">
             <th>Nº</th>
-            <th>{{ __('message.project') }}</th>
-            <th>{{ __('message.customer_name') }}</th>
-            <th>{{ __('message.type') }}</th>
-            <th>{{ __('message.contracted_hours') }}</th>
-            <th>{{ __('message.hours_available') }}</th>
-            <th>{{ __('message.hour_price') }}</th>
-            <th>{{ __('message.total_price') }}</th>
-            <th>{{ __('message.created_at') }}</th>
+            <th><a href="{{ route('bag_hours.orderby', ['project_name',$lang]) }}">{{ __('message.project') }}</a></th>
+            <th><a href="{{ route('bag_hours.orderby', ['customer_name',$lang]) }}">{{ __('message.customer_name') }}</a></th>
+            <th><a href="{{ route('bag_hours.orderby', ['type_name',$lang]) }}">{{ __('message.type') }}</a></th>
+            <th><a href="{{ route('bag_hours.orderby', ['contracted_hours',$lang]) }}">{{ __('message.contracted_hours') }}</a></th>
+            <th><a href="{{ route('bag_hours.orderby', ['hours_left',$lang]) }}">{{ __('message.hours_available') }}</a></th>
+            <th><a href="{{ route('bag_hours.orderby', ['type_hour_price',$lang]) }}">{{ __('message.hour_price') }}</a></th>
+            <th><a href="{{ route('bag_hours.orderby', ['total_price',$lang]) }}">{{ __('message.total_price') }}</a></th>
+            <th><a href="{{ route('bag_hours.orderby', ['created_at',$lang]) }}">{{ __('message.created_at') }}</a></th>
             <th></th>
         </tr>
     </thead>
@@ -258,11 +258,11 @@ $hours_left_count = 0;
         @endphp
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $value->project_name }}</td>
-            <td>{{ $value->customer_name }}</td>
+            <td><a href="{{ route('entry_hours.filterproject', [$value->project_id,$lang]) }}" class="text-dark" >{{ $value->project_name }}</a></td>
+            <td><a href="{{ route('entry_hours.filtercustomer', [$value->customer_id,$lang]) }}" class="text-dark" >{{ $value->customer_name }}</a></td>
             <td>{{ $value->type_name }}</td>
             <td>{{ $value->contracted_hours }}h</td>
-            <td>{{ $value->contracted_hours - $value->total_hours_project }}h</td>
+            <td>{{ $hours_left }}h</td>
             <td>{{ number_format($value->type_hour_price, 2, ',', '.') }}€</td>
             <td style="width:100px">{{ number_format($value->total_price, 2, ',', '.') }}€</td>
             <td>{{ $value->created_at->format('d/m/y') }}</td>
@@ -358,6 +358,7 @@ $hours_left_count = 0;
         </select>
     </div>
 </form>
+<a class="btn general_button" href="{{ route('bag_hours.export') }}" >Excel</a>
 @endif
 <div id="paginationContainer">
     {!! $data->links() !!} 

@@ -1,7 +1,7 @@
 <x-guest-layout>
     @extends('layout')
 
-    @section('title', 'Login - Home')
+    @section('title', 'Ress - Home')
 
     @section('nav_and_content')
     <div class="row login_container">

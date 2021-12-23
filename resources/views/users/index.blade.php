@@ -246,14 +246,14 @@
         </tr>
         <tr class="thead-light">
             <th>Nº</th>
-            <th>{{ __('message.username') }}</th>
-            <th>{{ __('message.surname') }}</th>
-            <th>{{ __('message.name') }}</th>
-            <th>{{ __('message.email') }}</th>
-            <th>{{ __('message.phone') }}</th>
-            <th>{{ __('message.observations') }}</th>
-            <th>{{ __('message.role') }}</th>
-            <th>{{ __('message.created_at') }}</th>
+            <th><a href="{{ route('users.orderby', ['nickname',$lang]) }}">{{ __('message.username') }}</a></th>
+            <th><a href="{{ route('users.orderby', ['surname',$lang]) }}">{{ __('message.surname') }}</a></th>
+            <th><a href="{{ route('users.orderby', ['name',$lang]) }}">{{ __('message.name') }}</a></th>
+            <th><a href="{{ route('users.orderby', ['email',$lang]) }}">{{ __('message.email') }}</a></th>
+            <th><a href="{{ route('users.orderby', ['phone',$lang]) }}">{{ __('message.phone') }}</a></th>
+            <th><a href="{{ route('users.orderby', ['description',$lang]) }}">{{ __('message.observations') }}</a></th>
+            <th><a href="{{ route('users.orderby', ['role',$lang]) }}">{{ __('message.role') }}</a></th>
+            <th><a href="{{ route('users.orderby', ['created_at',$lang]) }}">{{ __('message.created_at') }}</a></th>
             <th></th>
         </tr>
     </thead>
@@ -263,7 +263,7 @@
         @forelse ($data as $key => $value)
         <tr class="table-striped">
             <td>{{ ++$i }}</td>
-            <td>{{ $value->nickname }}</td>
+            <td><a href="{{ route('entry_hours.filteruser', [$value->id,$lang]) }}" class="text-dark" >{{ $value->nickname }}</a></td>
             <td>{{ $value->surname }}</td>
             <td>{{ $value->name }}</td>
             <td>{{ $value->email }}</td>

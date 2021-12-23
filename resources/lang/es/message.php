@@ -4,7 +4,7 @@ return [
     'login' => 'Login',
     'entry_hours' => 'Entrar horas trabajadas',
     
-    'english' => 'Inglés',
+    'english' => 'Ingles',
     'spanish' => 'Español',
     'catalan' => 'Catalán',
     
@@ -23,6 +23,7 @@ return [
     'home' => 'Inicio',
     'company_info' => 'Información de la empresa',
     'customers' => 'Clientes',
+    'providers' => 'Proveedores',
     'bag_hours_types' => 'Tipos de bolsas de horas',
 
     
@@ -48,13 +49,14 @@ return [
     'default_lang' => 'Idioma por defecto',
     'statistics' => 'Estadísticas',
     'work_sector' => 'Sector de trabajo',
-    'en' => 'Inglés',
+    'en' => 'Ingles',
     'es' => 'Español',
     'ca' => 'Catalán',
     
     'user' => 'Usuario',
     'create_new_customer' => 'Crear Nuevo Cliente',
     'customer' => 'Cliente',
+    'provider' => 'Proveedor',
     'filters' => 'Filtro',
     'name' => 'Nombre',
     'email' => 'Correo electrónico',
@@ -71,6 +73,7 @@ return [
     'filter' => 'FILTRAR',
     'delete_all_filters' => 'BORRAR FILTROS',
     'customers_list' => 'Lista de clientes',
+    'providers_list' => 'Lista de proveedores',
     'description' => 'Descripción',
     'created_at' => 'Creado el',
     'action' => 'Acción',
@@ -159,6 +162,7 @@ return [
     "time_entry" => "Entrada de horas",
     'validated' => "Validada",
     'invalidated' => 'Invalidada',
+    'hour_entry' => "Entrada de hora",
     
     'day' => 'Día',
     'inputed_hours' => 'Horas imputadas',
@@ -188,6 +192,11 @@ return [
     'new_logo' => 'Nuevo logotipo',
     'contact_person' => 'Persona de contacto',
     'tax_number' => 'NIF',
+    'address' => 'Dirección',
+    'postal_code' => 'Código  Postal',
+    'country' => 'País',
+    'province' => 'Provincia',
+    'municipality' => 'Municipio',
     
     'add_remove_users' => 'Agregar / eliminar usuarios',
     'to_project' => 'al proyecto',
@@ -212,19 +221,5 @@ return [
     'type_of_hour_bag' => 'Tipo de bolsa de horas',
     
     'bag_hour_project_assignated' => "El proyecto seleccionado ya tiene asignada una bolsa de horas",
-    
-    'entry_hours_days_required' => 'El campo día es obligatorio',
-    'entry_hours_days_string' => 'El campo día no tiene el formato adecuado',
-    'entry_hours_days_date_format' => 'El campo día no tiene el formato adecuado',
-    'entry_hours_days_before_or_equal' => 'El campo día no puede ser un día futuro',
-    
-    'entry_hours_hours_required' => 'El campo nº horas es obligatorio',
-    'entry_hours_hours_int' => 'El campo nº horas tiene que ser un número entero',
-    'entry_hours_hours_min' => 'El campo nº horas tiene que ser mayor o igual a 1',
-    'entry_hours_hours_max' => 'El campo nº horas tiene que ser menor o igual a 24',
-    
-    'entry_hours_desc_required' => 'El campo descripción tarea es obligatorio',
-    'entry_hours_desc_string' => 'El campo descripción tarea no tiene el formato adecuado',
-    'entry_hours_desc_min' => 'El campo descripción tarea tiene que tener 5 caracteres como mínimo',
-    'entry_hours_desc_max' => 'El campo descripción tarea tiene que tener 1000 caracteres como máximo',
+    'entry_hours_days_required' => 'El campo día es obligatorio'
 ];

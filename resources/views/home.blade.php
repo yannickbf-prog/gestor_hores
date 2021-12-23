@@ -50,10 +50,10 @@
     
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $value->user_name }}</td>
+            <td><a href="{{ route('entry_hours.filteruser', [$value->user_id,$lang]) }}" class="text-dark">{{ $value->user_name }}</a></td>
             <td>{{ $value->type_bag_hour_name }}</td>
-            <td>{{ $value->project_name }} </td>
-            <td>{{ $value->customer_name }}</td>
+            <td><a href="{{ route('entry_hours.filterproject', [$value->project_id,$lang]) }}" class="text-dark" >{{ $value->project_name }}</a></td>
+            <td><a href="{{ route('entry_hours.filtercustomer', [$value->customer_id,$lang]) }}" class="text-dark" >{{ $value->customer_name }}</a><td>
             <td>{{ $value->hour_entry_hours }}h</td>
             <td>{{ Carbon\Carbon::parse($value->hour_entry_created_at)->format('d/m/y') }}</td>
             <td class="align-middle">

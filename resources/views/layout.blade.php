@@ -54,7 +54,7 @@ if (Auth::check()) {
                     
                     @endif
                     <a href="{{ route($header_route) }}">
-                        <h1>{{DB::table('company')->first()->name}} | {{__($header_h1)}}</h1>
+                        <h1 class="companyname">{{DB::table('company')->first()->name}} | {{__($header_h1)}}</h1>
                     </a>
                     <div class="col-md-4 form-group">
                         <select class="form-control Langchange">
@@ -77,8 +77,11 @@ if (Auth::check()) {
                         </form>
                     </div>
                 </header>
-                <div class="col-12" id="showMenuBtnContainer">
-                    <i class="bi bi-arrow-bar-right" onclick="showMenu()"></i>
+                <div class="col-12" id="showMenuBtnContainer" style="display: none;">
+                    <div class="col-2 p-2">
+                        <i class="bi bi-arrow-bar-right" onclick="showMenu()"></i>
+                    </div>
+                    <div class="col-10"></div>
                 </div>
             </div>
 
@@ -129,6 +132,14 @@ if (Auth::check()) {
     </script>
 
     <script>
+
+        if(document.getElementsByTagName('table')[0].getElementsByTagName('thead')[0]!=null){
+            let camps=document.getElementsByTagName('table')[0].getElementsByTagName('thead')[0].getElementsByTagName('a');
+            for(let i=0;i<camps.length;i++){
+                camps[i].style.color = "#495057";
+            }
+        }
+        
         function hideMenu() {
 
             let dimensionDiv = document.getElementsByTagName('nav')[0].getBoundingClientRect();
@@ -139,14 +150,15 @@ if (Auth::check()) {
 
             document.getElementsByTagName('nav')[0].style.width = width;
             document.getElementsByTagName('nav')[0].style.height = height;
+            document.getElementsByTagName('nav')[0].style.paddingTop = "15px";
 
             document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column');
 
             $('nav').animate({width: 'hide'}, function() {
-                   document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
-                   $('#showMenuBtnContainer').slideDown("slow");
+                document.getElementsByTagName('main')[0].setAttribute('class', 'col-12');
+                $('#showMenuBtnContainer').slideDown("slow");
             });
-            
+
         }
         
         function showMenu() {
@@ -159,16 +171,17 @@ if (Auth::check()) {
             let calculatedWidth = (width/100)*16.666666666666;
             
             
-            document.getElementsByTagName('main')[0].setAttribute('class', 'col-12 col-md-10');
+            
             
             setTimeout(function () {
+				document.getElementsByTagName('main')[0].setAttribute('class', 'col-12 col-md-10');
                 document.getElementsByTagName('nav')[0].style.width = calculatedWidth;
                 //document.getElementsByTagName('nav')[0].style.height = height;
                 document.getElementsByTagName('nav')[0].style.paddingRight = "15px";
-
-                $('nav').animate({width: 'show'}, function() {
+                document.getElementsByTagName('nav')[0].style.paddingTop = "15px";
+                $('#showMenuBtnContainer').slideUp("slow", function(){
                        
-                       $('#showMenuBtnContainer').slideUp("slow", function() {
+                       $('nav').animate({width: 'show'}, function() {
                        
                             document.getElementsByTagName('nav')[0].removeAttribute("style")
                             document.getElementsByTagName('nav')[0].setAttribute('class', 'nav flex-column col-2 pl-0 pr-3 d-none d-md-block');
@@ -178,7 +191,7 @@ if (Auth::check()) {
                 });
                 
                 
-            }, 500);
+            }, 100);
                 
         }
     </script>

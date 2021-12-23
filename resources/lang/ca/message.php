@@ -4,7 +4,7 @@ return [
     'login' => 'Login',
     'entry_hours' => 'Entrar hores treballades',
 
-    'english' => 'Anglès',
+    'english' => 'Angles',
     'spanish' => 'Espanyol',
     'catalan' => 'Català',
     
@@ -23,6 +23,7 @@ return [
     'home' => 'Inici',
     'company_info' => "Informació de l'empresa",
     'customers' => 'Clients',
+    'providers' => 'Proveidors',
     "bag_hours_types" => "Tipus de bosses d'hores",
     
     'unvalidated_hour_bags' => "Bosses d'hores sense validar",
@@ -48,12 +49,13 @@ return [
     'default_lang' => 'Idioma per defecte',
     'statistics' => 'Estadístiques',
     'work_sector' => 'Sector de treball',
-    'en' => 'Anglès',
+    'en' => 'Angles',
     'es' => 'Espanyol',
     'ca' => 'Català',
     
     'create_new_customer' => 'Crear Nou Client',
     'customer' => 'Client',
+    'provider' => 'Proveidor',
     'filters' => 'Filtre',
     'name' => 'Nom',
     'email' => 'Correu electrònic',
@@ -70,6 +72,7 @@ return [
     'filter' => 'FILTRAR',
     'delete_all_filters' => 'BORRAR FILTRES',
     'customers_list' => 'Llista de clients',
+    'providers_list' => 'Llista de proveidors',
     'description' => 'Descripció',
     'created_at' => 'Creat el',
     'action' => 'Acció',
@@ -160,7 +163,8 @@ return [
     "time_entry" => "Entrada d'hores",
     'validated' => "Validada",
     'invalidated' => 'Invalidada',
-    
+    'hour_entry' => "Entrada d'hora",
+
     'day' => 'Dia',
     'inputed_hours' => 'Hores imputades',
     'task_description' => 'Descripció tasca',
@@ -189,6 +193,13 @@ return [
     'new_logo' => 'Nou logotip',
     'contact_person' => 'Persona de contacte',
     'tax_number' => 'NIF',
+    'address' => 'Adreça',
+    'postal_code' => 'Codi Postal',
+    'country' => 'Pais',
+    'province' => 'Provincia',
+    'municipality' => 'Municipi',
+
+
     
     'add_remove_users' => 'Afegir / eliminar usuaris',
     'to_project' => 'al projecte',
@@ -215,19 +226,6 @@ return [
     'bag_hour_project_assignated' => "El projecte seleccionat ja té assignada una bossa d'hores",
     'type_of_hour_bag' => "Tipus de bossa d'hores",
     
-    'entry_hours_days_required' => 'El camp dia és obligatori',
-    'entry_hours_days_string' => 'El camp dia no té el format adequat',
-    'entry_hours_days_date_format' => 'El camp dia no té el format adequat',
-    'entry_hours_days_before_or_equal' => 'El camp dia no pot ser un dia futur',
-    
-    'entry_hours_hours_required' => 'El camp nº hores és obligatori',
-    'entry_hours_hours_int' => 'El camp nº hores ha de ser un nombre sencer',
-    'entry_hours_hours_min' => 'El camp nº hores ha de ser major o igual a 1',
-    'entry_hours_hours_max' => 'El camp nº hores ha de ser menor o igual a 24',
-    
-    'entry_hours_desc_required' => 'El camp descripció tasca és obligatori',
-    'entry_hours_desc_string' => 'El camp descripció tasca no té el format adequat',
-    'entry_hours_desc_min' => 'El camp descripció tasca ha de tindre 5 caràcters com a mínim',
-    'entry_hours_desc_max' => 'El camp descripció tasca ha de tindre 1000 caràcters com a màxim',
+    'entry_hours_days_required' => 'El camp dia és obligatori'
     
 ];

@@ -180,8 +180,9 @@ $load_old_hour_entries = true;
                 <div class="form-group col-xs-12 col-sm-6 col-md-4" id="formGroupFilterName">
                     <label for="selectFilterName">*Cognoms, Nom: </label>
                     <select id="selectFilterName" name="select_filter_name" class="form-control" onchange="filterShowCustomersOfUser()">
+						<option value="">{{ __('message.all_m') }}</option>
                         @forelse ($users_with_projects as $value)
-                        <option value="{{ $value->id }}">
+                        <option value="{{ $value->id }}" @if(session('hour_entry_user') == $value->id) selected @endif>
                             {{ $value->name." ".$value->surname }}
                         </option>
                         @empty
@@ -189,6 +190,45 @@ $load_old_hour_entries = true;
                         @endforelse
                     </select>
                 </div>
+				<div class="form-group col-xs-12 col-sm-6 col-md-4" id="formGroupFilterCustomers">
+                    <label for="selectFilterCustomers">*Client: </label>
+                    <select name="select_filter_customers" id="selectFilterCustomers" class="form-control" onchange="filterShowProjectsOfUserAndCustomer()">
+						<option value="">Tots</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-12 col-sm-6 col-md-4" id="formGroupFilterProjects">
+                    <label for="selectFilterCustomers">*Projecte: </label>
+                    <select name="select_filter_projects" id="selectFilterProjects" class="form-control">
+                        <option value="">Tots</option>
+                    </select>
+            	</div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 form-group align-self-end">
+
+                <button type="button" class="btn m-0" id="datePopoverBtn" data-placement="top">{{ __('message.date_creation_interval') }}</button>
+
+                <div class="popover fade bs-popover-top show invisible" id="datePopover" role="tooltip" style="position: absolute; transform: translate3d(-51px, -186px, 0px); top: 0px; left: 0px;" x-placement="top">
+                    <div class="arrow" style="left: 114px;"></div>
+                    <div class="popover-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="form-group mt-2">
+                                    <label for="filterDateFrom">{{ __('message.from') }}:</label>
+                                    <input id="filterDateFrom" autocomplete="off" name="date_from" type="text" class="datepicker form-control form-control-sm" value="@if(session('hours_entry_date_from') != ''){{session('hours_entry_date_from')}}@endif">
+                                </div>
+                                <div class="form-group">
+                                    <label for="filterDateTo">{{ __('message.to') }}:</label><br>
+                                    <input id="filterDateTo" autocomplete="off" type="text" name="date_to" class="datepicker form-control form-control-sm" value="@if(session('hours_entry_date_to') != ''){{session('hours_entry_date_to')}}@endif">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-group d-flex justify-content-end mb-0">
@@ -215,15 +255,15 @@ $load_old_hour_entries = true;
     @if (count($data) > 0)
     <thead>
         <tr class="thead-light">   
-            <th>{{ __('message.date') }}</th>  
-            <th>{{ __('message.worker_name') }}</th>
-            <th>{{ __('message.username') }}</th>
-            <th>{{ __('message.project') }}</th>
-            <th>{{ __('message.customer_name') }}</th>
-            <th>{{ __('message.bag_hour') }}</th>
-            <th>{{ __('message.dedicated_hours') }}</th>
-            <th>{{ __('message.imputed_hours') }}</th>
-            <th>{{ __('message.created_at') }}</th>
+            <th><a href="{{ route('entry_hours.orderby', ['hours_entry_day',$lang]) }}">{{ __('message.date') }}</a></th>  
+            <th><a href="{{ route('entry_hours.orderby', ['user_surname',$lang]) }}">{{ __('message.worker_name') }}</a></th>
+            <th><a href="{{ route('entry_hours.orderby', ['user_nickname',$lang]) }}">{{ __('message.username') }}</a></th>
+            <th><a href="{{ route('entry_hours.orderby', ['project_name',$lang]) }}">{{ __('message.project') }}</a></th>
+            <th><a href="{{ route('entry_hours.orderby', ['customer_name',$lang]) }}">{{ __('message.customer_name') }}</a></th>
+            <th><a href="{{ route('entry_hours.orderby', ['type_bag_hour_name',$lang]) }}">{{ __('message.bag_hour') }}</a></th>
+            <th><a href="{{ route('entry_hours.orderby', ['hour_entry_hours',$lang]) }}">{{ __('message.dedicated_hours') }}</a></th>
+            <th><a href="{{ route('entry_hours.orderby', ['hour_entry_hours_imputed',$lang]) }}">{{ __('message.imputed_hours') }}</a></th>
+            <th><a href="{{ route('entry_hours.orderby', ['hour_entry_created_at',$lang]) }}">{{ __('message.created_at') }}</a></th>
             <th></th>
         </tr>
     </thead>
@@ -234,10 +274,10 @@ $load_old_hour_entries = true;
         <tr>
 
             <td>{{ Carbon\Carbon::parse($value->hours_entry_day)->format('d/m/y') }}</td>
-            <td>{{ $value->user_name." ".$value->user_surname }}</td>
-            <td>{{ $value->user_nickname }}</td>
-            <td>{{ $value->project_name }} </td>
-            <td>{{ $value->customer_name }}</td>
+            <td><a href="{{ route('entry_hours.filteruser', [$value->user_id,$lang]) }}" class="text-dark" >{{ $value->user_name." ".$value->user_surname }}</a></td>
+            <td><a href="{{ route('entry_hours.filteruser', [$value->user_id,$lang]) }}" class="text-dark" >{{ $value->user_nickname }}</a></td>
+            <td><a href="{{ route('entry_hours.filterproject', [$value->project_id,$lang]) }}" class="text-dark" >{{ $value->project_name }}</a></td>
+            <td><a href="{{ route('entry_hours.filtercustomer', [$value->customer_id,$lang]) }}" class="text-dark" >{{ $value->customer_name }}</a></td>
             <td>{{ $value->type_bag_hour_name }}</td>
             <td>{{ $value->hour_entry_hours }}h</td>
             <td>{{ $value->hour_entry_hours_imputed }}h</td>
@@ -291,7 +331,7 @@ $load_old_hour_entries = true;
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the') }} {{ __("message.hour_entry") }} <b>{{ $value->name }}</b>?
+                                        {{ __('message.confirm') }} {{ __('message.delete') }} {{ __('message.the_f') }} {{ __("message.hour_entry") }} <b>{{ $value->name }}</b>?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('message.close') }}</button>
@@ -325,6 +365,7 @@ $load_old_hour_entries = true;
 </form>
 
 <a class="btn general_button" href="{{ route('entry_hours.validate_all', $lang) }}">{{ __('message.validate_all_hours') }}</a>
+<a class="btn general_button" href="{{ route('time_entries.export') }}" >Excel</a>
 @endif
 <div id="paginationContainer">
     {!! $data->links() !!} 
@@ -346,7 +387,7 @@ $load_old_hour_entries = true;
 
             $(".alert-success").slideDown(400);
 
-            $(".alert-success").delay(6000).slideUp(400, function () {
+            $(".alert-success").delay(8000).slideUp(400, function () {
                 $(this).alert('close');
             });
 
@@ -422,11 +463,9 @@ $load_old_hour_entries = true;
 
             //Get the object from json
             var users_info = @json($users_info);
-                    var users_customers = @json($users_customers);
-
+            var users_customers = @json($users_customers);
 
             function createCountOfHours() {
-
                 let totalCountHtml = document.createElement("div");
                 totalCountHtml.setAttribute('id', 'totalCount');
                 totalCountHtml.setAttribute('class', ' mt-3');
@@ -463,10 +502,17 @@ $load_old_hour_entries = true;
             }
 
             function showValidateInvalidateButton() {
-                if (values_before_edit !== null && document.getElementById("inputedHours1") !== null) {
+				if(document.getElementById("validateInvalidate") != null){
+					let formGroup8=document.getElementById("validateInvalidate");
+					formGroup8.parentNode.removeChild(formGroup8);
+					document.getElementById('timeEntryContainer1').appendChild(formGroup8);
+				}
+				   
+				if (values_before_edit !== null && document.getElementById("inputedHours1") !== null 
+                && document.getElementById("validateInvalidate") == null) {
 
                     let formGroup8 = document.createElement("div");
-                    formGroup8.setAttribute('class', 'form-group');
+                    formGroup8.setAttribute('class', 'form-group form_group_8');
                     formGroup8.setAttribute('id', 'validateInvalidate');
 
                     //<input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-size="sm">
@@ -495,7 +541,9 @@ $load_old_hour_entries = true;
 
             function showDescription(containerId) {
                 //Create task description
+                let text="";
                 if (document.getElementById('descContainer' + containerId) != null) {
+                    text=document.getElementById('desc' + containerId).value;
                     document.getElementById('descContainer' + containerId).remove();
                 }
                 let formGroup7 = document.createElement("div");
@@ -510,6 +558,8 @@ $load_old_hour_entries = true;
                 inputDesc.setAttribute('id', 'desc' + containerId);
                 inputDesc.setAttribute('placeholder', "{{ __('message.task_description') }}");
                 inputDesc.setAttribute('class', "form-control");
+                inputDesc.value=text;
+
 
                 if (old_data.length != 0 && !loadFinish && old_data.old_desc[old_data_index] != null) {
                     inputDesc.innerText = old_data.old_desc[old_data_index];
@@ -565,6 +615,7 @@ $load_old_hour_entries = true;
                     let imputedHoursHtml = document.createElement("input");
                     imputedHoursHtml.setAttribute('type', 'number');
                     imputedHoursHtml.setAttribute('name', 'inputed_hours[]');
+					imputedHoursHtml.setAttribute('min', '0');
                     imputedHoursHtml.setAttribute('class', 'inputed_hours form-control');
 
                     imputedHoursHtml.setAttribute('placeholder', "{{ __('message.inputed_hours') }}");
@@ -642,6 +693,7 @@ $load_old_hour_entries = true;
             }
 
             function showCustomersOfUser(containerId) {
+				
                 let formGroup4 = document.createElement("div");
                 formGroup4.setAttribute('class', 'form-group form_group_4');
                 formGroup4.setAttribute('id', 'customerContainer' + containerId);
@@ -649,7 +701,6 @@ $load_old_hour_entries = true;
                 labelCustomer.innerText = "*{{ __('message.customer') }}: ";
                 labelCustomer.setAttribute('for', 'customers' + containerId);
                 formGroup4.appendChild(labelCustomer);
-
 
                 //Create the select of customers
                 let customerSelectHtml = document.createElement("select");
@@ -659,9 +710,15 @@ $load_old_hour_entries = true;
                 customerSelectHtml.setAttribute('class', 'form-control');
 
                 let userId = document.getElementById('users' + containerId).value;
-                let res = users_customers.filter((item) => {
-                    return item.user_id == userId;
-                });
+                let res;
+                if(userId!=""){
+                    res = users_customers.filter((item) => {
+						return item.user_id == userId;
+					});
+                }
+                else{
+                    res = users_customers;
+                }
                 let customersInUser = res[0]['customers'];
 
                 for (customer of customersInUser) {
@@ -771,6 +828,7 @@ $load_old_hour_entries = true;
                 inputHours.setAttribute('id', 'hours' + countEntries)
                 inputHours.setAttribute('name', 'hours[]');
                 inputHours.setAttribute('type', 'number');
+				inputHours.setAttribute('min', '0');
                 inputHours.setAttribute('class', 'hours form-control');
                 inputHours.setAttribute('placeholder', "{{ __('message.hours') }} ");
 
@@ -867,6 +925,8 @@ $load_old_hour_entries = true;
 
             function filterShowProjectsOfUserAndCustomer() {
 
+				let seproject="{{session('hour_entry_project')}}";
+				
                 let formGroup = document.createElement("div");
                 formGroup.setAttribute('class', 'form-group col-xs-12 col-sm-6 col-md-4');
                 formGroup.setAttribute('id', 'formGroupFilterProjects');
@@ -884,9 +944,21 @@ $load_old_hour_entries = true;
 
                 let userId = document.getElementById('selectFilterName').value;
                 let customerId = document.getElementById('selectFilterCustomers').value;
-                let res = users_info.filter((item) => {
-                    return item.user_id == userId;
-                });
+                let res;
+                if(userId!=""){
+                    res = users_info.filter((item) => {
+						return item.user_id == userId;
+					});
+                }
+                else{
+                    res = users_info;
+                }
+				
+				let optionAll = document.createElement("option");
+                optionAll.value = "";
+                optionAll.innerText = "{{ __('message.all_m') }}";
+                projectSelectHtml.appendChild(optionAll);
+
                 let projectsInUser = res[0]['user_projects'];
 
                 for (project of projectsInUser) {
@@ -894,7 +966,7 @@ $load_old_hour_entries = true;
                         let option = document.createElement("option");
                         option.value = project.project_id;
                         option.innerText = project.project_name;
-                        if (old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
+                        if (seproject==project.project_id || old_data.length != 0 && project.project_id == old_data.old_projects[old_data_index])
                             option.selected = true;
                         projectSelectHtml.appendChild(option);
                     }
@@ -910,8 +982,14 @@ $load_old_hour_entries = true;
             }
 
             function filterShowCustomersOfUser() {
-
-
+				
+				//Solucio per que no es pogui filtra sense que aparegui els altre camps
+				let buttonfilter = document.getElementById('collapseExample').getElementsByTagName('button')[0];
+				if(buttonfilter.disabled==true){
+					buttonfilter.disabled = false;
+				}
+				let secustomer="{{session('hour_entry_customer')}}";
+				
                 let formGroup = document.createElement("div");
                 formGroup.setAttribute('class', 'form-group col-xs-12 col-sm-6 col-md-4');
                 formGroup.setAttribute('id', 'formGroupFilterCustomers');
@@ -929,17 +1007,31 @@ $load_old_hour_entries = true;
                 customerSelectHtml.setAttribute('onchange', 'filterShowProjectsOfUserAndCustomer()');
 
                 let userId = document.getElementById('selectFilterName').value;
-
-                let res = users_customers.filter((item) => {
-                    return item.user_id == userId;
-                });
+                let res;
+                if(userId!=""){
+                    res = users_customers.filter((item) => {
+						return item.user_id == userId;
+					});
+                }
+                else{
+                    res = users_customers;
+                }
+				
+				let optionAll = document.createElement("option");
+                optionAll.value = "";
+                optionAll.innerText = "{{ __('message.all_m') }}";
+                customerSelectHtml.appendChild(optionAll);
+				
                 let customersInUser = res[0]['customers'];
-
+				var old_data;
+				if(old_data==undefined){
+				   old_data = @json($old_data);
+				}
                 for (customer of customersInUser) {
                     let option = document.createElement("option");
                     option.value = customer.customer_id;
                     option.innerText = customer.customer_name;
-                    if (old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
+                    if (secustomer==customer.customer_id || old_data.length != 0 && customer.customer_id == old_data.old_customers[old_data_index])
                         option.selected = true;
                     customerSelectHtml.appendChild(option);
                 }
@@ -956,11 +1048,13 @@ $load_old_hour_entries = true;
             }
 
 
-            var old_data = @json($old_data);
+            old_data = @json($old_data);
 
             var old_data_index = 0;
             var old_inputed_hours_index = 0;
-
+			
+			filterShowCustomersOfUser();
+	
             var loadFinish = false;
 
             var values_before_edit = @json($values_before_edit_json);
@@ -1030,5 +1124,6 @@ $load_old_hour_entries = true;
              }
 
 </script>
+<script type="text/javascript" src="{{ URL::asset('js/entry_hours_index.js') }}"></script>
 @endsection
 

@@ -1,4 +1,4 @@
-'<?php
+<?php
 
 return [
     'login' => 'Login',
@@ -23,6 +23,7 @@ return [
     'home' => 'Home',
     'company_info' => 'Company info',
     'customers' => 'Customers',
+    'providers' => 'Providers',
     "bag_hours_types" => "Types of hour bags",
     
     'unvalidated_hour_bags' => "Unvalidated hour bags",
@@ -54,6 +55,7 @@ return [
     'user' => 'User',
     'create_new_customer' => 'Create New Customer',
     'customer' => 'Customer',
+    'provider' => 'Provider',
     'filters' => 'Filter',
     'name' => 'Name',
     'email' => 'Email',
@@ -70,6 +72,7 @@ return [
     'filter' => 'FILTER',
     'delete_all_filters' => 'DELETE FILTERS',
     'customers_list' => 'Customers list',
+    'providers_list' => 'Providers list',
     'description' => 'Description',
     'created_at' => 'Created at',
     'action' => 'Action',
@@ -160,6 +163,7 @@ return [
     "time_entry" => "Time entry",
     'validated' => "Validated",
     'invalidated' => 'Invalidted',
+    'hour_entry' => "Time entrie",
     
     'day' => 'Day',
     'inputed_hours' => 'Hours charged',
@@ -189,6 +193,11 @@ return [
     'new_logo' => 'New logo',
     'contact_person' => 'Contact person',
     'tax_number' => 'Tax number',
+    'address' => 'Address',
+    'postal_code' => 'Postal Code',
+    'country' => 'Country',
+    'province' => 'Province',
+    'municipality' => 'Municipality',
     
     'add_remove_users' => 'Add / remove users',
     'to_project' => 'to project',
@@ -215,20 +224,5 @@ return [
     'bag_hour_project_assignated' => "The project you have selected has already a bag hour assigned",
     'type_of_hour_bag' => "Type of hour bag",
     
-    'entry_hours_days_required' => 'The day field is required',
-    'entry_hours_days_string' => 'The day field is not in the correct format',
-    'entry_hours_days_date_format' => 'The day field is not in the correct format',
-    'entry_hours_days_before_or_equal' => 'The day field cannot be a future day',
-    
-    'entry_hours_hours_required' => 'The nº of hours field is required',
-    'entry_hours_hours_int' => 'The nº of hours field must be an integer',
-    'entry_hours_hours_min' => 'The nº of hours field must be greater than or equal to 1',
-    'entry_hours_hours_max' => 'The nº of hours field must be less than or equal to 24',
-    
-    'entry_hours_desc_required' => 'The task description field is required',
-    'entry_hours_desc_string' => 'The task description field is not in the proper format',
-    'entry_hours_desc_min' => 'The task description field must be at least 5 characters long',
-    'entry_hours_desc_max' => 'The task description field must have a maximum of 1000 characters
-
-',
+    'entry_hours_days_required' => 'The day field is required'
 ];
